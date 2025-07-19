@@ -1,7 +1,7 @@
 {
   "common": {
-    "title": "Next Shadcn Starter",
-    "subtitle": "使用 Jotai 进行状态管理",
+    "title": "视频工具",
+    "subtitle": "专业的在线视频处理工具集合",
     "increment": "+",
     "decrement": "-",
     "reset": "重置",
@@ -9,6 +9,66 @@
     "languageToggle": "语言",
     "english": "English",
     "chinese": "中文",
-    "japanese": "日本語"
+    "japanese": "日本語",
+    "startUsing": "开始使用",
+    "whyChooseUs": "为什么选择我们的工具？",
+    "highQuality": "高质量处理",
+    "highQualityDesc": "使用先进的算法确保视频处理的最高质量，保持原始细节。",
+    "fastProcessing": "快速处理",
+    "fastProcessingDesc": "优化的处理引擎，让您的视频转换和编辑更加快速高效。",
+    "easyToUse": "易于使用",
+    "easyToUseDesc": "简洁直观的用户界面，让任何人都能轻松完成专业的视频处理。"
+  },
+  "navigation": {
+    "home": "首页",
+    "tools": "工具",
+    "about": "关于"
+  },
+  "tools": {
+    "videoToGif": {
+      "title": "视频转 GIF",
+      "description": "将视频文件转换为 GIF 动图",
+      "comingSoon": "即将推出"
+    },
+    "gifToVideo": {
+      "title": "GIF 转视频",
+      "description": "将 GIF 动图转换为视频文件",
+      "comingSoon": "即将推出"
+    },
+    "videoTranscode": {
+      "title": "视频转码",
+      "description": "转换视频格式，支持多种编码方式",
+      "comingSoon": "即将推出"
+    },
+    "videoCompress": {
+      "title": "视频压缩",
+      "description": "压缩视频文件大小，保持高质量",
+      "comingSoon": "即将推出"
+    },
+    "videoCrop": {
+      "title": "视频裁剪",
+      "description": "裁剪视频片段或调整视频尺寸",
+      "comingSoon": "即将推出"
+    },
+    "extractAudio": {
+      "title": "视频提取音频",
+      "description": "从视频文件中提取音频轨道",
+      "comingSoon": "即将推出"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 视频工具. 保留所有权利.",
+    "sourceCode": "源代码",
+    "documentation": "文档",
+    "support": "支持",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "resources": "资源",
+    "legal": "法律",
+    "contact": "联系"
+  },
+  "metadata": {
+    "title": "视频工具 - 专业的在线视频处理工具",
+    "description": "免费的在线视频处理工具集合，支持视频转GIF、GIF转视频、视频转码、视频压缩、视频裁剪、音频提取等功能。"
   }
 }

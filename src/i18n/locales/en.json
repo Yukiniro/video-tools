@@ -1,7 +1,7 @@
 {
   "common": {
-    "title": "Next Shadcn Starter",
-    "subtitle": "State Management with Jotai",
+    "title": "Video Tools",
+    "subtitle": "Professional online video processing tool collection",
     "increment": "+",
     "decrement": "-",
     "reset": "Reset",
@@ -9,6 +9,66 @@
     "languageToggle": "Language",
     "english": "English",
     "chinese": "中文",
-    "japanese": "日本語"
+    "japanese": "日本語",
+    "startUsing": "Start Using",
+    "whyChooseUs": "Why Choose Our Tools?",
+    "highQuality": "High Quality Processing",
+    "highQualityDesc": "Advanced algorithms ensure the highest quality video processing while preserving original details.",
+    "fastProcessing": "Fast Processing",
+    "fastProcessingDesc": "Optimized processing engine makes your video conversion and editing faster and more efficient.",
+    "easyToUse": "Easy to Use",
+    "easyToUseDesc": "Clean and intuitive user interface that allows anyone to easily complete professional video processing."
+  },
+  "navigation": {
+    "home": "Home",
+    "tools": "Tools",
+    "about": "About"
+  },
+  "tools": {
+    "videoToGif": {
+      "title": "Video to GIF",
+      "description": "Convert video files to GIF animations",
+      "comingSoon": "Coming Soon"
+    },
+    "gifToVideo": {
+      "title": "GIF to Video",
+      "description": "Convert GIF animations to video files",
+      "comingSoon": "Coming Soon"
+    },
+    "videoTranscode": {
+      "title": "Video Transcode",
+      "description": "Convert video formats with multiple encoding options",
+      "comingSoon": "Coming Soon"
+    },
+    "videoCompress": {
+      "title": "Video Compress",
+      "description": "Compress video file size while maintaining high quality",
+      "comingSoon": "Coming Soon"
+    },
+    "videoCrop": {
+      "title": "Video Crop",
+      "description": "Crop video segments or adjust video dimensions",
+      "comingSoon": "Coming Soon"
+    },
+    "extractAudio": {
+      "title": "Extract Audio",
+      "description": "Extract audio tracks from video files",
+      "comingSoon": "Coming Soon"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Video Tools. All rights reserved.",
+    "sourceCode": "Source Code",
+    "documentation": "Documentation",
+    "support": "Support",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "resources": "Resources",
+    "legal": "Legal",
+    "contact": "Contact"
+  },
+  "metadata": {
+    "title": "Video Tools - Professional Online Video Processing Tools",
+    "description": "Free online video processing tool collection. Supports video to GIF, GIF to video, video transcoding, video compression, video cropping, audio extraction and more."
   }
 }

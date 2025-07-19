@@ -1,18 +1,67 @@
 import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
+import { getMessages, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
+import { ThemeProvider } from '@/components/theme-provider'
 import { routing } from '@/i18n/routing'
 import '../globals.css'
-
-export const metadata: Metadata = {
-  title: 'Next Shadcn Starter',
-  description: 'A Next.js starter with Shadcn UI and Jotai',
-}
 
 interface RootLayoutProps {
   children: React.ReactNode
   params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'metadata' })
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    keywords: ['视频工具', '视频转换', 'GIF转换', '视频压缩', '视频裁剪', '音频提取', 'video tools', 'video converter'],
+    authors: [{ name: 'Video Tools Team' }],
+    creator: 'Video Tools',
+    publisher: 'Video Tools',
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    metadataBase: new URL('https://videotools.com'),
+    alternates: {
+      canonical: '/',
+      languages: {
+        'zh-CN': '/zh',
+        'en-US': '/en',
+      },
+    },
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      url: '/',
+      siteName: 'Video Tools',
+      locale: locale === 'zh' ? 'zh_CN' : 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        'index': true,
+        'follow': true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  }
 }
 
 export default async function RootLayout({ children, params }: RootLayoutProps) {
@@ -27,9 +76,22 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
   const messages = await getMessages()
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body className="antialiased">
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextIntlClientProvider messages={messages}>
+            <div className="relative flex min-h-screen flex-col">
+              <Header locale={locale} />
+              <main className="flex-1">{children}</main>
+              <Footer locale={locale} />
+            </div>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
