@@ -13,26 +13,32 @@ export default async function Home({ params }: HomeProps) {
     {
       key: 'videoToGif',
       href: '/video-to-gif',
+      comingSoon: false,
     },
     {
       key: 'gifToVideo',
       href: '/gif-to-video',
+      comingSoon: true,
     },
     {
       key: 'videoTranscode',
       href: '/video-transcode',
+      comingSoon: true,
     },
     {
       key: 'videoCompress',
       href: '/video-compress',
+      comingSoon: true,
     },
     {
       key: 'videoCrop',
       href: '/video-crop',
+      comingSoon: true,
     },
     {
       key: 'extractAudio',
       href: '/extract-audio',
+      comingSoon: true,
     },
   ]
 
@@ -63,7 +69,7 @@ export default async function Home({ params }: HomeProps) {
                 toolKey={tool.key}
                 href={tool.href}
                 locale={locale}
-                comingSoon={true}
+                comingSoon={tool.comingSoon}
               />
             ))}
           </div>

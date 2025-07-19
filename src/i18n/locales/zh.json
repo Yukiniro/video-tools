@@ -17,7 +17,20 @@
     "fastProcessing": "快速处理",
     "fastProcessingDesc": "优化的处理引擎，让您的视频转换和编辑更加快速高效。",
     "easyToUse": "易于使用",
-    "easyToUseDesc": "简洁直观的用户界面，让任何人都能轻松完成专业的视频处理。"
+    "easyToUseDesc": "简洁直观的用户界面，让任何人都能轻松完成专业的视频处理。",
+    "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览"
+  },
+  "gifConfig": {
+    "title": "GIF 导出设置",
+    "resolution": "分辨率",
+    "frameRate": "帧率",
+    "exportGif": "导出 GIF",
+    "converting": "转换中...",
+    "clickToConvert": "点击按钮开始转换视频为 GIF",
+    "tips": {
+      "lowResolution": "较低的分辨率和帧率可以减小文件大小",
+      "chooseAppropriate": "建议选择合适的分辨率以获得最佳效果"
+    }
   },
   "navigation": {
     "home": "首页",

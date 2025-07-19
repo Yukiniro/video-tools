@@ -17,7 +17,20 @@
     "fastProcessing": "Fast Processing",
     "fastProcessingDesc": "Optimized processing engine makes your video conversion and editing faster and more efficient.",
     "easyToUse": "Easy to Use",
-    "easyToUseDesc": "Clean and intuitive user interface that allows anyone to easily complete professional video processing."
+    "easyToUseDesc": "Clean and intuitive user interface that allows anyone to easily complete professional video processing.",
+    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse"
+  },
+  "gifConfig": {
+    "title": "GIF Export Settings",
+    "resolution": "Resolution",
+    "frameRate": "Frame Rate",
+    "exportGif": "Export GIF",
+    "converting": "Converting...",
+    "clickToConvert": "Click the button to start converting video to GIF",
+    "tips": {
+      "lowResolution": "Lower resolution and frame rate can reduce file size",
+      "chooseAppropriate": "Choose appropriate resolution for best results"
+    }
   },
   "navigation": {
     "home": "Home",

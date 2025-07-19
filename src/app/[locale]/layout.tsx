@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Provider } from 'jotai'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -78,20 +79,22 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className="antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NextIntlClientProvider messages={messages}>
-            <div className="relative flex min-h-screen flex-col">
-              <Header locale={locale} />
-              <main className="flex-1">{children}</main>
-              <Footer locale={locale} />
-            </div>
-          </NextIntlClientProvider>
-        </ThemeProvider>
+        <Provider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextIntlClientProvider messages={messages}>
+              <div className="relative flex min-h-screen flex-col">
+                <Header locale={locale} />
+                <main className="flex-1">{children}</main>
+                <Footer locale={locale} />
+              </div>
+            </NextIntlClientProvider>
+          </ThemeProvider>
+        </Provider>
       </body>
     </html>
   )

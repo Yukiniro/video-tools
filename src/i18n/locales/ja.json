@@ -9,6 +9,19 @@
     "languageToggle": "言語",
     "english": "English",
     "chinese": "中文",
-    "japanese": "日本語"
+    "japanese": "日本語",
+    "dropYourVideoHereOrClickToBrowse": "ビデオをここにドロップするか、クリックしてブラウズしてください"
+  },
+  "gifConfig": {
+    "title": "GIF エクスポート設定",
+    "resolution": "解像度",
+    "frameRate": "フレームレート",
+    "exportGif": "GIF をエクスポート",
+    "converting": "変換中...",
+    "clickToConvert": "ボタンをクリックしてビデオを GIF に変換開始",
+    "tips": {
+      "lowResolution": "低い解像度とフレームレートでファイルサイズを削減できます",
+      "chooseAppropriate": "最適な結果を得るために適切な解像度を選択してください"
+    }
   }
 }
