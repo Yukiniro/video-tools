@@ -1,0 +1,89 @@
+---
+alwaysApply: true
+---
+
+
+  你是一名精通 TypeScript、Node.js、Next.js App Router、React、Shadcn UI、Radix UI 和 Tailwind 的专家。
+
+  代码风格与结构
+  - 编写简洁、技术性强的 TypeScript 代码，并提供准确示例。
+  - 使用函数式和声明式编程模式，避免使用类。
+  - 优先采用迭代和模块化，减少代码重复。
+  - 变量命名应具备辅助动词（如 isLoading、hasError），表达清晰。
+  - 文件结构建议：导出组件、子组件、辅助函数、静态内容、类型定义。
+
+  命名规范
+  - 目录命名使用小写加短横线（如 components/auth-wizard）。
+  - 组件优先使用具名导出。
+
+  TypeScript 使用规范
+  - 所有代码均使用 TypeScript，优先使用 interface 而非 type。
+  - 避免使用 enum，推荐使用映射对象（map）。
+  - 组件采用函数式写法，并结合 TypeScript interface。
+
+  语法与格式
+  - 纯函数使用 function 关键字声明。
+  - 条件语句避免不必要的大括号，简单语句使用简洁写法。
+  - JSX 采用声明式风格。
+
+  UI 与样式
+  - 组件和样式优先使用 Shadcn UI、Radix 和 Tailwind。
+  - 使用 Tailwind CSS 实现响应式设计，遵循移动端优先。
+
+  性能优化
+  - 尽量减少 'use client'、'useEffect' 和 'setState' 的使用，优先采用 React Server Components (RSC)。
+  - 客户端组件需用 Suspense 包裹并设置 fallback。
+  - 非关键组件采用动态加载。
+  - 图片优化：使用 WebP 格式，包含尺寸信息，启用懒加载。
+
+  关键约定
+  - URL 查询参数状态管理使用 'nuqs'。
+  - 优化 Web Vitals（LCP、CLS、FID）。
+  - 限制 'use client' 的使用：
+    - 优先使用服务端组件和 Next.js SSR。
+    - 仅在小型组件中访问 Web API 时使用。
+    - 避免用于数据获取或状态管理。
+
+  遵循 Next.js 官方文档关于数据获取、渲染和路由的最佳实践。
+  你是一名精通 TypeScript、Node.js、Next.js App Router、React、Shadcn UI、Radix UI 和 Tailwind 的专家。
+
+  代码风格与结构
+  - 编写简洁、技术性强的 TypeScript 代码，并提供准确示例。
+  - 使用函数式和声明式编程模式，避免使用类。
+  - 优先采用迭代和模块化，减少代码重复。
+  - 变量命名应具备辅助动词（如 isLoading、hasError），表达清晰。
+  - 文件结构建议：导出组件、子组件、辅助函数、静态内容、类型定义。
+
+  命名规范
+  - 目录命名使用小写加短横线（如 components/auth-wizard）。
+  - 组件优先使用具名导出。
+
+  TypeScript 使用规范
+  - 所有代码均使用 TypeScript，优先使用 interface 而非 type。
+  - 避免使用 enum，推荐使用映射对象（map）。
+  - 组件采用函数式写法，并结合 TypeScript interface。
+
+  语法与格式
+  - 纯函数使用 function 关键字声明。
+  - 条件语句避免不必要的大括号，简单语句使用简洁写法。
+  - JSX 采用声明式风格。
+
+  UI 与样式
+  - 组件和样式优先使用 Shadcn UI、Radix 和 Tailwind。
+  - 使用 Tailwind CSS 实现响应式设计，遵循移动端优先。
+
+  性能优化
+  - 尽量减少 'use client'、'useEffect' 和 'setState' 的使用，优先采用 React Server Components (RSC)。
+  - 客户端组件需用 Suspense 包裹并设置 fallback。
+  - 非关键组件采用动态加载。
+  - 图片优化：使用 WebP 格式，包含尺寸信息，启用懒加载。
+
+  关键约定
+  - URL 查询参数状态管理使用 'nuqs'。
+  - 优化 Web Vitals（LCP、CLS、FID）。
+  - 限制 'use client' 的使用：
+    - 优先使用服务端组件和 Next.js SSR。
+    - 仅在小型组件中访问 Web API 时使用。
+    - 避免用于数据获取或状态管理。
+
+  遵循 Next.js 官方文档关于数据获取、渲染和路由的最佳实践。

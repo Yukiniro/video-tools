@@ -1,0 +1,14 @@
+{
+  "common": {
+    "title": "Next Shadcn Starter",
+    "subtitle": "Jotaiで状態管理",
+    "increment": "+",
+    "decrement": "-",
+    "reset": "リセット",
+    "count": "カウント",
+    "languageToggle": "言語",
+    "english": "English",
+    "chinese": "中文",
+    "japanese": "日本語"
+  }
+}

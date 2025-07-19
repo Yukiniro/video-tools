@@ -1,0 +1,14 @@
+{
+  "common": {
+    "title": "Next Shadcn Starter",
+    "subtitle": "State Management with Jotai",
+    "increment": "+",
+    "decrement": "-",
+    "reset": "Reset",
+    "count": "Count",
+    "languageToggle": "Language",
+    "english": "English",
+    "chinese": "中文",
+    "japanese": "日本語"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "common": {
+    "title": "Next Shadcn Starter",
+    "subtitle": "使用 Jotai 进行状态管理",
+    "increment": "+",
+    "decrement": "-",
+    "reset": "重置",
+    "count": "计数",
+    "languageToggle": "语言",
+    "english": "English",
+    "chinese": "中文",
+    "japanese": "日本語"
+  }
+}
