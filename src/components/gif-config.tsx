@@ -3,10 +3,10 @@
 import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
 import React from 'react'
+import { gifConfigAtom } from '@/atoms'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
-import { gifConfigAtom } from '@/lib/atoms'
 
 const RESOLUTION_OPTIONS = [
   { value: '120P', label: '120P' },

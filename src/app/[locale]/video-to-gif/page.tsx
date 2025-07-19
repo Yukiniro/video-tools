@@ -3,12 +3,13 @@
 import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { filesAtom, gifConfigAtom } from '@/atoms'
 import FileUpload from '@/components/file-upload'
 import { GifConfig } from '@/components/gif-config'
 import { ToolPageTemplate } from '@/components/tool-page-template'
 import { Button } from '@/components/ui/button'
 import { VideoPreview } from '@/components/video-preview'
-import { filesAtom, gifConfigAtom } from '@/lib/atoms'
+import { saveAsGif, videoToGif } from '@/store'
 
 export default function VideoToGifPage() {
   const t = useTranslations('gifConfig')
@@ -29,7 +30,16 @@ export default function VideoToGifPage() {
       // 这里应该调用实际的转换 API
 
       // 模拟转换过程
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      const blob = await videoToGif({
+        file: files[0],
+        resolution: _gifConfig.resolution as '120P' | '240P' | '480P',
+        fps: _gifConfig.fps as '10FPS' | '15FPS' | '25FPS',
+      }, {
+        start: 0,
+        end: 2,
+      })
+
+      saveAsGif(blob)
 
       // TODO: 处理转换成功的情况
       // 例如：显示成功消息、下载文件等

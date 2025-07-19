@@ -5,11 +5,5 @@ const DEFAULT_GIF_CONFIG = {
   fps: '15FPS',
 }
 
-// 计数器状态
-export const countAtom = atom(0)
-
-// 文件状态
-export const filesAtom = atom<File[]>([])
-
 // GIF 配置状态
 export const gifConfigAtom = atom(DEFAULT_GIF_CONFIG)
