@@ -121,7 +121,7 @@ export default async function Home({ params }: HomeProps) {
           features={features}
         />
       </div>
-      <Footer locale={locale} />
+      <Footer />
     </>
   )
 }

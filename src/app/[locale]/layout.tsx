@@ -22,15 +22,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t('title'),
     description: t('description'),
     keywords: ['视频工具', '视频转换', 'GIF转换', '视频压缩', '视频裁剪', '音频提取', 'video tools', 'video converter'],
-    authors: [{ name: 'Video Tools Team' }],
-    creator: 'Video Tools',
-    publisher: 'Video Tools',
-    formatDetection: {
-      email: false,
-      address: false,
-      telephone: false,
-    },
-    metadataBase: new URL('https://videotools.com'),
+    authors: [{ name: 'Yukiniro' }],
+    creator: 'Yukiniro',
+    publisher: 'Yukiniro',
     alternates: {
       canonical: '/',
       languages: {

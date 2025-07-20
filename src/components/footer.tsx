@@ -5,11 +5,7 @@ import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { GithubIcon } from '@/components/icon/github'
 
-interface FooterProps {
-  locale: string
-}
-
-export function Footer({ locale }: FooterProps) {
+export function Footer() {
   const t = useTranslations('footer')
 
   return (
