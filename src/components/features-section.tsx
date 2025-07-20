@@ -34,9 +34,9 @@ export function FeaturesSection({ badge, title, description, features }: Feature
 
           {/* Features Grid */}
           <div className="grid gap-8 md:grid-cols-3">
-            {features.map((feature, index) => (
+            {features.map(feature => (
               <FeatureCard
-                key={index}
+                key={feature.title}
                 icon={feature.icon}
                 title={feature.title}
                 description={feature.description}
