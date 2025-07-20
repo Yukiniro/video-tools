@@ -30,7 +30,7 @@ export function Footer({ locale }: FooterProps) {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  href="https://github.com/yourusername/video-tools"
+                  href="https://github.com/Yukiniro/video-tools"
                   className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -38,22 +38,6 @@ export function Footer({ locale }: FooterProps) {
                   <GithubIcon className="h-4 w-4" />
                   {t('sourceCode')}
                   <ExternalLink className="h-3 w-3" />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/docs`}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  {t('documentation')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/support`}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  {t('support')}
                 </Link>
               </li>
             </ul>
@@ -65,15 +49,7 @@ export function Footer({ locale }: FooterProps) {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="mailto:contact@videotools.com"
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  contact@videotools.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://twitter.com/videotools"
+                  href="https://x.com/Yukiro94317534"
                   className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1"
                   target="_blank"
                   rel="noopener noreferrer"

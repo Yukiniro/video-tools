@@ -1,29 +1,37 @@
-import type { VariantProps } from 'class-variance-authority'
-import { cva } from 'class-variance-authority'
-import * as React from 'react'
 import { cn } from '@/lib/utils'
 
-const badgeVariants = cva(
-  'inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
-  {
-    variants: {
-      variant: {
-        default: 'border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80',
-        secondary: 'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        destructive: 'border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80',
-        outline: 'text-foreground',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  },
-)
-
-export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof badgeVariants> {}
-
-function Badge({ className, variant, ...props }: BadgeProps) {
-  return <div className={cn(badgeVariants({ variant }), className)} {...props} />
+interface BadgeProps {
+  children: React.ReactNode
+  className?: string
+  dotColor?: 'primary' | 'secondary' | 'accent'
+  animate?: boolean
 }
 
-export { Badge, badgeVariants }
+export function Badge({
+  children,
+  className,
+  dotColor = 'primary',
+  animate = false,
+}: BadgeProps) {
+  const dotColorClasses = {
+    primary: 'bg-primary',
+    secondary: 'bg-secondary',
+    accent: 'bg-accent',
+  }
+
+  return (
+    <div className={cn(
+      'inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium bg-background/50 backdrop-blur-sm',
+      className,
+    )}
+    >
+      <span className={cn(
+        'w-2 h-2 rounded-full mr-2',
+        dotColorClasses[dotColor],
+        animate && 'animate-pulse',
+      )}
+      />
+      <span className="text-foreground">{children}</span>
+    </div>
+  )
+}

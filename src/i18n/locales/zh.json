@@ -20,6 +20,33 @@
     "easyToUseDesc": "简洁直观的用户界面，让任何人都能轻松完成专业的视频处理。",
     "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览"
   },
+  "hero": {
+    "badge": "专业视频处理",
+    "title": "趣味视频工具",
+    "subtitle": "使用前沿AI驱动的处理工具转换您的视频。",
+    "description": "快速、可靠、专业的结果。",
+    "getStarted": "免费开始",
+    "watchDemo": "观看演示",
+    "stats": {
+      "videosProcessed": "已处理视频",
+      "successRate": "成功率",
+      "avgProcessing": "平均处理时间"
+    }
+  },
+  "toolsSection": {
+    "badge": "强大工具",
+    "description": "从我们为专业人士和创作者设计的全面视频处理工具套件中选择。",
+    "moreComing": "更多工具即将推出！加入我们的社区以获得早期访问权限。",
+    "requestTool": "请求工具"
+  },
+  "featuresSection": {
+    "badge": "为什么选择我们",
+    "description": "通过我们的前沿技术和用户友好界面体验视频处理的未来。",
+    "social": {
+      "title": "加入数千名创作者",
+      "subtitle": "已在使用我们的工具"
+    }
+  },
   "gifConfig": {
     "title": "GIF 导出设置",
     "resolution": "分辨率",

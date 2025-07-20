@@ -46,7 +46,7 @@ export function ToolCard({ toolKey, href, locale, comingSoon = true }: ToolCardP
               <Icon className="h-6 w-6 text-primary" />
             </div>
             {comingSoon && (
-              <Badge variant="secondary" className="text-xs">
+              <Badge dotColor="secondary" className="text-xs border-secondary/20 bg-secondary/10">
                 {t(`${toolKey}.comingSoon`)}
               </Badge>
             )}

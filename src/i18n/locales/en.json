@@ -1,7 +1,7 @@
 {
   "common": {
-    "title": "Video Tools",
-    "subtitle": "Professional online video processing tool collection",
+    "title": "Funny Video Tools",
+    "subtitle": "Professional online funny video processing tool collection",
     "increment": "+",
     "decrement": "-",
     "reset": "Reset",
@@ -19,6 +19,33 @@
     "easyToUse": "Easy to Use",
     "easyToUseDesc": "Clean and intuitive user interface that allows anyone to easily complete professional video processing.",
     "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse"
+  },
+  "hero": {
+    "badge": "Professional Video Processing",
+    "title": "Funny Video Tools",
+    "subtitle": "Transform your videos with cutting-edge AI-powered processing tools.",
+    "description": "Fast, reliable, and professional results.",
+    "getStarted": "Get Started Free",
+    "watchDemo": "Watch Demo",
+    "stats": {
+      "videosProcessed": "Videos Processed",
+      "successRate": "Success Rate",
+      "avgProcessing": "Avg Processing"
+    }
+  },
+  "toolsSection": {
+    "badge": "Powerful Tools",
+    "description": "Choose from our comprehensive suite of video processing tools designed for professionals and creators alike.",
+    "moreComing": "More tools coming soon! Join our community to get early access.",
+    "requestTool": "Request a Tool"
+  },
+  "featuresSection": {
+    "badge": "Why Choose Us",
+    "description": "Experience the future of video processing with our cutting-edge technology and user-friendly interface.",
+    "social": {
+      "title": "Join thousands of creators",
+      "subtitle": "Already using our tools"
+    }
   },
   "gifConfig": {
     "title": "GIF Export Settings",

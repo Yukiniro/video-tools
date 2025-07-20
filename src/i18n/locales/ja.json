@@ -20,6 +20,33 @@
     "easyToUseDesc": "Clean and intuitive user interface that allows anyone to easily complete professional video processing.",
     "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse"
   },
+  "hero": {
+    "badge": "プロフェッショナル動画処理",
+    "title": "面白い動画ツール",
+    "subtitle": "最先端のAI駆動処理ツールで動画を変換。",
+    "description": "高速、信頼性、プロフェッショナルな結果。",
+    "getStarted": "無料で始める",
+    "watchDemo": "デモを見る",
+    "stats": {
+      "videosProcessed": "処理済み動画",
+      "successRate": "成功率",
+      "avgProcessing": "平均処理時間"
+    }
+  },
+  "toolsSection": {
+    "badge": "強力なツール",
+    "description": "プロフェッショナルとクリエイター向けに設計された包括的な動画処理ツールスイートから選択してください。",
+    "moreComing": "より多くのツールが近日公開予定！早期アクセスのためにコミュニティに参加してください。",
+    "requestTool": "ツールをリクエスト"
+  },
+  "featuresSection": {
+    "badge": "なぜ私たちを選ぶのか",
+    "description": "最先端の技術とユーザーフレンドリーなインターフェースで動画処理の未来を体験してください。",
+    "social": {
+      "title": "数千人のクリエイターに参加",
+      "subtitle": "既に私たちのツールを使用中"
+    }
+  },
   "gifConfig": {
     "title": "GIF Export Settings",
     "resolution": "Resolution",

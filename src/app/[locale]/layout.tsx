@@ -2,9 +2,7 @@ import type { Metadata } from 'next'
 import { Provider } from 'jotai'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
-import { headers } from 'next/headers'
 import { notFound } from 'next/navigation'
-import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
@@ -38,13 +36,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: {
         'zh-CN': '/zh',
         'en-US': '/en',
+        'ja-JP': '/ja',
       },
     },
     openGraph: {
       title: t('title'),
       description: t('description'),
       url: '/',
-      siteName: 'Video Tools',
+      siteName: 'Funny Video Tools',
       locale: locale === 'zh' ? 'zh_CN' : 'en_US',
       type: 'website',
     },
@@ -78,11 +77,6 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
   // Providing all messages to the client
   const messages = await getMessages()
 
-  // 检查当前路径是否为首页
-  const headersList = await headers()
-  const pathname = headersList.get('x-pathname') || headersList.get('x-invoke-path') || ''
-  const isHomePage = pathname === `/${locale}` || pathname === `/${locale}/` || pathname === '/'
-
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className="antialiased">
@@ -97,7 +91,6 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
               <div className="relative flex min-h-screen flex-col">
                 <Header locale={locale} />
                 <main className="flex-1">{children}</main>
-                {isHomePage && <Footer locale={locale} />}
               </div>
               <Toaster position="top-center" richColors />
             </NextIntlClientProvider>
