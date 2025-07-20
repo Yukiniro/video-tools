@@ -1,7 +1,7 @@
 import { delay } from 'es-toolkit'
 import { atom } from 'jotai'
 import { toast } from 'sonner'
-import { saveAsGif, videoToGif } from '@/store'
+import { getVideoDuration, saveAsGif, videoToGif } from '@/store'
 import { filesAtom } from './files'
 
 const DEFAULT_GIF_CONFIG = {
@@ -20,6 +20,10 @@ const DEFAULT_CONVERSION_PROGRESS: ConversionProgress = {
   progress: 0,
   stage: '',
 }
+
+export const convertStartTimeAtom = atom<number>(0) // 转换开始时间
+
+export const convertEndTimeAtom = atom<number>(5) // 转换结束时间
 
 // GIF 配置状态
 export const gifConfigAtom = atom(DEFAULT_GIF_CONFIG)
@@ -57,14 +61,29 @@ export const convertToGifAtom = atom(
         stage: translations('processingVideo'),
       }))
 
+      // 获取时间设置
+      const startTime = get(convertStartTimeAtom)
+      const endTime = get(convertEndTimeAtom)
+
+      if (startTime >= endTime) {
+        toast.error(translations('startTimeGreaterThanEndTime'))
+        return
+      }
+
+      const duration = await getVideoDuration(files[0])
+      if (endTime > duration) {
+        toast.error(translations('endTimeGreaterThanDuration'))
+        return
+      }
+
       // 模拟转换过程
       const blob = await videoToGif({
         file: files[0],
         resolution: gifConfig.resolution as '120P' | '240P' | '480P',
         fps: gifConfig.fps as '10FPS' | '15FPS' | '25FPS',
       }, {
-        start: 0,
-        end: 2,
+        start: startTime,
+        end: endTime === Infinity ? 2 : endTime, // 如果没有设置结束时间，默认使用2秒
         progress: (progressValue: number) => {
           set(gifConversionProgressAtom, prev => ({
             ...prev,
@@ -92,17 +111,17 @@ export const convertToGifAtom = atom(
       // 稍等片刻显示完成状态
       await delay(100)
 
-      // 隐藏对话框并显示成功提示
-      set(showProgressDialogAtom, false)
       toast.success(translations('conversionSuccess'))
     }
     catch (error) {
-      // 隐藏对话框并显示错误提示
-      set(showProgressDialogAtom, false)
+      // 显示错误提示
       toast.error(translations('conversionError'))
       console.error('转换失败:', error)
     }
     finally {
+      // 隐藏对话框并显示成功提示
+      set(showProgressDialogAtom, false)
+
       // 重置进度状态
       set(gifConversionProgressAtom, {
         isConverting: false,

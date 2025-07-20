@@ -24,6 +24,11 @@
     "title": "GIF Export Settings",
     "resolution": "Resolution",
     "frameRate": "Frame Rate",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "startTimeDesc": "Start time for conversion (seconds)",
+    "endTimeDesc": "End time for conversion (seconds)",
+    "endTimePlaceholder": "End of video",
     "exportGif": "Export GIF",
     "converting": "Converting...",
     "clickToConvert": "Click the button to start converting video to GIF",
@@ -37,8 +42,11 @@
     "conversionError": "Conversion failed, please try again",
     "tips": {
       "lowResolution": "Lower resolution and frame rate can reduce file size",
-      "chooseAppropriate": "Choose appropriate resolution for best results"
-    }
+      "chooseAppropriate": "Choose appropriate resolution for best results",
+      "timeSettings": "Set time range to convert only specific segments of the video"
+    },
+    "startTimeGreaterThanEndTime": "Start time must be less than end time",
+    "endTimeGreaterThanDuration": "End time must be less than video duration"
   },
   "navigation": {
     "home": "Home",

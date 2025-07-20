@@ -29,6 +29,26 @@ function getSize(size: Size, resolution: '120P' | '240P' | '480P'): Size {
   }
 }
 
+/**
+ * 获取视频时长
+ * @param file 视频文件
+ * @returns 视频时长（秒）
+ */
+export async function getVideoDuration(file: File): Promise<number> {
+  const input = new Input({
+    formats: ALL_FORMATS,
+    source: new BlobSource(file),
+  })
+  return await input.computeDuration()
+}
+
+/**
+ * 将视频转换为 GIF
+ * @param params 视频转换参数
+ * @param options 转换选项
+ * @returns 转换后的 GIF 文件
+ *
+ */
 export async function videoToGif(
   params: VideoToGifParams,
   options: {

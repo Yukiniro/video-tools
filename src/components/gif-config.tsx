@@ -4,6 +4,7 @@ import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import { gifConfigAtom } from '@/atoms'
+import { TimeRangeSettings } from '@/components/time-range-settings'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
@@ -112,6 +113,9 @@ export function GifConfig() {
           </div>
         </div>
 
+        {/* 时间设置 */}
+        <TimeRangeSettings className="space-y-4" />
+
         {/* 配置提示 */}
         <div className="text-xs text-muted-foreground space-y-1">
           <p>
@@ -121,6 +125,10 @@ export function GifConfig() {
           <p>
             •
             {t('tips.chooseAppropriate')}
+          </p>
+          <p>
+            •
+            {t('tips.timeSettings')}
           </p>
         </div>
       </CardContent>

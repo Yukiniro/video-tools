@@ -16,6 +16,11 @@
     "title": "GIF エクスポート設定",
     "resolution": "解像度",
     "frameRate": "フレームレート",
+    "startTime": "開始時間",
+    "endTime": "終了時間",
+    "startTimeDesc": "変換開始時間（秒）",
+    "endTimeDesc": "変換終了時間（秒）",
+    "endTimePlaceholder": "ビデオの終わり",
     "exportGif": "GIF をエクスポート",
     "converting": "変換中...",
     "clickToConvert": "ボタンをクリックしてビデオを GIF に変換開始",
@@ -29,7 +34,10 @@
     "conversionError": "変換に失敗しました、再試行してください",
     "tips": {
       "lowResolution": "低い解像度とフレームレートでファイルサイズを削減できます",
-      "chooseAppropriate": "最適な結果を得るために適切な解像度を選択してください"
-    }
+      "chooseAppropriate": "最適な結果を得るために適切な解像度を選択してください",
+      "timeSettings": "時間範囲を設定してビデオの特定の部分のみを変換します"
+    },
+    "startTimeGreaterThanEndTime": "開始時間は終了時間より小さくなければなりません",
+    "endTimeGreaterThanDuration": "終了時間はビデオの長さより小さくなければなりません"
   }
 }

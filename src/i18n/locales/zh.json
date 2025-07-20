@@ -24,6 +24,11 @@
     "title": "GIF 导出设置",
     "resolution": "分辨率",
     "frameRate": "帧率",
+    "startTime": "开始时间",
+    "endTime": "结束时间",
+    "startTimeDesc": "开始转换的时间点（秒）",
+    "endTimeDesc": "结束转换的时间点（秒）",
+    "endTimePlaceholder": "视频结尾",
     "exportGif": "导出 GIF",
     "converting": "转换中...",
     "clickToConvert": "点击按钮开始转换视频为 GIF",
@@ -37,8 +42,11 @@
     "conversionError": "转换失败，请重试",
     "tips": {
       "lowResolution": "较低的分辨率和帧率可以减小文件大小",
-      "chooseAppropriate": "建议选择合适的分辨率以获得最佳效果"
-    }
+      "chooseAppropriate": "建议选择合适的分辨率以获得最佳效果",
+      "timeSettings": "设置时间范围可以只转换视频的特定片段"
+    },
+    "startTimeGreaterThanEndTime": "开始时间必须小于结束时间",
+    "endTimeGreaterThanDuration": "结束时间必须小于视频时长"
   },
   "navigation": {
     "home": "首页",
