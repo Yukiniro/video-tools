@@ -45,7 +45,13 @@ export async function getVideoDuration(file: File): Promise<number> {
 /**
  * 将视频转换为 GIF
  * @param params 视频转换参数
+ * @param params.file 视频文件
+ * @param params.resolution 分辨率
+ * @param params.fps 帧率
  * @param options 转换选项
+ * @param options.start 开始时间
+ * @param options.end 结束时间
+ * @param options.progress 进度回调
  * @returns 转换后的 GIF 文件
  *
  */

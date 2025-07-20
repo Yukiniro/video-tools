@@ -30,7 +30,10 @@ export function GifProgressDialog() {
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
               <span>{progress.stage}</span>
-              <span>{progress.progress}%</span>
+              <span>
+                {progress.progress}
+                %
+              </span>
             </div>
             <Progress value={progress.progress} className="w-full" />
           </div>
@@ -41,4 +44,4 @@ export function GifProgressDialog() {
       </DialogContent>
     </Dialog>
   )
-} 
+}

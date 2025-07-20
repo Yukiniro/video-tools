@@ -1,7 +1,7 @@
 'use client'
 
 import { ChevronDown, Globe } from 'lucide-react'
-import { useLocale, useTranslations } from 'next-intl'
+import { useLocale } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import {
@@ -20,7 +20,6 @@ const languages = [
 export function LanguageDropdown() {
   const locale = useLocale()
   const router = useRouter()
-  const t = useTranslations('common')
 
   const currentLanguage = languages.find(lang => lang.code === locale)
 
