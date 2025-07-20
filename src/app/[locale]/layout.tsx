@@ -7,6 +7,7 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { ThemeProvider } from '@/components/theme-provider'
 import { routing } from '@/i18n/routing'
+import { headers } from 'next/headers'
 import '../globals.css'
 
 interface RootLayoutProps {
@@ -76,6 +77,11 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
   // Providing all messages to the client
   const messages = await getMessages()
 
+  // 检查当前路径是否为首页
+  const headersList = await headers()
+  const pathname = headersList.get('x-pathname') || headersList.get('x-invoke-path') || ''
+  const isHomePage = pathname === `/${locale}` || pathname === `/${locale}/` || pathname === '/'
+
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className="antialiased">
@@ -90,7 +96,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
               <div className="relative flex min-h-screen flex-col">
                 <Header locale={locale} />
                 <main className="flex-1">{children}</main>
-                <Footer locale={locale} />
+                {isHomePage && <Footer locale={locale} />}
               </div>
             </NextIntlClientProvider>
           </ThemeProvider>

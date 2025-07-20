@@ -11,7 +11,7 @@ export function ToolPageTemplate({ toolKey, children }: ToolPageTemplateProps) {
   const t = useTranslations('tools')
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background">
       <div className="container mx-auto px-4 py-24">
         <div className="mx-auto max-w-4xl">
           {/* Header */}
