@@ -3,7 +3,7 @@
 import { ChevronDown, Menu, Video } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { LanguageSwitcher } from '@/components/language-switcher'
+import { LanguageDropdown } from '@/components/language-dropdown'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 
@@ -15,12 +15,12 @@ export function Header({ locale }: HeaderProps) {
   const t = useTranslations()
 
   const tools = [
-    { key: 'videoToGif', href: '/video-to-gif' },
-    { key: 'gifToVideo', href: '/gif-to-video' },
-    { key: 'videoTranscode', href: '/video-transcode' },
-    { key: 'videoCompress', href: '/video-compress' },
-    { key: 'videoCrop', href: '/video-crop' },
-    { key: 'extractAudio', href: '/extract-audio' },
+    { key: 'videoToGif', href: '/video-to-gif', comingSoon: false },
+    { key: 'gifToVideo', href: '/gif-to-video', comingSoon: true },
+    { key: 'videoTranscode', href: '/video-transcode', comingSoon: true },
+    { key: 'videoCompress', href: '/video-compress', comingSoon: true },
+    { key: 'videoCrop', href: '/video-crop', comingSoon: true },
+    { key: 'extractAudio', href: '/extract-audio', comingSoon: true },
   ]
 
   return (
@@ -52,13 +52,29 @@ export function Header({ locale }: HeaderProps) {
             <div className="absolute top-full left-0 mt-1 w-48 bg-background border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
               <div className="py-1">
                 {tools.map(tool => (
-                  <Link
-                    key={tool.key}
-                    href={`/${locale}${tool.href}`}
-                    className="block px-4 py-2 text-sm hover:bg-muted"
-                  >
-                    {t(`tools.${tool.key}.title`)}
-                  </Link>
+                  tool.comingSoon
+                    ? (
+                        <div
+                          key={tool.key}
+                          className="block px-4 py-2 text-sm text-muted-foreground cursor-not-allowed opacity-50"
+                        >
+                          <span>{t(`tools.${tool.key}.title`)}</span>
+                          <span className="ml-2 text-xs">
+                            (
+                            {t(`tools.${tool.key}.comingSoon`)}
+                            )
+                          </span>
+                        </div>
+                      )
+                    : (
+                        <Link
+                          key={tool.key}
+                          href={`/${locale}${tool.href}`}
+                          className="block px-4 py-2 text-sm hover:bg-muted transition-colors"
+                        >
+                          {t(`tools.${tool.key}.title`)}
+                        </Link>
+                      )
                 ))}
               </div>
             </div>
@@ -75,8 +91,8 @@ export function Header({ locale }: HeaderProps) {
           {/* Theme Toggle */}
           <ThemeToggle />
 
-          {/* Language Switcher */}
-          <LanguageSwitcher />
+          {/* Language Dropdown */}
+          <LanguageDropdown />
         </div>
       </div>
     </header>

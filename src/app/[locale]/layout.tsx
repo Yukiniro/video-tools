@@ -99,7 +99,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
                 <main className="flex-1">{children}</main>
                 {isHomePage && <Footer locale={locale} />}
               </div>
-              <Toaster position="top-center" richColors />
+              <Toaster position='top-center' richColors />
             </NextIntlClientProvider>
           </ThemeProvider>
         </Provider>
