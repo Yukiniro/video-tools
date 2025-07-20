@@ -27,6 +27,14 @@
     "exportGif": "Export GIF",
     "converting": "Converting...",
     "clickToConvert": "Click the button to start converting video to GIF",
+    "conversionInProgress": "Converting your video, please wait...",
+    "pleaseWait": "Please do not close this window",
+    "preparingConversion": "Preparing conversion",
+    "processingVideo": "Processing video",
+    "generatingGif": "Generating GIF",
+    "completed": "Completed",
+    "conversionSuccess": "Conversion successful! GIF saved to your device",
+    "conversionError": "Conversion failed, please try again",
     "tips": {
       "lowResolution": "Lower resolution and frame rate can reduce file size",
       "chooseAppropriate": "Choose appropriate resolution for best results"

@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from '@/components/ui/sonner'
 import { routing } from '@/i18n/routing'
 import { headers } from 'next/headers'
 import '../globals.css'
@@ -98,6 +99,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
                 <main className="flex-1">{children}</main>
                 {isHomePage && <Footer locale={locale} />}
               </div>
+              <Toaster />
             </NextIntlClientProvider>
           </ThemeProvider>
         </Provider>

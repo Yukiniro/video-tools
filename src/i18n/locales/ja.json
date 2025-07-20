@@ -19,6 +19,14 @@
     "exportGif": "GIF をエクスポート",
     "converting": "変換中...",
     "clickToConvert": "ボタンをクリックしてビデオを GIF に変換開始",
+    "conversionInProgress": "ビデオを変換しています、お待ちください...",
+    "pleaseWait": "このウィンドウを閉じないでください",
+    "preparingConversion": "変換を準備中",
+    "processingVideo": "ビデオを処理中",
+    "generatingGif": "GIF を生成中",
+    "completed": "完了",
+    "conversionSuccess": "変換成功！GIF がデバイスに保存されました",
+    "conversionError": "変換に失敗しました、再試行してください",
     "tips": {
       "lowResolution": "低い解像度とフレームレートでファイルサイズを削減できます",
       "chooseAppropriate": "最適な結果を得るために適切な解像度を選択してください"

@@ -1,3 +1,4 @@
+import { clamp } from 'es-toolkit'
 import { saveAs } from 'file-saver'
 import GIF from 'gif.js'
 import { ALL_FORMATS, BlobSource, CanvasSink, Input } from 'mediabunny'
@@ -33,10 +34,11 @@ export async function videoToGif(
   options: {
     start: number
     end: number
+    progress: (progress: number) => void
   },
 ): Promise<Blob> {
   const { file, resolution, fps } = params
-  const { start, end } = options
+  const { start, end, progress } = options
   const input = new Input({
     formats: ALL_FORMATS,
     source: new BlobSource(file),
@@ -65,15 +67,20 @@ export async function videoToGif(
     workerScript: '/gif.worker.js',
   })
 
+  progress(0)
+
   for (let timestamp = start; timestamp < end; timestamp += frameInterval) {
     const wrappedCanvas = await sink.getCanvas(timestamp)
     if (!wrappedCanvas) {
       continue
     }
+    progress(clamp(timestamp / end, 0, 1))
     gif.addFrame(wrappedCanvas.canvas, { delay })
   }
 
   gif.render()
+
+  progress(1)
 
   return await new Promise((resolve) => {
     gif.on('finished', resolve)
