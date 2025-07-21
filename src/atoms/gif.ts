@@ -1,4 +1,5 @@
 import { delay } from 'es-toolkit'
+import { floor } from 'es-toolkit/compat'
 import { atom } from 'jotai'
 import { toast } from 'sonner'
 import { getVideoDuration, saveAsGif, videoToGif } from '@/store'
@@ -54,13 +55,6 @@ export const convertToGifAtom = atom(
         stage: translations('preparingConversion'),
       })
 
-      // 更新进度：开始处理
-      set(gifConversionProgressAtom, prev => ({
-        ...prev,
-        progress: 20,
-        stage: translations('processingVideo'),
-      }))
-
       // 获取时间设置
       const startTime = get(convertStartTimeAtom)
       const endTime = get(convertEndTimeAtom)
@@ -87,17 +81,11 @@ export const convertToGifAtom = atom(
         progress: (progressValue: number) => {
           set(gifConversionProgressAtom, prev => ({
             ...prev,
-            progress: Math.min(20 + progressValue * 0.6, 80), // 将进度映射到 20-80% 区间
+            progress: floor(progressValue * 100, 0), // 将进度映射到 20-80% 区间
+            stage: translations('generatingGif'),
           }))
         },
       })
-
-      // 更新进度：生成 GIF
-      set(gifConversionProgressAtom, prev => ({
-        ...prev,
-        progress: 80,
-        stage: translations('generatingGif'),
-      }))
 
       // 完成
       set(gifConversionProgressAtom, prev => ({
