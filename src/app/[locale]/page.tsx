@@ -98,7 +98,6 @@ export default async function Home({ params }: HomeProps) {
           subtitle={tHero('subtitle')}
           description={tHero('description')}
           getStarted={tHero('getStarted')}
-          watchDemo={tHero('watchDemo')}
           stats={{
             videosProcessed: tHero('stats.videosProcessed'),
             successRate: tHero('stats.successRate'),

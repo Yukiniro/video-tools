@@ -8,7 +8,6 @@ interface HeroSectionProps {
   subtitle: string
   description: string
   getStarted: string
-  watchDemo: string
   stats: {
     videosProcessed: string
     successRate: string
@@ -22,7 +21,6 @@ export function HeroSection({
   subtitle,
   description,
   getStarted,
-  watchDemo,
   stats,
 }: HeroSectionProps) {
   return (
