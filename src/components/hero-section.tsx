@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { StatsItem } from '@/components/stats-item'
 import { Badge } from '@/components/ui/badge'
 
@@ -55,13 +56,11 @@ export function HeroSection({
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button type="button" className="group relative px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-lg transition-all hover:scale-105 hover:shadow-2xl hover:shadow-primary/25">
-              <span className="relative z-10">{getStarted}</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-            </button>
-            <button type="button" className="px-8 py-4 border border-border rounded-full font-semibold text-lg transition-all hover:scale-105 hover:bg-accent/10 backdrop-blur-sm">
-              {watchDemo}
-            </button>
+            <Link href="/video-to-gif" className="group relative">
+              <button type="button" className="group relative px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-lg transition-all hover:scale-105 hover:shadow-2xl hover:shadow-primary/25">
+                {getStarted}
+              </button>
+            </Link>
           </div>
 
           {/* Stats */}
