@@ -1,4 +1,5 @@
 import { clamp } from 'es-toolkit'
+import { floor } from 'es-toolkit/compat'
 import { saveAs } from 'file-saver'
 import GIF from 'gif.js'
 import { ALL_FORMATS, BlobSource, CanvasSink, Input } from 'mediabunny'
@@ -100,7 +101,7 @@ export async function videoToGif(
     if (!wrappedCanvas) {
       continue
     }
-    progress(clamp(timestamp / end, 0, 1))
+    progress(clamp(floor(timestamp / end, 2), 0, 1))
     gif.addFrame(wrappedCanvas.canvas, { delay })
   }
 
