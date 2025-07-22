@@ -1,8 +1,8 @@
 'use client'
 
-import { useAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import { gifConversionProgressAtom, showProgressDialogAtom } from '@/atoms/gif'
+import { cancelConversionAtom, gifConversionProgressAtom, showProgressDialogAtom } from '@/atoms/gif'
 import {
   Dialog,
   DialogContent,
@@ -16,9 +16,17 @@ export function GifProgressDialog() {
   const t = useTranslations('gifConfig')
   const [showDialog, setShowDialog] = useAtom(showProgressDialogAtom)
   const [progress] = useAtom(gifConversionProgressAtom)
+  const cancelConversion = useSetAtom(cancelConversionAtom)
+
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      cancelConversion()
+    }
+    setShowDialog(open)
+  }
 
   return (
-    <Dialog open={showDialog} onOpenChange={setShowDialog}>
+    <Dialog open={showDialog} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t('converting')}</DialogTitle>

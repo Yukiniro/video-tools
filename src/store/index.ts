@@ -53,6 +53,7 @@ export async function getVideoDuration(file: File): Promise<number> {
  * @param options.start 开始时间
  * @param options.end 结束时间
  * @param options.progress 进度回调
+ * @param options.signal 取消信号
  * @returns 转换后的 GIF 文件
  *
  */
@@ -62,10 +63,11 @@ export async function videoToGif(
     start: number
     end: number
     progress: (progress: number) => void
+    signal?: AbortSignal
   },
 ): Promise<Blob> {
   const { file, resolution, fps } = params
-  const { start, end, progress } = options
+  const { start, end, progress, signal } = options
   const input = new Input({
     formats: ALL_FORMATS,
     source: new BlobSource(file),
@@ -97,6 +99,12 @@ export async function videoToGif(
   progress(0)
 
   for (let timestamp = start; timestamp < end; timestamp += frameInterval) {
+    // 检查是否被取消
+    if (signal?.aborted) {
+      gif.abort()
+      throw new Error('Conversion cancelled')
+    }
+
     const wrappedCanvas = await sink.getCanvas(timestamp)
     if (!wrappedCanvas) {
       continue
@@ -109,7 +117,15 @@ export async function videoToGif(
 
   progress(1)
 
-  return await new Promise((resolve) => {
+  return await new Promise((resolve, reject) => {
+    // 监听取消信号
+    if (signal) {
+      signal.addEventListener('abort', () => {
+        gif.abort()
+        reject(new Error('Conversion cancelled'))
+      })
+    }
+
     gif.on('finished', resolve)
   })
 }

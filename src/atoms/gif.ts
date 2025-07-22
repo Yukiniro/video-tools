@@ -35,6 +35,9 @@ export const gifConversionProgressAtom = atom(DEFAULT_CONVERSION_PROGRESS)
 // 显示进度模态框状态
 export const showProgressDialogAtom = atom(false)
 
+// 取消转换的 AbortController
+export const conversionAbortControllerAtom = atom<AbortController | null>(null)
+
 // 转换 action atom
 export const convertToGifAtom = atom(
   null,
@@ -45,6 +48,10 @@ export const convertToGifAtom = atom(
     if (files.length === 0) {
       return
     }
+
+    // 创建新的 AbortController
+    const abortController = new AbortController()
+    set(conversionAbortControllerAtom, abortController)
 
     try {
       // 显示进度对话框
@@ -70,7 +77,7 @@ export const convertToGifAtom = atom(
         return
       }
 
-      // 模拟转换过程
+      // 转换过程
       const blob = await videoToGif({
         file: files[0],
         resolution: gifConfig.resolution as '120P' | '240P' | '480P',
@@ -85,6 +92,7 @@ export const convertToGifAtom = atom(
             stage: translations('generatingGif'),
           }))
         },
+        signal: abortController.signal,
       })
 
       // 完成
@@ -102,11 +110,20 @@ export const convertToGifAtom = atom(
       toast.success(translations('conversionSuccess'))
     }
     catch (error) {
-      // 显示错误提示
-      toast.error(translations('conversionError'))
-      console.error('转换失败:', error)
+      // 检查是否是取消操作
+      if (error instanceof Error && error.message === 'Conversion cancelled') {
+        toast.info(translations('conversionCancelled'))
+      }
+      else {
+        // 显示错误提示
+        toast.error(translations('conversionError'))
+        console.error('转换失败:', error)
+      }
     }
     finally {
+      // 清理 AbortController
+      set(conversionAbortControllerAtom, null)
+
       // 隐藏对话框并显示成功提示
       set(showProgressDialogAtom, false)
 
@@ -116,6 +133,17 @@ export const convertToGifAtom = atom(
         progress: 0,
         stage: '',
       })
+    }
+  },
+)
+
+// 取消转换 action atom
+export const cancelConversionAtom = atom(
+  null,
+  (get) => {
+    const abortController = get(conversionAbortControllerAtom)
+    if (abortController) {
+      abortController.abort()
     }
   },
 )
