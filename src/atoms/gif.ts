@@ -113,7 +113,8 @@ export const convertToGifAtom = atom(
       // 检查是否是取消操作
       if (error instanceof Error && error.message === 'Conversion cancelled') {
         toast.info(translations('conversionCancelled'))
-      } else {
+      }
+      else {
         // 显示错误提示
         toast.error(translations('conversionError'))
         console.error('转换失败:', error)
@@ -122,7 +123,7 @@ export const convertToGifAtom = atom(
     finally {
       // 清理 AbortController
       set(conversionAbortControllerAtom, null)
-      
+
       // 隐藏对话框并显示成功提示
       set(showProgressDialogAtom, false)
 
@@ -139,7 +140,7 @@ export const convertToGifAtom = atom(
 // 取消转换 action atom
 export const cancelConversionAtom = atom(
   null,
-  (get, set) => {
+  (get) => {
     const abortController = get(conversionAbortControllerAtom)
     if (abortController) {
       abortController.abort()
