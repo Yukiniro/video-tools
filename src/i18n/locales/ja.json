@@ -65,8 +65,10 @@
     "processingVideo": "Processing video",
     "generatingGif": "Generating GIF",
     "completed": "Completed",
-    "conversionSuccess": "Conversion successful! GIF saved to your device",
-    "conversionError": "Conversion failed, please try again",
+    "conversionSuccess": "変換が成功しました！GIFがデバイスに保存されました",
+    "conversionError": "変換に失敗しました。もう一度お試しください",
+    "conversionCancelled": "変換がキャンセルされました",
+    "cancelConversion": "変換をキャンセル",
     "tips": {
       "lowResolution": "Lower resolution and frame rate can reduce file size",
       "chooseAppropriate": "Choose appropriate resolution for best results",

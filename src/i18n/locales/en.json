@@ -67,6 +67,8 @@
     "completed": "Completed",
     "conversionSuccess": "Conversion successful! GIF saved to your device",
     "conversionError": "Conversion failed, please try again",
+    "conversionCancelled": "Conversion cancelled",
+    "cancelConversion": "Cancel Conversion",
     "tips": {
       "lowResolution": "Lower resolution and frame rate can reduce file size",
       "chooseAppropriate": "Choose appropriate resolution for best results",

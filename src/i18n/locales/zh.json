@@ -67,6 +67,8 @@
     "completed": "完成",
     "conversionSuccess": "转换成功！GIF 已保存到您的设备",
     "conversionError": "转换失败，请重试",
+    "conversionCancelled": "转换已取消",
+    "cancelConversion": "取消转换",
     "tips": {
       "lowResolution": "较低的分辨率和帧率可以减小文件大小",
       "chooseAppropriate": "建议选择合适的分辨率以获得最佳效果",
