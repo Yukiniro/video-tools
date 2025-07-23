@@ -98,18 +98,22 @@ export async function videoToGif(
 
   progress(0)
 
-  for (let timestamp = start; timestamp < end; timestamp += frameInterval) {
+  const timestamps = Array.from({ length: Math.floor((end - start) / frameInterval) }, (_, i) => start + i * frameInterval)
+
+  const generator = sink.canvasesAtTimestamps(timestamps)
+
+  for await (const wrappedCanvas of generator) {
     // 检查是否被取消
     if (signal?.aborted) {
       gif.abort()
       throw new Error('Conversion cancelled')
     }
 
-    const wrappedCanvas = await sink.getCanvas(timestamp)
     if (!wrappedCanvas) {
       continue
     }
-    progress(clamp(floor(timestamp / end, 2), 0, 1))
+    
+    progress(clamp(floor((wrappedCanvas.timestamp - start) / (end - start), 2), 0, 1))
     gif.addFrame(wrappedCanvas.canvas, { delay })
   }
 
