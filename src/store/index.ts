@@ -112,7 +112,7 @@ export async function videoToGif(
     if (!wrappedCanvas) {
       continue
     }
-    
+
     progress(clamp(floor((wrappedCanvas.timestamp - start) / (end - start), 2), 0, 1))
     gif.addFrame(wrappedCanvas.canvas, { delay })
   }
