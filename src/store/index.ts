@@ -234,7 +234,7 @@ export async function gifToVideo(
   }
 
   const firstFrame = await getDecodedFrame(0)
-  const frameDuration = (firstFrame.duration ?? 0) / 1e6;
+  const frameDuration = (firstFrame.duration ?? 0) / 1e6
   const { width, height } = getVideoSize(
     { width: firstFrame.displayWidth, height: firstFrame.displayHeight },
     resolution,
@@ -243,12 +243,12 @@ export async function gifToVideo(
   canvas.height = height
 
   const interval = 1 / frameRate
-  
+
   for (let timestamp = 0; timestamp <= totalFrames * frameDuration; timestamp += interval) {
     const frame = await getDecodedFrame(Math.floor(timestamp / frameDuration))
     ctx.drawImage(frame, 0, 0, width, height)
     progress(timestamp / (totalFrames * frameDuration))
-    source.add(timestamp, frameDuration);
+    source.add(timestamp, frameDuration)
   }
 
   await output.finalize()
