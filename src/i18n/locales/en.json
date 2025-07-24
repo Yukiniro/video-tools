@@ -77,6 +77,28 @@
     "startTimeGreaterThanEndTime": "Start time must be less than end time",
     "endTimeGreaterThanDuration": "End time must be less than video duration"
   },
+  "videoConfig": {
+    "title": "Video Export Settings",
+    "resolution": "Video Resolution",
+    "frameRate": "Frame Rate",
+    "exportVideo": "Export Video",
+    "converting": "Converting...",
+    "clickToConvert": "Click the button to start converting GIF to video",
+    "conversionInProgress": "Converting your GIF, please wait...",
+    "pleaseWait": "Please do not close this window",
+    "preparingConversion": "Preparing conversion",
+    "generatingVideo": "Generating video",
+    "completed": "Completed",
+    "conversionSuccess": "Conversion successful! Video saved to your device",
+    "conversionError": "Conversion failed, please try again",
+    "conversionCancelled": "Conversion cancelled",
+    "dropYourGifHereOrClickToBrowse": "Drop your GIF here or click to browse",
+    "tips": {
+      "resolutionQuality": "Higher resolution provides clearer quality but larger file size",
+      "frameRateSmooth": "Higher frame rate provides smoother playback",
+      "conversionTime": "Conversion time depends on GIF size and output settings"
+    }
+  },
   "navigation": {
     "home": "Home",
     "tools": "Tools",

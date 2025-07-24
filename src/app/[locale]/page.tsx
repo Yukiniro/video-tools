@@ -24,7 +24,7 @@ export default async function Home({ params }: HomeProps) {
     {
       key: 'gifToVideo',
       href: '/gif-to-video',
-      comingSoon: true,
+      comingSoon: false,
     },
     {
       key: 'videoTranscode',

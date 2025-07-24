@@ -2,8 +2,8 @@
 
 import { useAtom, useSetAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
+import { GifConfig } from '@/app/[locale]/video-to-gif/gif-config'
 import { convertToGifAtom, gifConversionProgressAtom } from '@/atoms'
-import { GifConfig } from '@/components/gif-config'
 import { Button } from '@/components/ui/button'
 
 export default function VideoToGifSettingPanel() {

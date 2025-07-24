@@ -75,7 +75,29 @@
       "timeSettings": "Set time range to convert only specific segments of the video"
     },
     "startTimeGreaterThanEndTime": "Start time must be less than end time",
-    "endTimeGreaterThanDuration": "End time must be less than video duration"
+    "endTimeGreaterThanDuration": "終了時間は動画の長さより短くする必要があります"
+  },
+  "videoConfig": {
+    "title": "動画エクスポート設定",
+    "resolution": "動画解像度",
+    "frameRate": "フレームレート",
+    "exportVideo": "動画をエクスポート",
+    "converting": "変換中...",
+    "clickToConvert": "ボタンをクリックしてGIFから動画への変換を開始",
+    "conversionInProgress": "GIFを変換中です。しばらくお待ちください...",
+    "pleaseWait": "このウィンドウを閉じないでください",
+    "preparingConversion": "変換を準備中",
+    "generatingVideo": "動画を生成中",
+    "completed": "完了",
+    "conversionSuccess": "変換が成功しました！動画がデバイスに保存されました",
+    "conversionError": "変換に失敗しました。もう一度お試しください",
+    "conversionCancelled": "変換がキャンセルされました",
+    "dropYourGifHereOrClickToBrowse": "GIFをここにドロップするかクリックして参照",
+    "tips": {
+      "resolutionQuality": "解像度が高いほど画質が向上しますが、ファイルサイズが大きくなります",
+      "frameRateSmooth": "フレームレートが高いほど滑らかな再生が可能になります",
+      "conversionTime": "変換時間はGIFのサイズと出力設定によって決まります"
+    }
   },
   "navigation": {
     "home": "Home",
