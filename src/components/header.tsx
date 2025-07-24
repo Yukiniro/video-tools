@@ -16,7 +16,7 @@ export function Header({ locale }: HeaderProps) {
 
   const tools = [
     { key: 'videoToGif', href: '/video-to-gif', comingSoon: false },
-    { key: 'gifToVideo', href: '/gif-to-video', comingSoon: true },
+    { key: 'gifToVideo', href: '/gif-to-video', comingSoon: false },
     { key: 'videoTranscode', href: '/video-transcode', comingSoon: true },
     { key: 'videoCompress', href: '/video-compress', comingSoon: true },
     { key: 'videoCrop', href: '/video-crop', comingSoon: true },

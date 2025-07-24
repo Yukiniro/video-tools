@@ -6,9 +6,11 @@ import { useRef, useState } from 'react'
 
 interface FileUploadProps {
   onFilesChange: (files: File[]) => void
+  accept?: string
+  description?: string
 }
 
-export default function FileUpload({ onFilesChange }: FileUploadProps) {
+export default function FileUpload({ onFilesChange, accept = 'video/*', description }: FileUploadProps) {
   const t = useTranslations('common')
   const [isDragging, setIsDragging] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
@@ -20,8 +22,13 @@ export default function FileUpload({ onFilesChange }: FileUploadProps) {
 
     const fileArray = Array.from(files)
     const validFiles = fileArray.filter((file) => {
-      if (!file.type.startsWith('video/')) {
+      // 根据 accept 属性验证文件类型
+      if (accept === 'video/*' && !file.type.startsWith('video/')) {
         setErrors(['请选择视频文件'])
+        return false
+      }
+      if (accept === 'image/gif' && file.type !== 'image/gif') {
+        setErrors(['请选择 GIF 文件'])
         return false
       }
       return true
@@ -80,7 +87,7 @@ export default function FileUpload({ onFilesChange }: FileUploadProps) {
           <input
             ref={fileInputRef}
             type="file"
-            accept="video/*"
+            accept={accept}
             multiple
             onChange={handleFileInputChange}
             className="sr-only"
@@ -94,7 +101,7 @@ export default function FileUpload({ onFilesChange }: FileUploadProps) {
               <ImageUpIcon className="size-4 opacity-60" />
             </div>
             <p className="mb-1.5 text-sm font-medium">
-              {t('dropYourVideoHereOrClickToBrowse')}
+              {description || t('dropYourVideoHereOrClickToBrowse')}
             </p>
           </div>
         </div>

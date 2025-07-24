@@ -77,6 +77,28 @@
     "startTimeGreaterThanEndTime": "开始时间必须小于结束时间",
     "endTimeGreaterThanDuration": "结束时间必须小于视频时长"
   },
+  "videoConfig": {
+    "title": "视频导出设置",
+    "resolution": "视频分辨率",
+    "frameRate": "视频帧率",
+    "exportVideo": "导出视频",
+    "converting": "转换中...",
+    "clickToConvert": "点击按钮开始将 GIF 转换为视频",
+    "conversionInProgress": "正在转换您的 GIF，请稍等...",
+    "pleaseWait": "请不要关闭此窗口",
+    "preparingConversion": "准备转换",
+    "generatingVideo": "生成视频",
+    "completed": "完成",
+    "conversionSuccess": "转换成功！视频已保存到您的设备",
+    "conversionError": "转换失败，请重试",
+    "conversionCancelled": "转换已取消",
+    "dropYourGifHereOrClickToBrowse": "将 GIF 拖放到此处或单击浏览",
+    "tips": {
+      "resolutionQuality": "更高的分辨率提供更清晰的画质，但文件更大",
+      "frameRateSmooth": "更高的帧率提供更流畅的播放效果",
+      "conversionTime": "转换时间取决于 GIF 大小和输出设置"
+    }
+  },
   "navigation": {
     "home": "首页",
     "tools": "工具",
