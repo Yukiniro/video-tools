@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import process from 'node:process'
+import { Analytics } from '@vercel/analytics/next'
 import { Provider } from 'jotai'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
@@ -210,6 +211,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
             </NextIntlClientProvider>
           </ThemeProvider>
         </Provider>
+        <Analytics />
       </body>
     </html>
   )
