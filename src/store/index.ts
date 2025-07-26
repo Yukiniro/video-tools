@@ -244,11 +244,31 @@ export async function gifToVideo(
 
   const interval = 1 / frameRate
 
+  let lastFrameInfo = null as { index: number; frame: VideoFrame } | null
   for (let timestamp = 0; timestamp <= totalFrames * frameDuration; timestamp += interval) {
-    const frame = await getDecodedFrame(Math.floor(timestamp / frameDuration))
+    const index = Math.floor(timestamp / frameDuration)
+
+    let frame: VideoFrame | null = null
+    if (index === lastFrameInfo?.index && !!lastFrameInfo?.frame) {
+      frame = lastFrameInfo.frame
+    } else {
+      frame = await getDecodedFrame(index)
+      lastFrameInfo?.frame.close()
+      lastFrameInfo = { index, frame }
+    }
+
+    if (!frame) {
+      continue
+    }
+
     ctx.drawImage(frame, 0, 0, width, height)
     progress(timestamp / (totalFrames * frameDuration))
     source.add(timestamp, frameDuration)
+  }
+
+  // clean up the last frame
+  if (lastFrameInfo?.frame) {
+    lastFrameInfo.frame.close()
   }
 
   await output.finalize()
