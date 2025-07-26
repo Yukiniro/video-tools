@@ -244,14 +244,15 @@ export async function gifToVideo(
 
   const interval = 1 / frameRate
 
-  let lastFrameInfo = null as { index: number; frame: VideoFrame } | null
+  let lastFrameInfo = null as { index: number, frame: VideoFrame } | null
   for (let timestamp = 0; timestamp <= totalFrames * frameDuration; timestamp += interval) {
     const index = Math.floor(timestamp / frameDuration)
 
     let frame: VideoFrame | null = null
     if (index === lastFrameInfo?.index && !!lastFrameInfo?.frame) {
       frame = lastFrameInfo.frame
-    } else {
+    }
+    else {
       frame = await getDecodedFrame(index)
       lastFrameInfo?.frame.close()
       lastFrameInfo = { index, frame }
