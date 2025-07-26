@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private paths
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Allow important static files
+Allow: /favicon.ico
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Sitemap location
+Sitemap: https://video-tools.vercel.app/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1 
