@@ -4,7 +4,7 @@ import process from 'node:process'
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://video-tools.vercel.app'
   const locales = ['en', 'zh', 'ja']
-  const pages = ['', '/video-to-gif', '/gif-to-video']
+  const pages = ['', '/video-to-gif', '/gif-to-video', '/video-compress']
 
   const sitemap: MetadataRoute.Sitemap = []
 

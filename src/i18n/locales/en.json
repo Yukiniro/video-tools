@@ -147,6 +147,66 @@
     "legal": "Legal",
     "contact": "Contact"
   },
+  "videoCompress": {
+    "title": "Video Compression Settings",
+    "quality": "Compression Quality",
+    "resolution": "Output Resolution",
+    "enableAudio": "Keep Audio",
+    "customQuality": "Custom Quality",
+    "customWidth": "Custom Width",
+    "customHeight": "Custom Height",
+    "qualityTip": "Higher values mean better quality but larger file size",
+    "customResolutionTip": "Enter the target width and height in pixels",
+    "qualityOptions": {
+      "high": "High Quality",
+      "medium": "Medium Quality",
+      "low": "Low Quality",
+      "custom": "Custom"
+    },
+    "resolutionOptions": {
+      "original": "Original Resolution",
+      "1080P": "1080P",
+      "720P": "720P",
+      "480P": "480P",
+      "custom": "Custom"
+    },
+    "startCompression": "Start Compression",
+    "compressing": "Compressing...",
+    "clickToStartCompression": "Click the button to start video compression",
+    "compressionInProgress": "Compressing Video",
+    "pleaseWait": "Please do not close this window",
+    "preparingCompression": "Preparing compression",
+    "compressingVideo": "Compressing video",
+    "completed": "Compression completed",
+    "compressionCompleted": "Compression Completed",
+    "compressionSuccess": "Compression successful! Video saved to your device",
+    "compressionError": "Compression failed, please try again",
+    "compressionCancelled": "Compression cancelled",
+    "cancelCompression": "Cancel Compression",
+    "close": "Close",
+    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
+    "originalFileInfo": "Original File Info",
+    "fileName": "File Name",
+    "fileSize": "File Size",
+    "fileType": "File Type",
+    "lastModified": "Last Modified",
+    "originalSize": "Original Size",
+    "compressedSize": "Compressed Size",
+    "compressionRatio": "Compression Ratio",
+    "reduced": "reduced",
+    "compressionEstimate": "Compression Estimate",
+    "estimateInfo": {
+      "processingTime": "Processing time depends on file size and compression settings",
+      "sizeReduction": "Compression ratio is typically between 20%-70%",
+      "qualityImpact": "Lower quality settings may affect video clarity"
+    },
+    "tips": {
+      "qualityVsSize": "Higher quality means larger file size and longer processing time",
+      "resolutionRecommendation": "Choose appropriate resolution based on your use case",
+      "originalFormatKept": "Original video format will be preserved",
+      "bitrateAutoAdjusted": "Bitrate will be automatically adjusted to match original video"
+    }
+  },
   "metadata": {
     "title": "Video Tools - Professional Online Video Processing Tools",
     "description": "Free online video processing tool collection. Supports video to GIF, GIF to video, video transcoding, video compression, video cropping, audio extraction and more."

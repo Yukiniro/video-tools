@@ -17,6 +17,18 @@ interface GifToVideoParams {
   fps: '30FPS' | '60FPS'
 }
 
+interface VideoCompressParams {
+  file: File
+  config: {
+    quality: 'high' | 'medium' | 'low' | 'custom'
+    customQuality?: number
+    resolution: 'original' | '1080P' | '720P' | '480P' | 'custom'
+    customWidth?: number
+    customHeight?: number
+    enableAudio: boolean
+  }
+}
+
 interface Size {
   width: number
   height: number
@@ -278,6 +290,24 @@ export async function gifToVideo(
   progress(1)
 
   return new Blob([buffer!], { type: 'video/mp4' })
+}
+
+/**
+ * 压缩视频
+ * @param _params 压缩参数
+ * @param _options 压缩选项
+ * @returns 压缩后的视频文件和元数据
+ */
+export async function compressVideo(
+  _params: VideoCompressParams,
+  _options: {
+    progress: (progress: number, stage?: string) => void
+    signal?: AbortSignal
+  },
+): Promise<{ blob: Blob, metadata: any }> {
+  // TODO: 实现视频压缩逻辑
+  // 这里应该使用 FFmpeg.wasm 或其他视频处理库
+  throw new Error('Video compression not implemented yet')
 }
 
 export function saveAsVideo(blob: Blob, format: string) {

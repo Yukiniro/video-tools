@@ -147,6 +147,66 @@
     "legal": "Legal",
     "contact": "Contact"
   },
+  "videoCompress": {
+    "title": "视频压缩设置",
+    "quality": "压缩质量",
+    "resolution": "输出分辨率",
+    "enableAudio": "保留音频",
+    "customQuality": "自定义质量",
+    "customWidth": "自定义宽度",
+    "customHeight": "自定义高度",
+    "qualityTip": "数值越高质量越好，但文件更大",
+    "customResolutionTip": "请输入目标视频的宽度和高度像素值",
+    "qualityOptions": {
+      "high": "高质量",
+      "medium": "中等质量",
+      "low": "低质量",
+      "custom": "自定义"
+    },
+    "resolutionOptions": {
+      "original": "原始分辨率",
+      "1080P": "1080P",
+      "720P": "720P",
+      "480P": "480P",
+      "custom": "自定义"
+    },
+    "startCompression": "开始压缩",
+    "compressing": "压缩中...",
+    "clickToStartCompression": "点击按钮开始压缩视频",
+    "compressionInProgress": "正在压缩视频",
+    "pleaseWait": "请不要关闭此窗口",
+    "preparingCompression": "准备压缩",
+    "compressingVideo": "压缩视频中",
+    "completed": "压缩完成",
+    "compressionCompleted": "压缩已完成",
+    "compressionSuccess": "压缩成功！视频已保存到您的设备",
+    "compressionError": "压缩失败，请重试",
+    "compressionCancelled": "压缩已取消",
+    "cancelCompression": "取消压缩",
+    "close": "关闭",
+    "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览",
+    "originalFileInfo": "原始文件信息",
+    "fileName": "文件名称",
+    "fileSize": "文件大小",
+    "fileType": "文件类型",
+    "lastModified": "修改时间",
+    "originalSize": "原始大小",
+    "compressedSize": "压缩后大小",
+    "compressionRatio": "压缩比例",
+    "reduced": "减少",
+    "compressionEstimate": "压缩预估",
+    "estimateInfo": {
+      "processingTime": "处理时间取决于文件大小和压缩设置",
+      "sizeReduction": "压缩比例通常在20%-70%之间",
+      "qualityImpact": "较低质量设置可能影响视频清晰度"
+    },
+    "tips": {
+      "qualityVsSize": "质量越高，文件大小越大，处理时间越长",
+      "resolutionRecommendation": "建议根据使用场景选择合适的分辨率",
+      "originalFormatKept": "将保持原始视频格式不变",
+      "bitrateAutoAdjusted": "比特率将自动调整以匹配原始视频"
+    }
+  },
   "metadata": {
     "title": "视频工具 - 专业的在线视频处理工具",
     "description": "免费的在线视频处理工具集合，支持视频转GIF、GIF转视频、视频转码、视频压缩、视频裁剪、音频提取等功能。"
