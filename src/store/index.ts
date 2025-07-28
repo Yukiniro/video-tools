@@ -76,6 +76,44 @@ export async function getVideoDuration(file: File): Promise<number> {
 }
 
 /**
+ * 获取视频宽高信息
+ * @param file 视频文件
+ * @returns 视频宽高和宽高比
+ */
+export async function getVideoInfo(file: File): Promise<{
+  width: number
+  height: number
+  aspectRatio: number
+}> {
+  return new Promise((resolve, reject) => {
+    const video = document.createElement('video')
+    video.preload = 'metadata'
+
+    video.onloadedmetadata = () => {
+      const width = video.videoWidth
+      const height = video.videoHeight
+      const aspectRatio = width / height
+
+      // 清理对象URL
+      URL.revokeObjectURL(video.src)
+
+      resolve({
+        width,
+        height,
+        aspectRatio,
+      })
+    }
+
+    video.onerror = () => {
+      URL.revokeObjectURL(video.src)
+      reject(new Error('Failed to load video metadata'))
+    }
+
+    video.src = URL.createObjectURL(file)
+  })
+}
+
+/**
  * 将视频转换为 GIF
  * @param params 视频转换参数
  * @param params.file 视频文件

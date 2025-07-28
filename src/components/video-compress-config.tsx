@@ -2,14 +2,16 @@
 
 import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import React from 'react'
-import { videoCompressConfigAtom } from '@/atoms/video-compress'
+import React, { useEffect } from 'react'
+import { filesAtom } from '@/atoms/files'
+import { originalVideoInfoAtom, videoCompressConfigAtom } from '@/atoms/video-compress'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { SegmentedControl } from '@/components/ui/segmented-control'
 import { Separator } from '@/components/ui/separator'
+import { getVideoInfo } from '@/store'
 
 const QUALITY_OPTIONS = [
   { value: 'high', label: '高质量' },
@@ -28,7 +30,30 @@ const RESOLUTION_OPTIONS = [
 
 export function VideoCompressConfig() {
   const t = useTranslations('videoCompress')
+  const [files] = useAtom(filesAtom)
   const [config, setConfig] = useAtom(videoCompressConfigAtom)
+  const [videoInfo, setVideoInfo] = useAtom(originalVideoInfoAtom)
+
+  // 当文件改变时获取视频信息
+  useEffect(() => {
+    if (files.length > 0) {
+      getVideoInfo(files[0])
+        .then((info) => {
+          setVideoInfo(info)
+          // 如果还没有设置自定义宽高，使用原始宽高
+          if (!config.customWidth && !config.customHeight) {
+            setConfig(prev => ({
+              ...prev,
+              customWidth: info.width,
+              customHeight: info.height,
+            }))
+          }
+        })
+        .catch((error) => {
+          console.error('Failed to get video info:', error)
+        })
+    }
+  }, [files, setVideoInfo, config.customWidth, config.customHeight, setConfig])
 
   const handleQualityChange = (quality: string) => {
     setConfig({ ...config, quality: quality as any })
@@ -47,15 +72,27 @@ export function VideoCompressConfig() {
 
   const handleCustomWidthChange = (value: string) => {
     const numValue = Number(value)
-    if (numValue > 0) {
-      setConfig({ ...config, customWidth: numValue })
+    if (numValue > 0 && videoInfo.aspectRatio) {
+      // 强制保持宽高比，自动计算高度
+      const newHeight = Math.round(numValue / videoInfo.aspectRatio)
+      setConfig(prev => ({
+        ...prev,
+        customWidth: numValue,
+        customHeight: newHeight,
+      }))
     }
   }
 
   const handleCustomHeightChange = (value: string) => {
     const numValue = Number(value)
-    if (numValue > 0) {
-      setConfig({ ...config, customHeight: numValue })
+    if (numValue > 0 && videoInfo.aspectRatio) {
+      // 强制保持宽高比，自动计算宽度
+      const newWidth = Math.round(numValue * videoInfo.aspectRatio)
+      setConfig(prev => ({
+        ...prev,
+        customHeight: numValue,
+        customWidth: newWidth,
+      }))
     }
   }
 
@@ -121,6 +158,24 @@ export function VideoCompressConfig() {
 
           {config.resolution === 'custom' && (
             <div className="pl-4 space-y-3">
+              {/* 显示原始视频宽高比信息 */}
+              {videoInfo.aspectRatio && videoInfo.width && videoInfo.height && (
+                <div className="text-sm text-muted-foreground">
+                  原始尺寸:
+                  {' '}
+                  {videoInfo.width}
+                  {' '}
+                  ×
+                  {' '}
+                  {videoInfo.height}
+                  {' '}
+                  (宽高比
+                  {' '}
+                  {(videoInfo.aspectRatio).toFixed(2)}
+                  :1)
+                </div>
+              )}
+
               <div>
                 <Label className="text-sm text-muted-foreground">
                   {t('customWidth')}
@@ -152,7 +207,7 @@ export function VideoCompressConfig() {
                 />
               </div>
               <p className="text-xs text-muted-foreground">
-                {t('customResolutionTip')}
+                {t('aspectRatioTip')}
               </p>
             </div>
           )}

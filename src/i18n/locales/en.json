@@ -155,8 +155,10 @@
     "customQuality": "Custom Quality",
     "customWidth": "Custom Width",
     "customHeight": "Custom Height",
+    "maintainAspectRatio": "Maintain Aspect Ratio",
     "qualityTip": "Higher values mean better quality but larger file size",
     "customResolutionTip": "Enter the target width and height in pixels",
+    "aspectRatioTip": "When changing width or height, the other value will automatically adjust proportionally to maintain the original aspect ratio",
     "qualityOptions": {
       "high": "High Quality",
       "medium": "Medium Quality",

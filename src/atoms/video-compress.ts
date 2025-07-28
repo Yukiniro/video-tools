@@ -12,6 +12,7 @@ interface VideoCompressConfig {
   resolution: 'original' | '1080P' | '720P' | '480P' | 'custom'
   customWidth?: number
   customHeight?: number
+  maintainAspectRatio: boolean // 保持宽高比
   enableAudio: boolean
 }
 
@@ -29,6 +30,7 @@ interface CompressionProgress {
 const DEFAULT_COMPRESS_CONFIG: VideoCompressConfig = {
   quality: 'medium',
   resolution: '720P',
+  maintainAspectRatio: true, // 强制保持宽高比
   enableAudio: true,
 }
 
@@ -50,6 +52,13 @@ export const showVideoCompressionDialogAtom = atom(false)
 
 // 取消压缩的 AbortController
 export const videoCompressionAbortControllerAtom = atom<AbortController | null>(null)
+
+// 原始视频信息状态
+export const originalVideoInfoAtom = atom<{
+  width?: number
+  height?: number
+  aspectRatio?: number
+}>({})
 
 // 压缩预览对比状态
 export const videoCompressPreviewAtom = atom<{

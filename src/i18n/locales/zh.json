@@ -155,8 +155,10 @@
     "customQuality": "自定义质量",
     "customWidth": "自定义宽度",
     "customHeight": "自定义高度",
+    "maintainAspectRatio": "保持宽高比",
     "qualityTip": "数值越高质量越好，但文件更大",
     "customResolutionTip": "请输入目标视频的宽度和高度像素值",
+    "aspectRatioTip": "修改宽度或高度时，另一个值会自动等比调整以保持原始宽高比",
     "qualityOptions": {
       "high": "高质量",
       "medium": "中等质量",
