@@ -5,41 +5,76 @@ import GIF from 'gif.js'
 import { ALL_FORMATS, BlobSource, BufferTarget, CanvasSink, CanvasSource, Conversion, Input, Mp4OutputFormat, Output } from 'mediabunny'
 import { nanoid } from 'nanoid'
 
+/**
+ * 视频转 GIF 的参数
+ */
 interface VideoToGifParams {
+  /** 视频文件 */
   file: File
+  /** 输出分辨率 */
   resolution: '120P' | '240P' | '480P'
+  /** 输出帧率 */
   fps: '10FPS' | '15FPS' | '25FPS'
 }
 
+/**
+ * GIF 转视频的参数
+ */
 interface GifToVideoParams {
+  /** GIF 文件 */
   file: File
+  /** 输出分辨率 */
   resolution: '480P' | '720P' | '1080P'
+  /** 输出帧率 */
   fps: '30FPS' | '60FPS'
 }
 
+/**
+ * 视频压缩参数
+ */
 interface VideoCompressParams {
+  /** 视频文件 */
   file: File
+  /** 压缩配置 */
   config: {
+    /** 质量等级 */
     quality: 'high' | 'medium' | 'low' | 'custom'
+    /** 自定义质量（百分比） */
     customQuality?: number
+    /** 分辨率 */
     resolution: 'original' | '1080P' | '720P' | '480P' | 'custom'
+    /** 自定义宽度 */
     customWidth?: number
+    /** 自定义高度 */
     customHeight?: number
+    /** 是否保留音频 */
     enableAudio: boolean
   }
 }
 
+/**
+ * 尺寸信息
+ */
 interface Size {
   width: number
   height: number
 }
 
+/**
+ * 压缩配置
+ */
 interface CompressConfig {
   bitrate: number
   width: number
   height: number
 }
 
+/**
+ * 根据目标分辨率计算 GIF 输出尺寸
+ * @param size 原始尺寸
+ * @param resolution 目标分辨率（高度）
+ * @returns 目标尺寸
+ */
 function getSize(size: Size, resolution: '120P' | '240P' | '480P'): Size {
   const resolutionMap: Record<'120P' | '240P' | '480P', number> = {
     '120P': 120,
@@ -54,6 +89,12 @@ function getSize(size: Size, resolution: '120P' | '240P' | '480P'): Size {
   }
 }
 
+/**
+ * 根据目标分辨率计算视频输出尺寸
+ * @param size 原始尺寸
+ * @param resolution 目标分辨率（高度）
+ * @returns 目标尺寸
+ */
 function getVideoSize(size: Size, resolution: '480P' | '720P' | '1080P'): Size {
   const resolutionMap: Record<'480P' | '720P' | '1080P', number> = {
     '480P': 480,
@@ -69,7 +110,7 @@ function getVideoSize(size: Size, resolution: '480P' | '720P' | '1080P'): Size {
 }
 
 /**
- * 获取视频时长
+ * 获取视频时长（单位：秒）
  * @param file 视频文件
  * @returns 视频时长（秒）
  */
@@ -84,7 +125,7 @@ export async function getVideoDuration(file: File): Promise<number> {
 /**
  * 获取视频宽高信息
  * @param file 视频文件
- * @returns 视频宽高和宽高比
+ * @returns 包含 width、height、aspectRatio 的对象
  */
 export async function getVideoInfo(file: File): Promise<{
   width: number
@@ -123,15 +164,14 @@ export async function getVideoInfo(file: File): Promise<{
  * 将视频转换为 GIF
  * @param params 视频转换参数
  * @param params.file 视频文件
- * @param params.resolution 分辨率
- * @param params.fps 帧率
+ * @param params.resolution 输出分辨率
+ * @param params.fps 输出帧率
  * @param options 转换选项
- * @param options.start 开始时间
- * @param options.end 结束时间
- * @param options.progress 进度回调
- * @param options.signal 取消信号
- * @returns 转换后的 GIF 文件
- *
+ * @param options.start 开始时间（秒）
+ * @param options.end 结束时间（秒）
+ * @param options.progress 进度回调函数，参数为进度（0-1）
+ * @param options.signal 可选，取消信号
+ * @returns 转换后的 GIF Blob 文件
  */
 export async function videoToGif(
   params: VideoToGifParams,
@@ -210,21 +250,25 @@ export async function videoToGif(
   })
 }
 
+/**
+ * 保存 GIF 文件到本地
+ * @param blob GIF Blob 文件
+ */
 export function saveAsGif(blob: Blob) {
   const filename = `${nanoid()}.gif`
   saveAs(blob, filename)
 }
 
 /**
- * 将 GIF 转换为视频
+ * 将 GIF 转换为 MP4 视频
  * @param params GIF 转换参数
  * @param params.file GIF 文件
  * @param params.resolution 输出视频分辨率
  * @param params.fps 输出视频帧率
  * @param options 转换选项
- * @param options.progress 进度回调
- * @param options.signal 取消信号
- * @returns 转换后的视频文件
+ * @param options.progress 进度回调函数，参数为进度（0-1）
+ * @param options.signal 可选，取消信号
+ * @returns 转换后的视频 Blob 文件（MP4 格式）
  */
 export async function gifToVideo(
   params: GifToVideoParams,
@@ -280,6 +324,11 @@ export async function gifToVideo(
   if (!totalFrames || totalFrames <= 0)
     throw new Error('No frames in GIF')
 
+  /**
+   * 解码指定帧
+   * @param index 帧索引
+   * @returns VideoFrame
+   */
   const getDecodedFrame = async (index: number): Promise<VideoFrame> => {
     while (true) {
       const result = await decoder.decode({ frameIndex: index, completeFramesOnly: true })
@@ -323,7 +372,7 @@ export async function gifToVideo(
     source.add(timestamp, frameDuration)
   }
 
-  // clean up the last frame
+  // 清理最后一帧
   if (lastFrameInfo?.frame) {
     lastFrameInfo.frame.close()
   }
@@ -339,8 +388,10 @@ export async function gifToVideo(
 /**
  * 压缩视频
  * @param _params 压缩参数
- * @param _options 压缩选项
- * @returns 压缩后的视频文件和元数据
+ * @param _options 选项
+ * @param _options.progress 进度回调函数，参数为进度（0-1）和阶段
+ * @param _options.signal 可选，取消信号
+ * @returns 包含压缩后视频 Blob 及元数据的对象
  */
 export async function compressVideo(
   _params: VideoCompressParams,
@@ -406,8 +457,8 @@ export async function compressVideo(
 
 /**
  * 根据质量配置计算比特率
- * @param quality 质量等级
- * @param customQuality 自定义质量值
+ * @param quality 质量等级（high/medium/low/custom）
+ * @param customQuality 自定义质量值（百分比，0-100）
  * @param originalBitrate 原始比特率
  * @returns 计算后的比特率
  */
@@ -443,7 +494,7 @@ function calculateBitrate(
  * @param customHeight 自定义高度
  * @param originalWidth 原始宽度
  * @param originalHeight 原始高度
- * @returns 计算后的尺寸
+ * @returns 计算后的尺寸对象
  */
 function calculateDimensions(
   resolution: 'original' | '1080P' | '720P' | '480P' | 'custom',
@@ -477,7 +528,10 @@ function calculateDimensions(
  * 根据压缩配置计算编码参数
  * @param params 压缩参数
  * @param originalInfo 原始视频信息
- * @returns 编码配置
+ * @param originalInfo.width 原始视频宽度
+ * @param originalInfo.height 原始视频高度
+ * @param originalInfo.bitrate 原始视频比特率
+ * @returns 编码配置对象
  */
 function _calculateCompressConfig(
   params: VideoCompressParams,
@@ -503,6 +557,11 @@ function _calculateCompressConfig(
   return { bitrate, width, height }
 }
 
+/**
+ * 保存视频文件到本地
+ * @param blob 视频 Blob 文件
+ * @param format 文件扩展名（如 mp4）
+ */
 export function saveAsVideo(blob: Blob, format: string) {
   const filename = `${nanoid()}.${format}`
   saveAs(blob, filename)
