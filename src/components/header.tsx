@@ -18,7 +18,7 @@ export function Header({ locale }: HeaderProps) {
     { key: 'videoToGif', href: '/video-to-gif', comingSoon: false },
     { key: 'gifToVideo', href: '/gif-to-video', comingSoon: false },
     { key: 'videoTranscode', href: '/video-transcode', comingSoon: true },
-    { key: 'videoCompress', href: '/video-compress', comingSoon: true },
+    { key: 'videoCompress', href: '/video-compress', comingSoon: false },
     { key: 'videoCrop', href: '/video-crop', comingSoon: true },
     { key: 'extractAudio', href: '/extract-audio', comingSoon: true },
   ]

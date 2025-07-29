@@ -147,6 +147,73 @@
     "legal": "Legal",
     "contact": "Contact"
   },
+  "videoCompress": {
+    "title": "動画圧縮設定",
+    "quality": "圧縮品質",
+    "resolution": "出力解像度",
+    "enableAudio": "音声を保持",
+    "customQuality": "カスタム品質",
+    "customWidth": "カスタム幅",
+    "customHeight": "カスタム高さ",
+    "qualityTip": "値が高いほど品質は良くなりますが、ファイルサイズも大きくなります",
+    "customResolutionTip": "目標となる幅と高さをピクセル単位で入力してください",
+    "aspectRatioTip": "幅または高さを変更すると、元のアスペクト比を維持するため、もう一方の値が自動的に比例調整されます",
+    "qualityOptions": {
+      "high": "高品質",
+      "medium": "中品質",
+      "low": "低品質",
+      "custom": "カスタム"
+    },
+    "resolutionOptions": {
+      "original": "元の解像度",
+      "1080P": "1080P",
+      "720P": "720P",
+      "480P": "480P",
+      "custom": "カスタム"
+    },
+    "startCompression": "圧縮開始",
+    "compressing": "圧縮中...",
+    "clickToStartCompression": "ボタンをクリックして動画圧縮を開始",
+    "compressionInProgress": "動画を圧縮中",
+    "pleaseWait": "このウィンドウを閉じないでください",
+    "preparingCompression": "圧縮を準備中",
+    "compressingVideo": "動画を圧縮中",
+    "completed": "圧縮完了",
+    "compressionCompleted": "圧縮が完了しました",
+    "compressionSuccess": "圧縮が成功しました！動画がデバイスに保存されました",
+    "compressionError": "圧縮に失敗しました。もう一度お試しください",
+    "compressionCancelled": "圧縮がキャンセルされました",
+    "compressionFailed": "圧縮に失敗しました",
+    "cancelCompression": "圧縮をキャンセル",
+    "retryCompression": "再試行",
+    "close": "閉じる",
+    "compressionSuccessDescription": "動画の圧縮が正常に完了しました！",
+    "compressionErrorDescription": "圧縮中にエラーが発生しました。再試行できます。",
+    "compressionCancelledDescription": "圧縮がユーザーによってキャンセルされました。",
+    "errorDetails": "エラー詳細",
+    "dropYourVideoHereOrClickToBrowse": "動画をここにドロップするかクリックして参照",
+    "originalFileInfo": "元のファイル情報",
+    "fileName": "ファイル名",
+    "fileSize": "ファイルサイズ",
+    "fileType": "ファイルタイプ",
+    "lastModified": "最終更新",
+    "originalSize": "元のサイズ",
+    "compressedSize": "圧縮後のサイズ",
+    "compressionRatio": "圧縮率",
+    "reduced": "削減",
+    "compressionEstimate": "圧縮予測",
+    "estimateInfo": {
+      "processingTime": "処理時間はファイルサイズと圧縮設定によって決まります",
+      "sizeReduction": "圧縮率は通常20%-70%の間です",
+      "qualityImpact": "品質設定が低いと動画の鮮明度に影響する可能性があります"
+    },
+    "tips": {
+      "qualityVsSize": "品質が高いほどファイルサイズが大きく、処理時間が長くなります",
+      "resolutionRecommendation": "使用ケースに基づいて適切な解像度を選択してください",
+      "originalFormatKept": "元の動画形式が保持されます",
+      "bitrateAutoAdjusted": "ビットレートは元の動画に合わせて自動調整されます"
+    }
+  },
   "metadata": {
     "title": "ビデオツール - プロフェッショナルなオンライン動画処理ツール",
     "description": "無料のオンライン動画処理ツールコレクション。動画からGIF、GIFから動画、動画トランスコーディング、動画圧縮、動画トリミング、音声抽出などの機能をサポート。"
