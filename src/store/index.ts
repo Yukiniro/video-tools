@@ -2,7 +2,7 @@ import { clamp } from 'es-toolkit'
 import { floor } from 'es-toolkit/compat'
 import { saveAs } from 'file-saver'
 import GIF from 'gif.js'
-import { ALL_FORMATS, BlobSource, BufferTarget, CanvasSink, CanvasSource, Input, Mp4OutputFormat, Output } from 'mediabunny'
+import { ALL_FORMATS, BlobSource, BufferTarget, CanvasSink, CanvasSource, Conversion, Input, Mp4OutputFormat, Output } from 'mediabunny'
 import { nanoid } from 'nanoid'
 
 interface VideoToGifParams {
@@ -30,6 +30,12 @@ interface VideoCompressParams {
 }
 
 interface Size {
+  width: number
+  height: number
+}
+
+interface CompressConfig {
+  bitrate: number
   width: number
   height: number
 }
@@ -339,13 +345,162 @@ export async function gifToVideo(
 export async function compressVideo(
   _params: VideoCompressParams,
   _options: {
-    progress: (progress: number, stage?: string) => void
+    progress: (progress: number, stage?: 'compressing') => void
     signal?: AbortSignal
   },
 ): Promise<{ blob: Blob, metadata: any }> {
-  // TODO: 实现视频压缩逻辑
-  // 这里应该使用 FFmpeg.wasm 或其他视频处理库
-  throw new Error('Video compression not implemented yet')
+  const originalInfo = await getVideoInfo(_params.file)
+  const { bitrate, width, height } = _calculateCompressConfig(_params, originalInfo)
+
+  const input = new Input({
+    formats: ALL_FORMATS,
+    source: new BlobSource(_params.file),
+  })
+
+  const output = new Output({
+    format: new Mp4OutputFormat(),
+    target: new BufferTarget(),
+  })
+
+  const conversion = await Conversion.init({
+    input,
+    output,
+    video: {
+      width,
+      height,
+      bitrate,
+      fit: 'contain',
+    },
+    audio: {
+      discard: !_params.config.enableAudio,
+    },
+  })
+
+  let cancelReject: (reason?: any) => void
+  conversion.onProgress = (progress) => {
+    if (_options.signal?.aborted) {
+      cancelReject?.(new Error('Conversion cancelled'))
+      conversion.cancel()
+    }
+
+    _options.progress(progress, 'compressing')
+  }
+
+  await Promise.race([
+    conversion.execute(),
+    new Promise((_, reject) => {
+      cancelReject = reject
+    }),
+  ])
+
+  const buffer = output.target.buffer
+
+  return {
+    blob: new Blob([buffer!], { type: 'video/mp4' }),
+    metadata: {
+      width,
+      height,
+    },
+  }
+}
+
+/**
+ * 根据质量配置计算比特率
+ * @param quality 质量等级
+ * @param customQuality 自定义质量值
+ * @param originalBitrate 原始比特率
+ * @returns 计算后的比特率
+ */
+function calculateBitrate(
+  quality: 'high' | 'medium' | 'low' | 'custom',
+  customQuality: number | undefined,
+  originalBitrate: number,
+): number {
+  const qualityMap: Record<'high' | 'medium' | 'low', number> = {
+    high: 0.8,
+    medium: 0.5,
+    low: 0.3,
+  }
+
+  let qualityRatio: number
+  if (quality === 'custom' && customQuality !== undefined) {
+    qualityRatio = customQuality / 100
+  }
+  else if (quality !== 'custom') {
+    qualityRatio = qualityMap[quality]
+  }
+  else {
+    qualityRatio = 0.5 // 默认中等质量
+  }
+
+  return Math.round(originalBitrate * qualityRatio)
+}
+
+/**
+ * 根据分辨率配置计算最终尺寸
+ * @param resolution 分辨率配置
+ * @param customWidth 自定义宽度
+ * @param customHeight 自定义高度
+ * @param originalWidth 原始宽度
+ * @param originalHeight 原始高度
+ * @returns 计算后的尺寸
+ */
+function calculateDimensions(
+  resolution: 'original' | '1080P' | '720P' | '480P' | 'custom',
+  customWidth: number | undefined,
+  customHeight: number | undefined,
+  originalWidth: number,
+  originalHeight: number,
+): Size {
+  if (resolution === 'original') {
+    return { width: originalWidth, height: originalHeight }
+  }
+
+  if (resolution === 'custom' && customWidth && customHeight) {
+    return { width: customWidth, height: customHeight }
+  }
+
+  const resolutionMap: Record<'1080P' | '720P' | '480P', number> = {
+    '1080P': 1080,
+    '720P': 720,
+    '480P': 480,
+  }
+
+  const targetHeight = resolutionMap[resolution as '1080P' | '720P' | '480P']
+  const aspectRatio = originalWidth / originalHeight
+  const width = Math.round(targetHeight * aspectRatio)
+
+  return { width, height: targetHeight }
+}
+
+/**
+ * 根据压缩配置计算编码参数
+ * @param params 压缩参数
+ * @param originalInfo 原始视频信息
+ * @returns 编码配置
+ */
+function _calculateCompressConfig(
+  params: VideoCompressParams,
+  originalInfo: { width: number, height: number, bitrate?: number },
+): CompressConfig {
+  const { config } = params
+  const { quality, customQuality, resolution, customWidth, customHeight } = config
+
+  // 计算最终尺寸
+  const { width, height } = calculateDimensions(
+    resolution,
+    customWidth,
+    customHeight,
+    originalInfo.width,
+    originalInfo.height,
+  )
+
+  // 计算比特率（如果没有原始比特率，使用默认值）
+  const defaultBitrate = 2e6 // 2 Mbps
+  const originalBitrate = originalInfo.bitrate || defaultBitrate
+  const bitrate = calculateBitrate(quality, customQuality, originalBitrate)
+
+  return { bitrate, width, height }
 }
 
 export function saveAsVideo(blob: Blob, format: string) {

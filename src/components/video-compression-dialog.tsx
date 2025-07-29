@@ -2,7 +2,7 @@
 
 import { useAtom, useSetAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import { cancelVideoCompressionAtom, showVideoCompressionDialogAtom, videoCompressionProgressAtom } from '@/atoms/video-compress'
+import { cancelVideoCompressionAtom, closeVideoCompressionDialogAtom, retryVideoCompressionAtom, showVideoCompressionDialogAtom, videoCompressionProgressAtom } from '@/atoms/video-compress'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -24,45 +24,90 @@ function formatFileSize(bytes: number): string {
 
 export function VideoCompressionDialog() {
   const t = useTranslations('videoCompress')
-  const [showDialog, setShowDialog] = useAtom(showVideoCompressionDialogAtom)
+  const [showDialog] = useAtom(showVideoCompressionDialogAtom)
   const [progress] = useAtom(videoCompressionProgressAtom)
   const cancelCompression = useSetAtom(cancelVideoCompressionAtom)
+  const retryCompression = useSetAtom(retryVideoCompressionAtom)
+  const closeDialog = useSetAtom(closeVideoCompressionDialogAtom)
+
+  const handleClose = () => {
+    closeDialog()
+  }
 
   const handleCancel = () => {
     cancelCompression()
   }
 
-  const handleClose = () => {
-    if (!progress.isCompressing) {
-      setShowDialog(false)
-    }
+  const handleRetry = () => {
+    retryCompression(t)
   }
 
   return (
-    <Dialog open={showDialog} onOpenChange={handleClose}>
+    <Dialog open={showDialog} onOpenChange={handleCancel}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <div className="h-4 w-4 rounded-full bg-blue-500 animate-pulse" />
-            {t('compressionInProgress')}
+            {progress.status === 'compressing' && (
+              <>
+                <div className="h-4 w-4 rounded-full bg-blue-500 animate-pulse" />
+                {t('compressionInProgress')}
+              </>
+            )}
+            {progress.status === 'success' && (
+              <>
+                <div className="h-4 w-4 rounded-full bg-green-500" />
+                {t('compressionCompleted')}
+              </>
+            )}
+            {progress.status === 'error' && (
+              <>
+                <div className="h-4 w-4 rounded-full bg-red-500" />
+                {t('compressionFailed')}
+              </>
+            )}
+            {progress.status === 'cancelled' && (
+              <>
+                <div className="h-4 w-4 rounded-full bg-yellow-500" />
+                {t('compressionCancelled')}
+              </>
+            )}
           </DialogTitle>
           <DialogDescription>
-            {t('pleaseWait')}
+            {progress.status === 'compressing' && t('pleaseWait')}
+            {progress.status === 'success' && t('compressionSuccessDescription')}
+            {progress.status === 'error' && t('compressionErrorDescription')}
+            {progress.status === 'cancelled' && t('compressionCancelledDescription')}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
           {/* 进度条 */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">{progress.stage}</span>
-              <span className="font-medium">
-                {progress.progress.toFixed(0)}
-                %
-              </span>
+          {(progress.status === 'compressing' || progress.status === 'success') && (
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">{progress.stage}</span>
+                <span className="font-medium">
+                  {progress.progress.toFixed(0)}
+                  %
+                </span>
+              </div>
+              <Progress value={progress.progress} className="h-2" />
             </div>
-            <Progress value={progress.progress} className="h-2" />
-          </div>
+          )}
+
+          {/* 错误信息 */}
+          {progress.status === 'error' && progress.error && (
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+              <div className="text-sm text-red-600">
+                <strong>
+                  {t('errorDetails')}
+                  :
+                </strong>
+                {' '}
+                {progress.error}
+              </div>
+            </div>
+          )}
 
           {/* 文件大小信息 */}
           {(progress.originalSize || progress.compressedSize) && (
@@ -92,30 +137,50 @@ export function VideoCompressionDialog() {
             </div>
           )}
 
-          {/* 取消按钮 */}
-          {progress.isCompressing && (
-            <Button
-              variant="outline"
-              onClick={handleCancel}
-              className="w-full"
-            >
-              {t('cancelCompression')}
-            </Button>
-          )}
+          {/* 按钮区域 */}
+          <div className="space-y-2">
+            {/* 压缩中 - 显示取消按钮 */}
+            {progress.status === 'compressing' && (
+              <Button
+                variant="outline"
+                onClick={handleCancel}
+                className="w-full"
+              >
+                {t('cancelCompression')}
+              </Button>
+            )}
 
-          {/* 完成状态 */}
-          {!progress.isCompressing && progress.progress === 100 && (
-            <div className="text-center space-y-2">
-              <div className="text-green-600 font-medium">
-                ✅
-                {' '}
-                {t('compressionCompleted')}
-              </div>
-              <Button onClick={() => setShowDialog(false)} className="w-full">
+            {/* 成功状态 - 显示关闭按钮 */}
+            {progress.status === 'success' && (
+              <Button onClick={handleClose} className="w-full">
                 {t('close')}
               </Button>
-            </div>
-          )}
+            )}
+
+            {/* 错误状态 - 显示重新尝试和关闭按钮 */}
+            {progress.status === 'error' && (
+              <>
+                <Button onClick={handleRetry} className="w-full">
+                  {t('retryCompression')}
+                </Button>
+                <Button variant="outline" onClick={handleClose} className="w-full">
+                  {t('close')}
+                </Button>
+              </>
+            )}
+
+            {/* 取消状态 - 显示重新尝试和关闭按钮 */}
+            {progress.status === 'cancelled' && (
+              <>
+                <Button onClick={handleRetry} className="w-full">
+                  {t('retryCompression')}
+                </Button>
+                <Button variant="outline" onClick={handleClose} className="w-full">
+                  {t('close')}
+                </Button>
+              </>
+            )}
+          </div>
         </div>
       </DialogContent>
     </Dialog>
