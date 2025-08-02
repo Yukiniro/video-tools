@@ -20,7 +20,7 @@ export function Header({ locale }: HeaderProps) {
     { key: 'videoTranscode', href: '/video-transcode', comingSoon: true },
     { key: 'videoCompress', href: '/video-compress', comingSoon: false },
     { key: 'videoCrop', href: '/video-crop', comingSoon: true },
-    { key: 'extractAudio', href: '/extract-audio', comingSoon: true },
+    { key: 'extractAudio', href: '/video-to-audio', comingSoon: false },
   ]
 
   return (

@@ -34,7 +34,7 @@ export default async function Home({ params }: HomeProps) {
     {
       key: 'videoCompress',
       href: '/video-compress',
-      comingSoon: true,
+      comingSoon: false,
     },
     {
       key: 'videoCrop',
@@ -43,8 +43,8 @@ export default async function Home({ params }: HomeProps) {
     },
     {
       key: 'extractAudio',
-      href: '/extract-audio',
-      comingSoon: true,
+      href: '/video-to-audio',
+      comingSoon: false,
     },
   ]
 

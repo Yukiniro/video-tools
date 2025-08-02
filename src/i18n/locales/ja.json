@@ -99,6 +99,58 @@
       "conversionTime": "変換時間はGIFのサイズと出力設定によって決まります"
     }
   },
+  "audioConfig": {
+    "title": "オーディオエクスポート設定",
+    "pageTitle": "ビデオからオーディオ",
+    "pageDescription": "ビデオファイルからオーディオを抽出、MP3、WAV、OGG形式の出力をサポート",
+    "format": "オーディオ形式",
+    "quality": "オーディオ品質",
+    "selectFormat": "オーディオ形式を選択",
+    "selectQuality": "オーディオ品質を選択",
+    "mp3": "MP3",
+    "wav": "WAV",
+    "ogg": "OGG",
+    "high": "高品質",
+    "medium": "中品質",
+    "low": "低品質",
+    "formatDesc": {
+      "mp3": "MP3形式は互換性が良く、ファイルサイズが小さいです",
+      "wav": "WAV形式はロスレス音質を提供しますが、ファイルが大きくなります",
+      "ogg": "OGG形式はオープンソースの音声形式で、良好な圧縮率を持ちます"
+    },
+    "qualityDesc": {
+      "high": "最高の音質、音楽や高要求シーンに適しています",
+      "medium": "品質とファイルサイズのバランス、一般用途に適しています",
+      "low": "最小ファイルサイズ、音声や低要求シーンに適しています"
+    },
+    "exportAudio": "オーディオ抽出",
+    "converting": "変換中...",
+    "clickToConvert": "ボタンをクリックしてビデオからオーディオを抽出開始",
+    "conversionInProgress": "オーディオを抽出中、しばらくお待ちください...",
+    "pleaseWait": "このウィンドウを閉じないでください",
+    "preparingConversion": "変換準備中",
+    "extractingAudio": "オーディオ抽出中",
+    "completed": "完了",
+    "conversionSuccess": "オーディオ抽出成功！ファイルがデバイスに保存されました",
+    "conversionError": "変換に失敗しました、もう一度お試しください",
+    "conversionCancelled": "変換がキャンセルされました",
+    "cancelConversion": "変換をキャンセル",
+    "audioPreview": "オーディオプレビュー",
+    "downloadAudio": "オーディオファイルをダウンロード",
+    "selectVideoFile": "ビデオファイルを選択",
+    "pleaseSelectFile": "まずビデオファイルを選択してください",
+    "fileDownloading": "オーディオファイルをダウンロード中...",
+    "conversionSettings": "変換設定",
+    "startConversion": "変換開始",
+    "conversionProgress": "変換進度",
+    "dropYourVideoHereOrClickToBrowse": "ビデオをここにドロップするかクリックして参照",
+    "supportedFormats": "MP4、AVI、MOV、WMVなどの形式をサポート、最大500MB",
+    "tips": {
+      "formatCompatibility": "MP3形式はほとんどのプレーヤーで最高の互換性があります",
+      "qualityVsSize": "高い音質はより大きなファイルになります",
+      "losslessQuality": "WAV形式はロスレス音声を提供し、プロ用途に適しています"
+    }
+  },
   "navigation": {
     "home": "Home",
     "tools": "Tools",
@@ -108,12 +160,12 @@
     "videoToGif": {
       "title": "Video to GIF",
       "description": "Convert video files to GIF animations",
-      "comingSoon": "Coming Soon"
+      "comingSoon": ""
     },
     "gifToVideo": {
       "title": "GIF to Video",
       "description": "Convert GIF animations to video files",
-      "comingSoon": "Coming Soon"
+      "comingSoon": ""
     },
     "videoTranscode": {
       "title": "Video Transcode",
@@ -123,7 +175,7 @@
     "videoCompress": {
       "title": "Video Compress",
       "description": "Compress video file size while maintaining high quality",
-      "comingSoon": "Coming Soon"
+      "comingSoon": ""
     },
     "videoCrop": {
       "title": "Video Crop",
@@ -131,9 +183,9 @@
       "comingSoon": "Coming Soon"
     },
     "extractAudio": {
-      "title": "Extract Audio",
-      "description": "Extract audio tracks from video files",
-      "comingSoon": "Coming Soon"
+      "title": "オーディオ抽出",
+      "description": "ビデオファイルからオーディオトラックを抽出",
+      "comingSoon": ""
     }
   },
   "footer": {
