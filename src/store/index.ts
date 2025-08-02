@@ -2,7 +2,7 @@ import { clamp } from 'es-toolkit'
 import { floor } from 'es-toolkit/compat'
 import { saveAs } from 'file-saver'
 import GIF from 'gif.js'
-import { ALL_FORMATS, AudioSampleSink, AudioSampleSource, BlobSource, BufferTarget, CanvasSink, CanvasSource, Conversion, Input, Mp3OutputFormat, Mp4OutputFormat, OggOutputFormat, Output, QUALITY_HIGH, QUALITY_LOW, QUALITY_MEDIUM, WavOutputFormat } from 'mediabunny'
+import { ALL_FORMATS, AudioSampleSink, AudioSampleSource, BlobSource, BufferTarget, CanvasSink, CanvasSource, Conversion, Input, MkvOutputFormat, Mp3OutputFormat, Mp4OutputFormat, OggOutputFormat, Output, QUALITY_HIGH, QUALITY_LOW, QUALITY_MEDIUM, WavOutputFormat, WebMOutputFormat } from 'mediabunny'
 import { nanoid } from 'nanoid'
 
 /**
@@ -751,11 +751,11 @@ export async function videoTranscode(
       break
     case 'webm':
       // WebM 使用 MP4 格式作为容器（Mediabunny 的实现方式）
-      outputFormat = new Mp4OutputFormat()
+      outputFormat = new WebMOutputFormat()
       break
     case 'mkv':
       // MKV 使用 MP4 格式作为容器（Mediabunny 的实现方式）
-      outputFormat = new Mp4OutputFormat()
+      outputFormat = new MkvOutputFormat()
       break
     default:
       throw new Error(`Unsupported format: ${format}`)
@@ -784,26 +784,21 @@ export async function videoTranscode(
     },
   })
 
-  // 模拟进度更新
-  const progressInterval = setInterval(() => {
+  let cancelReject: (reason?: any) => void
+  conversion.onProgress = (value) => {
     if (signal?.aborted) {
-      clearInterval(progressInterval)
-      throw new Error('Conversion cancelled')
+      cancelReject?.(new Error('Conversion cancelled'))
+      return
     }
-    // 模拟进度（实际应该从 Mediabunny 获取）
-    const currentProgress = Math.min(0.9, Math.random())
-    progress(currentProgress)
-  }, 100)
+    progress(value)
+  }
 
-  try {
-    await conversion.execute()
-    clearInterval(progressInterval)
-    progress(1.0)
-  }
-  catch (error) {
-    clearInterval(progressInterval)
-    throw error
-  }
+  await Promise.race([
+    conversion.execute(),
+    new Promise((_, reject) => {
+      cancelReject = reject
+    }),
+  ])
 
   const buffer = (target as any).buffer
   const mimeType = getVideoMimeType(format)

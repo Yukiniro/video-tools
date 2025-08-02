@@ -7,9 +7,9 @@
     "reset": "重置",
     "count": "计数",
     "languageToggle": "语言",
-    "english": "English",
+    "english": "英语",
     "chinese": "中文",
-    "japanese": "日本語",
+    "japanese": "日语",
     "startUsing": "开始使用",
     "whyChooseUs": "为什么选择我们的工具？",
     "highQuality": "高质量处理",
@@ -176,6 +176,7 @@
       "mkv": "MKV 格式支持多种编解码器，功能强大"
     },
     "transcodeVideo": "转码视频",
+    "exportVideo": "转码视频",
     "converting": "转码中...",
     "clickToConvert": "点击按钮开始转码视频",
     "conversionInProgress": "正在转码视频，请稍候...",
@@ -192,7 +193,9 @@
     "tips": {
       "formatCompatibility": "MP4 格式兼容性最好，适合大多数设备",
       "resolutionChoice": "选择合适的分辨率可以平衡质量和文件大小",
-      "webmAdvantage": "WebM 格式在网络传输方面有优势"
+      "resolutionQuality": "更高的分辨率提供更清晰的画质，但文件更大",
+      "webmAdvantage": "WebM 格式在网络传输方面有优势",
+      "processingTime": "处理时间取决于文件大小和压缩设置"
     }
   },
   "navigation": {
@@ -233,15 +236,15 @@
     }
   },
   "footer": {
-    "copyright": "© 2025 Video Tools. All rights reserved.",
-    "sourceCode": "Source Code",
-    "documentation": "Documentation",
-    "support": "Support",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "resources": "Resources",
-    "legal": "Legal",
-    "contact": "Contact"
+    "copyright": "© 2025 Video Tools. 保留所有权利。",
+    "sourceCode": "源代码",
+    "documentation": "文档",
+    "support": "支持",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "resources": "资源",
+    "legal": "法律",
+    "contact": "联系我们"
   },
   "videoCompress": {
     "title": "视频压缩设置",

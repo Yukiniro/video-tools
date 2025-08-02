@@ -176,6 +176,7 @@
       "mkv": "MKV format supports multiple codecs and is feature-rich"
     },
     "transcodeVideo": "Transcode Video",
+    "exportVideo": "Transcode Video",
     "converting": "Transcoding...",
     "clickToConvert": "Click the button to start transcoding video",
     "conversionInProgress": "Transcoding video, please wait...",
@@ -192,7 +193,9 @@
     "tips": {
       "formatCompatibility": "MP4 format has the best compatibility for most devices",
       "resolutionChoice": "Choose appropriate resolution to balance quality and file size",
-      "webmAdvantage": "WebM format has advantages in network transmission"
+      "resolutionQuality": "Higher resolution provides clearer quality but larger file size",
+      "webmAdvantage": "WebM format has advantages in network transmission",
+      "processingTime":"Processing time depends on file size and compression settings"
     }
   },
   "navigation": {
