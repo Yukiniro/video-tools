@@ -1,24 +1,24 @@
 {
   "common": {
-    "title": "Video Tools",
-    "subtitle": "Professional online video processing tool collection",
+    "title": "ビデオツール",
+    "subtitle": "プロフェッショナルなオンライン動画処理ツールコレクション",
     "increment": "+",
     "decrement": "-",
-    "reset": "Reset",
-    "count": "Count",
-    "languageToggle": "Language",
-    "english": "English",
-    "chinese": "中文",
+    "reset": "リセット",
+    "count": "カウント",
+    "languageToggle": "言語",
+    "english": "英語",
+    "chinese": "中国語",
     "japanese": "日本語",
-    "startUsing": "Start Using",
-    "whyChooseUs": "Why Choose Our Tools?",
-    "highQuality": "High Quality Processing",
-    "highQualityDesc": "Advanced algorithms ensure the highest quality video processing while preserving original details.",
-    "fastProcessing": "Fast Processing",
-    "fastProcessingDesc": "Optimized processing engine makes your video conversion and editing faster and more efficient.",
-    "easyToUse": "Easy to Use",
-    "easyToUseDesc": "Clean and intuitive user interface that allows anyone to easily complete professional video processing.",
-    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse"
+    "startUsing": "使用開始",
+    "whyChooseUs": "なぜ私たちのツールを選ぶのか？",
+    "highQuality": "高品質処理",
+    "highQualityDesc": "高度なアルゴリズムにより、元の詳細を保持しながら最高品質の動画処理を保証します。",
+    "fastProcessing": "高速処理",
+    "fastProcessingDesc": "最適化された処理エンジンにより、動画変換と編集がより高速で効率的になります。",
+    "easyToUse": "使いやすい",
+    "easyToUseDesc": "誰でも簡単にプロフェッショナルな動画処理を完了できる、クリーンで直感的なユーザーインターフェース。",
+    "dropYourVideoHereOrClickToBrowse": "動画をここにドロップするかクリックして参照"
   },
   "hero": {
     "badge": "プロフェッショナル動画処理",
@@ -48,33 +48,33 @@
     }
   },
   "gifConfig": {
-    "title": "GIF Export Settings",
-    "resolution": "Resolution",
-    "frameRate": "Frame Rate",
-    "startTime": "Start Time",
-    "endTime": "End Time",
-    "startTimeDesc": "Start time for conversion (seconds)",
-    "endTimeDesc": "End time for conversion (seconds)",
-    "endTimePlaceholder": "End of video",
-    "exportGif": "Export GIF",
-    "converting": "Converting...",
-    "clickToConvert": "Click the button to start converting video to GIF",
-    "conversionInProgress": "Converting your video, please wait...",
-    "pleaseWait": "Please do not close this window",
-    "preparingConversion": "Preparing conversion",
-    "processingVideo": "Processing video",
-    "generatingGif": "Generating GIF",
-    "completed": "Completed",
+    "title": "GIFエクスポート設定",
+    "resolution": "解像度",
+    "frameRate": "フレームレート",
+    "startTime": "開始時間",
+    "endTime": "終了時間",
+    "startTimeDesc": "変換開始時間（秒）",
+    "endTimeDesc": "変換終了時間（秒）",
+    "endTimePlaceholder": "動画の終了",
+    "exportGif": "GIFエクスポート",
+    "converting": "変換中...",
+    "clickToConvert": "ボタンをクリックして動画からGIFへの変換を開始",
+    "conversionInProgress": "動画を変換中、お待ちください...",
+    "pleaseWait": "このウィンドウを閉じないでください",
+    "preparingConversion": "変換準備中",
+    "processingVideo": "動画処理中",
+    "generatingGif": "GIF生成中",
+    "completed": "完了",
     "conversionSuccess": "変換が成功しました！GIFがデバイスに保存されました",
     "conversionError": "変換に失敗しました。もう一度お試しください",
     "conversionCancelled": "変換がキャンセルされました",
     "cancelConversion": "変換をキャンセル",
     "tips": {
-      "lowResolution": "Lower resolution and frame rate can reduce file size",
-      "chooseAppropriate": "Choose appropriate resolution for best results",
-      "timeSettings": "Set time range to convert only specific segments of the video"
+      "lowResolution": "解像度とフレームレートを下げるとファイルサイズを小さくできます",
+      "chooseAppropriate": "最良の結果を得るために適切な解像度を選択してください",
+      "timeSettings": "時間範囲を設定して動画の特定のセグメントのみを変換"
     },
-    "startTimeGreaterThanEndTime": "Start time must be less than end time",
+    "startTimeGreaterThanEndTime": "開始時間は終了時間より短くする必要があります",
     "endTimeGreaterThanDuration": "終了時間は動画の長さより短くする必要があります"
   },
   "videoConfig": {
@@ -151,36 +151,83 @@
       "losslessQuality": "WAV形式はロスレス音声を提供し、プロ用途に適しています"
     }
   },
+  "videoTranscodeConfig": {
+    "title": "動画トランスコード設定",
+    "pageTitle": "動画トランスコード",
+    "pageDescription": "動画形式と解像度を変換、MP4、WebM、MKV出力をサポート",
+    "resolution": "出力解像度",
+    "format": "出力形式",
+    "selectResolution": "出力解像度を選択",
+    "selectFormat": "出力形式を選択",
+    "480P": "480P (854×480)",
+    "720P": "720P (1280×720)",
+    "1080P": "1080P (1920×1080)",
+    "mp4": "MP4",
+    "webm": "WebM",
+    "mkv": "MKV",
+    "resolutionDesc": {
+      "480P": "標準解像度、ファイルサイズが小さく、ネットワーク転送に適している",
+      "720P": "高解像度、品質とファイルサイズのバランスが良い",
+      "1080P": "フルHD解像度、最高の視覚品質"
+    },
+    "formatDesc": {
+      "mp4": "MP4形式は互換性が最も良く、ほとんどのデバイスとプラットフォームに適している",
+      "webm": "WebM形式はウェブ再生に適しており、圧縮効率が高い",
+      "mkv": "MKV形式は複数のコーデックをサポートし、機能が豊富"
+    },
+    "transcodeVideo": "動画をトランスコード",
+    "exportVideo": "動画をトランスコード",
+    "converting": "トランスコード中...",
+    "clickToConvert": "ボタンをクリックして動画のトランスコードを開始",
+    "conversionInProgress": "動画をトランスコード中、お待ちください...",
+    "pleaseWait": "このウィンドウを閉じないでください",
+    "preparingConversion": "トランスコード準備中",
+    "transcoding": "トランスコード中",
+    "completed": "完了",
+    "conversionSuccess": "動画トランスコード成功！ファイルがデバイスに保存されました",
+    "conversionError": "トランスコードに失敗しました、再試行してください",
+    "conversionCancelled": "トランスコードがキャンセルされました",
+    "cancel": "キャンセル",
+    "dropYourVideoHereOrClickToBrowse": "動画をここにドロップするかクリックして参照",
+    "supportedFormats": "MP4、AVI、MOV、WMVなどの形式をサポート、最大500MB",
+    "tips": {
+      "formatCompatibility": "MP4形式はほとんどのデバイスで最高の互換性を持っています",
+      "resolutionChoice": "適切な解像度を選択して品質とファイルサイズのバランスを取る",
+      "resolutionQuality": "解像度が高いほど画質が向上しますが、ファイルサイズが大きくなります",
+      "webmAdvantage": "WebM形式はネットワーク転送において優位性があります",
+      "processingTime": "処理時間はファイルサイズと圧縮設定によって決まります"
+    }
+  },
   "navigation": {
-    "home": "Home",
-    "tools": "Tools",
-    "about": "About"
+    "home": "ホーム",
+    "tools": "ツール",
+    "about": "について"
   },
   "tools": {
     "videoToGif": {
-      "title": "Video to GIF",
-      "description": "Convert video files to GIF animations",
+      "title": "動画からGIF",
+      "description": "動画ファイルをGIFアニメーションに変換",
       "comingSoon": ""
     },
     "gifToVideo": {
-      "title": "GIF to Video",
-      "description": "Convert GIF animations to video files",
+      "title": "GIFから動画",
+      "description": "GIFアニメーションを動画ファイルに変換",
       "comingSoon": ""
     },
     "videoTranscode": {
-      "title": "Video Transcode",
-      "description": "Convert video formats with multiple encoding options",
-      "comingSoon": "Coming Soon"
+      "title": "動画変換",
+      "description": "複数のエンコーディングオプションで動画形式を変換",
+      "comingSoon": "近日公開"
     },
     "videoCompress": {
-      "title": "Video Compress",
-      "description": "Compress video file size while maintaining high quality",
+      "title": "動画圧縮",
+      "description": "高品質を保ちながら動画ファイルサイズを圧縮",
       "comingSoon": ""
     },
     "videoCrop": {
-      "title": "Video Crop",
-      "description": "Crop video segments or adjust video dimensions",
-      "comingSoon": "Coming Soon"
+      "title": "動画クロップ",
+      "description": "動画セグメントをクロップまたは動画の寸法を調整",
+      "comingSoon": "近日公開"
     },
     "extractAudio": {
       "title": "オーディオ抽出",
@@ -189,15 +236,15 @@
     }
   },
   "footer": {
-    "copyright": "© 2025 Video Tools. All rights reserved.",
-    "sourceCode": "Source Code",
-    "documentation": "Documentation",
-    "support": "Support",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "resources": "Resources",
-    "legal": "Legal",
-    "contact": "Contact"
+    "copyright": "© 2025 Video Tools. 全著作権所有。",
+    "sourceCode": "ソースコード",
+    "documentation": "ドキュメント",
+    "support": "サポート",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "resources": "リソース",
+    "legal": "法的事項",
+    "contact": "お問い合わせ"
   },
   "videoCompress": {
     "title": "動画圧縮設定",

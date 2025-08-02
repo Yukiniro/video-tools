@@ -29,7 +29,7 @@ export default async function Home({ params }: HomeProps) {
     {
       key: 'videoTranscode',
       href: '/video-transcode',
-      comingSoon: true,
+      comingSoon: false,
     },
     {
       key: 'videoCompress',

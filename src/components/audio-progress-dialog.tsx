@@ -20,7 +20,7 @@ export function AudioProgressDialog() {
 
   return (
     <Dialog open={showDialog} onOpenChange={() => {}}>
-      <DialogContent className="sm:max-w-md" hideCloseButton>
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Loader2 className="h-5 w-5 animate-spin" />

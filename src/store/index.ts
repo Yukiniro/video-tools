@@ -2,7 +2,7 @@ import { clamp } from 'es-toolkit'
 import { floor } from 'es-toolkit/compat'
 import { saveAs } from 'file-saver'
 import GIF from 'gif.js'
-import { ALL_FORMATS, AudioSample, AudioSampleSink, AudioSampleSource, BlobSource, BufferTarget, CanvasSink, CanvasSource, Conversion, Input, Mp3OutputFormat, Mp4OutputFormat, OggOutputFormat, Output, QUALITY_HIGH, QUALITY_LOW, QUALITY_MEDIUM, WavOutputFormat } from 'mediabunny'
+import { ALL_FORMATS, AudioSampleSink, AudioSampleSource, BlobSource, BufferTarget, CanvasSink, CanvasSource, Conversion, Input, MkvOutputFormat, Mp3OutputFormat, Mp4OutputFormat, OggOutputFormat, Output, QUALITY_HIGH, QUALITY_LOW, QUALITY_MEDIUM, WavOutputFormat, WebMOutputFormat } from 'mediabunny'
 import { nanoid } from 'nanoid'
 
 /**
@@ -62,6 +62,18 @@ interface VideoToAudioParams {
   format: 'wav' | 'mp3' | 'ogg'
   /** 音频质量 */
   quality: 'high' | 'medium' | 'low'
+}
+
+/**
+ * 视频转码参数
+ */
+interface VideoTranscodeParams {
+  /** 视频文件 */
+  file: File
+  /** 输出分辨率 */
+  resolution: '480P' | '720P' | '1080P'
+  /** 输出格式 */
+  format: 'mp4' | 'webm' | 'mkv'
 }
 
 /**
@@ -705,4 +717,133 @@ export function saveAsAudio(blob: Blob, format: string) {
 export function saveAsVideo(blob: Blob, format: string) {
   const filename = `${nanoid()}.${format}`
   saveAs(blob, filename)
+}
+
+/**
+ * 视频转码
+ * @param params 转码参数
+ * @param params.file 视频文件
+ * @param params.resolution 目标分辨率
+ * @param params.format 目标格式
+ * @param options 选项
+ * @param options.progress 进度回调函数，参数为进度（0-1）
+ * @param options.signal 可选，取消信号
+ * @returns 转码后的视频 Blob
+ */
+export async function videoTranscode(
+  params: VideoTranscodeParams,
+  options: {
+    progress: (progress: number) => void
+    signal?: AbortSignal
+  },
+): Promise<Blob> {
+  const { file, resolution, format } = params
+  const { progress, signal } = options
+
+  // 获取视频信息
+  const videoInfo = await getVideoInfo(file)
+  const targetSize = getVideoSize(videoInfo, resolution)
+
+  // 创建输入和输出
+  const target = new BufferTarget()
+  const source = new BlobSource(file)
+
+  // 根据格式选择输出配置
+  let outputFormat
+  switch (format) {
+    case 'mp4':
+      outputFormat = new Mp4OutputFormat()
+      break
+    case 'webm':
+      // WebM 使用 MP4 格式作为容器（Mediabunny 的实现方式）
+      outputFormat = new WebMOutputFormat()
+      break
+    case 'mkv':
+      // MKV 使用 MP4 格式作为容器（Mediabunny 的实现方式）
+      outputFormat = new MkvOutputFormat()
+      break
+    default:
+      throw new Error(`Unsupported format: ${format}`)
+  }
+
+  const input = new Input({
+    formats: ALL_FORMATS,
+    source,
+  })
+
+  const output = new Output({
+    format: outputFormat,
+    target,
+
+  })
+
+  // 执行转码
+  const conversion = await Conversion.init({
+    input,
+    output,
+    video: {
+      bitrate: getVideoBitrate(resolution),
+      width: targetSize.width,
+      height: targetSize.height,
+      fit: 'contain',
+    },
+  })
+
+  let cancelReject: (reason?: any) => void
+  conversion.onProgress = (value) => {
+    if (signal?.aborted) {
+      cancelReject?.(new Error('Conversion cancelled'))
+      return
+    }
+    progress(value)
+  }
+
+  await Promise.race([
+    conversion.execute(),
+    new Promise((_, reject) => {
+      cancelReject = reject
+    }),
+  ])
+
+  const buffer = (target as any).buffer
+  const mimeType = getVideoMimeType(format)
+  const blob = new Blob([buffer!], { type: mimeType })
+
+  return blob
+}
+
+/**
+ * 根据分辨率获取视频比特率
+ * @param resolution 分辨率
+ * @returns 比特率（bps）
+ */
+function getVideoBitrate(resolution: '480P' | '720P' | '1080P'): number {
+  switch (resolution) {
+    case '480P':
+      return 1000000 // 1Mbps
+    case '720P':
+      return 2500000 // 2.5Mbps
+    case '1080P':
+      return 5000000 // 5Mbps
+    default:
+      return 2500000
+  }
+}
+
+/**
+ * 根据格式获取视频 MIME 类型
+ * @param format 视频格式
+ * @returns MIME 类型
+ */
+function getVideoMimeType(format: 'mp4' | 'webm' | 'mkv'): string {
+  switch (format) {
+    case 'mp4':
+      return 'video/mp4'
+    case 'webm':
+      return 'video/webm'
+    case 'mkv':
+      return 'video/x-matroska'
+    default:
+      return 'video/mp4'
+  }
 }
