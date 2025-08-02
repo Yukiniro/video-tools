@@ -722,7 +722,12 @@ export function saveAsVideo(blob: Blob, format: string) {
 /**
  * 视频转码
  * @param params 转码参数
+ * @param params.file 视频文件
+ * @param params.resolution 目标分辨率
+ * @param params.format 目标格式
  * @param options 选项
+ * @param options.progress 进度回调函数，参数为进度（0-1）
+ * @param options.signal 可选，取消信号
  * @returns 转码后的视频 Blob
  */
 export async function videoTranscode(

@@ -195,7 +195,7 @@
       "resolutionChoice": "Choose appropriate resolution to balance quality and file size",
       "resolutionQuality": "Higher resolution provides clearer quality but larger file size",
       "webmAdvantage": "WebM format has advantages in network transmission",
-      "processingTime":"Processing time depends on file size and compression settings"
+      "processingTime": "Processing time depends on file size and compression settings"
     }
   },
   "navigation": {
