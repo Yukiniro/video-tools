@@ -151,6 +151,50 @@
       "losslessQuality": "WAV形式はロスレス音声を提供し、プロ用途に適しています"
     }
   },
+  "videoTranscodeConfig": {
+    "title": "動画トランスコード設定",
+    "pageTitle": "動画トランスコード",
+    "pageDescription": "動画形式と解像度を変換、MP4、WebM、MKV出力をサポート",
+    "resolution": "出力解像度",
+    "format": "出力形式",
+    "selectResolution": "出力解像度を選択",
+    "selectFormat": "出力形式を選択",
+    "480P": "480P (854×480)",
+    "720P": "720P (1280×720)",
+    "1080P": "1080P (1920×1080)",
+    "mp4": "MP4",
+    "webm": "WebM",
+    "mkv": "MKV",
+    "resolutionDesc": {
+      "480P": "標準解像度、ファイルサイズが小さく、ネットワーク転送に適している",
+      "720P": "高解像度、品質とファイルサイズのバランスが良い",
+      "1080P": "フルHD解像度、最高の視覚品質"
+    },
+    "formatDesc": {
+      "mp4": "MP4形式は互換性が最も良く、ほとんどのデバイスとプラットフォームに適している",
+      "webm": "WebM形式はウェブ再生に適しており、圧縮効率が高い",
+      "mkv": "MKV形式は複数のコーデックをサポートし、機能が豊富"
+    },
+    "transcodeVideo": "動画をトランスコード",
+    "converting": "トランスコード中...",
+    "clickToConvert": "ボタンをクリックして動画のトランスコードを開始",
+    "conversionInProgress": "動画をトランスコード中、お待ちください...",
+    "pleaseWait": "このウィンドウを閉じないでください",
+    "preparingConversion": "トランスコード準備中",
+    "transcoding": "トランスコード中",
+    "completed": "完了",
+    "conversionSuccess": "動画トランスコード成功！ファイルがデバイスに保存されました",
+    "conversionError": "トランスコードに失敗しました、再試行してください",
+    "conversionCancelled": "トランスコードがキャンセルされました",
+    "cancel": "キャンセル",
+    "dropYourVideoHereOrClickToBrowse": "動画をここにドロップするかクリックして参照",
+    "supportedFormats": "MP4、AVI、MOV、WMVなどの形式をサポート、最大500MB",
+    "tips": {
+      "formatCompatibility": "MP4形式はほとんどのデバイスで最高の互換性を持っています",
+      "resolutionChoice": "適切な解像度を選択して品質とファイルサイズのバランスを取る",
+      "webmAdvantage": "WebM形式はネットワーク転送において優位性があります"
+    }
+  },
   "navigation": {
     "home": "Home",
     "tools": "Tools",

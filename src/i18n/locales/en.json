@@ -151,6 +151,50 @@
       "losslessQuality": "WAV format provides lossless audio, suitable for professional use"
     }
   },
+  "videoTranscodeConfig": {
+    "title": "Video Transcode Settings",
+    "pageTitle": "Video Transcode",
+    "pageDescription": "Convert video format and resolution, supports MP4, WebM, MKV output",
+    "resolution": "Output Resolution",
+    "format": "Output Format",
+    "selectResolution": "Select Output Resolution",
+    "selectFormat": "Select Output Format",
+    "480P": "480P (854×480)",
+    "720P": "720P (1280×720)",
+    "1080P": "1080P (1920×1080)",
+    "mp4": "MP4",
+    "webm": "WebM",
+    "mkv": "MKV",
+    "resolutionDesc": {
+      "480P": "Standard definition, smaller file size, suitable for network transmission",
+      "720P": "High definition, balanced quality and file size",
+      "1080P": "Full HD resolution, best visual quality"
+    },
+    "formatDesc": {
+      "mp4": "MP4 format has the best compatibility, suitable for most devices and platforms",
+      "webm": "WebM format is suitable for web playback with high compression efficiency",
+      "mkv": "MKV format supports multiple codecs and is feature-rich"
+    },
+    "transcodeVideo": "Transcode Video",
+    "converting": "Transcoding...",
+    "clickToConvert": "Click the button to start transcoding video",
+    "conversionInProgress": "Transcoding video, please wait...",
+    "pleaseWait": "Please do not close this window",
+    "preparingConversion": "Preparing transcode",
+    "transcoding": "Transcoding",
+    "completed": "Completed",
+    "conversionSuccess": "Video transcode successful! File has been saved to your device",
+    "conversionError": "Transcode failed, please try again",
+    "conversionCancelled": "Transcode cancelled",
+    "cancel": "Cancel",
+    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
+    "supportedFormats": "Supports MP4, AVI, MOV, WMV and other formats, max 500MB",
+    "tips": {
+      "formatCompatibility": "MP4 format has the best compatibility for most devices",
+      "resolutionChoice": "Choose appropriate resolution to balance quality and file size",
+      "webmAdvantage": "WebM format has advantages in network transmission"
+    }
+  },
   "navigation": {
     "home": "Home",
     "tools": "Tools",
