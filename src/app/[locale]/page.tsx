@@ -46,6 +46,11 @@ export default async function Home({ params }: HomeProps) {
       href: '/video-to-audio',
       comingSoon: false,
     },
+    {
+      key: 'videoInfo',
+      href: '/video-info',
+      comingSoon: false,
+    },
   ]
 
   const features = [

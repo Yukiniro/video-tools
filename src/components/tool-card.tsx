@@ -5,6 +5,7 @@ import {
   AudioLines,
   FileVideo,
   Image,
+  Info,
   Minimize2,
   Scissors,
   Video,
@@ -29,6 +30,7 @@ const iconMap = {
   videoCompress: Minimize2,
   videoCrop: Scissors,
   extractAudio: AudioLines,
+  videoInfo: Info,
 }
 
 export function ToolCard({ toolKey, href, locale, comingSoon = true }: ToolCardProps) {

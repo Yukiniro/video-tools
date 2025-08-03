@@ -241,6 +241,11 @@
       "title": "オーディオ抽出",
       "description": "ビデオファイルからオーディオトラックを抽出",
       "comingSoon": ""
+    },
+    "videoInfo": {
+      "title": "ビデオ情報表示",
+      "description": "ビデオファイルの詳細情報とメタデータを表示",
+      "comingSoon": ""
     }
   },
   "footer": {
@@ -316,6 +321,42 @@
       "originalFormatKept": "元の動画形式が保持されます",
       "bitrateAutoAdjusted": "ビットレートは元の動画に合わせて自動調整されます"
     }
+  },
+  "videoInfo": {
+    "dropYourVideoHereOrClickToBrowse": "ビデオをここにドロップするか、クリックして参照",
+    "videoInformation": "ビデオ情報",
+    "basicInfo": "基本情報",
+    "technicalInfo": "技術情報",
+    "fileName": "ファイル名",
+    "fileSize": "ファイルサイズ",
+    "duration": "再生時間",
+    "format": "形式",
+    "resolution": "解像度",
+    "frameRate": "フレームレート",
+    "bitrate": "ビットレート",
+    "videoCodec": "ビデオコーデック",
+    "audioCodec": "オーディオコーデック",
+    "audioChannels": "オーディオチャンネル",
+    "audioSampleRate": "オーディオサンプルレート",
+    "creationTime": "作成時間",
+    "modificationTime": "変更時間",
+    "aspectRatio": "アスペクト比",
+    "colorSpace": "色空間",
+    "pixelFormat": "ピクセル形式",
+    "fps": "fps",
+    "kbps": "kbps",
+    "mbps": "Mbps",
+    "hz": "Hz",
+    "khz": "kHz",
+    "channels": "チャンネル",
+    "mono": "モノラル",
+    "stereo": "ステレオ",
+    "surround": "サラウンド",
+    "unknown": "不明",
+    "notAvailable": "利用不可",
+    "analyzing": "ビデオ情報を分析中...",
+    "analysisComplete": "分析完了",
+    "analysisError": "分析に失敗しました。再試行してください"
   },
   "metadata": {
     "title": "ビデオツール - プロフェッショナルなオンライン動画処理ツール",
