@@ -3,14 +3,7 @@
 import { useAtom, useSetAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
 import { cancelConversionAtom, gifConversionProgressAtom, showProgressDialogAtom } from '@/atoms/gif'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
-import { Progress } from '@/components/ui/progress'
+import { CommonProgressDialog } from './common-progress-dialog'
 
 export function GifProgressDialog() {
   const t = useTranslations('gifConfig')
@@ -26,30 +19,20 @@ export function GifProgressDialog() {
   }
 
   return (
-    <Dialog open={showDialog} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>{t('converting')}</DialogTitle>
-          <DialogDescription>
-            {t('conversionInProgress')}
-          </DialogDescription>
-        </DialogHeader>
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span>{progress.stage}</span>
-              <span>
-                {progress.progress}
-                %
-              </span>
-            </div>
-            <Progress value={progress.progress} className="w-full" />
-          </div>
-          <p className="text-xs text-muted-foreground text-center">
-            {t('pleaseWait')}
-          </p>
-        </div>
-      </DialogContent>
-    </Dialog>
+    <CommonProgressDialog
+      open={showDialog}
+      progress={progress}
+      title={t('converting')}
+      description={t('conversionInProgress')}
+      pleaseWaitText={t('pleaseWait')}
+      cancelText={t('cancel')}
+      closeText={t('close')}
+      retryText={t('retry')}
+      errorDetailsText={t('errorDetails')}
+      onOpenChange={handleOpenChange}
+      showCancelButton={false}
+      showCloseButton={false}
+      showRetryButton={false}
+    />
   )
 }

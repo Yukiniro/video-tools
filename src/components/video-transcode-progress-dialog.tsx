@@ -2,20 +2,9 @@
 
 import { useAtom, useSetAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import {
-  cancelVideoTranscodeConversionAtom,
-  showVideoTranscodeProgressDialogAtom,
-  videoTranscodeConversionProgressAtom,
-} from '@/atoms'
+import { cancelVideoTranscodeConversionAtom, showVideoTranscodeProgressDialogAtom, videoTranscodeConversionProgressAtom } from '@/atoms/video-transcode'
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
-import { Progress } from '@/components/ui/progress'
+import { CommonProgressDialog } from './common-progress-dialog'
 
 export function VideoTranscodeProgressDialog() {
   const t = useTranslations('videoTranscodeConfig')
@@ -28,41 +17,36 @@ export function VideoTranscodeProgressDialog() {
     setShowDialog(false)
   }
 
+  // 自定义取消按钮，放在右侧
+  const customActions = (
+    <div className="flex justify-end">
+      <Button
+        variant="outline"
+        onClick={handleCancel}
+        disabled={!progress.isConverting}
+      >
+        {t('cancel')}
+      </Button>
+    </div>
+  )
+
   return (
-    <Dialog open={showDialog} onOpenChange={setShowDialog}>
-      <DialogContent className="sm:max-w-md" showCloseButton={false}>
-        <DialogHeader>
-          <DialogTitle>{t('converting')}</DialogTitle>
-          <DialogDescription>
-            {t('conversionInProgress')}
-          </DialogDescription>
-        </DialogHeader>
-
-        <div className="space-y-4">
-          {/* 进度条 */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span>{progress.stage}</span>
-              <span>
-                {progress.progress}
-                %
-              </span>
-            </div>
-            <Progress value={progress.progress} className="w-full" />
-          </div>
-
-          {/* 取消按钮 */}
-          <div className="flex justify-end">
-            <Button
-              variant="outline"
-              onClick={handleCancel}
-              disabled={!progress.isConverting}
-            >
-              {t('cancel')}
-            </Button>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
+    <CommonProgressDialog
+      open={showDialog}
+      progress={progress}
+      title={t('converting')}
+      description={t('conversionInProgress')}
+      pleaseWaitText={t('pleaseWait')}
+      cancelText={t('cancel')}
+      closeText={t('close')}
+      retryText={t('retry')}
+      errorDetailsText={t('errorDetails')}
+      onOpenChange={setShowDialog}
+      hideCloseButton={true}
+      showCancelButton={false}
+      showCloseButton={false}
+      showRetryButton={false}
+      customActions={customActions}
+    />
   )
 }
