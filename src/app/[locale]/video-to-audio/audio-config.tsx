@@ -20,7 +20,7 @@ const QUALITY_OPTIONS = [
 ]
 
 export function AudioConfig() {
-  const t = useTranslations('audioConfig')
+  const t = useTranslations('videoToAudio')
   const [config, setConfig] = useAtom(audioConfigAtom)
 
   const handleFormatChange = (format: string) => {

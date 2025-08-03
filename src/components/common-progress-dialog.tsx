@@ -122,6 +122,7 @@ export function CommonProgressDialog({
   // 获取当前状态的标题和描述
   const currentTitle = title || statusTexts[currentStatus as keyof typeof statusTexts]
   const currentDescription = description || statusDescriptions[currentStatus as keyof typeof statusDescriptions]
+  const currentProgessStageText = statusTexts[progress.stage as keyof typeof statusTexts]
 
   const handleOpenChange = (newOpen: boolean) => {
     if (onOpenChange) {
@@ -152,7 +153,7 @@ export function CommonProgressDialog({
           {(isProcessing || currentStatus === 'success') && (
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">{progress.stage}</span>
+                <span className="text-muted-foreground">{currentProgessStageText}</span>
                 <span className="font-medium">
                   {progress.progress.toFixed(0)}
                   %

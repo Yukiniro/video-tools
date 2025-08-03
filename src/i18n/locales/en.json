@@ -104,56 +104,6 @@
       "conversionTime": "Conversion time depends on GIF size and output settings"
     }
   },
-  "audioConfig": {
-    "title": "Audio Export Settings",
-    "pageTitle": "Video to Audio",
-    "pageDescription": "Extract audio from video files, supports MP3, WAV, OGG output formats",
-    "format": "Audio Format",
-    "quality": "Audio Quality",
-    "selectFormat": "Select audio format",
-    "selectQuality": "Select audio quality",
-    "mp3": "MP3",
-    "wav": "WAV",
-    "ogg": "OGG",
-    "high": "High Quality",
-    "medium": "Medium Quality",
-    "low": "Low Quality",
-    "formatDesc": {
-      "mp3": "MP3 format offers good compatibility and smaller file sizes",
-      "wav": "WAV format provides lossless audio quality, but larger files",
-      "ogg": "OGG format is an open-source audio format with good compression"
-    },
-    "qualityDesc": {
-      "high": "Best audio quality, suitable for music and high-demand scenarios",
-      "medium": "Balanced quality and file size, suitable for general use",
-      "low": "Smallest file size, suitable for voice or low-demand scenarios"
-    },
-    "exportAudio": "Extract Audio",
-    "converting": "Converting...",
-    "clickToConvert": "Click the button to start extracting audio from video",
-    "conversionInProgress": "Extracting audio, please wait...",
-    "preparingConversion": "Preparing conversion",
-    "extractingAudio": "Extracting audio",
-    "conversionSuccess": "Audio extraction successful! File saved to your device",
-    "conversionError": "Conversion failed, please try again",
-    "conversionCancelled": "Conversion cancelled",
-    "cancelConversion": "Cancel Conversion",
-    "audioPreview": "Audio Preview",
-    "downloadAudio": "Download Audio File",
-    "selectVideoFile": "Select Video File",
-    "pleaseSelectFile": "Please select a video file first",
-    "fileDownloading": "Audio file downloading...",
-    "conversionSettings": "Conversion Settings",
-    "startConversion": "Start Conversion",
-    "conversionProgress": "Conversion Progress",
-    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
-    "supportedFormats": "Supports MP4, AVI, MOV, WMV and other formats, max 500MB",
-    "tips": {
-      "formatCompatibility": "MP3 format has the best compatibility for most players",
-      "qualityVsSize": "Higher audio quality will result in larger files",
-      "losslessQuality": "WAV format provides lossless audio, suitable for professional use"
-    }
-  },
   "videoTranscodeConfig": {
     "title": "Video Transcode Settings",
     "pageTitle": "Video Transcode",
@@ -199,12 +149,54 @@
     }
   },
   "videoToAudio": {
+    "exportAudio": "Extract Audio",
+    "title": "Audio Export Settings",
+    "pageTitle": "Video to Audio",
+    "pageDescription": "Extract audio from video files, supports MP3, WAV, OGG output formats",
+    "format": "Audio Format",
+    "quality": "Audio Quality",
+    "selectFormat": "Select audio format",
+    "selectQuality": "Select audio quality",
+    "mp3": "MP3",
+    "wav": "WAV",
+    "ogg": "OGG",
+    "high": "High Quality",
+    "medium": "Medium Quality",
+    "low": "Low Quality",
+    "formatDesc": {
+      "mp3": "MP3 format offers good compatibility and smaller file sizes",
+      "wav": "WAV format provides lossless audio quality, but larger files",
+      "ogg": "OGG format is an open-source audio format with good compression"
+    },
+    "qualityDesc": {
+      "high": "Best audio quality, suitable for music and high-demand scenarios",
+      "medium": "Balanced quality and file size, suitable for general use",
+      "low": "Smallest file size, suitable for voice or low-demand scenarios"
+    },
     "converting": "Converting...",
+    "clickToConvert": "Click the button to start extracting audio from video",
     "conversionInProgress": "Extracting audio, please wait...",
+    "preparingConversion": "Preparing conversion",
+    "extractingAudio": "Extracting audio",
     "conversionSuccess": "Audio extraction successful! File saved to your device",
     "conversionError": "Conversion failed, please try again",
     "conversionCancelled": "Conversion cancelled",
-    "cancelConversion": "Cancel Conversion"
+    "cancelConversion": "Cancel Conversion",
+    "audioPreview": "Audio Preview",
+    "downloadAudio": "Download Audio File",
+    "selectVideoFile": "Select Video File",
+    "pleaseSelectFile": "Please select a video file first",
+    "fileDownloading": "Audio file downloading...",
+    "conversionSettings": "Conversion Settings",
+    "startConversion": "Start Conversion",
+    "conversionProgress": "Conversion Progress",
+    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
+    "supportedFormats": "Supports MP4, AVI, MOV, WMV and other formats, max 500MB",
+    "tips": {
+      "formatCompatibility": "MP3 format has the best compatibility for most players",
+      "qualityVsSize": "Higher audio quality will result in larger files",
+      "losslessQuality": "WAV format provides lossless audio, suitable for professional use"
+    }
   },
   "videoTranscode": {
     "converting": "Converting...",
