@@ -1,13 +1,13 @@
 'use client'
 
+import { useSetAtom } from 'jotai'
 import { ChevronDown, Menu, Video } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import { resetAllStatesAtom } from '@/atoms'
 import { LanguageDropdown } from '@/components/language-dropdown'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
-import { resetAllStatesAtom } from '@/atoms'
-import { useSetAtom } from 'jotai'
 
 interface HeaderProps {
   locale: string

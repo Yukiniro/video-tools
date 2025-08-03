@@ -8,14 +8,16 @@ import {
   completeProcessingAtom,
   handleErrorAtom,
   startProcessingAtom,
-  switchToolAtom,
   updateProgressAtom,
 } from './shared'
 
 export interface VideoCompressConfig {
-  quality: 'high' | 'medium' | 'low'
-  resolution: 'original' | '1080P' | '720P' | '480P'
+  quality: 'high' | 'medium' | 'low' | 'custom'
+  resolution: 'original' | '1080P' | '720P' | '480P' | 'custom'
   enableAudio: boolean
+  customWidth?: number
+  customHeight?: number
+  customQuality?: number
 }
 
 const DEFAULT_VIDEO_COMPRESS_CONFIG: VideoCompressConfig = {

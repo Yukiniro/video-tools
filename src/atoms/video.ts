@@ -9,7 +9,6 @@ import {
   completeProcessingAtom,
   handleErrorAtom,
   startProcessingAtom,
-  switchToolAtom,
   updateProgressAtom,
 } from './shared'
 

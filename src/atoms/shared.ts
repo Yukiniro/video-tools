@@ -57,30 +57,16 @@ export const resetAllStatesAtom = atom(
     set(showProgressDialogAtom, false)
     set(abortControllerAtom, null)
     set(activeToolAtom, null)
-    
+
     // 重置文件状态
     set(filesAtom, [])
-    
+
     // 重置所有工具特定状态
     set(resetAudioStateAtom)
     set(resetGifStateAtom)
     set(resetVideoStateAtom)
     set(resetVideoCompressStateAtom)
     set(resetVideoTranscodeStateAtom)
-  },
-)
-
-// 切换工具时的状态重置 action
-export const switchToolAtom = atom(
-  null,
-  (get, set, newTool: ToolType) => {
-    const currentTool = get(activeToolAtom)
-
-    // 如果切换到不同的工具，重置状态
-    if (currentTool !== newTool) {
-      set(resetAllStatesAtom)
-      set(activeToolAtom, newTool)
-    }
   },
 )
 

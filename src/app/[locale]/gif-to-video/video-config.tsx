@@ -1,11 +1,11 @@
 'use client'
 
+import type { VideoConfig as VideoCompressConfig } from '@/atoms/video'
 import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
 import { videoConfigAtom } from '@/atoms/video'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { SegmentedControl } from '@/components/ui/segmented-control'
-import type { VideoConfig } from '@/atoms/video'
 
 const RESOLUTION_OPTIONS = [
   { value: '480P', label: '480P' },
@@ -23,11 +23,11 @@ export function VideoConfig() {
   const [config, setConfig] = useAtom(videoConfigAtom)
 
   const handleResolutionChange = (resolution: string) => {
-    setConfig(prev => ({ ...prev, resolution: resolution as VideoConfig['resolution'] }))
+    setConfig(prev => ({ ...prev, resolution: resolution as VideoCompressConfig['resolution'] }))
   }
 
   const handleFrameRateChange = (fps: string) => {
-    setConfig(prev => ({ ...prev, fps: fps as VideoConfig['fps'] }))
+    setConfig(prev => ({ ...prev, fps: fps as VideoCompressConfig['fps'] }))
   }
 
   return (

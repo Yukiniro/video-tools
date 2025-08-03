@@ -150,7 +150,7 @@
   },
   "videoToAudio": {
     "exportAudio": "提取音频",
-     "title": "音频导出设置",
+    "title": "音频导出设置",
     "pageTitle": "视频转音频",
     "pageDescription": "从视频文件中提取音频，支持输出 MP3、WAV、OGG 格式",
     "format": "音频格式",

@@ -3,13 +3,13 @@
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { VideoConfig } from './video-config'
 import { filesAtom } from '@/atoms/files'
 import { convertToVideoAtom } from '@/atoms/video'
 import FileUpload from '@/components/file-upload'
 import { ToolPageTemplate } from '@/components/tool-page-template'
 import { Button } from '@/components/ui/button'
 import { VideoProgressDialog } from '@/components/video-progress-dialog'
+import { VideoConfig } from './video-config'
 
 export default function GifToVideoPage() {
   const t = useTranslations('gifToVideo')

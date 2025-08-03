@@ -9,9 +9,13 @@ import {
   completeProcessingAtom,
   handleErrorAtom,
   startProcessingAtom,
-  switchToolAtom,
   updateProgressAtom,
 } from './shared'
+
+export interface VideoTranscodeConfig {
+  format: 'mp4' | 'webm' | 'mkv'
+  resolution: '480P' | '720P' | '1080P'
+}
 
 const DEFAULT_VIDEO_TRANSCODE_CONFIG = {
   format: 'mp4' as const,
@@ -19,7 +23,7 @@ const DEFAULT_VIDEO_TRANSCODE_CONFIG = {
 }
 
 // 视频转码配置状态
-export const videoTranscodeConfigAtom = atom(DEFAULT_VIDEO_TRANSCODE_CONFIG)
+export const videoTranscodeConfigAtom = atom<VideoTranscodeConfig>(DEFAULT_VIDEO_TRANSCODE_CONFIG)
 
 // 重置视频转码状态
 export const resetVideoTranscodeStateAtom = atom(
