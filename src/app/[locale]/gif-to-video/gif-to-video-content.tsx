@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 import { VideoProgressDialog } from '@/components/video-progress-dialog'
 
 export function GifToVideoContent() {
-  const t = useTranslations('videoConfig')
+  const t = useTranslations('gifToVideo')
   const tDialog = useTranslations('common.dialog')
   const [files, setFiles] = useAtom(filesAtom)
   const convertToVideo = useSetAtom(convertToVideoAtom)

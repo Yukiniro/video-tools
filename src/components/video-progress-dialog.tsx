@@ -1,39 +1,43 @@
 'use client'
 
-import { useAtom, useSetAtom } from 'jotai'
+import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import { cancelVideoConversionAtom, showVideoProgressDialogAtom, videoConversionProgressAtom } from '@/atoms/video'
-import { CommonProgressDialog } from './common-progress-dialog'
+import { activeToolAtom, cancelProcessingAtom, commonProgressAtom, showProgressDialogAtom } from '@/atoms/shared'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Progress } from '@/components/ui/progress'
 
 export function VideoProgressDialog() {
-  const t = useTranslations('videoConfig')
+  const t = useTranslations('videoToAudio')
   const tDialog = useTranslations('common.dialog')
-  const [showDialog, setShowDialog] = useAtom(showVideoProgressDialogAtom)
-  const [progress] = useAtom(videoConversionProgressAtom)
-  const cancelConversion = useSetAtom(cancelVideoConversionAtom)
+  const [showDialog] = useAtom(showProgressDialogAtom)
+  const [progress] = useAtom(commonProgressAtom)
+  const [activeTool] = useAtom(activeToolAtom)
+  const [, cancelProcessing] = useAtom(cancelProcessingAtom)
 
-  const handleOpenChange = (open: boolean) => {
-    if (!open) {
-      cancelConversion()
-    }
-    setShowDialog(open)
+  const handleCancel = () => {
+    cancelProcessing()
+  }
+
+  // 只在当前工具是视频时显示对话框
+  if (activeTool !== 'video') {
+    return null
   }
 
   return (
-    <CommonProgressDialog
-      open={showDialog}
-      progress={progress}
-      title={t('converting')}
-      description={t('conversionInProgress')}
-      pleaseWaitText={tDialog('pleaseWait')}
-      cancelText={tDialog('cancel')}
-      closeText={tDialog('close')}
-      retryText={tDialog('retry')}
-      errorDetailsText={tDialog('errorDetails')}
-      onOpenChange={handleOpenChange}
-      showCancelButton={false}
-      showCloseButton={false}
-      showRetryButton={false}
-    />
+    <Dialog open={showDialog} onOpenChange={() => {}}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{t('converting')}</DialogTitle>
+          <DialogDescription>{t('conversionInProgress')}</DialogDescription>
+        </DialogHeader>
+        <Progress value={progress.progress} className="w-full" />
+        <DialogFooter>
+          <Button variant="outline" onClick={handleCancel}>
+            {tDialog('cancel')}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }

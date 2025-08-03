@@ -55,7 +55,7 @@
       "subtitle": "既に私たちのツールを使用中"
     }
   },
-  "gifConfig": {
+  "videoToGif": {
     "title": "GIFエクスポート設定",
     "resolution": "解像度",
     "frameRate": "フレームレート",
@@ -83,7 +83,7 @@
     "startTimeGreaterThanEndTime": "開始時間は終了時間より短くする必要があります",
     "endTimeGreaterThanDuration": "終了時間は動画の長さより短くする必要があります"
   },
-  "videoConfig": {
+  "gifToVideo": {
     "title": "動画エクスポート設定",
     "resolution": "動画解像度",
     "frameRate": "フレームレート",
@@ -197,6 +197,22 @@
       "webmAdvantage": "WebM形式はネットワーク転送において優位性があります",
       "processingTime": "処理時間はファイルサイズと圧縮設定によって決まります"
     }
+  },
+  "videoToAudio": {
+    "converting": "変換中...",
+    "conversionInProgress": "音声を抽出中です。しばらくお待ちください...",
+    "conversionSuccess": "音声抽出が成功しました！ファイルがデバイスに保存されました",
+    "conversionError": "変換に失敗しました。もう一度お試しください",
+    "conversionCancelled": "変換がキャンセルされました",
+    "cancelConversion": "変換をキャンセル"
+  },
+  "videoTranscode": {
+    "converting": "変換中...",
+    "conversionInProgress": "動画を変換中です。しばらくお待ちください...",
+    "conversionSuccess": "動画トランスコードが成功しました！ファイルがデバイスに保存されました",
+    "conversionError": "トランスコードに失敗しました。もう一度お試しください",
+    "conversionCancelled": "トランスコードがキャンセルされました",
+    "cancelConversion": "トランスコードをキャンセル"
   },
   "navigation": {
     "home": "ホーム",

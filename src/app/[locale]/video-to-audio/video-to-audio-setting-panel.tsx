@@ -1,16 +1,17 @@
 'use client'
 
-import { useAtom, useSetAtom } from 'jotai'
+import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import { AudioConfig } from '@/app/[locale]/video-to-audio/audio-config'
-import { audioConversionProgressAtom, convertToAudioAtom } from '@/atoms'
+import { convertToAudioAtom } from '@/atoms/audio'
+import { commonProgressAtom } from '@/atoms/shared'
 import { Button } from '@/components/ui/button'
+import { AudioConfig } from './audio-config'
 
-export default function VideoToAudioSettingPanel() {
-  const t = useTranslations('audioConfig')
+export function VideoToAudioSettingPanel() {
+  const t = useTranslations('videoToAudio')
   const tDialog = useTranslations('common.dialog')
-  const [progress] = useAtom(audioConversionProgressAtom)
-  const convertToAudio = useSetAtom(convertToAudioAtom)
+  const [progress] = useAtom(commonProgressAtom)
+  const [, convertToAudio] = useAtom(convertToAudioAtom)
 
   const handleConvertToAudio = () => {
     convertToAudio({
@@ -27,11 +28,11 @@ export default function VideoToAudioSettingPanel() {
       <div className="space-y-2">
         <Button
           onClick={handleConvertToAudio}
-          disabled={progress.isConverting}
+          disabled={progress.isProcessing}
           className="w-full"
           size="lg"
         >
-          {progress.isConverting ? t('converting') : t('exportAudio')}
+          {progress.isProcessing ? t('converting') : t('exportAudio')}
         </Button>
         <p className="text-xs text-muted-foreground text-center">
           {t('clickToConvert')}

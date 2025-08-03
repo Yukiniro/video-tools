@@ -21,7 +21,7 @@ const FRAMERATE_OPTIONS = [
 ]
 
 export function GifConfig() {
-  const t = useTranslations('gifConfig')
+  const t = useTranslations('videoToGif')
   const [config, setConfig] = useAtom(gifConfigAtom)
 
   const handleResolutionChange = (resolution: string) => {

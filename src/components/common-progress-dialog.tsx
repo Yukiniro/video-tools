@@ -27,7 +27,7 @@ export interface ProgressDialogConfig {
   // 基础配置
   open: boolean
   progress: ProgressState
-  
+
   // 文本配置
   title?: string
   description?: string
@@ -36,7 +36,7 @@ export interface ProgressDialogConfig {
   closeText: string
   retryText: string
   errorDetailsText: string
-  
+
   // 状态文本配置
   statusTexts?: {
     compressing?: string
@@ -45,7 +45,7 @@ export interface ProgressDialogConfig {
     error?: string
     cancelled?: string
   }
-  
+
   // 状态描述配置
   statusDescriptions?: {
     compressing?: string
@@ -54,30 +54,29 @@ export interface ProgressDialogConfig {
     error?: string
     cancelled?: string
   }
-  
+
   // 行为配置
   onCancel?: () => void
   onClose?: () => void
   onRetry?: () => void
   onOpenChange?: (open: boolean) => void
-  
+
   // 显示配置
   showCancelButton?: boolean
   showCloseButton?: boolean
   showRetryButton?: boolean
   showStatusIcon?: boolean
   hideCloseButton?: boolean
-  
+
   // 自定义内容
   customContent?: ReactNode
   customActions?: ReactNode
 }
 
-
-
 function getStatusIcon(status?: string, showIcon: boolean = true) {
-  if (!showIcon) return null
-  
+  if (!showIcon)
+    return null
+
   switch (status) {
     case 'compressing':
     case 'converting':
@@ -119,15 +118,16 @@ export function CommonProgressDialog({
 }: ProgressDialogConfig) {
   const currentStatus = progress.status || 'converting'
   const isProcessing = currentStatus === 'compressing' || currentStatus === 'converting'
-  
+
   // 获取当前状态的标题和描述
   const currentTitle = title || statusTexts[currentStatus as keyof typeof statusTexts]
   const currentDescription = description || statusDescriptions[currentStatus as keyof typeof statusDescriptions]
-  
+
   const handleOpenChange = (newOpen: boolean) => {
     if (onOpenChange) {
       onOpenChange(newOpen)
-    } else if (!newOpen && onCancel) {
+    }
+    else if (!newOpen && onCancel) {
       onCancel()
     }
   }
@@ -154,7 +154,8 @@ export function CommonProgressDialog({
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">{progress.stage}</span>
                 <span className="font-medium">
-                  {progress.progress.toFixed(0)}%
+                  {progress.progress.toFixed(0)}
+                  %
                 </span>
               </div>
               <Progress value={progress.progress} className="h-2" />
@@ -165,12 +166,15 @@ export function CommonProgressDialog({
           {currentStatus === 'error' && progress.error && (
             <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
               <div className="text-sm text-red-600">
-                <strong>{errorDetailsText}:</strong> {progress.error}
+                <strong>
+                  {errorDetailsText}
+                  :
+                </strong>
+                {' '}
+                {progress.error}
               </div>
             </div>
           )}
-
-
 
           {/* 等待提示 */}
           {isProcessing && (
@@ -191,7 +195,7 @@ export function CommonProgressDialog({
                   variant="outline"
                   onClick={onCancel}
                   className="w-full"
-                  disabled={!progress.isConverting}
+                  disabled={!isProcessing}
                 >
                   <X className="mr-2 h-4 w-4" />
                   {cancelText}

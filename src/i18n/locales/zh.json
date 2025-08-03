@@ -55,7 +55,7 @@
       "subtitle": "已在使用我们的工具"
     }
   },
-  "gifConfig": {
+  "videoToGif": {
     "title": "GIF 导出设置",
     "resolution": "分辨率",
     "frameRate": "帧率",
@@ -83,7 +83,7 @@
     "startTimeGreaterThanEndTime": "开始时间必须小于结束时间",
     "endTimeGreaterThanDuration": "结束时间必须小于视频时长"
   },
-  "videoConfig": {
+  "gifToVideo": {
     "title": "视频导出设置",
     "resolution": "视频分辨率",
     "frameRate": "视频帧率",
@@ -198,6 +198,22 @@
       "webmAdvantage": "WebM 格式在网络传输方面有优势",
       "processingTime": "处理时间取决于文件大小和压缩设置"
     }
+  },
+  "videoToAudio": {
+    "converting": "转换中...",
+    "conversionInProgress": "正在提取音频，请稍候...",
+    "conversionSuccess": "音频提取成功！文件已保存到您的设备",
+    "conversionError": "转换失败，请重试",
+    "conversionCancelled": "转换已取消",
+    "cancelConversion": "取消转换"
+  },
+  "videoTranscode": {
+    "converting": "转码中...",
+    "conversionInProgress": "正在转码视频，请稍候...",
+    "conversionSuccess": "视频转码成功！文件已保存到您的设备",
+    "conversionError": "转码失败，请重试",
+    "conversionCancelled": "转码已取消",
+    "cancelConversion": "取消转码"
   },
   "navigation": {
     "home": "首页",

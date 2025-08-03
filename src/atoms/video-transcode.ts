@@ -1,36 +1,33 @@
+import { delay } from 'es-toolkit'
+import { floor } from 'es-toolkit/compat'
 import { atom } from 'jotai'
 import { toast } from 'sonner'
-import { saveAsVideo, videoTranscode } from '@/store'
+import { saveAsVideo, transcodeVideo } from '@/store'
 import { filesAtom } from './files'
+import {
+  cleanupProcessingAtom,
+  completeProcessingAtom,
+  handleErrorAtom,
+  startProcessingAtom,
+  switchToolAtom,
+  updateProgressAtom,
+} from './shared'
 
 const DEFAULT_VIDEO_TRANSCODE_CONFIG = {
-  resolution: '720P' as '480P' | '720P' | '1080P',
-  format: 'mp4' as 'mp4' | 'webm' | 'mkv',
-}
-
-interface VideoTranscodeConversionProgress {
-  isConverting: boolean
-  progress: number // 0-100
-  stage: string // 转换阶段描述
-}
-
-const DEFAULT_CONVERSION_PROGRESS: VideoTranscodeConversionProgress = {
-  isConverting: false,
-  progress: 0,
-  stage: '',
+  format: 'mp4' as const,
+  resolution: '480P' as const,
 }
 
 // 视频转码配置状态
 export const videoTranscodeConfigAtom = atom(DEFAULT_VIDEO_TRANSCODE_CONFIG)
 
-// 视频转码转换进度状态
-export const videoTranscodeConversionProgressAtom = atom(DEFAULT_CONVERSION_PROGRESS)
-
-// 显示进度模态框状态
-export const showVideoTranscodeProgressDialogAtom = atom(false)
-
-// 取消转换的 AbortController
-export const videoTranscodeConversionAbortControllerAtom = atom<AbortController | null>(null)
+// 重置视频转码状态
+export const resetVideoTranscodeStateAtom = atom(
+  null,
+  (get, set) => {
+    set(videoTranscodeConfigAtom, DEFAULT_VIDEO_TRANSCODE_CONFIG)
+  },
+)
 
 // 转换 action atom
 export const convertToVideoTranscodeAtom = atom(
@@ -44,43 +41,38 @@ export const convertToVideoTranscodeAtom = atom(
       return
     }
 
-    // 创建新的 AbortController
-    const abortController = new AbortController()
-    set(videoTranscodeConversionAbortControllerAtom, abortController)
+    // 切换到视频转码工具并开始处理
+    set(switchToolAtom, 'video-transcode')
+    const abortController = set(startProcessingAtom, {
+      stage: translations('preparingConversion'),
+      toolType: 'video-transcode',
+    })
 
     try {
-      // 显示进度对话框
-      set(showVideoTranscodeProgressDialogAtom, true)
-      set(videoTranscodeConversionProgressAtom, {
-        isConverting: true,
-        progress: 0,
-        stage: translations('preparingConversion'),
-      })
-
       // 转换过程
-      const blob = await videoTranscode({
+      const blob = await transcodeVideo({
         file: files[0],
-        resolution: videoTranscodeConfig.resolution,
         format: videoTranscodeConfig.format,
+        resolution: videoTranscodeConfig.resolution,
       }, {
         progress: (progressValue: number) => {
-          set(videoTranscodeConversionProgressAtom, prev => ({
-            ...prev,
-            progress: Math.floor(progressValue * 100),
+          set(updateProgressAtom, {
+            progress: floor(progressValue * 100, 0),
             stage: translations('transcoding'),
-          }))
+          })
         },
         signal: abortController.signal,
       })
 
       // 完成
-      set(videoTranscodeConversionProgressAtom, prev => ({
-        ...prev,
-        progress: 100,
+      set(completeProcessingAtom, {
         stage: translationsDialog('completed'),
-      }))
+      })
 
       saveAsVideo(blob, videoTranscodeConfig.format)
+
+      // 稍等片刻显示完成状态
+      await delay(100)
 
       toast.success(translations('conversionSuccess'))
     }
@@ -91,34 +83,16 @@ export const convertToVideoTranscodeAtom = atom(
       }
       else {
         // 显示错误提示
+        set(handleErrorAtom, {
+          error: translations('conversionError'),
+        })
         toast.error(translations('conversionError'))
         console.error('转换失败:', error)
       }
     }
     finally {
-      // 清理 AbortController
-      set(videoTranscodeConversionAbortControllerAtom, null)
-
-      // 隐藏对话框
-      set(showVideoTranscodeProgressDialogAtom, false)
-
-      // 重置进度状态
-      set(videoTranscodeConversionProgressAtom, {
-        isConverting: false,
-        progress: 0,
-        stage: '',
-      })
-    }
-  },
-)
-
-// 取消转换 action atom
-export const cancelVideoTranscodeConversionAtom = atom(
-  null,
-  (get) => {
-    const abortController = get(videoTranscodeConversionAbortControllerAtom)
-    if (abortController) {
-      abortController.abort()
+      // 清理状态
+      set(cleanupProcessingAtom)
     }
   },
 )

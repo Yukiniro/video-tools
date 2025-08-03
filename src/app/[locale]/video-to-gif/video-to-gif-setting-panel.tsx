@@ -1,16 +1,17 @@
 'use client'
 
-import { useAtom, useSetAtom } from 'jotai'
+import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import { GifConfig } from '@/app/[locale]/video-to-gif/gif-config'
-import { convertToGifAtom, gifConversionProgressAtom } from '@/atoms'
+import { convertToGifAtom } from '@/atoms/gif'
+import { commonProgressAtom } from '@/atoms/shared'
 import { Button } from '@/components/ui/button'
+import { GifConfig } from './gif-config'
 
-export default function VideoToGifSettingPanel() {
-  const t = useTranslations('gifConfig')
+export function VideoToGifSettingPanel() {
+  const t = useTranslations('videoToGif')
   const tDialog = useTranslations('common.dialog')
-  const [progress] = useAtom(gifConversionProgressAtom)
-  const convertToGif = useSetAtom(convertToGifAtom)
+  const [progress] = useAtom(commonProgressAtom)
+  const [, convertToGif] = useAtom(convertToGifAtom)
 
   const handleConvertToGif = () => {
     convertToGif({
@@ -27,11 +28,11 @@ export default function VideoToGifSettingPanel() {
       <div className="space-y-2">
         <Button
           onClick={handleConvertToGif}
-          disabled={progress.isConverting}
+          disabled={progress.isProcessing}
           className="w-full"
           size="lg"
         >
-          {progress.isConverting ? t('converting') : t('exportGif')}
+          {progress.isProcessing ? t('converting') : t('exportGif')}
         </Button>
         <p className="text-xs text-muted-foreground text-center">
           {t('clickToConvert')}

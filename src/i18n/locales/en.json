@@ -55,7 +55,7 @@
       "subtitle": "Already using our tools"
     }
   },
-  "gifConfig": {
+  "videoToGif": {
     "title": "GIF Export Settings",
     "resolution": "Resolution",
     "frameRate": "Frame Rate",
@@ -83,7 +83,7 @@
     "startTimeGreaterThanEndTime": "Start time must be less than end time",
     "endTimeGreaterThanDuration": "End time must be less than video duration"
   },
-  "videoConfig": {
+  "gifToVideo": {
     "title": "Video Export Settings",
     "resolution": "Video Resolution",
     "frameRate": "Frame Rate",
@@ -197,6 +197,22 @@
       "webmAdvantage": "WebM format has advantages in network transmission",
       "processingTime": "Processing time depends on file size and compression settings"
     }
+  },
+  "videoToAudio": {
+    "converting": "Converting...",
+    "conversionInProgress": "Extracting audio, please wait...",
+    "conversionSuccess": "Audio extraction successful! File saved to your device",
+    "conversionError": "Conversion failed, please try again",
+    "conversionCancelled": "Conversion cancelled",
+    "cancelConversion": "Cancel Conversion"
+  },
+  "videoTranscode": {
+    "converting": "Converting...",
+    "conversionInProgress": "Converting your video, please wait...",
+    "conversionSuccess": "Video transcoding successful! File saved to your device",
+    "conversionError": "Transcoding failed, please try again",
+    "conversionCancelled": "Transcoding cancelled",
+    "cancelConversion": "Cancel Transcoding"
   },
   "navigation": {
     "home": "Home",

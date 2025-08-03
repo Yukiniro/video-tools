@@ -3,7 +3,8 @@
 import { useAtom, useSetAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
 import { filesAtom } from '@/atoms/files'
-import { compressVideoAtom, videoCompressionProgressAtom } from '@/atoms/video-compress'
+import { commonProgressAtom } from '@/atoms/shared'
+import { compressVideoAtom } from '@/atoms/video-compress'
 import FileUpload from '@/components/file-upload'
 import { ToolPageTemplate } from '@/components/tool-page-template'
 import { Button } from '@/components/ui/button'
@@ -25,7 +26,7 @@ export default function VideoCompressPage() {
   const t = useTranslations('videoCompress')
   const tDialog = useTranslations('common.dialog')
   const [files, setFiles] = useAtom(filesAtom)
-  const [progress] = useAtom(videoCompressionProgressAtom)
+  const [progress] = useAtom(commonProgressAtom)
   const compressVideo = useSetAtom(compressVideoAtom)
 
   const showUpload = files.length === 0
@@ -96,11 +97,11 @@ export default function VideoCompressPage() {
               <div className="space-y-2">
                 <Button
                   onClick={handleCompress}
-                  disabled={progress.isCompressing}
+                  disabled={progress.isProcessing}
                   className="w-full"
                   size="lg"
                 >
-                  {progress.isCompressing ? t('compressing') : t('startCompression')}
+                  {progress.isProcessing ? t('compressing') : t('startCompression')}
                 </Button>
                 <p className="text-xs text-muted-foreground text-center">
                   {t('clickToStartCompression')}

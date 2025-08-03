@@ -6,7 +6,7 @@ import FileUpload from '@/components/file-upload'
 import { ToolPageTemplate } from '@/components/tool-page-template'
 import { VideoPreview } from '@/components/video-preview'
 import { VideoTranscodeProgressDialog } from '@/components/video-transcode-progress-dialog'
-import VideoTranscodeSettingPanel from './video-transcode-setting-panel'
+import { VideoTranscodeSettingPanel } from './video-transcode-setting-panel'
 
 export default function VideoTranscodePage() {
   const [files, setFiles] = useAtom(filesAtom)

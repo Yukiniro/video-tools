@@ -1,30 +1,26 @@
 'use client'
 
-import { useAtom, useSetAtom } from 'jotai'
+import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import { cancelVideoCompressionAtom, closeVideoCompressionDialogAtom, retryVideoCompressionAtom, showVideoCompressionDialogAtom, videoCompressionProgressAtom } from '@/atoms/video-compress'
+import { activeToolAtom, cancelProcessingAtom, commonProgressAtom, showProgressDialogAtom } from '@/atoms/shared'
 import { CommonProgressDialog } from './common-progress-dialog'
 import { FileSizeInfo } from './file-size-info'
 
 export function VideoCompressionDialog() {
   const t = useTranslations('videoCompress')
   const tCommon = useTranslations('common.dialog')
-  const [showDialog] = useAtom(showVideoCompressionDialogAtom)
-  const [progress] = useAtom(videoCompressionProgressAtom)
-  const cancelCompression = useSetAtom(cancelVideoCompressionAtom)
-  const retryCompression = useSetAtom(retryVideoCompressionAtom)
-  const closeDialog = useSetAtom(closeVideoCompressionDialogAtom)
-
-  const handleClose = () => {
-    closeDialog()
-  }
+  const [showDialog] = useAtom(showProgressDialogAtom)
+  const [progress] = useAtom(commonProgressAtom)
+  const [activeTool] = useAtom(activeToolAtom)
+  const [, cancelProcessing] = useAtom(cancelProcessingAtom)
 
   const handleCancel = () => {
-    cancelCompression()
+    cancelProcessing()
   }
 
-  const handleRetry = () => {
-    retryCompression(t)
+  // 只在当前工具是视频压缩时显示对话框
+  if (activeTool !== 'video-compress') {
+    return null
   }
 
   return (
@@ -49,11 +45,11 @@ export function VideoCompressionDialog() {
       retryText={t('retryCompression')}
       errorDetailsText={tCommon('errorDetails')}
       onCancel={handleCancel}
-      onClose={handleClose}
-      onRetry={handleRetry}
+      onClose={handleCancel}
+      onRetry={handleCancel}
       onOpenChange={handleCancel}
       showStatusIcon={true}
-      customContent={
+      customContent={(
         <FileSizeInfo
           originalSize={progress.originalSize}
           compressedSize={progress.compressedSize}
@@ -63,7 +59,7 @@ export function VideoCompressionDialog() {
           compressionRatioText={t('compressionRatio')}
           reducedText={t('reduced')}
         />
-      }
+      )}
     />
   )
 }

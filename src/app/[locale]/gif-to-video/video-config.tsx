@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import { videoConfigAtom } from '@/atoms/video'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { SegmentedControl } from '@/components/ui/segmented-control'
+import type { VideoConfig } from '@/atoms/video'
 
 const RESOLUTION_OPTIONS = [
   { value: '480P', label: '480P' },
@@ -18,15 +19,15 @@ const FRAMERATE_OPTIONS = [
 ]
 
 export function VideoConfig() {
-  const t = useTranslations('videoConfig')
+  const t = useTranslations('gifToVideo')
   const [config, setConfig] = useAtom(videoConfigAtom)
 
   const handleResolutionChange = (resolution: string) => {
-    setConfig(prev => ({ ...prev, resolution }))
+    setConfig(prev => ({ ...prev, resolution: resolution as VideoConfig['resolution'] }))
   }
 
   const handleFrameRateChange = (fps: string) => {
-    setConfig(prev => ({ ...prev, fps }))
+    setConfig(prev => ({ ...prev, fps: fps as VideoConfig['fps'] }))
   }
 
   return (

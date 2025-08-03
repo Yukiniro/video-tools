@@ -1,36 +1,38 @@
+import { delay } from 'es-toolkit'
+import { floor } from 'es-toolkit/compat'
 import { atom } from 'jotai'
 import { toast } from 'sonner'
 import { saveAsAudio, videoToAudio } from '@/store'
 import { filesAtom } from './files'
+import {
+  cleanupProcessingAtom,
+  completeProcessingAtom,
+  handleErrorAtom,
+  startProcessingAtom,
+  switchToolAtom,
+  updateProgressAtom,
+} from './shared'
+
+interface AudioConfig {
+  format: 'mp3' | 'wav' | 'ogg'
+  quality: 'high' | 'medium' | 'low'
+}
 
 const DEFAULT_AUDIO_CONFIG = {
-  format: 'mp3' as 'wav' | 'mp3' | 'ogg',
-  quality: 'medium' as 'high' | 'medium' | 'low',
-}
-
-interface AudioConversionProgress {
-  isConverting: boolean
-  progress: number // 0-100
-  stage: string // 转换阶段描述
-}
-
-const DEFAULT_CONVERSION_PROGRESS: AudioConversionProgress = {
-  isConverting: false,
-  progress: 0,
-  stage: '',
+  format: 'wav' as const,
+  quality: 'medium' as const,
 }
 
 // 音频配置状态
-export const audioConfigAtom = atom(DEFAULT_AUDIO_CONFIG)
+export const audioConfigAtom = atom<AudioConfig>(DEFAULT_AUDIO_CONFIG)
 
-// 音频转换进度状态
-export const audioConversionProgressAtom = atom(DEFAULT_CONVERSION_PROGRESS)
-
-// 显示进度模态框状态
-export const showAudioProgressDialogAtom = atom(false)
-
-// 取消转换的 AbortController
-export const audioConversionAbortControllerAtom = atom<AbortController | null>(null)
+// 重置音频状态
+export const resetAudioStateAtom = atom(
+  null,
+  (get, set) => {
+    set(audioConfigAtom, DEFAULT_AUDIO_CONFIG)
+  },
+)
 
 // 转换 action atom
 export const convertToAudioAtom = atom(
@@ -44,19 +46,14 @@ export const convertToAudioAtom = atom(
       return
     }
 
-    // 创建新的 AbortController
-    const abortController = new AbortController()
-    set(audioConversionAbortControllerAtom, abortController)
+    // 切换到音频工具并开始处理
+    set(switchToolAtom, 'audio')
+    const abortController = set(startProcessingAtom, {
+      stage: translations('preparingConversion'),
+      toolType: 'audio',
+    })
 
     try {
-      // 显示进度对话框
-      set(showAudioProgressDialogAtom, true)
-      set(audioConversionProgressAtom, {
-        isConverting: true,
-        progress: 0,
-        stage: translations('preparingConversion'),
-      })
-
       // 转换过程
       const blob = await videoToAudio({
         file: files[0],
@@ -64,23 +61,23 @@ export const convertToAudioAtom = atom(
         quality: audioConfig.quality,
       }, {
         progress: (progressValue: number) => {
-          set(audioConversionProgressAtom, prev => ({
-            ...prev,
-            progress: Math.floor(progressValue * 100),
+          set(updateProgressAtom, {
+            progress: floor(progressValue * 100, 0),
             stage: translations('extractingAudio'),
-          }))
+          })
         },
         signal: abortController.signal,
       })
 
       // 完成
-      set(audioConversionProgressAtom, prev => ({
-        ...prev,
-        progress: 100,
+      set(completeProcessingAtom, {
         stage: translationsDialog('completed'),
-      }))
+      })
 
       saveAsAudio(blob, audioConfig.format)
+
+      // 稍等片刻显示完成状态
+      await delay(100)
 
       toast.success(translations('conversionSuccess'))
     }
@@ -91,34 +88,16 @@ export const convertToAudioAtom = atom(
       }
       else {
         // 显示错误提示
+        set(handleErrorAtom, {
+          error: translations('conversionError'),
+        })
         toast.error(translations('conversionError'))
         console.error('转换失败:', error)
       }
     }
     finally {
-      // 清理 AbortController
-      set(audioConversionAbortControllerAtom, null)
-
-      // 隐藏对话框
-      set(showAudioProgressDialogAtom, false)
-
-      // 重置进度状态
-      set(audioConversionProgressAtom, {
-        isConverting: false,
-        progress: 0,
-        stage: '',
-      })
-    }
-  },
-)
-
-// 取消转换 action atom
-export const cancelAudioConversionAtom = atom(
-  null,
-  (get) => {
-    const abortController = get(audioConversionAbortControllerAtom)
-    if (abortController) {
-      abortController.abort()
+      // 清理状态
+      set(cleanupProcessingAtom)
     }
   },
 )

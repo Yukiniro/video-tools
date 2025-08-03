@@ -15,7 +15,8 @@ interface FileSizeInfoProps {
 }
 
 function formatFileSize(bytes: number): string {
-  if (bytes === 0) return '0 B'
+  if (bytes === 0)
+    return '0 B'
   const k = 1024
   const sizes = ['B', 'KB', 'MB', 'GB']
   const i = Math.floor(Math.log(bytes) / Math.log(k))
@@ -56,7 +57,9 @@ export function FileSizeInfo({
         <div className="col-span-2 pt-2 border-t">
           <div className="text-muted-foreground mb-1">{compressionRatioText}</div>
           <div className="font-medium text-green-600">
-            {compressionRatio.toFixed(1)}% {reducedText}
+            {compressionRatio.toFixed(1)}
+            %
+            {reducedText}
           </div>
         </div>
       )}

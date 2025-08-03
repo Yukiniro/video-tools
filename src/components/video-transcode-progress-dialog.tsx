@@ -1,21 +1,26 @@
 'use client'
 
-import { useAtom, useSetAtom } from 'jotai'
+import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import { cancelVideoTranscodeConversionAtom, showVideoTranscodeProgressDialogAtom, videoTranscodeConversionProgressAtom } from '@/atoms/video-transcode'
+import { activeToolAtom, cancelProcessingAtom, commonProgressAtom, showProgressDialogAtom } from '@/atoms/shared'
 import { Button } from '@/components/ui/button'
 import { CommonProgressDialog } from './common-progress-dialog'
 
 export function VideoTranscodeProgressDialog() {
-  const t = useTranslations('videoTranscodeConfig')
+  const t = useTranslations('videoTranscode')
   const tDialog = useTranslations('common.dialog')
-  const [showDialog, setShowDialog] = useAtom(showVideoTranscodeProgressDialogAtom)
-  const [progress] = useAtom(videoTranscodeConversionProgressAtom)
-  const cancelConversion = useSetAtom(cancelVideoTranscodeConversionAtom)
+  const [showDialog] = useAtom(showProgressDialogAtom)
+  const [progress] = useAtom(commonProgressAtom)
+  const [activeTool] = useAtom(activeToolAtom)
+  const [, cancelProcessing] = useAtom(cancelProcessingAtom)
 
   const handleCancel = () => {
-    cancelConversion()
-    setShowDialog(false)
+    cancelProcessing()
+  }
+
+  // 只在当前工具是视频转码时显示对话框
+  if (activeTool !== 'video-transcode') {
+    return null
   }
 
   // 自定义取消按钮，放在右侧
@@ -24,7 +29,7 @@ export function VideoTranscodeProgressDialog() {
       <Button
         variant="outline"
         onClick={handleCancel}
-        disabled={!progress.isConverting}
+        disabled={!progress.isProcessing}
       >
         {tDialog('cancel')}
       </Button>
@@ -42,7 +47,7 @@ export function VideoTranscodeProgressDialog() {
       closeText={tDialog('close')}
       retryText={tDialog('retry')}
       errorDetailsText={tDialog('errorDetails')}
-      onOpenChange={setShowDialog}
+      onOpenChange={() => {}}
       hideCloseButton={true}
       showCancelButton={false}
       showCloseButton={false}
