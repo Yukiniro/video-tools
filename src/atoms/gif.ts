@@ -41,7 +41,8 @@ export const conversionAbortControllerAtom = atom<AbortController | null>(null)
 // 转换 action atom
 export const convertToGifAtom = atom(
   null,
-  async (get, set, translations: any) => {
+  async (get, set, params: { translations: any, translationsDialog: any }) => {
+    const { translations, translationsDialog } = params
     const files = get(filesAtom)
     const gifConfig = get(gifConfigAtom)
 
@@ -99,7 +100,7 @@ export const convertToGifAtom = atom(
       set(gifConversionProgressAtom, prev => ({
         ...prev,
         progress: 100,
-        stage: translations('completed'),
+        stage: translationsDialog('completed'),
       }))
 
       saveAsGif(blob)

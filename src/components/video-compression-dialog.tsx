@@ -8,6 +8,7 @@ import { FileSizeInfo } from './file-size-info'
 
 export function VideoCompressionDialog() {
   const t = useTranslations('videoCompress')
+  const tCommon = useTranslations('common.dialog')
   const [showDialog] = useAtom(showVideoCompressionDialogAtom)
   const [progress] = useAtom(videoCompressionProgressAtom)
   const cancelCompression = useSetAtom(cancelVideoCompressionAtom)
@@ -37,16 +38,16 @@ export function VideoCompressionDialog() {
         cancelled: t('compressionCancelled'),
       }}
       statusDescriptions={{
-        compressing: t('pleaseWait'),
+        compressing: tCommon('pleaseWait'),
         success: t('compressionSuccessDescription'),
         error: t('compressionErrorDescription'),
         cancelled: t('compressionCancelledDescription'),
       }}
-      pleaseWaitText={t('pleaseWait')}
+      pleaseWaitText={tCommon('pleaseWait')}
       cancelText={t('cancelCompression')}
-      closeText={t('close')}
+      closeText={tCommon('close')}
       retryText={t('retryCompression')}
-      errorDetailsText={t('errorDetails')}
+      errorDetailsText={tCommon('errorDetails')}
       onCancel={handleCancel}
       onClose={handleClose}
       onRetry={handleRetry}

@@ -6,7 +6,8 @@ import { cancelConversionAtom, gifConversionProgressAtom, showProgressDialogAtom
 import { CommonProgressDialog } from './common-progress-dialog'
 
 export function GifProgressDialog() {
-  const t = useTranslations('gifConfig')
+  const t = useTranslations('videoConfig')
+  const tCommon = useTranslations('common.dialog')
   const [showDialog, setShowDialog] = useAtom(showProgressDialogAtom)
   const [progress] = useAtom(gifConversionProgressAtom)
   const cancelConversion = useSetAtom(cancelConversionAtom)
@@ -24,11 +25,11 @@ export function GifProgressDialog() {
       progress={progress}
       title={t('converting')}
       description={t('conversionInProgress')}
-      pleaseWaitText={t('pleaseWait')}
-      cancelText={t('cancel')}
-      closeText={t('close')}
-      retryText={t('retry')}
-      errorDetailsText={t('errorDetails')}
+      pleaseWaitText={tCommon('pleaseWait')}
+      cancelText={t('cancelConversion')}
+      closeText={tCommon('close')}
+      retryText={tCommon('retry')}
+      errorDetailsText={tCommon('errorDetails')}
       onOpenChange={handleOpenChange}
       showCancelButton={false}
       showCloseButton={false}

@@ -37,7 +37,8 @@ export const videoConversionAbortControllerAtom = atom<AbortController | null>(n
 // 转换 action atom
 export const convertToVideoAtom = atom(
   null,
-  async (get, set, translations: any) => {
+  async (get, set, params: { translations: any, translationsDialog: any }) => {
+    const { translations, translationsDialog } = params
     const files = get(filesAtom)
     const videoConfig = get(videoConfigAtom)
 
@@ -78,7 +79,7 @@ export const convertToVideoAtom = atom(
       set(videoConversionProgressAtom, prev => ({
         ...prev,
         progress: 100,
-        stage: translations('completed'),
+        stage: translationsDialog('completed'),
       }))
 
       saveAsVideo(blob, 'mp4') // gif转视频默认输出为mp4格式

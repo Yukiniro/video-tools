@@ -23,6 +23,7 @@ function formatFileSize(bytes: number): string {
 
 export default function VideoCompressPage() {
   const t = useTranslations('videoCompress')
+  const tDialog = useTranslations('common.dialog')
   const [files, setFiles] = useAtom(filesAtom)
   const [progress] = useAtom(videoCompressionProgressAtom)
   const compressVideo = useSetAtom(compressVideoAtom)
@@ -31,7 +32,10 @@ export default function VideoCompressPage() {
   const showConfig = files.length > 0
 
   const handleCompress = () => {
-    compressVideo(t)
+    compressVideo({
+      translations: t,
+      translationsDialog: tDialog,
+    })
   }
 
   const handleFilesChange = (newFiles: File[]) => {

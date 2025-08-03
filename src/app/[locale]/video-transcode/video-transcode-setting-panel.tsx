@@ -8,11 +8,15 @@ import { Button } from '@/components/ui/button'
 
 export default function VideoTranscodeSettingPanel() {
   const t = useTranslations('videoTranscodeConfig')
+  const tDialog = useTranslations('common.dialog')
   const [progress] = useAtom(videoTranscodeConversionProgressAtom)
   const convertToVideoTranscode = useSetAtom(convertToVideoTranscodeAtom)
 
   const handleConvertToVideoTranscode = () => {
-    convertToVideoTranscode(t)
+    convertToVideoTranscode({
+      translations: t,
+      translationsDialog: tDialog,
+    })
   }
 
   return (

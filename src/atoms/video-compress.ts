@@ -72,7 +72,8 @@ export const videoCompressPreviewAtom = atom<{
 // 压缩 action atom
 export const compressVideoAtom = atom(
   null,
-  async (get, set, translations: any) => {
+  async (get, set, params: { translations: any, translationsDialog: any }) => {
+    const { translations, translationsDialog } = params
     const files = get(filesAtom)
     const compressConfig = get(videoCompressConfigAtom)
 
@@ -118,7 +119,7 @@ export const compressVideoAtom = atom(
         ...prev,
         isCompressing: false,
         progress: 100,
-        stage: translations('completed'),
+        stage: translationsDialog('completed'),
         compressedSize: blob.size,
         compressionRatio: Math.max(0, compressionRatio),
         status: 'success',
@@ -229,7 +230,7 @@ export const retryVideoCompressionAtom = atom(
         ...prev,
         isCompressing: false,
         progress: 100,
-        stage: translations('completed'),
+        stage: translations('common.dialog.completed'),
         compressedSize: blob.size,
         compressionRatio: Math.max(0, compressionRatio),
         status: 'success',

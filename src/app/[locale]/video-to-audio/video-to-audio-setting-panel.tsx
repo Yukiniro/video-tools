@@ -8,11 +8,15 @@ import { Button } from '@/components/ui/button'
 
 export default function VideoToAudioSettingPanel() {
   const t = useTranslations('audioConfig')
+  const tDialog = useTranslations('common.dialog')
   const [progress] = useAtom(audioConversionProgressAtom)
   const convertToAudio = useSetAtom(convertToAudioAtom)
 
   const handleConvertToAudio = () => {
-    convertToAudio(t)
+    convertToAudio({
+      translations: t,
+      translationsDialog: tDialog,
+    })
   }
 
   return (

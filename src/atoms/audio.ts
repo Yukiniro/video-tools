@@ -35,7 +35,8 @@ export const audioConversionAbortControllerAtom = atom<AbortController | null>(n
 // 转换 action atom
 export const convertToAudioAtom = atom(
   null,
-  async (get, set, translations: any) => {
+  async (get, set, params: { translations: any, translationsDialog: any }) => {
+    const { translations, translationsDialog } = params
     const files = get(filesAtom)
     const audioConfig = get(audioConfigAtom)
 
@@ -76,7 +77,7 @@ export const convertToAudioAtom = atom(
       set(audioConversionProgressAtom, prev => ({
         ...prev,
         progress: 100,
-        stage: translations('completed'),
+        stage: translationsDialog('completed'),
       }))
 
       saveAsAudio(blob, audioConfig.format)

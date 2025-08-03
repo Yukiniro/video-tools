@@ -35,7 +35,8 @@ export const videoTranscodeConversionAbortControllerAtom = atom<AbortController 
 // 转换 action atom
 export const convertToVideoTranscodeAtom = atom(
   null,
-  async (get, set, translations: any) => {
+  async (get, set, params: { translations: any, translationsDialog: any }) => {
+    const { translations, translationsDialog } = params
     const files = get(filesAtom)
     const videoTranscodeConfig = get(videoTranscodeConfigAtom)
 
@@ -76,7 +77,7 @@ export const convertToVideoTranscodeAtom = atom(
       set(videoTranscodeConversionProgressAtom, prev => ({
         ...prev,
         progress: 100,
-        stage: translations('completed'),
+        stage: translationsDialog('completed'),
       }))
 
       saveAsVideo(blob, videoTranscodeConfig.format)

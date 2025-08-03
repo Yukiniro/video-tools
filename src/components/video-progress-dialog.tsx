@@ -7,6 +7,7 @@ import { CommonProgressDialog } from './common-progress-dialog'
 
 export function VideoProgressDialog() {
   const t = useTranslations('videoConfig')
+  const tDialog = useTranslations('common.dialog')
   const [showDialog, setShowDialog] = useAtom(showVideoProgressDialogAtom)
   const [progress] = useAtom(videoConversionProgressAtom)
   const cancelConversion = useSetAtom(cancelVideoConversionAtom)
@@ -24,11 +25,11 @@ export function VideoProgressDialog() {
       progress={progress}
       title={t('converting')}
       description={t('conversionInProgress')}
-      pleaseWaitText={t('pleaseWait')}
-      cancelText={t('cancel')}
-      closeText={t('close')}
-      retryText={t('retry')}
-      errorDetailsText={t('errorDetails')}
+      pleaseWaitText={tDialog('pleaseWait')}
+      cancelText={tDialog('cancel')}
+      closeText={tDialog('close')}
+      retryText={tDialog('retry')}
+      errorDetailsText={tDialog('errorDetails')}
       onOpenChange={handleOpenChange}
       showCancelButton={false}
       showCloseButton={false}

@@ -12,11 +12,15 @@ import { VideoProgressDialog } from '@/components/video-progress-dialog'
 
 export function GifToVideoContent() {
   const t = useTranslations('videoConfig')
+  const tDialog = useTranslations('common.dialog')
   const [files, setFiles] = useAtom(filesAtom)
   const convertToVideo = useSetAtom(convertToVideoAtom)
 
   const handleConvert = () => {
-    convertToVideo(t)
+    convertToVideo({
+      translations: t,
+      translationsDialog: tDialog,
+    })
   }
 
   const handleFilesChange = (newFiles: File[]) => {

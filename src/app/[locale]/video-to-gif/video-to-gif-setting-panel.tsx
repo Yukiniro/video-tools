@@ -8,11 +8,15 @@ import { Button } from '@/components/ui/button'
 
 export default function VideoToGifSettingPanel() {
   const t = useTranslations('gifConfig')
+  const tDialog = useTranslations('common.dialog')
   const [progress] = useAtom(gifConversionProgressAtom)
   const convertToGif = useSetAtom(convertToGifAtom)
 
   const handleConvertToGif = () => {
-    convertToGif(t)
+    convertToGif({
+      translations: t,
+      translationsDialog: tDialog,
+    })
   }
 
   return (
