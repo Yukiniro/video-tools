@@ -46,8 +46,6 @@ export const convertToVideoAtom = atom(
       return
     }
 
-    // 切换到视频工具并开始处理
-    set(switchToolAtom, 'video')
     const abortController = set(startProcessingAtom, {
       stage: translations('preparingConversion'),
       toolType: 'video',

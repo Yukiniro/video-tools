@@ -46,8 +46,6 @@ export const convertToAudioAtom = atom(
       return
     }
 
-    // 切换到音频工具并开始处理
-    set(switchToolAtom, 'audio')
     const abortController = set(startProcessingAtom, {
       stage: translations('preparingConversion'),
       toolType: 'audio',

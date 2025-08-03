@@ -41,8 +41,6 @@ export const convertToVideoTranscodeAtom = atom(
       return
     }
 
-    // 切换到视频转码工具并开始处理
-    set(switchToolAtom, 'video-transcode')
     const abortController = set(startProcessingAtom, {
       stage: translations('preparingConversion'),
       toolType: 'video-transcode',

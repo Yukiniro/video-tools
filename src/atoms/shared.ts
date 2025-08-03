@@ -1,4 +1,10 @@
 import { atom } from 'jotai'
+import { resetAudioStateAtom } from './audio'
+import { filesAtom } from './files'
+import { resetGifStateAtom } from './gif'
+import { resetVideoStateAtom } from './video'
+import { resetVideoCompressStateAtom } from './video-compress'
+import { resetVideoTranscodeStateAtom } from './video-transcode'
 
 // 通用进度状态接口
 export interface CommonProgress {
@@ -51,6 +57,16 @@ export const resetAllStatesAtom = atom(
     set(showProgressDialogAtom, false)
     set(abortControllerAtom, null)
     set(activeToolAtom, null)
+    
+    // 重置文件状态
+    set(filesAtom, [])
+    
+    // 重置所有工具特定状态
+    set(resetAudioStateAtom)
+    set(resetGifStateAtom)
+    set(resetVideoStateAtom)
+    set(resetVideoCompressStateAtom)
+    set(resetVideoTranscodeStateAtom)
   },
 )
 

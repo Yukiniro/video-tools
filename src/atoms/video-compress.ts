@@ -63,8 +63,6 @@ export const compressVideoAtom = atom(
       return
     }
 
-    // 切换到视频压缩工具并开始处理
-    set(switchToolAtom, 'video-compress')
     const abortController = set(startProcessingAtom, {
       stage: translations('preparingCompression'),
       toolType: 'video-compress',

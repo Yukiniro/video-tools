@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { LanguageDropdown } from '@/components/language-dropdown'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
+import { resetAllStatesAtom } from '@/atoms'
+import { useSetAtom } from 'jotai'
 
 interface HeaderProps {
   locale: string
@@ -13,6 +15,7 @@ interface HeaderProps {
 
 export function Header({ locale }: HeaderProps) {
   const t = useTranslations()
+  const resetAllStates = useSetAtom(resetAllStatesAtom)
 
   const tools = [
     { key: 'videoToGif', href: '/video-to-gif', comingSoon: false },
@@ -68,6 +71,7 @@ export function Header({ locale }: HeaderProps) {
                       )
                     : (
                         <Link
+                          onClick={resetAllStates}
                           key={tool.key}
                           href={`/${locale}${tool.href}`}
                           className="block px-4 py-2 text-sm hover:bg-muted transition-colors"

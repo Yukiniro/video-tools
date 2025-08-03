@@ -47,8 +47,6 @@ export const convertToGifAtom = atom(
       return
     }
 
-    // 切换到 GIF 工具并开始处理
-    set(switchToolAtom, 'gif')
     const abortController = set(startProcessingAtom, {
       stage: translations('preparingConversion'),
       toolType: 'gif',
