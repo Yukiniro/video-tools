@@ -241,6 +241,11 @@
       "title": "Extract Audio",
       "description": "Extract audio tracks from video files",
       "comingSoon": ""
+    },
+    "videoInfo": {
+      "title": "Video Information",
+      "description": "View detailed information and metadata of video files",
+      "comingSoon": ""
     }
   },
   "footer": {
@@ -316,6 +321,42 @@
       "originalFormatKept": "Original video format will be preserved",
       "bitrateAutoAdjusted": "Bitrate will be automatically adjusted to match original video"
     }
+  },
+  "videoInfo": {
+    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
+    "videoInformation": "Video Information",
+    "basicInfo": "Basic Information",
+    "technicalInfo": "Technical Information",
+    "fileName": "File Name",
+    "fileSize": "File Size",
+    "duration": "Duration",
+    "format": "Format",
+    "resolution": "Resolution",
+    "frameRate": "Frame Rate",
+    "bitrate": "Bitrate",
+    "videoCodec": "Video Codec",
+    "audioCodec": "Audio Codec",
+    "audioChannels": "Audio Channels",
+    "audioSampleRate": "Audio Sample Rate",
+    "creationTime": "Creation Time",
+    "modificationTime": "Modification Time",
+    "aspectRatio": "Aspect Ratio",
+    "colorSpace": "Color Space",
+    "pixelFormat": "Pixel Format",
+    "fps": "fps",
+    "kbps": "kbps",
+    "mbps": "Mbps",
+    "hz": "Hz",
+    "khz": "kHz",
+    "channels": "channels",
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "surround": "Surround",
+    "unknown": "Unknown",
+    "notAvailable": "N/A",
+    "analyzing": "Analyzing video information...",
+    "analysisComplete": "Analysis Complete",
+    "analysisError": "Analysis failed, please try again"
   },
   "metadata": {
     "title": "Video Tools - Professional Online Video Processing Tools",

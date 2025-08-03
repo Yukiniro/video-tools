@@ -241,6 +241,11 @@
       "title": "视频提取音频",
       "description": "从视频文件中提取音频轨道",
       "comingSoon": ""
+    },
+    "videoInfo": {
+      "title": "视频信息查看",
+      "description": "查看视频文件的详细信息和元数据",
+      "comingSoon": ""
     }
   },
   "footer": {
@@ -316,6 +321,42 @@
       "originalFormatKept": "将保持原始视频格式不变",
       "bitrateAutoAdjusted": "比特率将自动调整以匹配原始视频"
     }
+  },
+  "videoInfo": {
+    "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览",
+    "videoInformation": "视频信息",
+    "basicInfo": "基本信息",
+    "technicalInfo": "技术信息",
+    "fileName": "文件名",
+    "fileSize": "文件大小",
+    "duration": "时长",
+    "format": "格式",
+    "resolution": "分辨率",
+    "frameRate": "帧率",
+    "bitrate": "比特率",
+    "videoCodec": "视频编码",
+    "audioCodec": "音频编码",
+    "audioChannels": "音频声道",
+    "audioSampleRate": "音频采样率",
+    "creationTime": "创建时间",
+    "modificationTime": "修改时间",
+    "aspectRatio": "宽高比",
+    "colorSpace": "色彩空间",
+    "pixelFormat": "像素格式",
+    "fps": "帧/秒",
+    "kbps": "千比特/秒",
+    "mbps": "兆比特/秒",
+    "hz": "赫兹",
+    "khz": "千赫兹",
+    "channels": "声道",
+    "mono": "单声道",
+    "stereo": "立体声",
+    "surround": "环绕声",
+    "unknown": "未知",
+    "notAvailable": "不可用",
+    "analyzing": "正在分析视频信息...",
+    "analysisComplete": "分析完成",
+    "analysisError": "分析失败，请重试"
   },
   "metadata": {
     "title": "视频工具 - 专业的在线视频处理工具",
