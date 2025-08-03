@@ -1,54 +1,42 @@
 'use client'
 
-import { useAtom, useSetAtom } from 'jotai'
+import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import { cancelVideoConversionAtom, showVideoProgressDialogAtom, videoConversionProgressAtom } from '@/atoms/video'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { activeToolAtom, cancelProcessingAtom, commonProgressAtom, showProgressDialogAtom } from '@/atoms/shared'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Progress } from '@/components/ui/progress'
 
 export function VideoProgressDialog() {
-  const t = useTranslations('videoConfig')
-  const [showDialog, setShowDialog] = useAtom(showVideoProgressDialogAtom)
-  const [progress] = useAtom(videoConversionProgressAtom)
-  const cancelConversion = useSetAtom(cancelVideoConversionAtom)
+  const t = useTranslations('videoToAudio')
+  const tDialog = useTranslations('common.dialog')
+  const [showDialog] = useAtom(showProgressDialogAtom)
+  const [progress] = useAtom(commonProgressAtom)
+  const [activeTool] = useAtom(activeToolAtom)
+  const [, cancelProcessing] = useAtom(cancelProcessingAtom)
 
-  const handleOpenChange = (open: boolean) => {
-    if (!open) {
-      cancelConversion()
-    }
-    setShowDialog(open)
+  const handleCancel = () => {
+    cancelProcessing()
+  }
+
+  // 只在当前工具是视频时显示对话框
+  if (activeTool !== 'video') {
+    return null
   }
 
   return (
-    <Dialog open={showDialog} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md">
+    <Dialog open={showDialog} onOpenChange={() => {}}>
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>{t('converting')}</DialogTitle>
-          <DialogDescription>
-            {t('conversionInProgress')}
-          </DialogDescription>
+          <DialogDescription>{t('conversionInProgress')}</DialogDescription>
         </DialogHeader>
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span>{progress.stage}</span>
-              <span>
-                {progress.progress}
-                %
-              </span>
-            </div>
-            <Progress value={progress.progress} className="w-full" />
-          </div>
-          <p className="text-xs text-muted-foreground text-center">
-            {t('pleaseWait')}
-          </p>
-        </div>
+        <Progress value={progress.progress} className="w-full" />
+        <DialogFooter>
+          <Button variant="outline" onClick={handleCancel}>
+            {tDialog('cancel')}
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )

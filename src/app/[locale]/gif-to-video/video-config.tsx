@@ -1,5 +1,6 @@
 'use client'
 
+import type { VideoConfig as VideoCompressConfig } from '@/atoms/video'
 import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
 import { videoConfigAtom } from '@/atoms/video'
@@ -18,15 +19,15 @@ const FRAMERATE_OPTIONS = [
 ]
 
 export function VideoConfig() {
-  const t = useTranslations('videoConfig')
+  const t = useTranslations('gifToVideo')
   const [config, setConfig] = useAtom(videoConfigAtom)
 
   const handleResolutionChange = (resolution: string) => {
-    setConfig(prev => ({ ...prev, resolution }))
+    setConfig(prev => ({ ...prev, resolution: resolution as VideoCompressConfig['resolution'] }))
   }
 
   const handleFrameRateChange = (fps: string) => {
-    setConfig(prev => ({ ...prev, fps }))
+    setConfig(prev => ({ ...prev, fps: fps as VideoCompressConfig['fps'] }))
   }
 
   return (

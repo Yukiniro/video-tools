@@ -18,7 +18,15 @@
     "fastProcessingDesc": "Optimized processing engine makes your video conversion and editing faster and more efficient.",
     "easyToUse": "Easy to Use",
     "easyToUseDesc": "Clean and intuitive user interface that allows anyone to easily complete professional video processing.",
-    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse"
+    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
+    "dialog": {
+      "pleaseWait": "Please do not close this window",
+      "cancel": "Cancel",
+      "close": "Close",
+      "retry": "Retry",
+      "errorDetails": "Error Details",
+      "completed": "Completed"
+    }
   },
   "hero": {
     "badge": "Professional Video Processing",
@@ -47,7 +55,7 @@
       "subtitle": "Already using our tools"
     }
   },
-  "gifConfig": {
+  "videoToGif": {
     "title": "GIF Export Settings",
     "resolution": "Resolution",
     "frameRate": "Frame Rate",
@@ -60,11 +68,9 @@
     "converting": "Converting...",
     "clickToConvert": "Click the button to start converting video to GIF",
     "conversionInProgress": "Converting your video, please wait...",
-    "pleaseWait": "Please do not close this window",
     "preparingConversion": "Preparing conversion",
     "processingVideo": "Processing video",
     "generatingGif": "Generating GIF",
-    "completed": "Completed",
     "conversionSuccess": "Conversion successful! GIF saved to your device",
     "conversionError": "Conversion failed, please try again",
     "conversionCancelled": "Conversion cancelled",
@@ -77,7 +83,7 @@
     "startTimeGreaterThanEndTime": "Start time must be less than end time",
     "endTimeGreaterThanDuration": "End time must be less than video duration"
   },
-  "videoConfig": {
+  "gifToVideo": {
     "title": "Video Export Settings",
     "resolution": "Video Resolution",
     "frameRate": "Frame Rate",
@@ -85,70 +91,17 @@
     "converting": "Converting...",
     "clickToConvert": "Click the button to start converting GIF to video",
     "conversionInProgress": "Converting your GIF, please wait...",
-    "pleaseWait": "Please do not close this window",
     "preparingConversion": "Preparing conversion",
     "generatingVideo": "Generating video",
-    "completed": "Completed",
     "conversionSuccess": "Conversion successful! Video saved to your device",
     "conversionError": "Conversion failed, please try again",
     "conversionCancelled": "Conversion cancelled",
     "dropYourGifHereOrClickToBrowse": "Drop your GIF here or click to browse",
+    "cancelConversion": "Cancel Conversion",
     "tips": {
       "resolutionQuality": "Higher resolution provides clearer quality but larger file size",
       "frameRateSmooth": "Higher frame rate provides smoother playback",
       "conversionTime": "Conversion time depends on GIF size and output settings"
-    }
-  },
-  "audioConfig": {
-    "title": "Audio Export Settings",
-    "pageTitle": "Video to Audio",
-    "pageDescription": "Extract audio from video files, supports MP3, WAV, OGG output formats",
-    "format": "Audio Format",
-    "quality": "Audio Quality",
-    "selectFormat": "Select audio format",
-    "selectQuality": "Select audio quality",
-    "mp3": "MP3",
-    "wav": "WAV",
-    "ogg": "OGG",
-    "high": "High Quality",
-    "medium": "Medium Quality",
-    "low": "Low Quality",
-    "formatDesc": {
-      "mp3": "MP3 format offers good compatibility and smaller file sizes",
-      "wav": "WAV format provides lossless audio quality, but larger files",
-      "ogg": "OGG format is an open-source audio format with good compression"
-    },
-    "qualityDesc": {
-      "high": "Best audio quality, suitable for music and high-demand scenarios",
-      "medium": "Balanced quality and file size, suitable for general use",
-      "low": "Smallest file size, suitable for voice or low-demand scenarios"
-    },
-    "exportAudio": "Extract Audio",
-    "converting": "Converting...",
-    "clickToConvert": "Click the button to start extracting audio from video",
-    "conversionInProgress": "Extracting audio, please wait...",
-    "pleaseWait": "Please do not close this window",
-    "preparingConversion": "Preparing conversion",
-    "extractingAudio": "Extracting audio",
-    "completed": "Completed",
-    "conversionSuccess": "Audio extraction successful! File saved to your device",
-    "conversionError": "Conversion failed, please try again",
-    "conversionCancelled": "Conversion cancelled",
-    "cancelConversion": "Cancel Conversion",
-    "audioPreview": "Audio Preview",
-    "downloadAudio": "Download Audio File",
-    "selectVideoFile": "Select Video File",
-    "pleaseSelectFile": "Please select a video file first",
-    "fileDownloading": "Audio file downloading...",
-    "conversionSettings": "Conversion Settings",
-    "startConversion": "Start Conversion",
-    "conversionProgress": "Conversion Progress",
-    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
-    "supportedFormats": "Supports MP4, AVI, MOV, WMV and other formats, max 500MB",
-    "tips": {
-      "formatCompatibility": "MP3 format has the best compatibility for most players",
-      "qualityVsSize": "Higher audio quality will result in larger files",
-      "losslessQuality": "WAV format provides lossless audio, suitable for professional use"
     }
   },
   "videoTranscodeConfig": {
@@ -180,14 +133,11 @@
     "converting": "Transcoding...",
     "clickToConvert": "Click the button to start transcoding video",
     "conversionInProgress": "Transcoding video, please wait...",
-    "pleaseWait": "Please do not close this window",
     "preparingConversion": "Preparing transcode",
     "transcoding": "Transcoding",
-    "completed": "Completed",
     "conversionSuccess": "Video transcode successful! File has been saved to your device",
     "conversionError": "Transcode failed, please try again",
     "conversionCancelled": "Transcode cancelled",
-    "cancel": "Cancel",
     "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
     "supportedFormats": "Supports MP4, AVI, MOV, WMV and other formats, max 500MB",
     "tips": {
@@ -197,6 +147,64 @@
       "webmAdvantage": "WebM format has advantages in network transmission",
       "processingTime": "Processing time depends on file size and compression settings"
     }
+  },
+  "videoToAudio": {
+    "exportAudio": "Extract Audio",
+    "title": "Audio Export Settings",
+    "pageTitle": "Video to Audio",
+    "pageDescription": "Extract audio from video files, supports MP3, WAV, OGG output formats",
+    "format": "Audio Format",
+    "quality": "Audio Quality",
+    "selectFormat": "Select audio format",
+    "selectQuality": "Select audio quality",
+    "mp3": "MP3",
+    "wav": "WAV",
+    "ogg": "OGG",
+    "high": "High Quality",
+    "medium": "Medium Quality",
+    "low": "Low Quality",
+    "formatDesc": {
+      "mp3": "MP3 format offers good compatibility and smaller file sizes",
+      "wav": "WAV format provides lossless audio quality, but larger files",
+      "ogg": "OGG format is an open-source audio format with good compression"
+    },
+    "qualityDesc": {
+      "high": "Best audio quality, suitable for music and high-demand scenarios",
+      "medium": "Balanced quality and file size, suitable for general use",
+      "low": "Smallest file size, suitable for voice or low-demand scenarios"
+    },
+    "converting": "Converting...",
+    "clickToConvert": "Click the button to start extracting audio from video",
+    "conversionInProgress": "Extracting audio, please wait...",
+    "preparingConversion": "Preparing conversion",
+    "extractingAudio": "Extracting audio",
+    "conversionSuccess": "Audio extraction successful! File saved to your device",
+    "conversionError": "Conversion failed, please try again",
+    "conversionCancelled": "Conversion cancelled",
+    "cancelConversion": "Cancel Conversion",
+    "audioPreview": "Audio Preview",
+    "downloadAudio": "Download Audio File",
+    "selectVideoFile": "Select Video File",
+    "pleaseSelectFile": "Please select a video file first",
+    "fileDownloading": "Audio file downloading...",
+    "conversionSettings": "Conversion Settings",
+    "startConversion": "Start Conversion",
+    "conversionProgress": "Conversion Progress",
+    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
+    "supportedFormats": "Supports MP4, AVI, MOV, WMV and other formats, max 500MB",
+    "tips": {
+      "formatCompatibility": "MP3 format has the best compatibility for most players",
+      "qualityVsSize": "Higher audio quality will result in larger files",
+      "losslessQuality": "WAV format provides lossless audio, suitable for professional use"
+    }
+  },
+  "videoTranscode": {
+    "converting": "Converting...",
+    "conversionInProgress": "Converting your video, please wait...",
+    "conversionSuccess": "Video transcoding successful! File saved to your device",
+    "conversionError": "Transcoding failed, please try again",
+    "conversionCancelled": "Transcoding cancelled",
+    "cancelConversion": "Cancel Transcoding"
   },
   "navigation": {
     "home": "Home",
@@ -274,10 +282,8 @@
     "compressing": "Compressing...",
     "clickToStartCompression": "Click the button to start video compression",
     "compressionInProgress": "Compressing Video",
-    "pleaseWait": "Please do not close this window",
     "preparingCompression": "Preparing compression",
     "compressingVideo": "Compressing video",
-    "completed": "Compression completed",
     "compressionCompleted": "Compression Completed",
     "compressionSuccess": "Compression successful! Video saved to your device",
     "compressionError": "Compression failed, please try again",
@@ -285,11 +291,9 @@
     "compressionFailed": "Compression Failed",
     "cancelCompression": "Cancel Compression",
     "retryCompression": "Retry Compression",
-    "close": "Close",
     "compressionSuccessDescription": "Video compression completed successfully!",
     "compressionErrorDescription": "An error occurred during compression. You can try again.",
     "compressionCancelledDescription": "Compression was cancelled by user.",
-    "errorDetails": "Error Details",
     "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
     "originalFileInfo": "Original File Info",
     "fileName": "File Name",

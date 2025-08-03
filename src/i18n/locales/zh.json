@@ -18,7 +18,15 @@
     "fastProcessingDesc": "优化的处理引擎，让您的视频转换和编辑更加快速高效。",
     "easyToUse": "易于使用",
     "easyToUseDesc": "简洁直观的用户界面，让任何人都能轻松完成专业的视频处理。",
-    "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览"
+    "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览",
+    "dialog": {
+      "pleaseWait": "请不要关闭此窗口",
+      "cancel": "取消",
+      "close": "关闭",
+      "retry": "重试",
+      "errorDetails": "错误详情",
+      "completed": "已完成"
+    }
   },
   "hero": {
     "badge": "专业视频处理",
@@ -47,7 +55,7 @@
       "subtitle": "已在使用我们的工具"
     }
   },
-  "gifConfig": {
+  "videoToGif": {
     "title": "GIF 导出设置",
     "resolution": "分辨率",
     "frameRate": "帧率",
@@ -60,11 +68,9 @@
     "converting": "转换中...",
     "clickToConvert": "点击按钮开始转换视频为 GIF",
     "conversionInProgress": "正在转换您的视频，请稍候...",
-    "pleaseWait": "请不要关闭此窗口",
     "preparingConversion": "准备转换",
     "processingVideo": "处理视频",
     "generatingGif": "生成 GIF",
-    "completed": "完成",
     "conversionSuccess": "转换成功！GIF 已保存到您的设备",
     "conversionError": "转换失败，请重试",
     "conversionCancelled": "转换已取消",
@@ -77,7 +83,7 @@
     "startTimeGreaterThanEndTime": "开始时间必须小于结束时间",
     "endTimeGreaterThanDuration": "结束时间必须小于视频时长"
   },
-  "videoConfig": {
+  "gifToVideo": {
     "title": "视频导出设置",
     "resolution": "视频分辨率",
     "frameRate": "视频帧率",
@@ -85,70 +91,17 @@
     "converting": "转换中...",
     "clickToConvert": "点击按钮开始将 GIF 转换为视频",
     "conversionInProgress": "正在转换您的 GIF，请稍等...",
-    "pleaseWait": "请不要关闭此窗口",
     "preparingConversion": "准备转换",
     "generatingVideo": "生成视频",
-    "completed": "完成",
     "conversionSuccess": "转换成功！视频已保存到您的设备",
     "conversionError": "转换失败，请重试",
     "conversionCancelled": "转换已取消",
     "dropYourGifHereOrClickToBrowse": "将 GIF 拖放到此处或单击浏览",
+    "cancelConversion": "取消转换",
     "tips": {
       "resolutionQuality": "更高的分辨率提供更清晰的画质，但文件更大",
       "frameRateSmooth": "更高的帧率提供更流畅的播放效果",
       "conversionTime": "转换时间取决于 GIF 大小和输出设置"
-    }
-  },
-  "audioConfig": {
-    "title": "音频导出设置",
-    "pageTitle": "视频转音频",
-    "pageDescription": "从视频文件中提取音频，支持输出 MP3、WAV、OGG 格式",
-    "format": "音频格式",
-    "quality": "音频质量",
-    "selectFormat": "选择音频格式",
-    "selectQuality": "选择音频质量",
-    "mp3": "MP3",
-    "wav": "WAV",
-    "ogg": "OGG",
-    "high": "高质量",
-    "medium": "中等质量",
-    "low": "低质量",
-    "formatDesc": {
-      "mp3": "MP3 格式具有良好的兼容性和较小的文件大小",
-      "wav": "WAV 格式提供无损音频质量，但文件较大",
-      "ogg": "OGG 格式是开源音频格式，具有良好的压缩率"
-    },
-    "qualityDesc": {
-      "high": "最佳音频质量，适合音乐和高要求场景",
-      "medium": "平衡质量和文件大小，适合一般用途",
-      "low": "最小文件大小，适合语音或低要求场景"
-    },
-    "exportAudio": "提取音频",
-    "converting": "转换中...",
-    "clickToConvert": "点击按钮开始从视频中提取音频",
-    "conversionInProgress": "正在提取音频，请稍候...",
-    "pleaseWait": "请不要关闭此窗口",
-    "preparingConversion": "准备转换",
-    "extractingAudio": "提取音频",
-    "completed": "完成",
-    "conversionSuccess": "音频提取成功！文件已保存到您的设备",
-    "conversionError": "转换失败，请重试",
-    "conversionCancelled": "转换已取消",
-    "cancelConversion": "取消转换",
-    "audioPreview": "音频预览",
-    "downloadAudio": "下载音频文件",
-    "selectVideoFile": "选择视频文件",
-    "pleaseSelectFile": "请先选择视频文件",
-    "fileDownloading": "音频文件下载中...",
-    "conversionSettings": "转换设置",
-    "startConversion": "开始转换",
-    "conversionProgress": "转换进度",
-    "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览",
-    "supportedFormats": "支持 MP4、AVI、MOV、WMV 等格式，最大 500MB",
-    "tips": {
-      "formatCompatibility": "MP3 格式兼容性最好，适合大多数播放器",
-      "qualityVsSize": "更高的音频质量会产生更大的文件",
-      "losslessQuality": "WAV 格式提供无损音频，适合专业用途"
     }
   },
   "videoTranscodeConfig": {
@@ -180,14 +133,11 @@
     "converting": "转码中...",
     "clickToConvert": "点击按钮开始转码视频",
     "conversionInProgress": "正在转码视频，请稍候...",
-    "pleaseWait": "请不要关闭此窗口",
     "preparingConversion": "准备转码",
     "transcoding": "转码中",
-    "completed": "完成",
     "conversionSuccess": "视频转码成功！文件已保存到您的设备",
     "conversionError": "转码失败，请重试",
     "conversionCancelled": "转码已取消",
-    "cancel": "取消",
     "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览",
     "supportedFormats": "支持 MP4、AVI、MOV、WMV 等格式，最大 500MB",
     "tips": {
@@ -197,6 +147,64 @@
       "webmAdvantage": "WebM 格式在网络传输方面有优势",
       "processingTime": "处理时间取决于文件大小和压缩设置"
     }
+  },
+  "videoToAudio": {
+    "exportAudio": "提取音频",
+    "title": "音频导出设置",
+    "pageTitle": "视频转音频",
+    "pageDescription": "从视频文件中提取音频，支持输出 MP3、WAV、OGG 格式",
+    "format": "音频格式",
+    "quality": "音频质量",
+    "selectFormat": "选择音频格式",
+    "selectQuality": "选择音频质量",
+    "mp3": "MP3",
+    "wav": "WAV",
+    "ogg": "OGG",
+    "high": "高质量",
+    "medium": "中等质量",
+    "low": "低质量",
+    "formatDesc": {
+      "mp3": "MP3 格式具有良好的兼容性和较小的文件大小",
+      "wav": "WAV 格式提供无损音频质量，但文件较大",
+      "ogg": "OGG 格式是开源音频格式，具有良好的压缩率"
+    },
+    "qualityDesc": {
+      "high": "最佳音频质量，适合音乐和高要求场景",
+      "medium": "平衡质量和文件大小，适合一般用途",
+      "low": "最小文件大小，适合语音或低要求场景"
+    },
+    "converting": "转换中...",
+    "clickToConvert": "点击按钮开始从视频中提取音频",
+    "conversionInProgress": "正在提取音频，请稍候...",
+    "preparingConversion": "准备转换",
+    "extractingAudio": "提取音频",
+    "conversionSuccess": "音频提取成功！文件已保存到您的设备",
+    "conversionError": "转换失败，请重试",
+    "conversionCancelled": "转换已取消",
+    "cancelConversion": "取消转换",
+    "audioPreview": "音频预览",
+    "downloadAudio": "下载音频文件",
+    "selectVideoFile": "选择视频文件",
+    "pleaseSelectFile": "请先选择视频文件",
+    "fileDownloading": "音频文件下载中...",
+    "conversionSettings": "转换设置",
+    "startConversion": "开始转换",
+    "conversionProgress": "转换进度",
+    "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览",
+    "supportedFormats": "支持 MP4、AVI、MOV、WMV 等格式，最大 500MB",
+    "tips": {
+      "formatCompatibility": "MP3 格式兼容性最好，适合大多数播放器",
+      "qualityVsSize": "更高的音频质量会产生更大的文件",
+      "losslessQuality": "WAV 格式提供无损音频，适合专业用途"
+    }
+  },
+  "videoTranscode": {
+    "converting": "转码中...",
+    "conversionInProgress": "正在转码视频，请稍候...",
+    "conversionSuccess": "视频转码成功！文件已保存到您的设备",
+    "conversionError": "转码失败，请重试",
+    "conversionCancelled": "转码已取消",
+    "cancelConversion": "取消转码"
   },
   "navigation": {
     "home": "首页",
@@ -274,10 +282,8 @@
     "compressing": "压缩中...",
     "clickToStartCompression": "点击按钮开始压缩视频",
     "compressionInProgress": "正在压缩视频",
-    "pleaseWait": "请不要关闭此窗口",
     "preparingCompression": "准备压缩",
     "compressingVideo": "压缩视频中",
-    "completed": "压缩完成",
     "compressionCompleted": "压缩已完成",
     "compressionSuccess": "压缩成功！视频已保存到您的设备",
     "compressionError": "压缩失败，请重试",
@@ -285,11 +291,9 @@
     "compressionFailed": "压缩失败",
     "cancelCompression": "取消压缩",
     "retryCompression": "重新尝试",
-    "close": "关闭",
     "compressionSuccessDescription": "视频压缩已成功完成！",
     "compressionErrorDescription": "压缩过程中发生错误，您可以重新尝试。",
     "compressionCancelledDescription": "压缩已被用户取消。",
-    "errorDetails": "错误详情",
     "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览",
     "originalFileInfo": "原始文件信息",
     "fileName": "文件名称",

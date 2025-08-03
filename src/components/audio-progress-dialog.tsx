@@ -1,60 +1,38 @@
 'use client'
 
 import { useAtom } from 'jotai'
-import { Loader2, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { audioConversionProgressAtom, cancelAudioConversionAtom, showAudioProgressDialogAtom } from '@/atoms'
-import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Progress } from '@/components/ui/progress'
+import { activeToolAtom, cancelProcessingAtom, commonProgressAtom, showProgressDialogAtom } from '@/atoms/shared'
+import { CommonProgressDialog } from './common-progress-dialog'
 
 export function AudioProgressDialog() {
-  const t = useTranslations('audioConfig')
-  const [progress] = useAtom(audioConversionProgressAtom)
-  const [showDialog] = useAtom(showAudioProgressDialogAtom)
-  const cancelConversion = useAtom(cancelAudioConversionAtom)[1]
+  const t = useTranslations('videoToAudio')
+  const tCommon = useTranslations('common.dialog')
+  const [progress] = useAtom(commonProgressAtom)
+  const [showDialog] = useAtom(showProgressDialogAtom)
+  const [activeTool] = useAtom(activeToolAtom)
+  const cancelProcessing = useAtom(cancelProcessingAtom)[1]
 
-  const handleCancel = () => {
-    cancelConversion()
+  // 只在当前工具是音频时显示对话框
+  if (activeTool !== 'audio') {
+    return null
   }
 
   return (
-    <Dialog open={showDialog} onOpenChange={() => {}}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <Loader2 className="h-5 w-5 animate-spin" />
-            {t('conversionInProgress')}
-          </DialogTitle>
-        </DialogHeader>
-
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span>{progress.stage}</span>
-              <span>
-                {progress.progress}
-                %
-              </span>
-            </div>
-            <Progress value={progress.progress} className="h-2" />
-          </div>
-
-          <p className="text-sm text-muted-foreground text-center">
-            {t('pleaseWait')}
-          </p>
-
-          <Button
-            onClick={handleCancel}
-            variant="outline"
-            className="w-full"
-            disabled={!progress.isConverting}
-          >
-            <X className="mr-2 h-4 w-4" />
-            {t('cancelConversion')}
-          </Button>
-        </div>
-      </DialogContent>
-    </Dialog>
+    <CommonProgressDialog
+      open={showDialog}
+      progress={progress}
+      title={t('conversionInProgress')}
+      pleaseWaitText={tCommon('pleaseWait')}
+      cancelText={t('cancelConversion')}
+      closeText={tCommon('close')}
+      retryText={tCommon('retry')}
+      errorDetailsText={tCommon('errorDetails')}
+      onCancel={cancelProcessing}
+      onOpenChange={() => {}} // 禁用通过点击外部关闭
+      showCloseButton={false}
+      showRetryButton={false}
+      hideCloseButton={true}
+    />
   )
 }

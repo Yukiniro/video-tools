@@ -11,7 +11,7 @@ interface TimeRangeSettingsProps {
 }
 
 export function TimeRangeSettings({ className }: TimeRangeSettingsProps) {
-  const t = useTranslations('gifConfig')
+  const t = useTranslations('videoToGif')
   const [startTime, setStartTime] = useAtom(convertStartTimeAtom)
   const [endTime, setEndTime] = useAtom(convertEndTimeAtom)
 

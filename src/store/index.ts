@@ -730,7 +730,7 @@ export function saveAsVideo(blob: Blob, format: string) {
  * @param options.signal 可选，取消信号
  * @returns 转码后的视频 Blob
  */
-export async function videoTranscode(
+export async function transcodeVideo(
   params: VideoTranscodeParams,
   options: {
     progress: (progress: number) => void

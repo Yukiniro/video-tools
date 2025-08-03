@@ -18,7 +18,15 @@
     "fastProcessingDesc": "最適化された処理エンジンにより、動画変換と編集がより高速で効率的になります。",
     "easyToUse": "使いやすい",
     "easyToUseDesc": "誰でも簡単にプロフェッショナルな動画処理を完了できる、クリーンで直感的なユーザーインターフェース。",
-    "dropYourVideoHereOrClickToBrowse": "動画をここにドロップするかクリックして参照"
+    "dropYourVideoHereOrClickToBrowse": "動画をここにドロップするかクリックして参照",
+    "dialog": {
+      "pleaseWait": "このウィンドウを閉じないでください",
+      "cancel": "キャンセル",
+      "close": "閉じる",
+      "retry": "再試行",
+      "errorDetails": "エラー詳細",
+      "completed": "完了"
+    }
   },
   "hero": {
     "badge": "プロフェッショナル動画処理",
@@ -47,7 +55,7 @@
       "subtitle": "既に私たちのツールを使用中"
     }
   },
-  "gifConfig": {
+  "videoToGif": {
     "title": "GIFエクスポート設定",
     "resolution": "解像度",
     "frameRate": "フレームレート",
@@ -60,11 +68,9 @@
     "converting": "変換中...",
     "clickToConvert": "ボタンをクリックして動画からGIFへの変換を開始",
     "conversionInProgress": "動画を変換中、お待ちください...",
-    "pleaseWait": "このウィンドウを閉じないでください",
     "preparingConversion": "変換準備中",
     "processingVideo": "動画処理中",
     "generatingGif": "GIF生成中",
-    "completed": "完了",
     "conversionSuccess": "変換が成功しました！GIFがデバイスに保存されました",
     "conversionError": "変換に失敗しました。もう一度お試しください",
     "conversionCancelled": "変換がキャンセルされました",
@@ -77,7 +83,7 @@
     "startTimeGreaterThanEndTime": "開始時間は終了時間より短くする必要があります",
     "endTimeGreaterThanDuration": "終了時間は動画の長さより短くする必要があります"
   },
-  "videoConfig": {
+  "gifToVideo": {
     "title": "動画エクスポート設定",
     "resolution": "動画解像度",
     "frameRate": "フレームレート",
@@ -85,70 +91,17 @@
     "converting": "変換中...",
     "clickToConvert": "ボタンをクリックしてGIFから動画への変換を開始",
     "conversionInProgress": "GIFを変換中です。しばらくお待ちください...",
-    "pleaseWait": "このウィンドウを閉じないでください",
     "preparingConversion": "変換を準備中",
     "generatingVideo": "動画を生成中",
-    "completed": "完了",
     "conversionSuccess": "変換が成功しました！動画がデバイスに保存されました",
     "conversionError": "変換に失敗しました。もう一度お試しください",
     "conversionCancelled": "変換がキャンセルされました",
     "dropYourGifHereOrClickToBrowse": "GIFをここにドロップするかクリックして参照",
+    "cancelConversion": "変換をキャンセル",
     "tips": {
       "resolutionQuality": "解像度が高いほど画質が向上しますが、ファイルサイズが大きくなります",
       "frameRateSmooth": "フレームレートが高いほど滑らかな再生が可能になります",
       "conversionTime": "変換時間はGIFのサイズと出力設定によって決まります"
-    }
-  },
-  "audioConfig": {
-    "title": "オーディオエクスポート設定",
-    "pageTitle": "ビデオからオーディオ",
-    "pageDescription": "ビデオファイルからオーディオを抽出、MP3、WAV、OGG形式の出力をサポート",
-    "format": "オーディオ形式",
-    "quality": "オーディオ品質",
-    "selectFormat": "オーディオ形式を選択",
-    "selectQuality": "オーディオ品質を選択",
-    "mp3": "MP3",
-    "wav": "WAV",
-    "ogg": "OGG",
-    "high": "高品質",
-    "medium": "中品質",
-    "low": "低品質",
-    "formatDesc": {
-      "mp3": "MP3形式は互換性が良く、ファイルサイズが小さいです",
-      "wav": "WAV形式はロスレス音質を提供しますが、ファイルが大きくなります",
-      "ogg": "OGG形式はオープンソースの音声形式で、良好な圧縮率を持ちます"
-    },
-    "qualityDesc": {
-      "high": "最高の音質、音楽や高要求シーンに適しています",
-      "medium": "品質とファイルサイズのバランス、一般用途に適しています",
-      "low": "最小ファイルサイズ、音声や低要求シーンに適しています"
-    },
-    "exportAudio": "オーディオ抽出",
-    "converting": "変換中...",
-    "clickToConvert": "ボタンをクリックしてビデオからオーディオを抽出開始",
-    "conversionInProgress": "オーディオを抽出中、しばらくお待ちください...",
-    "pleaseWait": "このウィンドウを閉じないでください",
-    "preparingConversion": "変換準備中",
-    "extractingAudio": "オーディオ抽出中",
-    "completed": "完了",
-    "conversionSuccess": "オーディオ抽出成功！ファイルがデバイスに保存されました",
-    "conversionError": "変換に失敗しました、もう一度お試しください",
-    "conversionCancelled": "変換がキャンセルされました",
-    "cancelConversion": "変換をキャンセル",
-    "audioPreview": "オーディオプレビュー",
-    "downloadAudio": "オーディオファイルをダウンロード",
-    "selectVideoFile": "ビデオファイルを選択",
-    "pleaseSelectFile": "まずビデオファイルを選択してください",
-    "fileDownloading": "オーディオファイルをダウンロード中...",
-    "conversionSettings": "変換設定",
-    "startConversion": "変換開始",
-    "conversionProgress": "変換進度",
-    "dropYourVideoHereOrClickToBrowse": "ビデオをここにドロップするかクリックして参照",
-    "supportedFormats": "MP4、AVI、MOV、WMVなどの形式をサポート、最大500MB",
-    "tips": {
-      "formatCompatibility": "MP3形式はほとんどのプレーヤーで最高の互換性があります",
-      "qualityVsSize": "高い音質はより大きなファイルになります",
-      "losslessQuality": "WAV形式はロスレス音声を提供し、プロ用途に適しています"
     }
   },
   "videoTranscodeConfig": {
@@ -180,14 +133,11 @@
     "converting": "トランスコード中...",
     "clickToConvert": "ボタンをクリックして動画のトランスコードを開始",
     "conversionInProgress": "動画をトランスコード中、お待ちください...",
-    "pleaseWait": "このウィンドウを閉じないでください",
     "preparingConversion": "トランスコード準備中",
     "transcoding": "トランスコード中",
-    "completed": "完了",
     "conversionSuccess": "動画トランスコード成功！ファイルがデバイスに保存されました",
     "conversionError": "トランスコードに失敗しました、再試行してください",
     "conversionCancelled": "トランスコードがキャンセルされました",
-    "cancel": "キャンセル",
     "dropYourVideoHereOrClickToBrowse": "動画をここにドロップするかクリックして参照",
     "supportedFormats": "MP4、AVI、MOV、WMVなどの形式をサポート、最大500MB",
     "tips": {
@@ -197,6 +147,64 @@
       "webmAdvantage": "WebM形式はネットワーク転送において優位性があります",
       "processingTime": "処理時間はファイルサイズと圧縮設定によって決まります"
     }
+  },
+  "videoToAudio": {
+    "exportAudio": "オーディオ抽出",
+    "title": "オーディオエクスポート設定",
+    "pageTitle": "ビデオからオーディオ",
+    "pageDescription": "ビデオファイルからオーディオを抽出、MP3、WAV、OGG形式の出力をサポート",
+    "format": "オーディオ形式",
+    "quality": "オーディオ品質",
+    "selectFormat": "オーディオ形式を選択",
+    "selectQuality": "オーディオ品質を選択",
+    "mp3": "MP3",
+    "wav": "WAV",
+    "ogg": "OGG",
+    "high": "高品質",
+    "medium": "中品質",
+    "low": "低品質",
+    "formatDesc": {
+      "mp3": "MP3形式は互換性が良く、ファイルサイズが小さいです",
+      "wav": "WAV形式はロスレス音質を提供しますが、ファイルが大きくなります",
+      "ogg": "OGG形式はオープンソースの音声形式で、良好な圧縮率を持ちます"
+    },
+    "qualityDesc": {
+      "high": "最高の音質、音楽や高要求シーンに適しています",
+      "medium": "品質とファイルサイズのバランス、一般用途に適しています",
+      "low": "最小ファイルサイズ、音声や低要求シーンに適しています"
+    },
+    "converting": "変換中...",
+    "clickToConvert": "ボタンをクリックしてビデオからオーディオを抽出開始",
+    "conversionInProgress": "オーディオを抽出中、しばらくお待ちください...",
+    "preparingConversion": "変換準備中",
+    "extractingAudio": "オーディオ抽出中",
+    "conversionSuccess": "オーディオ抽出成功！ファイルがデバイスに保存されました",
+    "conversionError": "変換に失敗しました、もう一度お試しください",
+    "conversionCancelled": "変換がキャンセルされました",
+    "cancelConversion": "変換をキャンセル",
+    "audioPreview": "オーディオプレビュー",
+    "downloadAudio": "オーディオファイルをダウンロード",
+    "selectVideoFile": "ビデオファイルを選択",
+    "pleaseSelectFile": "まずビデオファイルを選択してください",
+    "fileDownloading": "オーディオファイルをダウンロード中...",
+    "conversionSettings": "変換設定",
+    "startConversion": "変換開始",
+    "conversionProgress": "変換進度",
+    "dropYourVideoHereOrClickToBrowse": "ビデオをここにドロップするかクリックして参照",
+    "supportedFormats": "MP4、AVI、MOV、WMVなどの形式をサポート、最大500MB",
+    "tips": {
+      "formatCompatibility": "MP3形式はほとんどのプレーヤーで最高の互換性があります",
+      "qualityVsSize": "高い音質はより大きなファイルになります",
+      "losslessQuality": "WAV形式はロスレス音声を提供し、プロ用途に適しています"
+    }
+  },
+  "videoTranscode": {
+    "converting": "変換中...",
+    "conversionInProgress": "動画を変換中です。しばらくお待ちください...",
+    "conversionSuccess": "動画トランスコードが成功しました！ファイルがデバイスに保存されました",
+    "conversionError": "トランスコードに失敗しました。もう一度お試しください",
+    "conversionCancelled": "トランスコードがキャンセルされました",
+    "cancelConversion": "トランスコードをキャンセル"
   },
   "navigation": {
     "home": "ホーム",
@@ -274,10 +282,8 @@
     "compressing": "圧縮中...",
     "clickToStartCompression": "ボタンをクリックして動画圧縮を開始",
     "compressionInProgress": "動画を圧縮中",
-    "pleaseWait": "このウィンドウを閉じないでください",
     "preparingCompression": "圧縮を準備中",
     "compressingVideo": "動画を圧縮中",
-    "completed": "圧縮完了",
     "compressionCompleted": "圧縮が完了しました",
     "compressionSuccess": "圧縮が成功しました！動画がデバイスに保存されました",
     "compressionError": "圧縮に失敗しました。もう一度お試しください",
@@ -285,11 +291,9 @@
     "compressionFailed": "圧縮に失敗しました",
     "cancelCompression": "圧縮をキャンセル",
     "retryCompression": "再試行",
-    "close": "閉じる",
     "compressionSuccessDescription": "動画の圧縮が正常に完了しました！",
     "compressionErrorDescription": "圧縮中にエラーが発生しました。再試行できます。",
     "compressionCancelledDescription": "圧縮がユーザーによってキャンセルされました。",
-    "errorDetails": "エラー詳細",
     "dropYourVideoHereOrClickToBrowse": "動画をここにドロップするかクリックして参照",
     "originalFileInfo": "元のファイル情報",
     "fileName": "ファイル名",

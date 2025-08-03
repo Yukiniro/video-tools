@@ -6,7 +6,7 @@ import FileUpload from '@/components/file-upload'
 import { GifProgressDialog } from '@/components/gif-progress-dialog'
 import { ToolPageTemplate } from '@/components/tool-page-template'
 import { VideoPreview } from '@/components/video-preview'
-import VideoToGifSettingPanel from './video-to-gif-setting-panel'
+import { VideoToGifSettingPanel } from './video-to-gif-setting-panel'
 
 export default function VideoToGifPage() {
   const [files, setFiles] = useAtom(filesAtom)

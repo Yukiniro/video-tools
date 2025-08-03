@@ -9,7 +9,7 @@ interface VideoToGifLayoutProps {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'gifConfig' })
+  const t = await getTranslations({ locale, namespace: 'videoToGif' })
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://video-tools.vercel.app'
   const currentUrl = `${baseUrl}/${locale}/video-to-gif`

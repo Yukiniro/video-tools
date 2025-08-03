@@ -1,18 +1,23 @@
 'use client'
 
-import { useAtom, useSetAtom } from 'jotai'
+import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import { VideoTranscodeConfig } from '@/app/[locale]/video-transcode/video-transcode-config'
-import { convertToVideoTranscodeAtom, videoTranscodeConversionProgressAtom } from '@/atoms'
+import { commonProgressAtom } from '@/atoms/shared'
+import { convertToVideoTranscodeAtom } from '@/atoms/video-transcode'
 import { Button } from '@/components/ui/button'
+import { VideoTranscodeConfig } from './video-transcode-config'
 
-export default function VideoTranscodeSettingPanel() {
+export function VideoTranscodeSettingPanel() {
   const t = useTranslations('videoTranscodeConfig')
-  const [progress] = useAtom(videoTranscodeConversionProgressAtom)
-  const convertToVideoTranscode = useSetAtom(convertToVideoTranscodeAtom)
+  const tDialog = useTranslations('common.dialog')
+  const [progress] = useAtom(commonProgressAtom)
+  const [, convertToVideoTranscode] = useAtom(convertToVideoTranscodeAtom)
 
   const handleConvertToVideoTranscode = () => {
-    convertToVideoTranscode(t)
+    convertToVideoTranscode({
+      translations: t,
+      translationsDialog: tDialog,
+    })
   }
 
   return (
@@ -23,11 +28,11 @@ export default function VideoTranscodeSettingPanel() {
       <div className="space-y-2">
         <Button
           onClick={handleConvertToVideoTranscode}
-          disabled={progress.isConverting}
+          disabled={progress.isProcessing}
           className="w-full"
           size="lg"
         >
-          {progress.isConverting ? t('converting') : t('exportVideo')}
+          {progress.isProcessing ? t('converting') : t('exportVideo')}
         </Button>
         <p className="text-xs text-muted-foreground text-center">
           {t('clickToConvert')}

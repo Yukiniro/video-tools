@@ -4,40 +4,40 @@ import { atom } from 'jotai'
 import { toast } from 'sonner'
 import { gifToVideo, saveAsVideo } from '@/store'
 import { filesAtom } from './files'
+import {
+  cleanupProcessingAtom,
+  completeProcessingAtom,
+  handleErrorAtom,
+  startProcessingAtom,
+  updateProgressAtom,
+} from './shared'
+
+export interface VideoConfig {
+  fps: '30FPS' | '60FPS'
+  resolution: '480P' | '720P' | '1080P'
+}
 
 const DEFAULT_VIDEO_CONFIG = {
-  resolution: '720P',
-  fps: '30FPS',
-}
-
-interface ConversionProgress {
-  isConverting: boolean
-  progress: number // 0-100
-  stage: string // 转换阶段描述
-}
-
-const DEFAULT_CONVERSION_PROGRESS: ConversionProgress = {
-  isConverting: false,
-  progress: 0,
-  stage: '',
+  fps: '30FPS' as const,
+  resolution: '480P' as const,
 }
 
 // 视频配置状态
-export const videoConfigAtom = atom(DEFAULT_VIDEO_CONFIG)
+export const videoConfigAtom = atom<VideoConfig>(DEFAULT_VIDEO_CONFIG)
 
-// 视频转换进度状态
-export const videoConversionProgressAtom = atom(DEFAULT_CONVERSION_PROGRESS)
-
-// 显示进度模态框状态
-export const showVideoProgressDialogAtom = atom(false)
-
-// 取消转换的 AbortController
-export const videoConversionAbortControllerAtom = atom<AbortController | null>(null)
+// 重置视频状态
+export const resetVideoStateAtom = atom(
+  null,
+  (get, set) => {
+    set(videoConfigAtom, DEFAULT_VIDEO_CONFIG)
+  },
+)
 
 // 转换 action atom
 export const convertToVideoAtom = atom(
   null,
-  async (get, set, translations: any) => {
+  async (get, set, params: { translations: any, translationsDialog: any }) => {
+    const { translations, translationsDialog } = params
     const files = get(filesAtom)
     const videoConfig = get(videoConfigAtom)
 
@@ -45,43 +45,33 @@ export const convertToVideoAtom = atom(
       return
     }
 
-    // 创建新的 AbortController
-    const abortController = new AbortController()
-    set(videoConversionAbortControllerAtom, abortController)
+    const abortController = set(startProcessingAtom, {
+      stage: translations('preparingConversion'),
+      toolType: 'video',
+    })
 
     try {
-      // 显示进度对话框
-      set(showVideoProgressDialogAtom, true)
-      set(videoConversionProgressAtom, {
-        isConverting: true,
-        progress: 0,
-        stage: translations('preparingConversion'),
-      })
-
       // 转换过程
       const blob = await gifToVideo({
         file: files[0],
-        resolution: videoConfig.resolution as '480P' | '720P' | '1080P',
-        fps: videoConfig.fps as '30FPS' | '60FPS',
+        fps: videoConfig.fps,
+        resolution: videoConfig.resolution,
       }, {
         progress: (progressValue: number) => {
-          set(videoConversionProgressAtom, prev => ({
-            ...prev,
+          set(updateProgressAtom, {
             progress: floor(progressValue * 100, 0),
             stage: translations('generatingVideo'),
-          }))
+          })
         },
         signal: abortController.signal,
       })
 
       // 完成
-      set(videoConversionProgressAtom, prev => ({
-        ...prev,
-        progress: 100,
-        stage: translations('completed'),
-      }))
+      set(completeProcessingAtom, {
+        stage: translationsDialog('completed'),
+      })
 
-      saveAsVideo(blob, 'mp4') // gif转视频默认输出为mp4格式
+      saveAsVideo(blob, `${files[0].name}.mp4`)
 
       // 稍等片刻显示完成状态
       await delay(100)
@@ -95,34 +85,16 @@ export const convertToVideoAtom = atom(
       }
       else {
         // 显示错误提示
+        set(handleErrorAtom, {
+          error: translations('conversionError'),
+        })
         toast.error(translations('conversionError'))
         console.error('转换失败:', error)
       }
     }
     finally {
-      // 清理 AbortController
-      set(videoConversionAbortControllerAtom, null)
-
-      // 隐藏对话框
-      set(showVideoProgressDialogAtom, false)
-
-      // 重置进度状态
-      set(videoConversionProgressAtom, {
-        isConverting: false,
-        progress: 0,
-        stage: '',
-      })
-    }
-  },
-)
-
-// 取消转换 action atom
-export const cancelVideoConversionAtom = atom(
-  null,
-  (get) => {
-    const abortController = get(videoConversionAbortControllerAtom)
-    if (abortController) {
-      abortController.abort()
+      // 清理状态
+      set(cleanupProcessingAtom)
     }
   },
 )
