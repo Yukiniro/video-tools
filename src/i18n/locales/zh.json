@@ -29,12 +29,18 @@
     }
   },
   "hero": {
-    "badge": "专业视频处理",
-    "title": "趣味视频工具",
-    "subtitle": "使用前沿AI驱动的处理工具转换您的视频。",
-    "description": "快速、可靠、专业的结果。",
-    "getStarted": "免费开始",
+    "badge": "本地处理 · 数据隐私 · 完全免费",
+    "title": "专业视频工具",
+    "subtitle": "高质量本地视频处理，无需上传服务器，保护您的数据隐私。",
+    "description": "简单易用 · 快速高效 · 完全免费 · 本地处理",
+    "getStarted": "立即免费使用",
     "watchDemo": "观看演示",
+    "features": {
+      "localProcessing": "本地处理",
+      "dataPrivacy": "数据隐私",
+      "fastEfficient": "快速高效",
+      "completelyFree": "完全免费"
+    },
     "stats": {
       "videosProcessed": "已处理视频",
       "successRate": "成功率",

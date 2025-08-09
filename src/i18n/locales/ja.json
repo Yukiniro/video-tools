@@ -29,12 +29,18 @@
     }
   },
   "hero": {
-    "badge": "プロフェッショナル動画処理",
-    "title": "面白い動画ツール",
-    "subtitle": "最先端のAI駆動処理ツールで動画を変換。",
-    "description": "高速、信頼性、プロフェッショナルな結果。",
-    "getStarted": "無料で始める",
+    "badge": "ローカル処理 · データプライバシー · 完全無料",
+    "title": "プロフェッショナル動画ツール",
+    "subtitle": "サーバーにアップロードせずに高品質なローカル動画処理、データプライバシーを保護。",
+    "description": "使いやすい · 高速効率 · 完全無料 · ローカル処理",
+    "getStarted": "今すぐ無料で使用開始",
     "watchDemo": "デモを見る",
+    "features": {
+      "localProcessing": "ローカル処理",
+      "dataPrivacy": "データプライバシー",
+      "fastEfficient": "高速効率",
+      "completelyFree": "完全無料"
+    },
     "stats": {
       "videosProcessed": "処理済み動画",
       "successRate": "成功率",

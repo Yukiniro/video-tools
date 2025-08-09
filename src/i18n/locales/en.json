@@ -29,12 +29,18 @@
     }
   },
   "hero": {
-    "badge": "Professional Video Processing",
-    "title": "Funny Video Tools",
-    "subtitle": "Transform your videos with cutting-edge AI-powered processing tools.",
-    "description": "Fast, reliable, and professional results.",
-    "getStarted": "Get Started Free",
+    "badge": "Local Processing · Data Privacy · Completely Free",
+    "title": "Professional Video Tools",
+    "subtitle": "High-quality local video processing without uploading to servers, protecting your data privacy.",
+    "description": "Easy to Use · Fast & Efficient · Completely Free · Local Processing",
+    "getStarted": "Start Using Free Now",
     "watchDemo": "Watch Demo",
+    "features": {
+      "localProcessing": "Local Processing",
+      "dataPrivacy": "Data Privacy",
+      "fastEfficient": "Fast & Efficient",
+      "completelyFree": "Completely Free"
+    },
     "stats": {
       "videosProcessed": "Videos Processed",
       "successRate": "Success Rate",

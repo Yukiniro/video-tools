@@ -101,8 +101,13 @@ export default async function Home({ params }: HomeProps) {
           badge={tHero('badge')}
           title={tHero('title')}
           subtitle={tHero('subtitle')}
-          description={tHero('description')}
           getStarted={tHero('getStarted')}
+          features={{
+            localProcessing: tHero('features.localProcessing'),
+            dataPrivacy: tHero('features.dataPrivacy'),
+            fastEfficient: tHero('features.fastEfficient'),
+            completelyFree: tHero('features.completelyFree'),
+          }}
           stats={{
             videosProcessed: tHero('stats.videosProcessed'),
             successRate: tHero('stats.successRate'),
