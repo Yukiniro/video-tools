@@ -1,4 +1,4 @@
-import type { VideoCompressParams, VideoTranscodeParams } from '../types/video'
+import type { VideoCompressParams, VideoTranscodeParams, VideoTrimParams } from '../types/video'
 import { saveAs } from 'file-saver'
 import { ALL_FORMATS, BlobSource, BufferTarget, Conversion, Input, MkvOutputFormat, Mp4OutputFormat, Output, WebMOutputFormat } from 'mediabunny'
 import { nanoid } from 'nanoid'
@@ -175,4 +175,86 @@ export async function transcodeVideo(
 export function saveAsVideo(blob: Blob, format: string) {
   const filename = `${nanoid()}.${format}`
   saveAs(blob, filename)
+}
+
+/**
+ * 裁剪视频
+ * @param params 裁剪参数
+ * @param options 选项
+ * @returns 裁剪后的视频 Blob
+ */
+export async function trimVideo(
+  params: VideoTrimParams,
+  options: {
+    progress: (progress: number) => void
+    signal?: AbortSignal
+  },
+): Promise<Blob> {
+  const { file, startTime, endTime, resolution, keepAudio, frameRate } = params
+  const { progress, signal } = options
+
+  // 获取分辨率尺寸
+  const getResolutionSize = (res: string) => {
+    switch (res) {
+      case '480P': return { width: 854, height: 480 }
+      case '720P': return { width: 1280, height: 720 }
+      case '1080P': return { width: 1920, height: 1080 }
+      default: return { width: 1280, height: 720 }
+    }
+  }
+
+  const { width, height } = getResolutionSize(resolution)
+  const duration = endTime - startTime
+
+  // 创建输入源
+  const source = new BlobSource(file)
+  const input = new Input({
+    formats: ALL_FORMATS,
+    source,
+  })
+
+  // 创建输出目标
+  const target = new BufferTarget()
+  const output = new Output({
+    format: new Mp4OutputFormat(),
+    target,
+  })
+
+  // 创建转换任务
+  const conversion = await Conversion.init({
+    input,
+    output,
+    video: {
+      width,
+      height,
+      frameRate,
+    },
+    audio: {
+      codec: 'aac',
+      bitrate: 128,
+    },
+  })
+
+  let cancelReject: ((reason?: any) => void) | null = null
+
+  // 监听进度
+  conversion.onProgress = (value: number) => {
+    if (signal?.aborted) {
+      cancelReject?.(new Error('Conversion cancelled'))
+      return
+    }
+    progress(value)
+  }
+
+  await Promise.race([
+    conversion.execute(),
+    new Promise((_, reject) => {
+      cancelReject = reject
+    }),
+  ])
+
+  const buffer = (target as any).buffer
+  const blob = new Blob([buffer!], { type: 'video/mp4' })
+
+  return blob
 }

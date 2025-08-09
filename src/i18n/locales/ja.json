@@ -212,6 +212,59 @@
     "conversionCancelled": "トランスコードがキャンセルされました",
     "cancelConversion": "トランスコードをキャンセル"
   },
+  "videoTrim": {
+    "title": "ビデオトリム",
+    "description": "精密な時間制御でビデオセグメントをトリム",
+    "trimVideo": "ビデオをトリム",
+    "trimming": "トリム中...",
+    "clickToTrim": "ボタンをクリックしてビデオのトリムを開始",
+    "trimmingInProgress": "ビデオをトリム中です。しばらくお待ちください...",
+    "preparingTrim": "トリム準備中",
+    "processingVideo": "動画処理中",
+    "generatingVideo": "動画生成中",
+    "trimCompleted": "トリム完了",
+    "trimFailed": "トリム失敗",
+    "trimCancelled": "トリムがキャンセルされました",
+    "trimSuccessDescription": "動画トリムが成功しました！ファイルがデバイスに保存されました",
+    "trimErrorDescription": "トリム中にエラーが発生しました。もう一度お試しください",
+    "trimCancelledDescription": "動画トリム操作がキャンセルされました",
+    "cancelTrim": "トリムをキャンセル",
+    "retryTrim": "トリムを再試行",
+    "supportedFormats": "MP4、AVI、MOV、WMVなどの形式をサポート、最大500MB",
+    "config": {
+      "startTime": "開始時間",
+      "endTime": "終了時間",
+      "startTimeDesc": "トリム開始時間（秒）",
+      "endTimeDesc": "トリム終了時間（秒）",
+      "endTimePlaceholder": "動画の終了",
+      "resolution": "出力解像度",
+      "frameRate": "フレームレート",
+      "enableAudio": "音声を保持",
+      "480P": "480P (854×480)",
+      "720P": "720P (1280×720)",
+      "1080P": "1080P (1920×1080)",
+      "30FPS": "30FPS",
+      "60FPS": "60FPS"
+    },
+    "timeline": {
+      "currentTime": "現在時刻",
+      "selectedDuration": "選択された時間",
+      "trimRange": "トリム範囲",
+      "playPause": "再生/一時停止",
+      "dragToAdjust": "ドラッグしてトリム範囲を調整"
+    },
+    "validation": {
+      "startTimeGreaterThanEndTime": "開始時間は終了時間より小さくする必要があります",
+      "endTimeGreaterThanDuration": "終了時間は動画の長さより小さくする必要があります",
+      "invalidTimeRange": "無効な時間範囲"
+    },
+    "tips": {
+      "preciseControl": "タイムラインを使用してトリム範囲を精密に制御",
+      "resolutionQuality": "高解像度はより良い品質を提供しますが、ファイルサイズが大きくなります",
+      "frameRateSmooth": "高フレームレートはより滑らかな再生を提供します",
+      "audioOption": "トリムされた動画で音声を保持するかどうかを選択"
+    }
+  },
   "navigation": {
     "home": "ホーム",
     "tools": "ツール",
@@ -240,8 +293,8 @@
     },
     "videoCrop": {
       "title": "動画クロップ",
-      "description": "動画セグメントをクロップまたは動画の寸法を調整",
-      "comingSoon": "近日公開"
+      "description": "精密な時間制御で動画セグメントをクロップ",
+      "comingSoon": ""
     },
     "extractAudio": {
       "title": "オーディオ抽出",
@@ -252,6 +305,10 @@
       "title": "ビデオ情報表示",
       "description": "ビデオファイルの詳細情報とメタデータを表示",
       "comingSoon": ""
+    },
+    "videoTrim": {
+      "title": "ビデオトリム設定",
+      "description": "ビデオトリム"
     }
   },
   "footer": {
