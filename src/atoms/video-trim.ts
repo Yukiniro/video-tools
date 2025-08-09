@@ -1,0 +1,128 @@
+import type { VideoTrimParams } from '@/store'
+import { atom } from 'jotai'
+import { atomWithReset } from 'jotai/utils'
+import { trimVideo } from '@/store'
+import { filesAtom } from './files'
+import { activeToolAtom, commonProgressAtom, showProgressDialogAtom } from './shared'
+
+// 视频裁剪配置状态
+export const videoTrimConfigAtom = atomWithReset({
+  startTime: 0,
+  endTime: 0,
+  resolution: '720P' as '480P' | '720P' | '1080P',
+  keepAudio: true,
+  frameRate: 30 as 30 | 60,
+})
+
+// 视频时长状态
+export const videoDurationAtom = atom(0)
+
+// 视频裁剪操作原子
+export const trimVideoAtom = atom(
+  null,
+  async (
+    get,
+    set,
+    options: {
+      translations: any
+      translationsDialog: any
+    },
+  ) => {
+    const files = get(filesAtom)
+    const config = get(videoTrimConfigAtom)
+    const { translations: _t, translationsDialog: _tDialog } = options
+
+    if (files.length === 0) {
+      return
+    }
+
+    const file = files[0]
+
+    // 验证时间范围
+    if (config.startTime >= config.endTime) {
+      console.error('开始时间必须小于结束时间')
+      return
+    }
+
+    const params: VideoTrimParams = {
+      file,
+      startTime: config.startTime,
+      endTime: config.endTime,
+      resolution: config.resolution,
+      keepAudio: config.keepAudio,
+      frameRate: config.frameRate,
+    }
+
+    // 设置活跃工具和显示进度对话框
+    set(activeToolAtom, 'video-trim')
+    set(showProgressDialogAtom, true)
+
+    // 设置进度状态
+    set(commonProgressAtom, {
+      isProcessing: true,
+      progress: 0,
+      stage: 'trimming',
+      status: 'converting' as const,
+    })
+
+    try {
+      const abortController = new AbortController()
+
+      const blob = await trimVideo(params, {
+        progress: (progress) => {
+          set(commonProgressAtom, prev => ({
+            ...prev,
+            progress,
+          }))
+        },
+        signal: abortController.signal,
+      })
+
+      // 下载文件
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `trimmed-video-${Date.now()}.mp4`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
+
+      // 重置进度状态
+      set(commonProgressAtom, {
+        isProcessing: false,
+        progress: 100,
+        stage: 'completed',
+        status: 'success' as const,
+      })
+
+      // 延迟关闭对话框
+      setTimeout(() => {
+        set(showProgressDialogAtom, false)
+        set(activeToolAtom, null)
+      }, 2000)
+    }
+    catch (error) {
+      console.error('视频裁剪失败:', error)
+
+      // 重置进度状态
+      set(commonProgressAtom, {
+        isProcessing: false,
+        progress: 0,
+        stage: 'error',
+        status: 'error' as const,
+        error: error instanceof Error ? error.message : 'Unknown error',
+      })
+
+      // 延迟关闭对话框
+      setTimeout(() => {
+        set(showProgressDialogAtom, false)
+        set(activeToolAtom, null)
+      }, 3000)
+
+      if (error instanceof Error && error.message !== 'Conversion cancelled') {
+        console.error('视频裁剪失败，请重试', error)
+      }
+    }
+  },
+)

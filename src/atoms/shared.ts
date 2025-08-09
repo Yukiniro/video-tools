@@ -28,7 +28,7 @@ export const DEFAULT_PROGRESS: CommonProgress = {
 }
 
 // 当前活跃的工具类型
-export type ToolType = 'gif' | 'video' | 'audio' | 'video-transcode' | 'video-compress' | null
+export type ToolType = 'gif' | 'video' | 'audio' | 'video-transcode' | 'video-compress' | 'video-trim' | null
 
 // 当前活跃工具状态
 export const activeToolAtom = atom<ToolType>(null)

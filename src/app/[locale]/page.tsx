@@ -38,8 +38,8 @@ export default async function Home({ params }: HomeProps) {
     },
     {
       key: 'videoCrop',
-      href: '/video-crop',
-      comingSoon: true,
+      href: '/video-trim',
+      comingSoon: false,
     },
     {
       key: 'extractAudio',

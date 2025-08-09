@@ -212,6 +212,59 @@
     "conversionCancelled": "Transcoding cancelled",
     "cancelConversion": "Cancel Transcoding"
   },
+  "videoTrim": {
+    "title": "Video Trim",
+    "description": "Trim video segments with precise time control",
+    "trimVideo": "Trim Video",
+    "trimming": "Trimming...",
+    "clickToTrim": "Click the button to start trimming video",
+    "trimmingInProgress": "Trimming your video, please wait...",
+    "preparingTrim": "Preparing trim",
+    "processingVideo": "Processing video",
+    "generatingVideo": "Generating video",
+    "trimCompleted": "Trim Completed",
+    "trimFailed": "Trim Failed",
+    "trimCancelled": "Trimming cancelled",
+    "trimSuccessDescription": "Video trimming successful! File saved to your device",
+    "trimErrorDescription": "An error occurred during trimming, please try again",
+    "trimCancelledDescription": "Video trimming operation has been cancelled",
+    "cancelTrim": "Cancel Trimming",
+    "retryTrim": "Retry Trim",
+    "supportedFormats": "Supports MP4, AVI, MOV, WMV and other formats, max 500MB",
+    "config": {
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "startTimeDesc": "Trim start time (seconds)",
+      "endTimeDesc": "Trim end time (seconds)",
+      "endTimePlaceholder": "Video end",
+      "resolution": "Output Resolution",
+      "frameRate": "Frame Rate",
+      "enableAudio": "Keep Audio",
+      "480P": "480P (854×480)",
+      "720P": "720P (1280×720)",
+      "1080P": "1080P (1920×1080)",
+      "30FPS": "30FPS",
+      "60FPS": "60FPS"
+    },
+    "timeline": {
+      "currentTime": "Current Time",
+      "selectedDuration": "Selected Duration",
+      "trimRange": "Trim Range",
+      "playPause": "Play/Pause",
+      "dragToAdjust": "Drag to adjust trim range"
+    },
+    "validation": {
+      "startTimeGreaterThanEndTime": "Start time must be less than end time",
+      "endTimeGreaterThanDuration": "End time must be less than video duration",
+      "invalidTimeRange": "Invalid time range"
+    },
+    "tips": {
+      "preciseControl": "Use the timeline to precisely control trim range",
+      "resolutionQuality": "Higher resolution provides better quality but larger file size",
+      "frameRateSmooth": "Higher frame rate provides smoother playback",
+      "audioOption": "Choose whether to keep audio in the trimmed video"
+    }
+  },
   "navigation": {
     "home": "Home",
     "tools": "Tools",
@@ -240,8 +293,8 @@
     },
     "videoCrop": {
       "title": "Video Crop",
-      "description": "Crop video segments or adjust video dimensions",
-      "comingSoon": "Coming Soon"
+      "description": "Crop video segments with precise time control",
+      "comingSoon": ""
     },
     "extractAudio": {
       "title": "Extract Audio",
@@ -252,6 +305,10 @@
       "title": "Video Information",
       "description": "View detailed information and metadata of video files",
       "comingSoon": ""
+    },
+    "videoTrim": {
+      "title": "Video Trim Settings",
+      "description": "Video Trim"
     }
   },
   "footer": {

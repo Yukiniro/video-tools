@@ -212,6 +212,57 @@
     "conversionCancelled": "转码已取消",
     "cancelConversion": "取消转码"
   },
+  "videoTrim": {
+    "title": "视频裁剪",
+    "description": "精确控制时间范围的视频片段裁剪",
+    "trimming": "裁剪中...",
+    "trimmingInProgress": "正在裁剪视频，请稍候...",
+    "trimCompleted": "裁剪完成",
+    "trimFailed": "裁剪失败",
+    "trimCancelled": "裁剪已取消",
+    "trimSuccessDescription": "视频裁剪成功！文件已保存到您的设备",
+    "trimErrorDescription": "裁剪过程中出现错误，请重试",
+    "trimCancelledDescription": "视频裁剪操作已被取消",
+    "cancelTrim": "取消裁剪",
+    "retryTrim": "重试裁剪",
+    "exportVideo": "导出视频",
+    "clickToTrim": "点击按钮开始裁剪视频",
+    "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览",
+    "supportedFormats": "支持 MP4、AVI、MOV、WMV 等格式，最大 500MB",
+    "config": {
+      "title": "裁剪设置",
+      "startTime": "开始时间",
+      "endTime": "结束时间",
+      "resolution": "输出分辨率",
+      "frameRate": "帧率",
+      "keepAudio": "保留音频",
+      "480P": "480P (854×480)",
+      "720P": "720P (1280×720)",
+      "1080P": "1080P (1920×1080)",
+      "30fps": "30 FPS",
+      "60fps": "60 FPS"
+    },
+    "timeline": {
+      "title": "时间轴裁剪",
+      "selectedDuration": "选中时长",
+      "play": "播放",
+      "pause": "暂停",
+      "seekToStart": "跳转到开始",
+      "seekToEnd": "跳转到结束",
+      "loading": "正在加载视频..."
+    },
+    "validation": {
+      "invalidTimeRange": "请设置有效的时间范围",
+      "startTimeGreaterThanEndTime": "开始时间必须小于结束时间",
+      "endTimeGreaterThanDuration": "结束时间不能超过视频总时长"
+    },
+    "tips": {
+      "resolutionQuality": "更高的分辨率提供更清晰的画质，但文件更大",
+      "frameRateSmooth": "更高的帧率提供更流畅的播放效果",
+      "audioOption": "可选择是否保留音频轨道",
+      "timelineControl": "拖拽时间轴上的手柄来精确设置裁剪范围"
+    }
+  },
   "navigation": {
     "home": "首页",
     "tools": "工具",
@@ -229,9 +280,8 @@
       "comingSoon": ""
     },
     "videoTranscode": {
-      "title": "视频转码",
-      "description": "转换视频格式，支持多种编码方式",
-      "comingSoon": "即将推出"
+      "title": "视频裁剪",
+      "description": "裁剪视频片段，支持精确时间控制和多种输出设置"
     },
     "videoCompress": {
       "title": "视频压缩",
@@ -240,8 +290,8 @@
     },
     "videoCrop": {
       "title": "视频裁剪",
-      "description": "裁剪视频片段或调整视频尺寸",
-      "comingSoon": "即将推出"
+      "description": "裁剪视频片段，支持精确时间控制",
+      "comingSoon": ""
     },
     "extractAudio": {
       "title": "视频提取音频",
@@ -251,6 +301,11 @@
     "videoInfo": {
       "title": "视频信息查看",
       "description": "查看视频文件的详细信息和元数据",
+      "comingSoon": ""
+    },
+    "videoTrim": {
+      "title": "视频裁剪",
+      "description": "裁剪视频片段，支持精确时间控制和多种输出设置",
       "comingSoon": ""
     }
   },

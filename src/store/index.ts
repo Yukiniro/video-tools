@@ -22,6 +22,7 @@ export {
   compressVideo,
   saveAsVideo,
   transcodeVideo,
+  trimVideo,
 } from '../services/video'
 
 // 重新导出类型定义
@@ -33,6 +34,7 @@ export type {
   VideoToAudioParams,
   VideoToGifParams,
   VideoTranscodeParams,
+  VideoTrimParams,
 } from '../types/video'
 
 // 重新导出工具函数
