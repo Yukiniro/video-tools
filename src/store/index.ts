@@ -2,8 +2,11 @@ import { clamp } from 'es-toolkit'
 import { floor } from 'es-toolkit/compat'
 import { saveAs } from 'file-saver'
 import GIF from 'gif.js'
-import { ALL_FORMATS, AudioSampleSink, AudioSampleSource, BlobSource, BufferTarget, CanvasSink, CanvasSource, Conversion, Input, MkvOutputFormat, Mp3OutputFormat, Mp4OutputFormat, OggOutputFormat, Output, QUALITY_HIGH, QUALITY_LOW, QUALITY_MEDIUM, WavOutputFormat, WebMOutputFormat } from 'mediabunny'
+import { ALL_FORMATS, BlobSource, BufferTarget, CanvasSink, CanvasSource, Conversion, Input, MkvOutputFormat, Mp3OutputFormat, Mp4OutputFormat, OggOutputFormat, Output, QUALITY_HIGH, QUALITY_LOW, QUALITY_MEDIUM, registerEncoder, WavOutputFormat, WebMOutputFormat } from 'mediabunny'
 import { nanoid } from 'nanoid'
+import Mp3Encoder from '../lib/Mp3Encoder'
+
+registerEncoder(Mp3Encoder)
 
 /**
  * 视频转 GIF 的参数
@@ -646,51 +649,28 @@ export async function videoToAudio(
   }
 
   await (async () => {
-    if (format === 'mp3') {
-      const audioTrack = await input.getPrimaryAudioTrack()
-      if (!audioTrack) {
-        throw new Error('No audio track found')
+    const conversion = await Conversion.init({
+      input,
+      output,
+      video: { discard: true },
+      audio: { bitrate: audioBitrate },
+    })
+
+    let cancelReject: (reason?: any) => void
+    conversion.onProgress = (value) => {
+      if (signal?.aborted) {
+        cancelReject?.(new Error('Conversion cancelled'))
+        return
       }
-      const audioSink = new AudioSampleSink(audioTrack)
-
-      const sampleSource = new AudioSampleSource({
-        codec: 'aac',
-        bitrate: audioBitrate,
-      })
-      output.addAudioTrack(sampleSource)
-
-      await output.start()
-
-      for await (const sample of audioSink.samples()) {
-        sampleSource.add(sample.clone())
-      }
-
-      await output.finalize()
+      progress(value)
     }
-    else {
-      const conversion = await Conversion.init({
-        input,
-        output,
-        video: { discard: true },
-        audio: { bitrate: audioBitrate },
-      })
 
-      let cancelReject: (reason?: any) => void
-      conversion.onProgress = (value) => {
-        if (signal?.aborted) {
-          cancelReject?.(new Error('Conversion cancelled'))
-          return
-        }
-        progress(value)
-      }
-
-      await Promise.race([
-        conversion.execute(),
-        new Promise((_, reject) => {
-          cancelReject = reject
-        }),
-      ])
-    }
+    await Promise.race([
+      conversion.execute(),
+      new Promise((_, reject) => {
+        cancelReject = reject
+      }),
+    ])
   })()
 
   const buffer = output.target.buffer

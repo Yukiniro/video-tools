@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { SegmentedControl } from '@/components/ui/segmented-control'
 
 const FORMAT_OPTIONS = [
-  // { value: 'mp3', label: 'MP3' },
+  { value: 'mp3', label: 'MP3' },
   { value: 'wav', label: 'WAV' },
   { value: 'ogg', label: 'OGG' },
 ]
