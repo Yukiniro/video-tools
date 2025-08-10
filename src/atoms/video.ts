@@ -3,7 +3,6 @@ import { floor } from 'es-toolkit/compat'
 import { atom } from 'jotai'
 import { toast } from 'sonner'
 import { gifToVideo, saveAsVideo } from '@/store'
-import { filesAtom } from './files'
 import {
   cleanupProcessingAtom,
   completeProcessingAtom,
@@ -11,6 +10,9 @@ import {
   startProcessingAtom,
   updateProgressAtom,
 } from './shared'
+
+// GIF 转视频工具专用的文件状态
+export const gifToVideoFilesAtom = atom<File[]>([])
 
 export interface VideoConfig {
   fps: '30FPS' | '60FPS'
@@ -38,7 +40,7 @@ export const convertToVideoAtom = atom(
   null,
   async (get, set, params: { translations: any, translationsDialog: any }) => {
     const { translations, translationsDialog } = params
-    const files = get(filesAtom)
+    const files = get(gifToVideoFilesAtom)
     const videoConfig = get(videoConfigAtom)
 
     if (files.length === 0) {

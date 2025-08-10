@@ -1,7 +1,7 @@
 'use client'
 
 import { useAtom } from 'jotai'
-import { filesAtom } from '@/atoms'
+import { audioFilesAtom } from '@/atoms'
 import { AudioProgressDialog } from '@/components/audio-progress-dialog'
 import FileUpload from '@/components/file-upload'
 import { ToolPageTemplate } from '@/components/tool-page-template'
@@ -9,7 +9,7 @@ import { VideoPreview } from '@/components/video-preview'
 import { VideoToAudioSettingPanel } from './video-to-audio-setting-panel'
 
 export default function VideoToAudioPage() {
-  const [files, setFiles] = useAtom(filesAtom)
+  const [files, setFiles] = useAtom(audioFilesAtom)
 
   const showUpload = files.length === 0
   const showPreview = files.length > 0

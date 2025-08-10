@@ -3,7 +3,6 @@ import { floor } from 'es-toolkit/compat'
 import { atom } from 'jotai'
 import { toast } from 'sonner'
 import { getVideoDuration, saveAsGif, videoToGif } from '@/store'
-import { filesAtom } from './files'
 import {
   cleanupProcessingAtom,
   completeProcessingAtom,
@@ -11,6 +10,9 @@ import {
   startProcessingAtom,
   updateProgressAtom,
 } from './shared'
+
+// GIF 工具专用的文件状态
+export const gifFilesAtom = atom<File[]>([])
 
 const DEFAULT_GIF_CONFIG = {
   resolution: '240P',
@@ -39,7 +41,7 @@ export const convertToGifAtom = atom(
   null,
   async (get, set, params: { translations: any, translationsDialog: any }) => {
     const { translations, translationsDialog } = params
-    const files = get(filesAtom)
+    const files = get(gifFilesAtom)
     const gifConfig = get(gifConfigAtom)
 
     if (files.length === 0) {

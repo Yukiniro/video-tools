@@ -3,7 +3,6 @@ import { floor } from 'es-toolkit/compat'
 import { atom } from 'jotai'
 import { toast } from 'sonner'
 import { saveAsAudio, videoToAudio } from '@/store'
-import { filesAtom } from './files'
 import {
   cleanupProcessingAtom,
   completeProcessingAtom,
@@ -11,6 +10,9 @@ import {
   startProcessingAtom,
   updateProgressAtom,
 } from './shared'
+
+// 音频工具专用的文件状态
+export const audioFilesAtom = atom<File[]>([])
 
 interface AudioConfig {
   format: 'mp3' | 'wav' | 'ogg'
@@ -38,7 +40,7 @@ export const convertToAudioAtom = atom(
   null,
   async (get, set, params: { translations: any, translationsDialog: any }) => {
     const { translations, translationsDialog } = params
-    const files = get(filesAtom)
+    const files = get(audioFilesAtom)
     const audioConfig = get(audioConfigAtom)
 
     if (files.length === 0) {

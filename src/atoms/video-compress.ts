@@ -2,7 +2,6 @@ import { floor } from 'es-toolkit/compat'
 import { atom } from 'jotai'
 import { toast } from 'sonner'
 import { compressVideo, saveAsVideo } from '@/store'
-import { filesAtom } from './files'
 import {
   cleanupProcessingAtom,
   completeProcessingAtom,
@@ -10,6 +9,9 @@ import {
   startProcessingAtom,
   updateProgressAtom,
 } from './shared'
+
+// 视频压缩工具专用的文件状态
+export const videoCompressFilesAtom = atom<File[]>([])
 
 export interface VideoCompressConfig {
   quality: 'high' | 'medium' | 'low' | 'custom'
@@ -58,7 +60,7 @@ export const compressVideoAtom = atom(
   null,
   async (get, set, params: { translations: any, translationsDialog: any }) => {
     const { translations, translationsDialog } = params
-    const files = get(filesAtom)
+    const files = get(videoCompressFilesAtom)
     const compressConfig = get(videoCompressConfigAtom)
 
     if (files.length === 0) {

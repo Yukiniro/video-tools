@@ -3,7 +3,6 @@ import { floor } from 'es-toolkit/compat'
 import { atom } from 'jotai'
 import { toast } from 'sonner'
 import { saveAsVideo, transcodeVideo } from '@/store'
-import { filesAtom } from './files'
 import {
   cleanupProcessingAtom,
   completeProcessingAtom,
@@ -11,6 +10,9 @@ import {
   startProcessingAtom,
   updateProgressAtom,
 } from './shared'
+
+// 视频转码工具专用的文件状态
+export const videoTranscodeFilesAtom = atom<File[]>([])
 
 export interface VideoTranscodeConfig {
   format: 'mp4' | 'webm' | 'mkv'
@@ -38,7 +40,7 @@ export const convertToVideoTranscodeAtom = atom(
   null,
   async (get, set, params: { translations: any, translationsDialog: any }) => {
     const { translations, translationsDialog } = params
-    const files = get(filesAtom)
+    const files = get(videoTranscodeFilesAtom)
     const videoTranscodeConfig = get(videoTranscodeConfigAtom)
 
     if (files.length === 0) {

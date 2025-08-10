@@ -190,7 +190,7 @@ export async function trimVideo(
     signal?: AbortSignal
   },
 ): Promise<Blob> {
-  const { file, startTime, endTime, resolution, keepAudio, frameRate } = params
+  const { file, resolution, /* keepAudio: _keepAudio, */ frameRate } = params
   const { progress, signal } = options
 
   // 获取分辨率尺寸
@@ -204,7 +204,7 @@ export async function trimVideo(
   }
 
   const { width, height } = getResolutionSize(resolution)
-  const duration = endTime - startTime
+  // const duration = endTime - startTime
 
   // 创建输入源
   const source = new BlobSource(file)
