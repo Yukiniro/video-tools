@@ -1,6 +1,7 @@
 import type { VideoTrimParams } from '@/store'
 import { atom } from 'jotai'
 import { atomWithReset } from 'jotai/utils'
+import { ALL_FORMATS, BlobSource, Input } from 'mediabunny'
 import { trimVideo } from '@/store'
 import { activeToolAtom, commonProgressAtom, showProgressDialogAtom } from './shared'
 
@@ -128,3 +129,24 @@ export const trimVideoAtom = atom(
     }
   },
 )
+
+export const uploadVideoTrimFilesAtom = atom(null, async (get, set, update: File[]) => {
+  set(videoTrimFilesAtom, update)
+  const input = new Input({
+    formats: ALL_FORMATS,
+    source: new BlobSource(update[0]),
+  })
+
+  // 计算视频时长
+  const duration = await input.computeDuration()
+
+  // 初始化裁剪配置
+  set(videoTrimConfigAtom, {
+    ...get(videoTrimConfigAtom),
+    startTime: 0,
+    endTime: duration,
+  })
+
+  // 初始化视频时长
+  set(videoDurationAtom, duration)
+})

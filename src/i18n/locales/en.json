@@ -26,6 +26,10 @@
       "retry": "Retry",
       "errorDetails": "Error Details",
       "completed": "Completed"
+    },
+    "videoPreview": {
+      "title": "Video Preview",
+      "browserNotSupported": "Your browser does not support video playback."
     }
   },
   "hero": {

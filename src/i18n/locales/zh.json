@@ -26,6 +26,10 @@
       "retry": "重试",
       "errorDetails": "错误详情",
       "completed": "已完成"
+    },
+    "videoPreview": {
+      "title": "视频预览",
+      "browserNotSupported": "您的浏览器不支持视频播放。"
     }
   },
   "hero": {
