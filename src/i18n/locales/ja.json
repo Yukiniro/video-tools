@@ -26,6 +26,10 @@
       "retry": "再試行",
       "errorDetails": "エラー詳細",
       "completed": "完了"
+    },
+    "videoPreview": {
+      "title": "動画プレビュー",
+      "browserNotSupported": "お使いのブラウザは動画再生をサポートしていません。"
     }
   },
   "hero": {
