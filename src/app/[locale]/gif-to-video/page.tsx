@@ -3,8 +3,7 @@
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { filesAtom } from '@/atoms/files'
-import { convertToVideoAtom } from '@/atoms/video'
+import { convertToVideoAtom, gifToVideoFilesAtom } from '@/atoms/video'
 import FileUpload from '@/components/file-upload'
 import { ToolPageTemplate } from '@/components/tool-page-template'
 import { Button } from '@/components/ui/button'
@@ -14,7 +13,7 @@ import { VideoConfig } from './video-config'
 export default function GifToVideoPage() {
   const t = useTranslations('gifToVideo')
   const tDialog = useTranslations('common.dialog')
-  const [files, setFiles] = useAtom(filesAtom)
+  const [files, setFiles] = useAtom(gifToVideoFilesAtom)
   const convertToVideo = useSetAtom(convertToVideoAtom)
 
   const handleConvert = () => {
@@ -28,8 +27,8 @@ export default function GifToVideoPage() {
     setFiles(newFiles)
   }
 
-  const showUpload = useAtomValue(filesAtom).length === 0
-  const showConfig = useAtomValue(filesAtom).length > 0
+  const showUpload = useAtomValue(gifToVideoFilesAtom).length === 0
+  const showConfig = useAtomValue(gifToVideoFilesAtom).length > 0
 
   return (
     <ToolPageTemplate toolKey="gifToVideo">

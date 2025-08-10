@@ -1,7 +1,7 @@
 'use client'
 
 import { useAtom } from 'jotai'
-import { filesAtom } from '@/atoms'
+import { videoTrimFilesAtom } from '@/atoms'
 import FileUpload from '@/components/file-upload'
 import { ToolPageTemplate } from '@/components/tool-page-template'
 import { VideoPreview } from '@/components/video-preview'
@@ -10,7 +10,7 @@ import { VideoTrimSettingPanel } from './video-trim-setting-panel'
 import { VideoTrimTimeline } from './video-trim-timeline'
 
 export default function VideoTrimPage() {
-  const [files, setFiles] = useAtom(filesAtom)
+  const [files, setFiles] = useAtom(videoTrimFilesAtom)
 
   const showUpload = files.length === 0
   const showPreview = files.length > 0

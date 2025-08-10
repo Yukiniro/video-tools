@@ -2,9 +2,8 @@
 
 import { useAtom, useSetAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
-import { filesAtom } from '@/atoms/files'
 import { commonProgressAtom } from '@/atoms/shared'
-import { compressVideoAtom } from '@/atoms/video-compress'
+import { compressVideoAtom, videoCompressFilesAtom } from '@/atoms/video-compress'
 import FileUpload from '@/components/file-upload'
 import { ToolPageTemplate } from '@/components/tool-page-template'
 import { Button } from '@/components/ui/button'
@@ -25,7 +24,7 @@ function formatFileSize(bytes: number): string {
 export default function VideoCompressPage() {
   const t = useTranslations('videoCompress')
   const tDialog = useTranslations('common.dialog')
-  const [files, setFiles] = useAtom(filesAtom)
+  const [files, setFiles] = useAtom(videoCompressFilesAtom)
   const [progress] = useAtom(commonProgressAtom)
   const compressVideo = useSetAtom(compressVideoAtom)
 

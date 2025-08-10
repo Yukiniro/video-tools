@@ -2,8 +2,10 @@ import type { VideoTrimParams } from '@/store'
 import { atom } from 'jotai'
 import { atomWithReset } from 'jotai/utils'
 import { trimVideo } from '@/store'
-import { filesAtom } from './files'
 import { activeToolAtom, commonProgressAtom, showProgressDialogAtom } from './shared'
+
+// 视频裁剪工具专用的文件状态
+export const videoTrimFilesAtom = atom<File[]>([])
 
 // 视频裁剪配置状态
 export const videoTrimConfigAtom = atomWithReset({
@@ -28,7 +30,7 @@ export const trimVideoAtom = atom(
       translationsDialog: any
     },
   ) => {
-    const files = get(filesAtom)
+    const files = get(videoTrimFilesAtom)
     const config = get(videoTrimConfigAtom)
     const { translations: _t, translationsDialog: _tDialog } = options
 

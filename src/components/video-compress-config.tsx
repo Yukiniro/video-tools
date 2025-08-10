@@ -3,8 +3,7 @@
 import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
 import React, { useEffect } from 'react'
-import { filesAtom } from '@/atoms/files'
-import { originalVideoInfoAtom, videoCompressConfigAtom } from '@/atoms/video-compress'
+import { originalVideoInfoAtom, videoCompressConfigAtom, videoCompressFilesAtom } from '@/atoms/video-compress'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
@@ -30,7 +29,7 @@ const RESOLUTION_OPTIONS = [
 
 export function VideoCompressConfig() {
   const t = useTranslations('videoCompress')
-  const [files] = useAtom(filesAtom)
+  const [files] = useAtom(videoCompressFilesAtom)
   const [config, setConfig] = useAtom(videoCompressConfigAtom)
   const [videoInfo, setVideoInfo] = useAtom(originalVideoInfoAtom)
 

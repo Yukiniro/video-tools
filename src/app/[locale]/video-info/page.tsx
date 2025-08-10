@@ -3,7 +3,7 @@
 import { useAtom } from 'jotai'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import { filesAtom } from '@/atoms/files'
+import { videoInfoFilesAtom } from '@/atoms/video-info'
 import FileUpload from '@/components/file-upload'
 import { ToolPageTemplate } from '@/components/tool-page-template'
 import { VideoInfoDisplay } from '@/components/video-info-display'
@@ -28,7 +28,7 @@ interface VideoInfo {
 
 export default function VideoInfoPage() {
   const t = useTranslations('videoInfo')
-  const [files, setFiles] = useAtom(filesAtom)
+  const [files, setFiles] = useAtom(videoInfoFilesAtom)
   const [videoInfo, setVideoInfo] = useState<VideoInfo | null>(null)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [error, setError] = useState<string | undefined>()

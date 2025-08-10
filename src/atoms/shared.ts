@@ -1,10 +1,10 @@
 import { atom } from 'jotai'
-import { resetAudioStateAtom } from './audio'
-import { filesAtom } from './files'
-import { resetGifStateAtom } from './gif'
-import { resetVideoStateAtom } from './video'
-import { resetVideoCompressStateAtom } from './video-compress'
-import { resetVideoTranscodeStateAtom } from './video-transcode'
+import { audioFilesAtom, resetAudioStateAtom } from './audio'
+import { gifFilesAtom, resetGifStateAtom } from './gif'
+import { gifToVideoFilesAtom, resetVideoStateAtom } from './video'
+import { resetVideoCompressStateAtom, videoCompressFilesAtom } from './video-compress'
+import { resetVideoTranscodeStateAtom, videoTranscodeFilesAtom } from './video-transcode'
+import { videoTrimFilesAtom } from './video-trim'
 
 // 通用进度状态接口
 export interface CommonProgress {
@@ -59,7 +59,30 @@ export const resetAllStatesAtom = atom(
     set(activeToolAtom, null)
 
     // 重置文件状态
-    set(filesAtom, [])
+    const activeTool = get(activeToolAtom)
+    switch (activeTool) {
+      case 'audio':
+        set(audioFilesAtom, [])
+        break
+      case 'gif':
+        set(gifFilesAtom, [])
+        break
+      case 'video':
+        set(gifToVideoFilesAtom, [])
+        break
+      case 'video-compress':
+        set(videoCompressFilesAtom, [])
+        break
+      case 'video-transcode':
+        set(videoTranscodeFilesAtom, [])
+        break
+      case 'video-trim':
+        set(videoTrimFilesAtom, [])
+        break
+      default:
+        // 如果未设置 activeTool，则无需重置具体文件原子
+        break
+    }
 
     // 重置所有工具特定状态
     set(resetAudioStateAtom)
