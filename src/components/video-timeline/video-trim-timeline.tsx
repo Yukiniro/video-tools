@@ -9,8 +9,10 @@ import {
   TimelineControls,
   TimelineMask,
 } from '.'
+import { TimelineThumbnail } from './timeline-thumbnail'
 
 interface VideoTrimTimelineProps {
+  file: File
   isPlaying: boolean
   currentTime: number
   duration: number
@@ -26,6 +28,7 @@ interface VideoTrimTimelineProps {
 
 export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
   const {
+    file,
     isPlaying,
     currentTime,
     duration,
@@ -147,6 +150,9 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
           >
             {/* 背景轨道 */}
             <div className="absolute inset-0 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700" />
+
+            {/* 视频缩略图 */}
+            <TimelineThumbnail file={file} />
 
             {/* 时间轴遮罩 */}
             <TimelineMask
