@@ -73,6 +73,7 @@ export default function VideoTrimPage() {
             <div className="max-w-4xl mx-auto">
               <VideoTrimTimeline
                 isPlaying={isPlay}
+                file={files[0]}
                 currentTime={currentTime}
                 duration={duration}
                 startTime={config.startTime}
