@@ -1,6 +1,7 @@
 'use client'
 
 import type { VideoPreviewRef } from '@/components/video-preview'
+import { clamp } from 'es-toolkit'
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { useRef, useState } from 'react'
 import { videoTrimFilesAtom } from '@/atoms'
@@ -36,20 +37,30 @@ export default function VideoTrimPage() {
   }
 
   const handleCurrentTimeChange = (time: number) => {
-    setCurrentTime(time)
-    videoPreviewRef.current?.seekTo(time)
+    const nextCurrentTime = clamp(time, config.startTime, config.endTime)
+    setCurrentTime(nextCurrentTime)
+    videoPreviewRef.current?.seekTo(nextCurrentTime)
   }
 
   const handleStartTimeChange = (time: number) => {
     setConfig(prev => ({ ...prev, startTime: time }))
+    const nextCurrentTime = clamp(currentTime, time, config.endTime)
+    setCurrentTime(nextCurrentTime)
+    videoPreviewRef.current?.seekTo(nextCurrentTime)
   }
 
   const handleEndTimeChange = (time: number) => {
+    const nextCurrentTime = clamp(currentTime, config.startTime, time)
     setConfig(prev => ({ ...prev, endTime: time }))
+    setCurrentTime(nextCurrentTime)
+    videoPreviewRef.current?.seekTo(nextCurrentTime)
   }
 
   const handleRangeMove = (startTime: number, endTime: number) => {
+    const nextCurrentTime = clamp(currentTime, startTime, endTime)
     setConfig(prev => ({ ...prev, startTime, endTime }))
+    setCurrentTime(nextCurrentTime)
+    videoPreviewRef.current?.seekTo(nextCurrentTime)
   }
 
   return (

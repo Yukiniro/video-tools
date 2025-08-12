@@ -43,77 +43,84 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
   } = props
 
   const timelineRef = useRef<HTMLDivElement>(null)
-  const isDraggingRef = useRef<'start' | 'end' | 'range' | null>(null)
-  const [isDragging, setIsDragging] = useState(false)
+  const [_, setDragType] = useState<'none' | 'handle' | 'seek'>('none')
 
-  // 处理时间轴点击
-  const handleTimelineClick = (e: React.MouseEvent) => {
-    if (!timelineRef.current || duration === 0 || isDragging)
+  /**
+   * 处理时间轴鼠标按下事件，支持点击和拖动更新当前时间
+   * @param e 鼠标事件
+   */
+  const handleTimelineMouseDown = (e: React.MouseEvent) => {
+    if (!timelineRef.current || duration === 0)
       return
 
-    const rect = timelineRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const percentage = x / rect.width
-    const time = percentage * duration
+    setDragType('seek')
 
-    onCurrentTimeChange(time)
-  }
-
-  // 处理拖拽开始
-  const handleDragStart = (type: 'start' | 'end' | 'range', initialOffset = 0) => (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    isDraggingRef.current = type
-    setIsDragging(true)
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!timelineRef.current || !isDraggingRef.current || duration === 0)
+    const updateCurrentTime = (clientX: number) => {
+      if (!timelineRef.current)
         return
 
       const rect = timelineRef.current.getBoundingClientRect()
-      const x = e.clientX - rect.left
+      const x = clientX - rect.left
       const percentage = Math.max(0, Math.min(1, x / rect.width))
       const time = percentage * duration
 
-      if (isDraggingRef.current === 'start') {
-        const newStartTime = Math.max(0, Math.min(time, endTime - 1))
-        onStartTimeChange(newStartTime)
-      }
-      else if (isDraggingRef.current === 'end') {
-        const newEndTime = Math.max(startTime + 1, Math.min(time, duration))
-        onEndTimeChange(newEndTime)
-      }
-      else if (isDraggingRef.current === 'range') {
-        const rangeDuration = endTime - startTime
-        const newStartTime = Math.max(0, Math.min(time - initialOffset, duration - rangeDuration))
-        const newEndTime = newStartTime + rangeDuration
-        onRangeMove(newStartTime, newEndTime)
-      }
+      onCurrentTimeChange(time)
+    }
+
+    // 初始点击时更新时间
+    updateCurrentTime(e.clientX)
+
+    // 处理拖动
+    const handleMouseMove = (e: MouseEvent) => {
+      updateCurrentTime(e.clientX)
     }
 
     const handleMouseUp = () => {
-      isDraggingRef.current = null
-      setIsDragging(false)
       document.removeEventListener('mousemove', handleMouseMove)
       document.removeEventListener('mouseup', handleMouseUp)
+      setDragType('none')
     }
 
     document.addEventListener('mousemove', handleMouseMove)
     document.addEventListener('mouseup', handleMouseUp)
   }
 
-  // 处理范围拖拽开始
-  const handleRangeDragStart = (e: React.MouseEvent) => {
-    if (!timelineRef.current || duration === 0)
+  // 处理拖动开始
+  const handleChangeStart = (_type: 'start' | 'end' | 'range') => {
+    // 可以在这里添加拖动开始的逻辑，比如显示提示信息等
+    setDragType('handle')
+  }
+
+  // 处理拖动过程中的变化
+  const handleChange = (type: 'start' | 'end' | 'range', percentage: number, _deltaPercentage?: number) => {
+    if (duration === 0)
       return
 
-    const rect = timelineRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const percentage = x / rect.width
-    const clickTime = percentage * duration
-    const offset = clickTime - startTime
+    if (type === 'start') {
+      const time = (percentage / 100) * duration
+      const newStartTime = Math.max(0, Math.min(time, endTime - 1))
+      onStartTimeChange(newStartTime)
+    }
+    else if (type === 'end') {
+      const time = (percentage / 100) * duration
+      const newEndTime = Math.max(startTime + 1, Math.min(time, duration))
+      onEndTimeChange(newEndTime)
+    }
+    else if (type === 'range') {
+      const rangeDuration = endTime - startTime
+      const newStartTime = (percentage / 100) * duration
+      const newEndTime = newStartTime + rangeDuration
+      onRangeMove(newStartTime, newEndTime)
+    }
+  }
 
-    handleDragStart('range', offset)(e)
+  // 处理拖动结束
+  const handleChangeEnd = (_type: 'start' | 'end' | 'range') => {
+    // 可以在这里添加拖动结束的逻辑，比如隐藏提示信息等
+    setDragType('none')
   }
 
   if (duration === 0) {
@@ -146,7 +153,7 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
           <div
             ref={timelineRef}
             className="relative h-16 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 rounded-xl cursor-pointer shadow-inner border border-slate-200 dark:border-slate-600"
-            onClick={handleTimelineClick}
+            onMouseDown={handleTimelineMouseDown}
           >
             {/* 背景轨道 */}
             <div className="absolute inset-0 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700" />
@@ -167,9 +174,10 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
             <TimelineControls
               startPercentage={startPercentage}
               endPercentage={endPercentage}
-              onStartMouseDown={handleDragStart('start')}
-              onEndMouseDown={handleDragStart('end')}
-              onRangeMouseDown={handleRangeDragStart}
+              timelineRef={timelineRef}
+              onChangeStart={handleChangeStart}
+              onChange={handleChange}
+              onChangeEnd={handleChangeEnd}
             />
           </div>
         </div>
