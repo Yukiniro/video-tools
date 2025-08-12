@@ -1,33 +1,132 @@
 'use client'
 
+import { useRef } from 'react'
+import { DragHandle } from './drag-handle'
+
+type ControllerType = 'start' | 'end' | 'range'
+
 interface TimelineControlsProps {
+  /** 开始位置百分比 (0-100) */
   startPercentage: number
+  /** 结束位置百分比 (0-100) */
   endPercentage: number
-  onStartMouseDown: (e: React.MouseEvent) => void
-  onEndMouseDown: (e: React.MouseEvent) => void
-  onRangeMouseDown: (e: React.MouseEvent) => void
+  /** 时间轴容器引用，用于计算拖动位置 */
+  timelineRef: React.RefObject<HTMLDivElement | null>
+  /** 拖动开始回调 */
+  onChangeStart?: (type: ControllerType, percentage?: number) => void
+  /** 拖动过程中回调 */
+  onChange?: (type: ControllerType, percentage: number, deltaPercentage?: number) => void
+  /** 拖动结束回调 */
+  onChangeEnd?: (type: ControllerType, percentage?: number) => void
 }
 
 /**
  * 时间轴控制器组件 - 包含范围移动控制器和拖拽手柄
- * @param startPercentage 开始位置百分比
- * @param endPercentage 结束位置百分比
- * @param onStartMouseDown 开始手柄鼠标按下事件
- * @param onEndMouseDown 结束手柄鼠标按下事件
- * @param onRangeMouseDown 范围移动鼠标按下事件
+ * 内置完整的鼠标拖动逻辑，对外提供高级回调接口
+ *
+ * @param props
+ * @param props.startPercentage 开始位置百分比
+ * @param props.endPercentage 结束位置百分比
+ * @param props.timelineRef 时间轴容器引用
+ * @param props.onChangeStart 开始时间变化回调
+ * @param props.onChange 拖动过程中回调
+ * @param props.onChangeEnd 结束时间变化回调
  */
 export function TimelineControls({
   startPercentage,
   endPercentage,
-  onStartMouseDown,
-  onEndMouseDown,
-  onRangeMouseDown,
+  timelineRef,
+  onChangeStart,
+  onChange,
+  onChangeEnd,
 }: TimelineControlsProps) {
+  const isDraggingRef = useRef<'start' | 'end' | 'range' | null>(null)
+  const dragOffsetRef = useRef(0)
+
   const rangeWidth = endPercentage - startPercentage
+
+  /**
+   * 处理拖动开始
+   * @param type 拖动类型
+   * @param initialOffset 初始偏移量（仅用于范围拖动）
+   */
+  const handleDragStart = (type: 'start' | 'end' | 'range', initialOffset = 0) => (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if (!timelineRef.current)
+      return
+
+    isDraggingRef.current = type
+    dragOffsetRef.current = initialOffset
+
+    onChangeStart?.(type)
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!timelineRef.current || !isDraggingRef.current)
+        return
+
+      const rect = timelineRef.current.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+
+      if (isDraggingRef.current === 'range') {
+        const rangeDuration = endPercentage - startPercentage
+        const adjustedPercentage = percentage - dragOffsetRef.current
+        const newStartPercentage = Math.max(0, Math.min(adjustedPercentage, 100 - rangeDuration))
+        onChange?.(type, newStartPercentage)
+      }
+      else {
+        onChange?.(type, percentage)
+      }
+    }
+
+    const handleMouseUp = (e: MouseEvent) => {
+      if (!timelineRef.current || !isDraggingRef.current)
+        return
+
+      const rect = timelineRef.current.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+
+      if (isDraggingRef.current === 'range') {
+        const rangeDuration = endPercentage - startPercentage
+        const adjustedPercentage = percentage - dragOffsetRef.current
+        const newStartPercentage = Math.max(0, Math.min(adjustedPercentage, 100 - rangeDuration))
+        onChangeEnd?.(type, newStartPercentage)
+      }
+      else {
+        onChangeEnd?.(type, percentage)
+      }
+
+      isDraggingRef.current = null
+      dragOffsetRef.current = 0
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+  }
+
+  /**
+   * 处理范围拖动开始
+   */
+  const handleRangeDragStart = (e: React.MouseEvent) => {
+    if (!timelineRef.current)
+      return
+
+    const rect = timelineRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const clickPercentage = (x / rect.width) * 100
+    const offset = clickPercentage - startPercentage
+
+    handleDragStart('range', offset)(e)
+  }
 
   return (
     <div
-      className="absolute h-full flex items-stretch pointer-events-none border border-solid border-blue-500"
+      className="absolute h-full flex items-stretch border border-solid border-blue-500"
       style={{
         left: `${startPercentage}%`,
         width: `${rangeWidth}%`,
@@ -35,9 +134,8 @@ export function TimelineControls({
     >
       {/* 范围移动控制器 - 顶部居中 */}
       <div
-        className="absolute top-[-12px] left-1/2 transform -translate-x-1/2 flex items-center justify-center bg-gradient-to-b from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-300 dark:hover:to-blue-400 cursor-move z-30 shadow-lg hover:shadow-xl rounded-t-sm pointer-events-auto w-[32px] h-[12px]"
-        onMouseDown={onRangeMouseDown}
-        title="拖拽移动选中区域"
+        className="absolute top-[-12px] left-1/2 transform -translate-x-1/2 flex items-center justify-center bg-gradient-to-b from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-300 dark:hover:to-blue-400 cursor-ew-resize z-30 shadow-lg hover:shadow-xl rounded-t-sm pointer-events-auto w-[32px] h-[12px]"
+        onMouseDown={e => handleRangeDragStart(e)}
       >
         {/* 条形控制器中间的抓手指示线 */}
         <div className="flex items-center justify-center gap-0.5">
@@ -48,24 +146,16 @@ export function TimelineControls({
       </div>
 
       {/* 开始时间拖拽手柄 - 左侧 */}
-      <div
-        className="absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-b from-blue-500 to-blue-700 dark:from-blue-400 dark:to-blue-600 cursor-ew-resize hover:from-blue-600 hover:to-blue-800 dark:hover:from-blue-300 dark:hover:to-blue-500 z-20 group pointer-events-auto transform -translate-x-1/2"
-        onMouseDown={onStartMouseDown}
-        title="拖拽调整开始时间"
-      >
-        {/* 拖动条中间指示线 */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-0.5 h-6 bg-white/80 dark:bg-slate-200/80 rounded-full" />
-      </div>
+      <DragHandle
+        percentage={0}
+        onMouseDown={handleDragStart('start')}
+      />
 
       {/* 结束时间拖拽手柄 - 右侧 */}
-      <div
-        className="absolute right-0 top-0 bottom-0 w-3 bg-gradient-to-b from-blue-500 to-blue-700 dark:from-blue-400 dark:to-blue-600 cursor-ew-resize hover:from-blue-600 hover:to-blue-800 dark:hover:from-blue-300 dark:hover:to-blue-500 z-20 group pointer-events-auto transform translate-x-1/2"
-        onMouseDown={onEndMouseDown}
-        title="拖拽调整结束时间"
-      >
-        {/* 拖动条中间指示线 */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-0.5 h-6 bg-white/80 dark:bg-slate-200/80 rounded-full" />
-      </div>
+      <DragHandle
+        percentage={100}
+        onMouseDown={handleDragStart('end')}
+      />
     </div>
   )
 }

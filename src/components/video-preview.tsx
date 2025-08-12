@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useImperativeHandle, useRef } from 'react'
+import { useCallback, useImperativeHandle, useRef } from 'react'
 
 interface VideoPreviewProps {
   file: File
@@ -30,16 +30,49 @@ interface VideoPreviewProps {
 export function VideoPreview({ ref, file, title, showControls = true, onTimeUpdate }: VideoPreviewProps & { ref?: React.RefObject<VideoPreviewRef | null> }) {
   const t = useTranslations('common.videoPreview')
   const videoRef = useRef<HTMLVideoElement>(null)
+  const rafIdRef = useRef<number | null>(null)
+
+  /**
+   * 启动 RAF 时间更新循环
+   */
+  const startTimeUpdateLoop = useCallback(() => {
+    if (rafIdRef.current)
+      return // 防止重复启动
+
+    const updateTime = () => {
+      if (videoRef.current && !videoRef.current.paused && onTimeUpdate) {
+        onTimeUpdate(videoRef.current.currentTime)
+        rafIdRef.current = requestAnimationFrame(updateTime)
+      }
+      else {
+        rafIdRef.current = null
+      }
+    }
+
+    rafIdRef.current = requestAnimationFrame(updateTime)
+  }, [onTimeUpdate])
+
+  /**
+   * 停止 RAF 时间更新循环
+   */
+  const stopTimeUpdateLoop = useCallback(() => {
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current)
+      rafIdRef.current = null
+    }
+  }, [])
 
   useImperativeHandle(ref, () => ({
     play: async () => {
       if (videoRef.current) {
         await videoRef.current.play()
+        startTimeUpdateLoop()
       }
     },
     pause: async () => {
       if (videoRef.current) {
         videoRef.current.pause()
+        stopTimeUpdateLoop()
         // 等待下一帧确保暂停状态已更新
         await new Promise(resolve => requestAnimationFrame(resolve))
       }
@@ -83,7 +116,7 @@ export function VideoPreview({ ref, file, title, showControls = true, onTimeUpda
       }
     },
     getVideoElement: () => videoRef.current,
-  }), [])
+  }), [startTimeUpdateLoop, stopTimeUpdateLoop])
 
   return (
     <div className="space-y-4">
@@ -93,13 +126,11 @@ export function VideoPreview({ ref, file, title, showControls = true, onTimeUpda
         <video
           ref={videoRef}
           {...(showControls && { controls: true })}
-          onTimeUpdate={(e) => {
-            if (onTimeUpdate) {
-              onTimeUpdate((e.target as HTMLVideoElement).currentTime)
-            }
-          }}
           className="w-full rounded-lg border"
           preload="metadata"
+          onPlay={startTimeUpdateLoop}
+          onPause={stopTimeUpdateLoop}
+          onEnded={stopTimeUpdateLoop}
         >
           <source src={URL.createObjectURL(file)} type={file.type} />
           {t('browserNotSupported')}

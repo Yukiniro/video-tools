@@ -2,25 +2,20 @@
 
 interface DragHandleProps {
   percentage: number
-  isDragging: boolean
   onMouseDown: (e: React.MouseEvent) => void
-  title: string
 }
 
 /**
  * 拖拽手柄组件
  * @param percentage 位置百分比
- * @param isDragging 是否正在拖拽
  * @param onMouseDown 鼠标按下事件处理函数
- * @param title 提示文本
  */
-export function DragHandle({ percentage, onMouseDown, title }: DragHandleProps) {
+export function DragHandle({ percentage, onMouseDown }: DragHandleProps) {
   return (
     <div
-      className="absolute top-0 bottom-0 w-3 bg-gradient-to-b from-blue-500 to-blue-700 dark:from-blue-400 dark:to-blue-600 cursor-ew-resize hover:from-blue-600 hover:to-blue-800 dark:hover:from-blue-300 dark:hover:to-blue-500 z-20 shadow-lg rounded-xs group"
+      className="absolute top-0 bottom-0 w-3 bg-blue-500 cursor-ew-resize z-20 shadow-lg rounded-xs group"
       style={{ left: `${percentage}%`, transform: 'translateX(-50%)' }}
       onMouseDown={onMouseDown}
-      title={title}
     >
       {/* 拖动条中间指示线 */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-0.5 h-6 bg-white/80 dark:bg-slate-200/80 rounded-full" />
