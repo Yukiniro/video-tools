@@ -37,7 +37,7 @@ export default async function Home({ params }: HomeProps) {
       comingSoon: false,
     },
     {
-      key: 'videoCrop',
+      key: 'videoTrim',
       href: '/video-trim',
       comingSoon: false,
     },

@@ -169,7 +169,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
       'Video to GIF conversion',
       'GIF to Video conversion',
       'Video compression',
-      'Video cropping',
+      'Video trimming',
       'Audio extraction',
       'Online video processing',
     ],

@@ -288,16 +288,16 @@
     "videoTranscode": {
       "title": "Video Transcode",
       "description": "Convert video formats with multiple encoding options",
-      "comingSoon": "Coming Soon"
+      "comingSoon": ""
     },
     "videoCompress": {
       "title": "Video Compress",
       "description": "Compress video file size while maintaining high quality",
       "comingSoon": ""
     },
-    "videoCrop": {
-      "title": "Video Crop",
-      "description": "Crop video segments with precise time control",
+    "videoTrim": {
+      "title": "Video Trim",
+      "description": "Trim video segments with precise time control",
       "comingSoon": ""
     },
     "extractAudio": {
@@ -309,10 +309,6 @@
       "title": "Video Information",
       "description": "View detailed information and metadata of video files",
       "comingSoon": ""
-    },
-    "videoTrim": {
-      "title": "Video Trim Settings",
-      "description": "Video Trim"
     }
   },
   "footer": {
@@ -427,6 +423,6 @@
   },
   "metadata": {
     "title": "Video Tools - Professional Online Video Processing Tools",
-    "description": "Free online video processing tool collection. Supports video to GIF, GIF to video, video transcoding, video compression, video cropping, audio extraction and more."
+    "description": "Free online video processing tool collection. Supports video to GIF, GIF to video, video transcoding, video compression, video trimming, audio extraction and more."
   }
 }
