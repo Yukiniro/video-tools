@@ -180,7 +180,15 @@ export function saveAsVideo(blob: Blob, format: string) {
 /**
  * 裁剪视频
  * @param params 裁剪参数
+ * @param params.file 视频文件
+ * @param params.startTime 开始时间
+ * @param params.endTime 结束时间
+ * @param params.resolution 分辨率
+ * @param params.frameRate 帧率
+ * @param params.keepAudio 是否保留音频
  * @param options 选项
+ * @param options.progress 进度回调函数，参数为进度（0-1）
+ * @param options.signal 可选，取消信号
  * @returns 裁剪后的视频 Blob
  */
 export async function trimVideo(
@@ -190,7 +198,7 @@ export async function trimVideo(
     signal?: AbortSignal
   },
 ): Promise<Blob> {
-  const { file, resolution, /* keepAudio: _keepAudio, */ frameRate } = params
+  const { startTime, endTime, file, resolution, keepAudio, frameRate } = params
   const { progress, signal } = options
 
   // 获取分辨率尺寸
@@ -204,7 +212,6 @@ export async function trimVideo(
   }
 
   const { width, height } = getResolutionSize(resolution)
-  // const duration = endTime - startTime
 
   // 创建输入源
   const source = new BlobSource(file)
@@ -227,11 +234,15 @@ export async function trimVideo(
     video: {
       width,
       height,
+      fit: 'contain',
       frameRate,
     },
     audio: {
-      codec: 'aac',
-      bitrate: 128,
+      discard: !keepAudio,
+    },
+    trim: {
+      start: startTime,
+      end: endTime,
     },
   })
 

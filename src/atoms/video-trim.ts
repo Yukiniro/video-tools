@@ -1,4 +1,5 @@
 import type { VideoTrimParams } from '@/store'
+import { floor } from 'es-toolkit/compat'
 import { atom } from 'jotai'
 import { atomWithReset } from 'jotai/utils'
 import { ALL_FORMATS, BlobSource, Input } from 'mediabunny'
@@ -75,7 +76,7 @@ export const trimVideoAtom = atom(
         progress: (progress) => {
           set(commonProgressAtom, prev => ({
             ...prev,
-            progress,
+            progress: floor(progress * 100, 0),
           }))
         },
         signal: abortController.signal,
