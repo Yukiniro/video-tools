@@ -288,16 +288,16 @@
     "videoTranscode": {
       "title": "動画変換",
       "description": "複数のエンコーディングオプションで動画形式を変換",
-      "comingSoon": "近日公開"
+      "comingSoon": ""
     },
     "videoCompress": {
       "title": "動画圧縮",
       "description": "高品質を保ちながら動画ファイルサイズを圧縮",
       "comingSoon": ""
     },
-    "videoCrop": {
-      "title": "動画クロップ",
-      "description": "精密な時間制御で動画セグメントをクロップ",
+    "videoTrim": {
+      "title": "動画トリミング",
+      "description": "精密な時間制御で動画セグメントをトリミング",
       "comingSoon": ""
     },
     "extractAudio": {
@@ -309,10 +309,6 @@
       "title": "ビデオ情報表示",
       "description": "ビデオファイルの詳細情報とメタデータを表示",
       "comingSoon": ""
-    },
-    "videoTrim": {
-      "title": "ビデオトリム設定",
-      "description": "ビデオトリム"
     }
   },
   "footer": {

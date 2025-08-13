@@ -284,17 +284,18 @@
       "comingSoon": ""
     },
     "videoTranscode": {
-      "title": "视频裁剪",
-      "description": "裁剪视频片段，支持精确时间控制和多种输出设置"
+      "title": "视频转码",
+      "description": "转换视频格式，支持多种编码选项和输出格式",
+      "comingSoon": ""
     },
     "videoCompress": {
       "title": "视频压缩",
       "description": "压缩视频文件大小，保持高质量",
       "comingSoon": ""
     },
-    "videoCrop": {
+    "videoTrim": {
       "title": "视频裁剪",
-      "description": "裁剪视频片段，支持精确时间控制",
+      "description": "裁剪视频片段，支持精确时间控制和多种输出设置",
       "comingSoon": ""
     },
     "extractAudio": {
@@ -305,11 +306,6 @@
     "videoInfo": {
       "title": "视频信息查看",
       "description": "查看视频文件的详细信息和元数据",
-      "comingSoon": ""
-    },
-    "videoTrim": {
-      "title": "视频裁剪",
-      "description": "裁剪视频片段，支持精确时间控制和多种输出设置",
       "comingSoon": ""
     }
   },

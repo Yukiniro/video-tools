@@ -28,7 +28,7 @@ const iconMap = {
   gifToVideo: Video,
   videoTranscode: FileVideo,
   videoCompress: Minimize2,
-  videoCrop: Scissors,
+  videoTrim: Scissors,
   extractAudio: AudioLines,
   videoInfo: Info,
 }

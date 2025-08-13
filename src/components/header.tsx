@@ -22,7 +22,7 @@ export function Header({ locale }: HeaderProps) {
     { key: 'gifToVideo', href: '/gif-to-video', comingSoon: false },
     { key: 'videoTranscode', href: '/video-transcode', comingSoon: false },
     { key: 'videoCompress', href: '/video-compress', comingSoon: false },
-    { key: 'videoCrop', href: '/video-crop', comingSoon: true },
+    { key: 'videoTrim', href: '/video-trim', comingSoon: false },
     { key: 'extractAudio', href: '/video-to-audio', comingSoon: false },
     { key: 'videoInfo', href: '/video-info', comingSoon: false },
   ]
