@@ -103,3 +103,45 @@ export interface CompressConfig {
   width: number
   height: number
 }
+
+/**
+ * 视频信息接口
+ */
+export interface VideoInfo {
+  /** 视频时长（秒） */
+  duration: number
+  /** 编码宽度 */
+  codedWidth: number
+  /** 编码高度 */
+  codedHeight: number
+  /** 显示宽度 */
+  displayWidth: number
+  /** 显示高度 */
+  displayHeight: number
+  /** 帧率 */
+  frameRate: number
+  /** 比特率 */
+  bitrate?: number
+  /** 视频编解码器 */
+  videoCodec?: string
+  /** 音频编解码器 */
+  audioCodec?: string
+  /** 音频声道数 */
+  audioChannels?: number
+  /** 音频采样率 */
+  audioSampleRate?: number
+  /** 旋转角度 */
+  rotation?: number
+  /** 格式 */
+  format?: string
+  /** 文件大小 */
+  size: number
+  /** 宽高比 */
+  aspectRatio?: string
+  /** 色彩空间 */
+  colorSpace?: string
+  /** 像素格式 */
+  pixelFormat?: string
+  /** 媒体类型 */
+  mediaType?: string
+}

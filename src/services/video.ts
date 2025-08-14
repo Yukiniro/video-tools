@@ -1,4 +1,4 @@
-import type { VideoCompressParams, VideoTranscodeParams, VideoTrimParams } from '../types/video'
+import type { VideoCompressParams, VideoInfo, VideoTranscodeParams, VideoTrimParams } from '../types/video'
 import { saveAs } from 'file-saver'
 import { ALL_FORMATS, BlobSource, BufferTarget, Conversion, Input, MkvOutputFormat, Mp4OutputFormat, Output, WebMOutputFormat } from 'mediabunny'
 import { nanoid } from 'nanoid'
@@ -268,4 +268,63 @@ export async function trimVideo(
   const blob = new Blob([buffer!], { type: 'video/mp4' })
 
   return blob
+}
+
+/**
+ * 分析视频信息
+ * @param file 视频文件
+ * @returns 视频信息对象
+ * @throws 当分析失败时抛出错误
+ */
+export async function analyzeVideo(file: File): Promise<VideoInfo> {
+  try {
+    const input = new Input({
+      formats: ALL_FORMATS,
+      source: new BlobSource(file),
+    })
+
+    const duration = await input.computeDuration()
+    const mimeType = await input.getMimeType()
+    const videoTrack = await input.getPrimaryVideoTrack()
+    const audioTrack = await input.getPrimaryAudioTrack()
+
+    const info: Partial<VideoInfo> = {
+      mediaType: mimeType,
+      duration,
+      size: file.size,
+    }
+
+    if (videoTrack) {
+      const codec = await videoTrack.getCodecParameterString()
+      const { averagePacketRate: fps } = await videoTrack.computePacketStats(100)
+      const { codedWidth, codedHeight, displayWidth, displayHeight } = videoTrack
+      const rotation = videoTrack.rotation
+
+      Object.assign(info, {
+        codedWidth,
+        codedHeight,
+        displayWidth,
+        displayHeight,
+        frameRate: fps,
+        videoCodec: codec || undefined,
+        rotation: rotation || undefined,
+        aspectRatio: `${codedWidth}:${codedHeight}`,
+      })
+    }
+
+    if (audioTrack) {
+      const codec = await audioTrack.getCodecParameterString()
+      Object.assign(info, {
+        audioCodec: codec || undefined,
+        audioChannels: audioTrack.numberOfChannels || undefined,
+        audioSampleRate: audioTrack.sampleRate || undefined,
+      })
+    }
+
+    return info as VideoInfo
+  }
+  catch (error) {
+    console.error('Error analyzing video:', error)
+    throw error instanceof Error ? error : new Error('Unknown error occurred')
+  }
 }

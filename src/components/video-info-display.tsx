@@ -8,19 +8,23 @@ interface VideoInfoProps {
   file: File
   videoInfo: {
     duration: number
-    width: number
-    height: number
+    codedWidth: number
+    codedHeight: number
+    displayWidth: number
+    displayHeight: number
     frameRate: number
     bitrate?: number
     videoCodec?: string
     audioCodec?: string
     audioChannels?: number
     audioSampleRate?: number
+    rotation?: number
     format?: string
     size: number
     aspectRatio?: string
     colorSpace?: string
     pixelFormat?: string
+    mediaType?: string
   } | null
   isAnalyzing: boolean
   error?: string
@@ -151,16 +155,16 @@ export function VideoInfoDisplay({ file, videoInfo, isAnalyzing, error }: VideoI
             <div>
               <label className="text-sm font-medium text-muted-foreground">{t('resolution')}</label>
               <p className="text-sm">
-                {videoInfo.width}
+                {videoInfo.displayWidth}
                 {' '}
                 ×
                 {' '}
-                {videoInfo.height}
+                {videoInfo.displayHeight}
               </p>
             </div>
             <div>
               <label className="text-sm font-medium text-muted-foreground">{t('aspectRatio')}</label>
-              <p className="text-sm">{videoInfo.aspectRatio || `${(videoInfo.width / videoInfo.height).toFixed(2)}:1`}</p>
+              <p className="text-sm">{videoInfo.aspectRatio || `${(videoInfo.displayWidth / videoInfo.displayHeight).toFixed(2)}:1`}</p>
             </div>
             <div>
               <label className="text-sm font-medium text-muted-foreground">{t('frameRate')}</label>
