@@ -117,7 +117,7 @@
   "videoTranscodeConfig": {
     "title": "Video Transcode Settings",
     "pageTitle": "Video Transcode",
-    "pageDescription": "Convert video format and resolution, supports MP4, WebM, MKV output",
+    "pageDescription": "Convert video format and resolution, supports MP4, WebM, MKV, MOV output",
     "resolution": "Output Resolution",
     "format": "Output Format",
     "selectResolution": "Select Output Resolution",
@@ -128,6 +128,7 @@
     "mp4": "MP4",
     "webm": "WebM",
     "mkv": "MKV",
+    "mov": "MOV",
     "resolutionDesc": {
       "480P": "Standard definition, smaller file size, suitable for network transmission",
       "720P": "High definition, balanced quality and file size",
@@ -136,7 +137,8 @@
     "formatDesc": {
       "mp4": "MP4 format has the best compatibility, suitable for most devices and platforms",
       "webm": "WebM format is suitable for web playback with high compression efficiency",
-      "mkv": "MKV format supports multiple codecs and is feature-rich"
+      "mkv": "MKV format supports multiple codecs and is feature-rich",
+      "mov": "MOV format is developed by Apple with good QuickTime compatibility"
     },
     "transcodeVideo": "Transcode Video",
     "exportVideo": "Transcode Video",

@@ -117,7 +117,7 @@
   "videoTranscodeConfig": {
     "title": "视频转码设置",
     "pageTitle": "视频转码",
-    "pageDescription": "转换视频格式和分辨率，支持输出 MP4、WebM、MKV 格式",
+    "pageDescription": "转换视频格式和分辨率，支持输出 MP4、WebM、MKV、MOV 格式",
     "resolution": "输出分辨率",
     "format": "输出格式",
     "selectResolution": "选择输出分辨率",
@@ -128,6 +128,7 @@
     "mp4": "MP4",
     "webm": "WebM",
     "mkv": "MKV",
+    "mov": "MOV",
     "resolutionDesc": {
       "480P": "标清分辨率，文件较小，适合网络传输",
       "720P": "高清分辨率，平衡质量和文件大小",
@@ -136,7 +137,8 @@
     "formatDesc": {
       "mp4": "MP4 格式兼容性最好，适合大多数设备和平台",
       "webm": "WebM 格式适合网络播放，压缩效率高",
-      "mkv": "MKV 格式支持多种编解码器，功能强大"
+      "mkv": "MKV 格式支持多种编解码器，功能强大",
+      "mov": "MOV 格式是苹果开发的格式，与 QuickTime 兼容性好"
     },
     "transcodeVideo": "转码视频",
     "exportVideo": "转码视频",

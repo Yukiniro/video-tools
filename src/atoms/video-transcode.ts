@@ -15,7 +15,7 @@ import {
 export const videoTranscodeFilesAtom = atom<File[]>([])
 
 export interface VideoTranscodeConfig {
-  format: 'mp4' | 'webm' | 'mkv'
+  format: 'mp4' | 'webm' | 'mkv' | 'mov'
   resolution: '480P' | '720P' | '1080P'
 }
 

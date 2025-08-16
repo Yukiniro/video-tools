@@ -66,7 +66,7 @@ export interface VideoTranscodeParams {
   /** 输出分辨率 */
   resolution: '480P' | '720P' | '1080P'
   /** 输出格式 */
-  format: 'mp4' | 'webm' | 'mkv'
+  format: 'mp4' | 'webm' | 'mkv' | 'mov'
 }
 
 /**

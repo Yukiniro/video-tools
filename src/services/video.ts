@@ -1,6 +1,6 @@
 import type { VideoCompressParams, VideoInfo, VideoTranscodeParams, VideoTrimParams } from '../types/video'
 import { saveAs } from 'file-saver'
-import { ALL_FORMATS, BlobSource, BufferTarget, Conversion, Input, MkvOutputFormat, Mp4OutputFormat, Output, WebMOutputFormat } from 'mediabunny'
+import { ALL_FORMATS, BlobSource, BufferTarget, Conversion, Input, MkvOutputFormat, MovOutputFormat, Mp4OutputFormat, Output, WebMOutputFormat } from 'mediabunny'
 import { nanoid } from 'nanoid'
 import { calculateCompressConfig, getVideoBitrate, getVideoInfo, getVideoMimeType, getVideoSize } from '../utils/video'
 
@@ -116,6 +116,10 @@ export async function transcodeVideo(
     case 'mkv':
       // MKV 使用 MP4 格式作为容器（Mediabunny 的实现方式）
       outputFormat = new MkvOutputFormat()
+      break
+    case 'mov':
+      // MOV 使用 MP4 格式作为容器（Mediabunny 的实现方式）
+      outputFormat = new MovOutputFormat()
       break
     default:
       throw new Error(`Unsupported format: ${format}`)

@@ -217,7 +217,7 @@ export function getVideoBitrate(resolution: '480P' | '720P' | '1080P'): number {
  * @param format 视频格式
  * @returns MIME 类型
  */
-export function getVideoMimeType(format: 'mp4' | 'webm' | 'mkv'): string {
+export function getVideoMimeType(format: 'mp4' | 'webm' | 'mkv' | 'mov'): string {
   switch (format) {
     case 'mp4':
       return 'video/mp4'
@@ -225,6 +225,8 @@ export function getVideoMimeType(format: 'mp4' | 'webm' | 'mkv'): string {
       return 'video/webm'
     case 'mkv':
       return 'video/x-matroska'
+    case 'mov':
+      return 'video/quicktime'
     default:
       return 'video/mp4'
   }

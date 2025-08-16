@@ -117,7 +117,7 @@
   "videoTranscodeConfig": {
     "title": "動画トランスコード設定",
     "pageTitle": "動画トランスコード",
-    "pageDescription": "動画形式と解像度を変換、MP4、WebM、MKV出力をサポート",
+    "pageDescription": "動画形式と解像度を変換、MP4、WebM、MKV、MOV出力をサポート",
     "resolution": "出力解像度",
     "format": "出力形式",
     "selectResolution": "出力解像度を選択",
@@ -128,6 +128,7 @@
     "mp4": "MP4",
     "webm": "WebM",
     "mkv": "MKV",
+    "mov": "MOV",
     "resolutionDesc": {
       "480P": "標準解像度、ファイルサイズが小さく、ネットワーク転送に適している",
       "720P": "高解像度、品質とファイルサイズのバランスが良い",
@@ -136,7 +137,8 @@
     "formatDesc": {
       "mp4": "MP4形式は互換性が最も良く、ほとんどのデバイスとプラットフォームに適している",
       "webm": "WebM形式はウェブ再生に適しており、圧縮効率が高い",
-      "mkv": "MKV形式は複数のコーデックをサポートし、機能が豊富"
+      "mkv": "MKV形式は複数のコーデックをサポートし、機能が豊富",
+      "mov": "MOV形式はAppleが開発した形式で、QuickTimeとの互換性が良い"
     },
     "transcodeVideo": "動画をトランスコード",
     "exportVideo": "動画をトランスコード",
