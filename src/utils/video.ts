@@ -35,9 +35,15 @@ export function getVideoSize(size: Size, resolution: '480P' | '720P' | '1080P'):
   }
   const targetHeight = resolutionMap[resolution]
   const aspectRatio = size.width / size.height
+  
+  // 计算宽度并向下取偶
+  const width = Math.floor(targetHeight * aspectRatio / 2) * 2
+  // 高度向下取偶
+  const height = Math.floor(targetHeight / 2) * 2
+  
   return {
-    width: Math.round(targetHeight * aspectRatio),
-    height: targetHeight,
+    width,
+    height,
   }
 }
 
@@ -217,7 +223,7 @@ export function getVideoBitrate(resolution: '480P' | '720P' | '1080P'): number {
  * @param format 视频格式
  * @returns MIME 类型
  */
-export function getVideoMimeType(format: 'mp4' | 'webm' | 'mkv'): string {
+export function getVideoMimeType(format: 'mp4' | 'webm' | 'mkv' | 'mov'): string {
   switch (format) {
     case 'mp4':
       return 'video/mp4'
@@ -225,6 +231,8 @@ export function getVideoMimeType(format: 'mp4' | 'webm' | 'mkv'): string {
       return 'video/webm'
     case 'mkv':
       return 'video/x-matroska'
+    case 'mov':
+      return 'video/quicktime'
     default:
       return 'video/mp4'
   }

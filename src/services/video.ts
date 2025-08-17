@@ -1,6 +1,6 @@
-import type { VideoCompressParams, VideoInfo, VideoTranscodeParams, VideoTrimParams } from '../types/video'
+import type { VideoCompressParams, VideoInfo, VideoSpeedParams, VideoTranscodeParams, VideoTrimParams } from '../types/video'
 import { saveAs } from 'file-saver'
-import { ALL_FORMATS, BlobSource, BufferTarget, Conversion, Input, MkvOutputFormat, Mp4OutputFormat, Output, WebMOutputFormat } from 'mediabunny'
+import { ALL_FORMATS, BlobSource, BufferTarget, CanvasSource, Conversion, Input, MkvOutputFormat, MovOutputFormat, Mp4OutputFormat, Output, VideoSampleSink, WebMOutputFormat } from 'mediabunny'
 import { nanoid } from 'nanoid'
 import { calculateCompressConfig, getVideoBitrate, getVideoInfo, getVideoMimeType, getVideoSize } from '../utils/video'
 
@@ -116,6 +116,10 @@ export async function transcodeVideo(
     case 'mkv':
       // MKV 使用 MP4 格式作为容器（Mediabunny 的实现方式）
       outputFormat = new MkvOutputFormat()
+      break
+    case 'mov':
+      // MOV 使用 MP4 格式作为容器（Mediabunny 的实现方式）
+      outputFormat = new MovOutputFormat()
       break
     default:
       throw new Error(`Unsupported format: ${format}`)
@@ -327,4 +331,113 @@ export async function analyzeVideo(file: File): Promise<VideoInfo> {
     console.error('Error analyzing video:', error)
     throw error instanceof Error ? error : new Error('Unknown error occurred')
   }
+}
+
+/**
+ * 视频变速处理
+ * @param params 变速参数
+ * @param params.file 视频文件
+ * @param params.speed 播放速度倍率
+ * @param params.resolution 目标分辨率
+ * @param params.keepAudio 是否保留音频
+ * @param params.frameRate 目标帧率
+ * @param options 选项
+ * @param options.progress 进度回调函数，参数为进度（0-1）
+ * @param options.signal 可选，取消信号
+ * @returns 变速后的视频 Blob
+ */
+export async function speedVideo(
+  params: VideoSpeedParams,
+  options: {
+    progress: (progress: number) => void
+    signal?: AbortSignal
+  },
+): Promise<Blob> {
+  const { file, speed, resolution, keepAudio, frameRate } = params
+  const { progress, signal } = options
+
+  // 获取视频信息
+  const videoInfo = await getVideoInfo(file)
+  const targetSize = getVideoSize(videoInfo, resolution)
+
+  const input = new Input({
+    formats: ALL_FORMATS,
+    source: new BlobSource(file),
+  })
+
+  const output = new Output({
+    format: new Mp4OutputFormat(),
+    target: new BufferTarget(),
+  })
+
+  // 获取视频轨道信息
+  const inputVideoTrack = await input.getPrimaryVideoTrack()
+  if (!inputVideoTrack) {
+    throw new Error('No video track found')
+  }
+
+  const duration = await inputVideoTrack.computeDuration()
+  if (duration === 0) {
+    throw new Error('Video duration is 0')
+  }
+
+  const canvasElement = document.createElement('canvas')
+  canvasElement.width = targetSize.width
+  canvasElement.height = targetSize.height
+  const videoSource = new CanvasSource(canvasElement, {
+    codec: 'avc',
+    bitrate: 1e6, // 1 Mbps
+  })
+
+  output.addVideoTrack(videoSource, {
+    frameRate,
+  })
+  await output.start()
+
+  // 创建视频样本接收器来遍历帧
+  const inputVideoSampleSink = new VideoSampleSink(inputVideoTrack)
+
+  let currentTimestamp = 0
+
+  // 遍历所有原始帧并根据变速规则处理
+  for await (const sample of inputVideoSampleSink.samples()) {
+    if (signal?.aborted) {
+      throw new Error('Conversion cancelled')
+    }
+    const { timestamp, duration: sampleDuration, displayWidth, displayHeight } = sample
+    const originalTimestamp = convertTimestampToOriginal(currentTimestamp, duration, duration / speed)
+    if (originalTimestamp > timestamp + sampleDuration) {
+      sample.close()
+      continue
+    }
+    const dx = (displayWidth - targetSize.width) / 2
+    const dy = (displayHeight - targetSize.height) / 2
+    sample.draw(canvasElement.getContext('2d')!, dx, dy, targetSize.width, targetSize.height)
+    sample.close()
+    videoSource.add(currentTimestamp, 1 / frameRate)
+    currentTimestamp += (1 / frameRate)
+    progress(currentTimestamp / duration)
+  }
+
+  await output.finalize()
+  const buffer = output.target.buffer
+
+  return new Blob([buffer!], { type: 'video/mp4' })
+}
+
+/**
+ * 计算转换视频帧在原始视频中的对应时间戳
+ * @param convertedTimestamp 转换视频中的帧时间戳（毫秒）
+ * @param originalDuration 原始视频时长（毫秒）
+ * @param convertedDuration 转换视频时长（毫秒）
+ * @returns 原始视频中对应的时间戳（毫秒）
+ */
+function convertTimestampToOriginal(
+  convertedTimestamp: number,
+  originalDuration: number,
+  convertedDuration: number,
+): number {
+  const timeRatio = originalDuration / convertedDuration
+  const originalTimestamp = convertedTimestamp * timeRatio
+  return originalTimestamp
 }

@@ -51,6 +51,11 @@ export default async function Home({ params }: HomeProps) {
       href: '/video-info',
       comingSoon: false,
     },
+    {
+      key: 'videoSpeed',
+      href: '/video-speed',
+      comingSoon: false,
+    },
   ]
 
   const features = [

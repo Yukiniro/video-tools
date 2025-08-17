@@ -17,6 +17,7 @@ const FORMAT_OPTIONS = [
   { value: 'mp4', label: 'MP4' },
   { value: 'webm', label: 'WebM' },
   { value: 'mkv', label: 'MKV' },
+  { value: 'mov', label: 'MOV' },
 ]
 
 export function VideoTranscodeConfig() {
@@ -28,7 +29,7 @@ export function VideoTranscodeConfig() {
   }
 
   const handleFormatChange = (format: string) => {
-    setConfig({ ...config, format: format as 'mp4' | 'webm' | 'mkv' })
+    setConfig({ ...config, format: format as 'mp4' | 'webm' | 'mkv' | 'mov' })
   }
 
   return (

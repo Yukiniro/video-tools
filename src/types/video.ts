@@ -66,7 +66,7 @@ export interface VideoTranscodeParams {
   /** 输出分辨率 */
   resolution: '480P' | '720P' | '1080P'
   /** 输出格式 */
-  format: 'mp4' | 'webm' | 'mkv'
+  format: 'mp4' | 'webm' | 'mkv' | 'mov'
 }
 
 /**
@@ -84,6 +84,22 @@ export interface VideoTrimParams {
   /** 是否保留音频 */
   keepAudio: boolean
   /** 帧率 */
+  frameRate: 30 | 60
+}
+
+/**
+ * 视频变速参数
+ */
+export interface VideoSpeedParams {
+  /** 视频文件 */
+  file: File
+  /** 播放速度倍率 */
+  speed: number
+  /** 目标分辨率 */
+  resolution: '480P' | '720P' | '1080P'
+  /** 是否保留音频 */
+  keepAudio: boolean
+  /** 目标帧率 */
   frameRate: 30 | 60
 }
 
