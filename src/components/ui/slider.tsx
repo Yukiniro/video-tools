@@ -1,104 +1,63 @@
-'use client'
+"use client"
 
-import * as React from 'react'
-import { cn } from '@/lib/utils'
+import * as React from "react"
+import * as SliderPrimitive from "@radix-ui/react-slider"
 
-interface SliderProps {
-  value: number[]
-  onValueChange: (value: number[]) => void
-  min?: number
-  max?: number
-  step?: number
-  className?: string
-  disabled?: boolean
-}
+import { cn } from "@/lib/utils"
 
-/**
- * 简单的滑动条组件
- * @param props 滑动条属性
- * @returns 滑动条组件
- */
-const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
-  ({ value, onValueChange, min = 0, max = 100, step = 1, className, disabled = false }, ref) => {
-    const [isDragging, setIsDragging] = React.useState(false)
-    const trackRef = React.useRef<HTMLDivElement>(null)
+function Slider({
+  className,
+  defaultValue,
+  value,
+  min = 0,
+  max = 100,
+  ...props
+}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+  const _values = React.useMemo(
+    () =>
+      Array.isArray(value)
+        ? value
+        : Array.isArray(defaultValue)
+          ? defaultValue
+          : [min, max],
+    [value, defaultValue, min, max]
+  )
 
-    const currentValue = value[0] || min
-    const percentage = ((currentValue - min) / (max - min)) * 100
-
-    const updateValue = React.useCallback((e: React.MouseEvent | MouseEvent) => {
-      if (!trackRef.current || disabled) return
-
-      const rect = trackRef.current.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
-      const newValue = min + (percentage / 100) * (max - min)
-      const steppedValue = Math.round(newValue / step) * step
-      const clampedValue = Math.max(min, Math.min(max, steppedValue))
-      
-      onValueChange([clampedValue])
-    }, [min, max, step, disabled, onValueChange])
-
-    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
-      if (disabled) return
-      setIsDragging(true)
-      updateValue(e)
-    }, [disabled, updateValue])
-
-    React.useEffect(() => {
-      if (!isDragging) return
-
-      const handleMouseMove = (e: MouseEvent) => {
-        updateValue(e)
-      }
-
-      const handleMouseUp = () => {
-        setIsDragging(false)
-      }
-
-      document.addEventListener('mousemove', handleMouseMove)
-      document.addEventListener('mouseup', handleMouseUp)
-
-      return () => {
-        document.removeEventListener('mousemove', handleMouseMove)
-        document.removeEventListener('mouseup', handleMouseUp)
-      }
-    }, [isDragging, updateValue])
-
-    return (
-      <div
-        ref={ref}
+  return (
+    <SliderPrimitive.Root
+      data-slot="slider"
+      defaultValue={defaultValue}
+      value={value}
+      min={min}
+      max={max}
+      className={cn(
+        "relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col",
+        className
+      )}
+      {...props}
+    >
+      <SliderPrimitive.Track
+        data-slot="slider-track"
         className={cn(
-          'relative flex w-full touch-none select-none items-center',
-          className,
+          "bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5"
         )}
       >
-        <div
-          ref={trackRef}
-          className="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary cursor-pointer"
-          onMouseDown={handleMouseDown}
-        >
-          <div
-            className="absolute h-full bg-primary transition-all"
-            style={{ width: `${percentage}%` }}
-          />
-        </div>
-        <div
+        <SliderPrimitive.Range
+          data-slot="slider-range"
           className={cn(
-            'block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer',
-            isDragging && 'scale-110',
+            "bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full"
           )}
-          style={{
-            position: 'absolute',
-            left: `calc(${percentage}% - 10px)`,
-          }}
-          onMouseDown={handleMouseDown}
         />
-      </div>
-    )
-  },
-)
-
-Slider.displayName = 'Slider'
+      </SliderPrimitive.Track>
+      {Array.from({ length: _values.length }, (_, index) => (
+        <SliderPrimitive.Thumb
+          data-slot="slider-thumb"
+          key={index}
+          className="border-primary bg-background ring-ring/50 block size-4 shrink-0 rounded-full border shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+        />
+      ))}
+    </SliderPrimitive.Root>
+  )
+}
 
 export { Slider }
