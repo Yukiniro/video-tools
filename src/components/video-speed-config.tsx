@@ -44,8 +44,6 @@ export function VideoSpeedConfig() {
     setConfig({ ...config, resolution: resolution as any })
   }
 
-
-
   return (
     <Card>
       <CardHeader>
@@ -104,7 +102,6 @@ export function VideoSpeedConfig() {
             onChange={handleResolutionChange}
           />
         </div>
-
 
       </CardContent>
     </Card>

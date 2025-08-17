@@ -99,11 +99,11 @@ export async function videoToAudio(
 }
 
 /**
-   * 保存音频文件到本地
-   * @param blob 音频 Blob 文件
-   * @param format 文件扩展名（如 mp3、wav、ogg）
-   */
-  export function saveAsAudio(blob: Blob, format: string) {
+ * 保存音频文件到本地
+ * @param blob 音频 Blob 文件
+ * @param format 文件扩展名（如 mp3、wav、ogg）
+ */
+export function saveAsAudio(blob: Blob, format: string) {
   const filename = `viidoo--${nanoid()}.${format}`
   saveAs(blob, filename)
 }

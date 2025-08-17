@@ -224,10 +224,10 @@ export async function gifToVideo(
 }
 
 /**
-   * 保存 GIF 文件到本地
-   * @param blob GIF Blob 文件
-   */
-  export function saveAsGif(blob: Blob) {
+ * 保存 GIF 文件到本地
+ * @param blob GIF Blob 文件
+ */
+export function saveAsGif(blob: Blob) {
   const filename = `viidoo--${nanoid()}.gif`
   saveAs(blob, filename)
 }
