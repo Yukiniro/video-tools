@@ -21,6 +21,7 @@ export {
 export {
   compressVideo,
   saveAsVideo,
+  speedVideo,
   transcodeVideo,
   trimVideo,
 } from '../services/video'

@@ -311,6 +311,11 @@
       "title": "ビデオ情報表示",
       "description": "ビデオファイルの詳細情報とメタデータを表示",
       "comingSoon": ""
+    },
+    "videoSpeed": {
+      "title": "動画速度調整",
+      "description": "動画の再生速度を調整、加速・減速をサポート",
+      "comingSoon": ""
     }
   },
   "footer": {
@@ -423,8 +428,56 @@
     "analysisComplete": "分析完了",
     "analysisError": "分析に失敗しました。再試行してください"
   },
+  "videoSpeed": {
+    "title": "動画速度設定",
+    "pageTitle": "動画速度調整",
+    "pageDescription": "動画の再生速度を調整、0.25倍から4倍までの速度範囲をサポート",
+    "speed": "再生速度",
+    "speedValue": "{{speed}}倍",
+    "presetSpeeds": "プリセット速度",
+    "resolution": "出力解像度",
+    "audioOptions": "音声オプション",
+    "keepAudio": "音声を保持",
+    "adjustAudioSpeed": "音声速度を調整",
+    "discardAudio": "音声を破棄",
+    "resolutionOptions": {
+      "original": "元の解像度",
+      "1080P": "1080P (1920×1080)",
+      "720P": "720P (1280×720)",
+      "480P": "480P (854×480)"
+    },
+    "audioOptionsDesc": {
+      "keepAudio": "元の音声を変更せずに保持",
+      "adjustAudioSpeed": "動画速度に応じて音声速度を調整",
+      "discardAudio": "音声トラックを削除、無音動画を出力"
+    },
+    "processingSpeed": "処理速度",
+    "preset": "プリセット",
+    "processVideo": "動画を処理",
+    "processing": "処理中...",
+    "clickToProcess": "ボタンをクリックして動画速度処理を開始",
+    "processingInProgress": "動画速度を処理中、しばらくお待ちください...",
+    "preparingProcessing": "処理準備中",
+    "processingVideo": "動画処理中",
+    "processingCompleted": "処理完了",
+    "processingSuccess": "動画速度処理が成功しました！ファイルがデバイスに保存されました",
+    "processingError": "処理に失敗しました。再試行してください",
+    "processingCancelled": "処理がキャンセルされました",
+    "processingFailed": "処理に失敗",
+    "cancelProcessing": "処理をキャンセル",
+    "retryProcessing": "処理を再試行",
+    "processingSuccessDescription": "動画速度処理が正常に完了しました！",
+    "processingErrorDescription": "処理中にエラーが発生しました。再試行できます。",
+    "dropYourVideoHereOrClickToBrowse": "動画をここにドロップするか、クリックして参照",
+    "fileName": "ファイル名",
+    "fileSize": "ファイルサイズ",
+    "fileType": "ファイルタイプ",
+    "speedChangeSuccess": "動画速度処理が成功しました！",
+    "speedChangeError": "動画速度処理に失敗しました。再試行してください",
+    "speedChangeCancelled": "動画速度処理がキャンセルされました"
+  },
   "metadata": {
     "title": "ビデオツール - プロフェッショナルなオンライン動画処理ツール",
-    "description": "無料のオンライン動画処理ツールコレクション。動画からGIF、GIFから動画、動画トランスコーディング、動画圧縮、動画トリミング、音声抽出などの機能をサポート。"
+    "description": "無料のオンライン動画処理ツールコレクション。動画からGIF、GIFから動画、動画トランスコーディング、動画圧縮、動画トリミング、音声抽出、動画速度調整などの機能をサポート。"
   }
 }

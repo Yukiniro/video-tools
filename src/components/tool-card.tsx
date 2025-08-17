@@ -9,6 +9,7 @@ import {
   Minimize2,
   Scissors,
   Video,
+  Zap,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
@@ -31,6 +32,7 @@ const iconMap = {
   videoTrim: Scissors,
   extractAudio: AudioLines,
   videoInfo: Info,
+  videoSpeed: Zap,
 }
 
 export function ToolCard({ toolKey, href, locale, comingSoon = true }: ToolCardProps) {

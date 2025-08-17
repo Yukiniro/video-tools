@@ -25,6 +25,7 @@ export function Header({ locale }: HeaderProps) {
     { key: 'videoTrim', href: '/video-trim', comingSoon: false },
     { key: 'extractAudio', href: '/video-to-audio', comingSoon: false },
     { key: 'videoInfo', href: '/video-info', comingSoon: false },
+    { key: 'videoSpeed', href: '/video-speed', comingSoon: false },
   ]
 
   return (
