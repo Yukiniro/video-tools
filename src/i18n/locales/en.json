@@ -471,7 +471,10 @@
     "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
     "fileName": "File Name",
     "fileSize": "File Size",
-    "fileType": "File Type"
+    "fileType": "File Type",
+    "speedChangeSuccess": "Video speed processing successful!",
+    "speedChangeError": "Video speed processing failed, please try again",
+    "speedChangeCancelled": "Video speed processing cancelled"
   },
   "metadata": {
     "title": "Video Tools - Professional Online Video Processing Tools",

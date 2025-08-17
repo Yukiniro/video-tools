@@ -469,7 +469,10 @@
     "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览",
     "fileName": "文件名称",
     "fileSize": "文件大小",
-    "fileType": "文件类型"
+    "fileType": "文件类型",
+    "speedChangeSuccess": "视频变速处理成功！",
+    "speedChangeError": "视频变速处理失败，请重试",
+    "speedChangeCancelled": "视频变速处理已取消"
   },
   "metadata": {
     "title": "视频工具 - 专业的在线视频处理工具",

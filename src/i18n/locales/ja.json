@@ -471,7 +471,10 @@
     "dropYourVideoHereOrClickToBrowse": "動画をここにドロップするか、クリックして参照",
     "fileName": "ファイル名",
     "fileSize": "ファイルサイズ",
-    "fileType": "ファイルタイプ"
+    "fileType": "ファイルタイプ",
+    "speedChangeSuccess": "動画速度処理が成功しました！",
+    "speedChangeError": "動画速度処理に失敗しました。再試行してください",
+    "speedChangeCancelled": "動画速度処理がキャンセルされました"
   },
   "metadata": {
     "title": "ビデオツール - プロフェッショナルなオンライン動画処理ツール",
