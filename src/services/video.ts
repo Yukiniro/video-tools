@@ -1,6 +1,6 @@
 import type { VideoCompressParams, VideoInfo, VideoSpeedParams, VideoTranscodeParams, VideoTrimParams } from '../types/video'
 import { saveAs } from 'file-saver'
-import { ALL_FORMATS, BlobSource, BufferTarget, CanvasSource, Conversion, Input, MkvOutputFormat, MovOutputFormat, MovOutputFormat, Mp4OutputFormat, Output, VideoSampleSink, WebMOutputFormat } from 'mediabunny'
+import { ALL_FORMATS, BlobSource, BufferTarget, CanvasSource, Conversion, Input, MkvOutputFormat, MovOutputFormat, Mp4OutputFormat, Output, VideoSampleSink, WebMOutputFormat } from 'mediabunny'
 import { nanoid } from 'nanoid'
 import { calculateCompressConfig, getVideoBitrate, getVideoInfo, getVideoMimeType, getVideoSize } from '../utils/video'
 
@@ -353,7 +353,7 @@ export async function speedVideo(
     signal?: AbortSignal
   },
 ): Promise<Blob> {
-  const { file, speed, resolution, keepAudio, frameRate } = params
+  const { file, speed, resolution, frameRate } = params
   const { progress, signal } = options
 
   // 获取视频信息

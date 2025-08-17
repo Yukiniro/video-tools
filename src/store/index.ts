@@ -1,8 +1,6 @@
-import { registerEncoder } from 'mediabunny'
-import Mp3Encoder from '../lib/Mp3Encoder'
+import { registerMp3Encoder } from '@mediabunny/mp3-encoder'
 
-// 注册 MP3 编码器
-registerEncoder(Mp3Encoder)
+registerMp3Encoder()
 
 // 重新导出音频处理功能
 export {
