@@ -88,6 +88,20 @@ export interface VideoTrimParams {
 }
 
 /**
+ * 视频变速参数
+ */
+export interface VideoSpeedParams {
+  /** 视频文件 */
+  file: File
+  /** 播放速度倍率 */
+  speed: number
+  /** 输出分辨率 */
+  resolution: '480P' | '720P' | '1080P'
+  /** 是否保留音频 */
+  keepAudio: boolean
+}
+
+/**
  * 尺寸信息
  */
 export interface Size {

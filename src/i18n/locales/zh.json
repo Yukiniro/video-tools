@@ -309,6 +309,11 @@
       "title": "视频信息查看",
       "description": "查看视频文件的详细信息和元数据",
       "comingSoon": ""
+    },
+    "videoSpeed": {
+      "title": "视频变速",
+      "description": "调整视频播放速度，支持加速和减速",
+      "comingSoon": ""
     }
   },
   "footer": {
@@ -421,8 +426,52 @@
     "analysisComplete": "分析完成",
     "analysisError": "分析失败，请重试"
   },
+  "videoSpeed": {
+    "title": "视频变速设置",
+    "pageTitle": "视频变速",
+    "pageDescription": "调整视频播放速度，支持0.25x到4x的变速范围",
+    "speed": "播放速度",
+    "speedValue": "{{speed}}x",
+    "presetSpeeds": "预设速度",
+    "resolution": "输出分辨率",
+    "audioOptions": "音频选项",
+    "keepAudio": "保留音频",
+    "adjustAudioSpeed": "调整音频速度",
+    "discardAudio": "丢弃音频",
+    "resolutionOptions": {
+      "original": "原始分辨率",
+      "1080P": "1080P (1920×1080)",
+      "720P": "720P (1280×720)",
+      "480P": "480P (854×480)"
+    },
+    "audioOptionsDesc": {
+      "keepAudio": "保持原始音频不变",
+      "adjustAudioSpeed": "根据视频速度调整音频速度",
+      "discardAudio": "移除音频轨道，输出静音视频"
+    },
+    "preset": "预设",
+    "processVideo": "处理视频",
+    "processing": "处理中...",
+    "clickToProcess": "点击按钮开始处理视频变速",
+    "processingInProgress": "正在处理视频变速，请稍候...",
+    "preparingProcessing": "准备处理",
+    "processingVideo": "处理视频中",
+    "processingCompleted": "处理已完成",
+    "processingSuccess": "视频变速处理成功！文件已保存到您的设备",
+    "processingError": "处理失败，请重试",
+    "processingCancelled": "处理已取消",
+    "processingFailed": "处理失败",
+    "cancelProcessing": "取消处理",
+    "retryProcessing": "重新尝试",
+    "processingSuccessDescription": "视频变速处理已成功完成！",
+    "processingErrorDescription": "处理过程中发生错误，您可以重新尝试。",
+    "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览",
+    "fileName": "文件名称",
+    "fileSize": "文件大小",
+    "fileType": "文件类型"
+  },
   "metadata": {
     "title": "视频工具 - 专业的在线视频处理工具",
-    "description": "免费的在线视频处理工具集合，支持视频转GIF、GIF转视频、视频转码、视频压缩、视频裁剪、音频提取等功能。"
+    "description": "免费的在线视频处理工具集合，支持视频转GIF、GIF转视频、视频转码、视频压缩、视频裁剪、音频提取、视频变速等功能。"
   }
 }

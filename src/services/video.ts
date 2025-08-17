@@ -1,4 +1,4 @@
-import type { VideoCompressParams, VideoInfo, VideoTranscodeParams, VideoTrimParams } from '../types/video'
+import type { VideoCompressParams, VideoInfo, VideoSpeedParams, VideoTranscodeParams, VideoTrimParams } from '../types/video'
 import { saveAs } from 'file-saver'
 import { ALL_FORMATS, BlobSource, BufferTarget, Conversion, Input, MkvOutputFormat, MovOutputFormat, Mp4OutputFormat, Output, WebMOutputFormat } from 'mediabunny'
 import { nanoid } from 'nanoid'
@@ -331,4 +331,81 @@ export async function analyzeVideo(file: File): Promise<VideoInfo> {
     console.error('Error analyzing video:', error)
     throw error instanceof Error ? error : new Error('Unknown error occurred')
   }
+}
+
+/**
+ * 视频变速处理
+ * @param params 变速参数
+ * @param params.file 视频文件
+ * @param params.speed 播放速度倍率
+ * @param params.resolution 目标分辨率
+ * @param params.keepAudio 是否保留音频
+ * @param options 选项
+ * @param options.progress 进度回调函数，参数为进度（0-1）
+ * @param options.signal 可选，取消信号
+ * @returns 变速后的视频 Blob
+ */
+export async function speedVideo(
+  params: VideoSpeedParams,
+  options: {
+    progress: (progress: number) => void
+    signal?: AbortSignal
+  },
+): Promise<Blob> {
+  const { file, speed, resolution, keepAudio } = params
+  const { progress, signal } = options
+
+  // 获取视频信息
+  const videoInfo = await getVideoInfo(file)
+  const targetSize = getVideoSize(videoInfo, resolution)
+
+  const input = new Input({
+    formats: ALL_FORMATS,
+    source: new BlobSource(file),
+  })
+
+  const output = new Output({
+    format: new Mp4OutputFormat(),
+    target: new BufferTarget(),
+  })
+
+  const conversion = await Conversion.init({
+    input,
+    output,
+    video: {
+      width: targetSize.width,
+      height: targetSize.height,
+      // 通过调整帧率来实现变速效果
+      frameRate: Math.round(30 * speed), // 使用默认30fps
+      fit: 'contain',
+    },
+    audio: {
+      discard: !keepAudio,
+      // 如果保留音频，需要调整音频速度以匹配视频
+      ...(keepAudio && {
+        tempo: speed,
+      }),
+    },
+  })
+
+  let cancelReject: (reason?: any) => void
+  conversion.onProgress = (progressValue) => {
+    if (signal?.aborted) {
+      cancelReject?.(new Error('Conversion cancelled'))
+      conversion.cancel()
+    }
+
+    progress(progressValue)
+  }
+
+  await Promise.race([
+    conversion.execute(),
+    new Promise((_, reject) => {
+      cancelReject = reject
+    }),
+  ])
+
+  const buffer = output.target.buffer
+
+  return new Blob([buffer!], { type: 'video/mp4' })
 }

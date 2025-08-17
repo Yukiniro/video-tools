@@ -311,6 +311,11 @@
       "title": "Video Information",
       "description": "View detailed information and metadata of video files",
       "comingSoon": ""
+    },
+    "videoSpeed": {
+      "title": "Video Speed",
+      "description": "Adjust video playback speed with acceleration and deceleration",
+      "comingSoon": ""
     }
   },
   "footer": {
@@ -423,8 +428,52 @@
     "analysisComplete": "Analysis Complete",
     "analysisError": "Analysis failed, please try again"
   },
+  "videoSpeed": {
+    "title": "Video Speed Settings",
+    "pageTitle": "Video Speed",
+    "pageDescription": "Adjust video playback speed with support for 0.25x to 4x speed range",
+    "speed": "Playback Speed",
+    "speedValue": "{{speed}}x",
+    "presetSpeeds": "Preset Speeds",
+    "resolution": "Output Resolution",
+    "audioOptions": "Audio Options",
+    "keepAudio": "Keep Audio",
+    "adjustAudioSpeed": "Adjust Audio Speed",
+    "discardAudio": "Discard Audio",
+    "resolutionOptions": {
+      "original": "Original Resolution",
+      "1080P": "1080P (1920×1080)",
+      "720P": "720P (1280×720)",
+      "480P": "480P (854×480)"
+    },
+    "audioOptionsDesc": {
+      "keepAudio": "Keep original audio unchanged",
+      "adjustAudioSpeed": "Adjust audio speed according to video speed",
+      "discardAudio": "Remove audio track, output silent video"
+    },
+    "preset": "Preset",
+    "processVideo": "Process Video",
+    "processing": "Processing...",
+    "clickToProcess": "Click the button to start processing video speed",
+    "processingInProgress": "Processing video speed, please wait...",
+    "preparingProcessing": "Preparing Processing",
+    "processingVideo": "Processing Video",
+    "processingCompleted": "Processing Completed",
+    "processingSuccess": "Video speed processing successful! File has been saved to your device",
+    "processingError": "Processing failed, please try again",
+    "processingCancelled": "Processing cancelled",
+    "processingFailed": "Processing Failed",
+    "cancelProcessing": "Cancel Processing",
+    "retryProcessing": "Retry Processing",
+    "processingSuccessDescription": "Video speed processing completed successfully!",
+    "processingErrorDescription": "An error occurred during processing, you can try again.",
+    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
+    "fileName": "File Name",
+    "fileSize": "File Size",
+    "fileType": "File Type"
+  },
   "metadata": {
     "title": "Video Tools - Professional Online Video Processing Tools",
-    "description": "Free online video processing tool collection. Supports video to GIF, GIF to video, video transcoding, video compression, video trimming, audio extraction and more."
+    "description": "Free online video processing tool collection, supporting video to GIF, GIF to video, video transcoding, video compression, video trimming, audio extraction, video speed adjustment and more."
   }
 }
