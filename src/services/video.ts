@@ -177,7 +177,7 @@ export async function transcodeVideo(
  * @param format 文件扩展名（如 mp4）
  */
 export function saveAsVideo(blob: Blob, format: string) {
-  const filename = `${nanoid()}.${format}`
+  const filename = `viidoo--${nanoid()}.${format}`
   saveAs(blob, filename)
 }
 
