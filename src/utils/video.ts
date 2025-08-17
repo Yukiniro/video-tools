@@ -35,9 +35,15 @@ export function getVideoSize(size: Size, resolution: '480P' | '720P' | '1080P'):
   }
   const targetHeight = resolutionMap[resolution]
   const aspectRatio = size.width / size.height
+  
+  // 计算宽度并向下取偶
+  const width = Math.floor(targetHeight * aspectRatio / 2) * 2
+  // 高度向下取偶
+  const height = Math.floor(targetHeight / 2) * 2
+  
   return {
-    width: Math.round(targetHeight * aspectRatio),
-    height: targetHeight,
+    width,
+    height,
   }
 }
 

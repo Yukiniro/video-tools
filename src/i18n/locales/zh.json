@@ -449,6 +449,7 @@
       "adjustAudioSpeed": "根据视频速度调整音频速度",
       "discardAudio": "移除音频轨道，输出静音视频"
     },
+    "processingSpeed": "处理速度",
     "preset": "预设",
     "processVideo": "处理视频",
     "processing": "处理中...",

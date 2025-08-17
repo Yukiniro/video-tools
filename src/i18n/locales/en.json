@@ -451,6 +451,7 @@
       "adjustAudioSpeed": "Adjust audio speed according to video speed",
       "discardAudio": "Remove audio track, output silent video"
     },
+    "processingSpeed": "Processing Speed",
     "preset": "Preset",
     "processVideo": "Process Video",
     "processing": "Processing...",

@@ -451,6 +451,7 @@
       "adjustAudioSpeed": "動画速度に応じて音声速度を調整",
       "discardAudio": "音声トラックを削除、無音動画を出力"
     },
+    "processingSpeed": "処理速度",
     "preset": "プリセット",
     "processVideo": "動画を処理",
     "processing": "処理中...",

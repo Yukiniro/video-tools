@@ -95,10 +95,12 @@ export interface VideoSpeedParams {
   file: File
   /** 播放速度倍率 */
   speed: number
-  /** 输出分辨率 */
+  /** 目标分辨率 */
   resolution: '480P' | '720P' | '1080P'
   /** 是否保留音频 */
   keepAudio: boolean
+  /** 目标帧率 */
+  frameRate: 30 | 60
 }
 
 /**

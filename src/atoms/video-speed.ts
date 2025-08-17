@@ -56,7 +56,7 @@ export const processVideoSpeedAtom = atom(
     }
 
     const _abortController = set(startProcessingAtom, {
-      stage: translations('preparingSpeedChange'),
+      stage: translations('processingSpeed'),
       toolType: 'video-speed',
     })
 
@@ -67,8 +67,9 @@ export const processVideoSpeedAtom = atom(
         speed: _speedConfig.speed,
         resolution: _speedConfig.resolution,
         keepAudio: _speedConfig.keepAudio,
+        frameRate: 30,
       }, {
-        progress: (progress) => {
+        progress: (progress: number) => {
           set(updateProgressAtom, {
             progress: floor(progress * 100),
             stage: translations('processingSpeed'),
