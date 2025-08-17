@@ -6,7 +6,6 @@ import React from 'react'
 import { videoSpeedConfigAtom } from '@/atoms/video-speed'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { SegmentedControl } from '@/components/ui/segmented-control'
 import { Separator } from '@/components/ui/separator'
@@ -45,9 +44,7 @@ export function VideoSpeedConfig() {
     setConfig({ ...config, resolution: resolution as any })
   }
 
-  const handleKeepAudioChange = (checked: boolean) => {
-    setConfig({ ...config, keepAudio: checked })
-  }
+
 
   return (
     <Card>
@@ -108,19 +105,7 @@ export function VideoSpeedConfig() {
           />
         </div>
 
-        <Separator />
 
-        {/* 音频选项 */}
-        <div className="flex items-center space-x-2">
-          <Checkbox
-            id="keep-audio"
-            checked={config.keepAudio}
-            onCheckedChange={handleKeepAudioChange}
-          />
-          <Label htmlFor="keep-audio" className="text-sm font-medium">
-            {t('keepAudio')}
-          </Label>
-        </div>
       </CardContent>
     </Card>
   )

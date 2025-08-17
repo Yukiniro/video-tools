@@ -22,14 +22,11 @@ export interface VideoSpeedConfig {
   speed: number
   /** 输出分辨率 */
   resolution: '480P' | '720P' | '1080P'
-  /** 是否保留音频 */
-  keepAudio: boolean
 }
 
 const DEFAULT_VIDEO_SPEED_CONFIG: VideoSpeedConfig = {
   speed: 1.0,
   resolution: '720P',
-  keepAudio: true,
 }
 
 // 视频变速配置状态
@@ -66,7 +63,7 @@ export const processVideoSpeedAtom = atom(
         file: files[0],
         speed: _speedConfig.speed,
         resolution: _speedConfig.resolution,
-        keepAudio: _speedConfig.keepAudio,
+        keepAudio: false, // 屏蔽音频支持
         frameRate: 30,
       }, {
         progress: (progress: number) => {
