@@ -7,65 +7,83 @@
 ## ✨ 核心特性
 
 ### 🔒 隐私安全
+
 - 🛡️ **本地处理** - 所有视频处理完全在浏览器本地进行
 - 🔐 **数据隐私** - 文件不会上传到任何服务器
 - 🚫 **无需注册** - 无需创建账户或提供个人信息
 
 ### ⚡ 性能优势
+
 - 🚀 **快速高效** - 利用现代浏览器技术实现高速处理
 - 🎯 **高质量输出** - 保持原始视频质量的同时优化文件大小
 - 💰 **完全免费** - 所有功能永久免费使用
 
 ### 🎨 用户体验
+
 - 📱 **响应式设计** - 完美适配桌面和移动设备
 - 🌍 **多语言支持** - 支持中文、英文、日文
 - 🌗 **明暗模式** - 支持系统主题切换
 - 🎯 **简单易用** - 直观的用户界面，无需专业知识
 
 ### 🛠️ 技术特性
-- 🚀 **Next.js 15** 使用 App Router
+
+- 🚀 **Next.js 15** 使用 App Router 和 Turbopack
 - 💎 **TypeScript** 类型安全
 - 🎨 **Shadcn/ui** 现代化组件库
 - ⚡ **服务端渲染** 优秀的SEO支持
+- 🔄 **Jotai** 轻量级状态管理
 
 ## 🛠️ 专业工具集合
 
 > 🔒 **所有工具均在本地运行，文件不会离开您的设备**
 
 ### 📹 视频转 GIF
+
 - 将任意视频文件转换为高质量 GIF 动图
 - 支持自定义分辨率、帧率和时间范围
 - 智能优化文件大小，保持视觉质量
 
 ### 🎬 GIF 转视频
+
 - 将 GIF 动图转换为标准视频格式
 - 支持多种输出格式（MP4、WebM 等）
 - 提升画质和压缩效率
 
 ### 🔄 视频转码
+
 - 转换视频格式，支持主流编码方式
 - H.264、H.265、VP9 等现代编码器
 - 批量处理，提高工作效率
 
 ### 📦 视频压缩
-- 智能压缩视频文件大小
-- 保持高质量的同时显著减小文件体积
-- 可自定义压缩参数和质量设置
 
-### ✂️ 视频裁剪 (即将推出)
+- 智能压缩视频文件大小
+- 支持自定义质量和分辨率设置
+- 保持高质量的同时显著减小文件体积
+
+### ✂️ 视频裁剪
+
 - 精确裁剪视频片段
-- 调整视频尺寸和宽高比
-- 支持多段剪辑和合并
+- 支持时间范围选择和预览
+- 保持原始视频质量
 
 ### 🎵 音频提取
+
 - 从视频文件中提取高质量音频
 - 支持多种音频格式输出
 - 保持原始音频质量
 
 ### 📊 视频信息查看
+
 - 详细显示视频文件信息和元数据
 - 技术参数一目了然
 - 帮助优化处理参数
+
+### ⚡ 视频变速
+
+- 调整视频播放速度，支持 0.25x 到 4x 范围
+- 可选择保留、调整或丢弃音频
+- 支持多种输出分辨率
 
 ## 🚀 快速开始
 
@@ -98,18 +116,30 @@ src/
 │   └── [locale]/          # 国际化路由
 │       ├── layout.tsx     # 根布局
 │       ├── page.tsx       # 首页
-│       └── [tools]/       # 工具页面
+│       ├── video-to-gif/  # 视频转GIF
+│       ├── gif-to-video/  # GIF转视频
+│       ├── video-transcode/ # 视频转码
+│       ├── video-compress/  # 视频压缩
+│       ├── video-trim/      # 视频裁剪
+│       ├── video-to-audio/  # 音频提取
+│       ├── video-info/      # 视频信息
+│       └── video-speed/     # 视频变速
 ├── components/            # React 组件
 │   ├── ui/               # Shadcn UI 组件
+│   ├── video-timeline/   # 视频时间轴组件
 │   ├── header.tsx        # 头部导航
 │   ├── footer.tsx        # 底部
 │   ├── theme-provider.tsx # 主题提供者
 │   └── tool-card.tsx     # 工具卡片
+├── atoms/                # Jotai 状态管理
 ├── i18n/                 # 国际化配置
 │   ├── locales/          # 语言文件
 │   └── routing.ts        # 路由配置
 ├── lib/                  # 工具函数
-└── types/                # TypeScript 类型定义
+├── services/             # 视频处理服务
+├── store/                # 状态存储
+├── types/                # TypeScript 类型定义
+└── utils/                # 工具函数
 ```
 
 ## 🌐 多语言支持
@@ -132,39 +162,48 @@ src/
 
 ## 🔧 技术栈
 
-- **框架**: [Next.js 15](https://nextjs.org/)
-- **语言**: [TypeScript](https://www.typescriptlang.org/)
-- **样式**: [Tailwind CSS](https://tailwindcss.com/)
-- **组件**: [Shadcn/ui](https://ui.shadcn.com/)
+- **框架**: [Next.js 15.1.4](https://nextjs.org/) (App Router + Turbopack)
+- **语言**: [TypeScript 5.9.2](https://www.typescriptlang.org/)
+- **样式**: [Tailwind CSS 4.1.11](https://tailwindcss.com/)
+- **组件**: [Shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://www.radix-ui.com/)
 - **图标**: [Lucide React](https://lucide.dev/)
-- **国际化**: [next-intl](https://next-intl-docs.vercel.app/)
+- **国际化**: [next-intl 4.3.4](https://next-intl-docs.vercel.app/)
 - **主题**: [next-themes](https://github.com/pacocoursey/next-themes)
-- **状态管理**: [Jotai](https://jotai.org/)
+- **状态管理**: [Jotai 2.13.0](https://jotai.org/)
+- **视频处理**: [MediaBunny](https://github.com/MediaBunny/MediaBunny) + [GIF.js](https://github.com/buzzfeed/libgif-js)
+- **音频处理**: [@mediabunny/mp3-encoder](https://github.com/MediaBunny/MediaBunny)
+- **通知**: [Sonner](https://sonner.emilkowal.ski/)
+- **分析**: [@vercel/analytics](https://vercel.com/analytics)
 
 ## 📝 开发进展
 
 ### ✅ 已完成功能
+
 - [x] **视频转 GIF** - 高质量转换，支持自定义参数
 - [x] **GIF 转视频** - 多格式输出，提升画质
 - [x] **视频转码** - 支持主流编码器
-- [x] **视频压缩** - 智能压缩算法
+- [x] **视频压缩** - 智能压缩算法，支持自定义质量
+- [x] **视频裁剪** - 精确时间范围剪辑
 - [x] **音频提取** - 高保真音频输出
 - [x] **视频信息查看** - 详细元数据展示
+- [x] **视频变速** - 0.25x-4x 速度调整
 - [x] **文件上传组件** - 拖拽上传，多格式支持
 - [x] **进度显示** - 实时处理进度
 - [x] **多语言支持** - 中英日三语切换
 - [x] **响应式设计** - 完美适配各种设备
+- [x] **视频预览** - 处理前预览功能
+- [x] **视频时间轴** - 精确时间控制
 
 ### 🚧 开发中
-- [ ] **视频裁剪功能** - 精确剪辑和尺寸调整
+
 - [ ] **批量处理** - 同时处理多个文件
 - [ ] **更多输出格式** - 扩展格式支持
+- [ ] **视频合并** - 多段视频无缝拼接
 
 ### 🔮 未来计划
-- [ ] **视频合并** - 多段视频无缝拼接
+
 - [ ] **字幕添加** - 支持多种字幕格式
 - [ ] **视频特效** - 滤镜和转场效果
-- [ ] **PWA 支持** - 离线使用能力
 
 ## 🔒 隐私声明
 
@@ -183,11 +222,20 @@ src/
 欢迎提交 Issue 和 Pull Request 来帮助改进这个项目！
 
 ### 如何贡献
+
 1. Fork 本项目
 2. 创建您的特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交您的更改 (`git commit -m 'Add some AmazingFeature'`)
+3. 提交您的更改 (`git commit -m 'feat: add some AmazingFeature'`)
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
 5. 打开一个 Pull Request
+
+### 开发规范
+
+- 使用 TypeScript 编写代码
+- 遵循 ESLint 配置
+- 提交信息使用英文，遵循约定式提交规范
+- 组件优先使用函数式写法
+- 优先使用服务端组件，减少客户端组件使用
 
 ## 📄 许可证
 
