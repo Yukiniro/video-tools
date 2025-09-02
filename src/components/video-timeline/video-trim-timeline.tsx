@@ -45,17 +45,6 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
   const timelineRef = useRef<HTMLDivElement>(null)
   const [_, setDragType] = useState<'none' | 'handle' | 'seek'>('none')
 
-  /**
-   * 处理时间轴点击事件，更新当前时间
-   */
-  const handleTimelineClick = (e: React.MouseEvent) => {
-    if (!timelineRef.current || duration === 0)
-      return
-
-    setDragType('seek')
-    updateCurrentTime(e.clientX)
-  }
-
   const updateCurrentTime = (clientX: number) => {
     if (!timelineRef.current)
       return
@@ -66,6 +55,17 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
     const time = percentage * duration
 
     onCurrentTimeChange(time)
+  }
+
+  /**
+   * 处理时间轴点击事件，更新当前时间
+   */
+  const handleTimelineClick = (e: React.MouseEvent) => {
+    if (!timelineRef.current || duration === 0)
+      return
+
+    setDragType('seek')
+    updateCurrentTime(e.clientX)
   }
 
   // 处理拖动开始

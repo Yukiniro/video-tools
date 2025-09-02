@@ -7,8 +7,9 @@ interface DragHandleProps {
 
 /**
  * 拖拽手柄组件
- * @param percentage 位置百分比
- * @param onMouseDown 鼠标按下事件处理函数
+ * @param {object} props - 组件属性
+ * @param {number} props.percentage - 位置百分比
+ * @param {Function} props.onMouseDown - 鼠标按下事件处理函数
  */
 export function DragHandle({ percentage, onMouseDown }: DragHandleProps) {
   return (

@@ -102,8 +102,8 @@ export function CommonProgressDialog({
   closeText,
   retryText,
   errorDetailsText,
-  statusTexts = {},
-  statusDescriptions = {},
+  statusTexts,
+  statusDescriptions,
   onCancel,
   onClose,
   onRetry,
@@ -119,10 +119,14 @@ export function CommonProgressDialog({
   const currentStatus = progress.status || 'converting'
   const isProcessing = currentStatus === 'compressing' || currentStatus === 'converting'
 
+  // 处理默认值
+  const defaultStatusTexts = statusTexts || {}
+  const defaultStatusDescriptions = statusDescriptions || {}
+
   // 获取当前状态的标题和描述
-  const currentTitle = title || statusTexts[currentStatus as keyof typeof statusTexts]
-  const currentDescription = description || statusDescriptions[currentStatus as keyof typeof statusDescriptions]
-  const currentProgessStageText = statusTexts[progress.stage as keyof typeof statusTexts]
+  const currentTitle = title || defaultStatusTexts[currentStatus as keyof typeof defaultStatusTexts]
+  const currentDescription = description || defaultStatusDescriptions[currentStatus as keyof typeof defaultStatusDescriptions]
+  const currentProgessStageText = defaultStatusTexts[progress.stage as keyof typeof defaultStatusTexts]
 
   const handleOpenChange = (newOpen: boolean) => {
     if (onOpenChange) {

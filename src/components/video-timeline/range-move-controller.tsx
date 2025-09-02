@@ -9,8 +9,8 @@ interface RangeMoveControllerProps {
 
 /**
  * 范围移动控制器组件
- * @param isDragging 是否正在拖拽
- * @param onMouseDown 鼠标按下事件处理函数
+ * @param {object} props - 组件属性
+ * @param {Function} props.onMouseDown - 鼠标按下事件处理函数
  */
 export function RangeMoveController({ onMouseDown }: RangeMoveControllerProps) {
   return (

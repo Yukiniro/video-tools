@@ -10,8 +10,9 @@ interface PlayControlButtonProps {
 
 /**
  * 播放控制按钮组件
- * @param isPlaying 是否正在播放
- * @param togglePlay 切换播放状态的回调函数
+ * @param {object} props - 组件属性
+ * @param {boolean} props.isPlaying - 是否正在播放
+ * @param {Function} props.togglePlay - 切换播放状态的回调函数
  */
 export function PlayControlButton({ isPlaying, togglePlay }: PlayControlButtonProps) {
   return (

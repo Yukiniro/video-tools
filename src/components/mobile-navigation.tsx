@@ -1,7 +1,7 @@
 'use client'
 
 import { useSetAtom } from 'jotai'
-import { Video, X } from 'lucide-react'
+import { Video } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useState } from 'react'

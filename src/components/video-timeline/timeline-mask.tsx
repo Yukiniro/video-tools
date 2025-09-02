@@ -7,8 +7,9 @@ interface TimelineMaskProps {
 
 /**
  * 时间轴遮罩组件
- * @param startPercentage 开始位置百分比
- * @param endPercentage 结束位置百分比
+ * @param {object} props - 组件属性
+ * @param {number} props.startPercentage - 开始位置百分比
+ * @param {number} props.endPercentage - 结束位置百分比
  */
 export function TimelineMask({ startPercentage, endPercentage }: TimelineMaskProps) {
   return (
