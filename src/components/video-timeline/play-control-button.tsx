@@ -19,15 +19,16 @@ export function PlayControlButton({ isPlaying, togglePlay }: PlayControlButtonPr
       variant="ghost"
       size="icon"
       onClick={togglePlay}
-      className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-200 group"
+      className="w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-primary/10 hover:bg-primary/20 active:bg-primary/30 transition-colors duration-200 group touch-manipulation select-none"
       title={isPlaying ? '暂停' : '播放'}
+      style={{ touchAction: 'manipulation' }}
     >
       {isPlaying
         ? (
-            <Pause className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-200" />
+            <Pause className="w-6 h-6 sm:w-5 sm:h-5 text-primary group-hover:scale-110 group-active:scale-95 transition-transform duration-200" />
           )
         : (
-            <Play className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-200 ml-0.5" />
+            <Play className="w-6 h-6 sm:w-5 sm:h-5 text-primary group-hover:scale-110 group-active:scale-95 transition-transform duration-200 ml-0.5" />
           )}
     </Button>
   )

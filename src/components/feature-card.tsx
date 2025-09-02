@@ -33,21 +33,21 @@ export function FeatureCard({ icon, title, description, colorVariant }: FeatureC
   const colors = colorClasses[colorVariant]
 
   return (
-    <div className="group relative">
-      <div className={`relative p-8 rounded-2xl border bg-background/50 backdrop-blur-sm transition-all duration-300 group-hover:shadow-xl ${colors.shadow} group-hover:-translate-y-2`}>
-        <div className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity`} />
+    <div className="group relative h-full">
+      <div className={`relative p-6 sm:p-8 rounded-xl sm:rounded-2xl border bg-background/50 backdrop-blur-sm transition-all duration-300 group-hover:shadow-xl ${colors.shadow} group-hover:-translate-y-2 group-active:scale-95 h-full`}>
+        <div className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} to-transparent rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity`} />
 
-        <div className="relative">
-          <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${colors.iconBg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-            <div className={colors.iconColor}>
+        <div className="relative h-full flex flex-col">
+          <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${colors.iconBg} flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform flex-shrink-0`}>
+            <div className={`${colors.iconColor} scale-75 sm:scale-100`}>
               {icon}
             </div>
           </div>
 
-          <h3 className={`text-2xl font-bold mb-4 ${colors.titleHover} transition-colors`}>
+          <h3 className={`text-xl sm:text-2xl font-bold mb-3 sm:mb-4 ${colors.titleHover} transition-colors leading-tight`}>
             {title}
           </h3>
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-muted-foreground leading-relaxed text-sm sm:text-base flex-1">
             {description}
           </p>
         </div>

@@ -8,9 +8,10 @@ interface FileUploadProps {
   onFilesChange: (files: File[]) => void
   accept?: string
   description?: string
+  allowCamera?: boolean
 }
 
-export default function FileUpload({ onFilesChange, accept = 'video/*', description }: FileUploadProps) {
+export default function FileUpload({ onFilesChange, accept = 'video/*', description, allowCamera = false }: FileUploadProps) {
   const t = useTranslations('common')
   const [isDragging, setIsDragging] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
@@ -64,6 +65,22 @@ export default function FileUpload({ onFilesChange, accept = 'video/*', descript
     fileInputRef.current?.click()
   }
 
+  const openCameraDialog = () => {
+    if (allowCamera && accept === 'video/*') {
+      const cameraInput = document.createElement('input')
+      cameraInput.type = 'file'
+      cameraInput.accept = 'video/*'
+      cameraInput.capture = 'environment'
+      cameraInput.onchange = (e) => {
+        const target = e.target as HTMLInputElement
+        if (target.files) {
+          handleFiles(target.files)
+        }
+      }
+      cameraInput.click()
+    }
+  }
+
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleFiles(e.target.files)
     // 重置 input 值，允许重复选择同一文件
@@ -82,7 +99,8 @@ export default function FileUpload({ onFilesChange, accept = 'video/*', descript
           onDragOver={handleDragOver}
           onDrop={handleDrop}
           data-dragging={isDragging || undefined}
-          className="border-input hover:bg-accent/50 data-[dragging=true]:bg-accent/50 has-[input:focus]:border-ring has-[input:focus]:ring-ring/50 relative flex min-h-96 flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed p-4 transition-colors has-disabled:pointer-events-none has-disabled:opacity-50 has-[img]:border-none has-[input:focus]:ring-[3px]"
+          className="border-input hover:bg-accent/50 data-[dragging=true]:bg-accent/50 has-[input:focus]:border-ring has-[input:focus]:ring-ring/50 relative flex min-h-64 sm:min-h-80 lg:min-h-96 flex-col items-center justify-center overflow-hidden rounded-lg sm:rounded-xl border border-dashed p-3 sm:p-4 transition-colors has-disabled:pointer-events-none has-disabled:opacity-50 has-[img]:border-none has-[input:focus]:ring-[3px] touch-manipulation select-none"
+          style={{ touchAction: 'manipulation' }}
         >
           <input
             ref={fileInputRef}
@@ -93,16 +111,39 @@ export default function FileUpload({ onFilesChange, accept = 'video/*', descript
             className="sr-only"
             aria-label="Upload file"
           />
-          <div className="flex flex-col items-center justify-center px-4 py-3 text-center">
+          <div className="flex flex-col items-center justify-center px-2 sm:px-4 py-3 text-center">
             <div
-              className="bg-background mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border"
+              className="bg-background mb-2 flex size-12 sm:size-11 shrink-0 items-center justify-center rounded-full border"
               aria-hidden="true"
             >
-              <ImageUpIcon className="size-4 opacity-60" />
+              <ImageUpIcon className="size-5 sm:size-4 opacity-60" />
             </div>
-            <p className="mb-1.5 text-sm font-medium">
+            <p className="mb-1.5 text-sm sm:text-sm font-medium leading-relaxed">
               {description || t('dropYourVideoHereOrClickToBrowse')}
             </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              支持拖拽或点击选择文件
+            </p>
+            {allowCamera && accept === 'video/*' && (
+              <div className="mt-3 flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={openFileDialog}
+                  className="text-xs h-8 min-h-[32px]"
+                >
+                  选择文件
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={openCameraDialog}
+                  className="text-xs h-8 min-h-[32px]"
+                >
+                  拍摄视频
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

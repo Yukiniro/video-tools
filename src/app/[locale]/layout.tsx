@@ -29,6 +29,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       template: `%s | Video Tools`,
     },
     description: t('description'),
+    viewport: {
+      width: 'device-width',
+      initialScale: 1,
+      maximumScale: 5,
+      userScalable: true,
+      viewportFit: 'cover',
+    },
     keywords: [
       '视频工具',
       '视频转换',
@@ -134,6 +141,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'theme-color': '#0f172a',
       'color-scheme': 'dark light',
       'format-detection': 'telephone=no',
+      'mobile-web-app-capable': 'yes',
+      'apple-mobile-web-app-capable': 'yes',
+      'apple-mobile-web-app-status-bar-style': 'default',
+      'apple-mobile-web-app-title': 'Video Tools',
     },
   }
 }
