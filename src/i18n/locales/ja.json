@@ -236,8 +236,11 @@
     "trimCancelledDescription": "動画トリム操作がキャンセルされました",
     "cancelTrim": "トリムをキャンセル",
     "retryTrim": "トリムを再試行",
+    "exportVideo": "動画をエクスポート",
+    "dropYourVideoHereOrClickToBrowse": "動画をここにドロップするかクリックして参照",
     "supportedFormats": "MP4、AVI、MOV、WMVなどの形式をサポート、最大500MB",
     "config": {
+      "title": "トリム設定",
       "startTime": "開始時間",
       "endTime": "終了時間",
       "startTimeDesc": "トリム開始時間（秒）",

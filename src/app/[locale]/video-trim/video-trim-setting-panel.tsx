@@ -35,7 +35,7 @@ export function VideoTrimSettingPanel() {
           className="w-full"
           size="lg"
         >
-          {progress.isProcessing ? '正在裁剪...' : '导出视频'}
+          {progress.isProcessing ? t('trimming') : t('exportVideo')}
         </Button>
       </div>
     </div>

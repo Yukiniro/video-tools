@@ -100,29 +100,6 @@ export default function VideoTrimPage() {
                 />
               </div>
             )}
-
-            {/* 移动端提示信息 */}
-            {isMobile && (
-              <div className="w-full max-w-5xl mx-auto px-2 sm:px-0">
-                <div className="bg-muted/50 border border-muted rounded-lg p-6 text-center">
-                  <div className="flex flex-col items-center gap-3">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-2">移动端时间轴功能</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        时间轴裁剪功能在移动端暂不可用，请在桌面端使用以获得完整功能体验。
-                        <br />
-                        您仍可以使用右侧的设置面板来调整开始和结束时间。
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         )}
       </div>
