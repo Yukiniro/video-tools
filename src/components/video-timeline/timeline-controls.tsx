@@ -50,63 +50,63 @@ export function TimelineControls({
    * @param type 拖动类型
    * @param initialOffset 初始偏移量（仅用于范围拖动）
    */
-  const handleDragStart = (type: 'start' | 'end' | 'range', initialOffset = 0) => (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-
-    if (!timelineRef.current)
-      return
-
-    isDraggingRef.current = type
-    dragOffsetRef.current = initialOffset
-
-    onChangeStart?.(type)
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!timelineRef.current || !isDraggingRef.current)
+  const handleDragStart = (type: 'start' | 'end' | 'range', initialOffset = 0) => {
+    return (e: React.MouseEvent) => {
+      if (!timelineRef.current)
         return
 
-      const rect = timelineRef.current.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+      e.preventDefault()
+      isDraggingRef.current = type
+      dragOffsetRef.current = initialOffset
+      onChangeStart?.(type)
 
-      if (isDraggingRef.current === 'range') {
-        const rangeDuration = endPercentage - startPercentage
-        const adjustedPercentage = percentage - dragOffsetRef.current
-        const newStartPercentage = Math.max(0, Math.min(adjustedPercentage, 100 - rangeDuration))
-        onChange?.(type, newStartPercentage)
+      const handleMouseMove = (e: MouseEvent) => {
+        if (!timelineRef.current || !isDraggingRef.current)
+          return
+
+        const rect = timelineRef.current.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+
+        if (isDraggingRef.current === 'range') {
+          const rangeDuration = endPercentage - startPercentage
+          const adjustedPercentage = percentage - dragOffsetRef.current
+          const newStartPercentage = Math.max(0, Math.min(adjustedPercentage, 100 - rangeDuration))
+          onChange?.(type, newStartPercentage)
+        }
+        else {
+          onChange?.(type, percentage)
+        }
       }
-      else {
-        onChange?.(type, percentage)
+
+      const handleMouseUp = (e: MouseEvent) => {
+        if (!timelineRef.current || !isDraggingRef.current)
+          return
+
+        const rect = timelineRef.current.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+
+        if (isDraggingRef.current === 'range') {
+          const rangeDuration = endPercentage - startPercentage
+          const adjustedPercentage = percentage - dragOffsetRef.current
+          const newStartPercentage = Math.max(0, Math.min(adjustedPercentage, 100 - rangeDuration))
+          onChangeEnd?.(type, newStartPercentage)
+        }
+        else {
+          onChangeEnd?.(type, percentage)
+        }
+
+        isDraggingRef.current = null
+        dragOffsetRef.current = 0
+
+        document.removeEventListener('mousemove', handleMouseMove)
+        document.removeEventListener('mouseup', handleMouseUp)
       }
+
+      document.addEventListener('mousemove', handleMouseMove)
+      document.addEventListener('mouseup', handleMouseUp)
     }
-
-    const handleMouseUp = (e: MouseEvent) => {
-      if (!timelineRef.current || !isDraggingRef.current)
-        return
-
-      const rect = timelineRef.current.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
-
-      if (isDraggingRef.current === 'range') {
-        const rangeDuration = endPercentage - startPercentage
-        const adjustedPercentage = percentage - dragOffsetRef.current
-        const newStartPercentage = Math.max(0, Math.min(adjustedPercentage, 100 - rangeDuration))
-        onChangeEnd?.(type, newStartPercentage)
-      }
-      else {
-        onChangeEnd?.(type, percentage)
-      }
-
-      isDraggingRef.current = null
-      dragOffsetRef.current = 0
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleMouseUp)
-    }
-
-    document.addEventListener('mousemove', handleMouseMove)
-    document.addEventListener('mouseup', handleMouseUp)
   }
 
   /**
@@ -134,8 +134,8 @@ export function TimelineControls({
     >
       {/* 范围移动控制器 - 顶部居中 */}
       <div
-        className="absolute top-[-12px] left-1/2 transform -translate-x-1/2 flex items-center justify-center bg-gradient-to-b from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-300 dark:hover:to-blue-400 cursor-ew-resize z-30 shadow-lg hover:shadow-xl rounded-t-sm pointer-events-auto w-[32px] h-[12px]"
-        onMouseDown={e => handleRangeDragStart(e)}
+        className="absolute top-[-12px] left-1/2 transform -translate-x-1/2 flex items-center justify-center bg-gradient-to-b from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-300 dark:hover:to-blue-400 cursor-ew-resize z-30 shadow-lg hover:shadow-xl rounded-t-sm pointer-events-auto"
+        onMouseDown={handleRangeDragStart}
       >
         {/* 条形控制器中间的抓手指示线 */}
         <div className="flex items-center justify-center gap-0.5">

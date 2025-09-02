@@ -11,6 +11,7 @@ import { ToolPageTemplate } from '@/components/tool-page-template'
 import { VideoPreview } from '@/components/video-preview'
 import { VideoTrimTimeline } from '@/components/video-timeline'
 import { VideoTrimProgressDialog } from '@/components/video-trim-progress-dialog'
+import { isMobileDevice } from '@/utils/device-detection'
 import { VideoTrimSettingPanel } from './video-trim-setting-panel'
 
 export default function VideoTrimPage() {
@@ -23,6 +24,7 @@ export default function VideoTrimPage() {
 
   const showUpload = files.length === 0
   const showPreview = files.length > 0
+  const isMobile = isMobileDevice()
 
   const videoPreviewRef = useRef<VideoPreviewRef | null>(null)
 
@@ -70,32 +72,34 @@ export default function VideoTrimPage() {
           <FileUpload onFilesChange={uploadVideoTrimFiles} />
         )}
         {showPreview && (
-          <div className="space-y-6">
-            <div className="flex flex-col lg:flex-row lg:gap-12 lg:justify-center">
-              <div className="flex-2">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="flex flex-col xl:flex-row xl:gap-8 xl:justify-center">
+              <div className="w-full xl:flex-2 xl:max-w-2xl">
                 <VideoPreview ref={videoPreviewRef} file={files[0]} onTimeUpdate={setCurrentTime} showControls={false} />
               </div>
-              <div className="flex-1">
+              <div className="w-full xl:flex-1 xl:max-w-md mt-4 xl:mt-0">
                 <VideoTrimSettingPanel />
               </div>
             </div>
 
-            {/* 时间轴裁剪组件 */}
-            <div className="max-w-4xl mx-auto">
-              <VideoTrimTimeline
-                isPlaying={isPlay}
-                file={files[0]}
-                currentTime={currentTime}
-                duration={duration}
-                startTime={config.startTime}
-                endTime={config.endTime}
-                onCurrentTimeChange={handleCurrentTimeChange}
-                onStartTimeChange={handleStartTimeChange}
-                onEndTimeChange={handleEndTimeChange}
-                onRangeMove={handleRangeMove}
-                togglePlay={handleTogglePlay}
-              />
-            </div>
+            {/* 时间轴裁剪组件 - 移动端隐藏 */}
+            {!isMobile && (
+              <div className="w-full max-w-5xl mx-auto px-2 sm:px-0">
+                <VideoTrimTimeline
+                  isPlaying={isPlay}
+                  file={files[0]}
+                  currentTime={currentTime}
+                  duration={duration}
+                  startTime={config.startTime}
+                  endTime={config.endTime}
+                  onCurrentTimeChange={handleCurrentTimeChange}
+                  onStartTimeChange={handleStartTimeChange}
+                  onEndTimeChange={handleEndTimeChange}
+                  onRangeMove={handleRangeMove}
+                  togglePlay={handleTogglePlay}
+                />
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -7,14 +7,18 @@ interface DragHandleProps {
 
 /**
  * 拖拽手柄组件
- * @param percentage 位置百分比
- * @param onMouseDown 鼠标按下事件处理函数
+ * @param {object} props - 组件属性
+ * @param {number} props.percentage - 位置百分比
+ * @param {Function} props.onMouseDown - 鼠标按下事件处理函数
  */
 export function DragHandle({ percentage, onMouseDown }: DragHandleProps) {
   return (
     <div
       className="absolute top-0 bottom-0 w-3 bg-blue-500 cursor-ew-resize z-20 shadow-lg rounded-xs group"
-      style={{ left: `${percentage}%`, transform: 'translateX(-50%)' }}
+      style={{
+        left: `${percentage}%`,
+        transform: 'translateX(-50%)',
+      }}
       onMouseDown={onMouseDown}
     >
       {/* 拖动条中间指示线 */}

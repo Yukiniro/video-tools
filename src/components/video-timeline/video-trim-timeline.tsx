@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -27,6 +28,7 @@ interface VideoTrimTimelineProps {
 }
 
 export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
+  const t = useTranslations('videoTimeline')
   const {
     file,
     isPlaying,
@@ -34,7 +36,7 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
     duration,
     startTime,
     endTime,
-    title = '时间轴裁剪',
+    title,
     togglePlay,
     onCurrentTimeChange,
     onStartTimeChange,
@@ -42,50 +44,32 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
     onRangeMove,
   } = props
 
+  const displayTitle = title || t('timelineTrim')
+
   const timelineRef = useRef<HTMLDivElement>(null)
   const [_, setDragType] = useState<'none' | 'handle' | 'seek'>('none')
 
+  const updateCurrentTime = (clientX: number) => {
+    if (!timelineRef.current)
+      return
+
+    const rect = timelineRef.current.getBoundingClientRect()
+    const x = clientX - rect.left
+    const percentage = Math.max(0, Math.min(1, x / rect.width))
+    const time = percentage * duration
+
+    onCurrentTimeChange(time)
+  }
+
   /**
-   * 处理时间轴鼠标按下事件，支持点击和拖动更新当前时间
-   * @param e 鼠标事件
+   * 处理时间轴点击事件，更新当前时间
    */
-  const handleTimelineMouseDown = (e: React.MouseEvent) => {
+  const handleTimelineClick = (e: React.MouseEvent) => {
     if (!timelineRef.current || duration === 0)
       return
 
     setDragType('seek')
-
-    e.preventDefault()
-    e.stopPropagation()
-
-    const updateCurrentTime = (clientX: number) => {
-      if (!timelineRef.current)
-        return
-
-      const rect = timelineRef.current.getBoundingClientRect()
-      const x = clientX - rect.left
-      const percentage = Math.max(0, Math.min(1, x / rect.width))
-      const time = percentage * duration
-
-      onCurrentTimeChange(time)
-    }
-
-    // 初始点击时更新时间
     updateCurrentTime(e.clientX)
-
-    // 处理拖动
-    const handleMouseMove = (e: MouseEvent) => {
-      updateCurrentTime(e.clientX)
-    }
-
-    const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleMouseUp)
-      setDragType('none')
-    }
-
-    document.addEventListener('mousemove', handleMouseMove)
-    document.addEventListener('mouseup', handleMouseUp)
   }
 
   // 处理拖动开始
@@ -134,26 +118,30 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-lg flex items-center justify-between">
-          <span>{title}</span>
-          <PlayControlButton isPlaying={isPlaying} togglePlay={togglePlay} />
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+      <CardHeader className="pb-3 sm:pb-6">
+        <CardTitle className="text-base sm:text-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
+          <div className="flex items-center justify-between sm:justify-start">
+            <span className="text-sm sm:text-base">{displayTitle}</span>
+            <PlayControlButton isPlaying={isPlaying} togglePlay={togglePlay} />
+          </div>
+          <div className="flex items-center justify-center sm:justify-end text-xs sm:text-sm text-muted-foreground">
             <span>
-              选中时长:
+              {t('selectedDuration')}
+              :
+              {' '}
               {formatTime(selectedDuration)}
             </span>
           </div>
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 sm:space-y-4 pt-0">
 
         {/* 时间轴 */}
-        <div className="space-y-3">
+        <div className="space-y-2 sm:space-y-3">
           <div
             ref={timelineRef}
-            className="relative h-16 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 rounded-xl cursor-pointer shadow-inner border border-slate-200 dark:border-slate-600"
-            onMouseDown={handleTimelineMouseDown}
+            className="relative h-12 sm:h-16 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 rounded-lg sm:rounded-xl cursor-pointer shadow-inner border border-slate-200 dark:border-slate-600"
+            onMouseDown={handleTimelineClick}
           >
             {/* 背景轨道 */}
             <div className="absolute inset-0 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700" />

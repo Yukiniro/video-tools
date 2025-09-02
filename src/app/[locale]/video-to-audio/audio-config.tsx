@@ -14,9 +14,9 @@ const FORMAT_OPTIONS = [
 ]
 
 const QUALITY_OPTIONS = [
-  { value: 'high', label: '高质量' },
-  { value: 'medium', label: '中等质量' },
-  { value: 'low', label: '低质量' },
+  { value: 'high', label: 'high' },
+  { value: 'medium', label: 'medium' },
+  { value: 'low', label: 'low' },
 ]
 
 export function AudioConfig() {
@@ -50,7 +50,10 @@ export function AudioConfig() {
         {/* 音频质量选择 */}
         <SegmentedControl
           label={t('quality')}
-          options={QUALITY_OPTIONS}
+          options={QUALITY_OPTIONS.map(opt => ({
+            ...opt,
+            label: t(`qualityOptions.${opt.value}`),
+          }))}
           value={config.quality}
           onChange={handleQualityChange}
         />

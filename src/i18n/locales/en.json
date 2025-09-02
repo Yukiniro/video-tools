@@ -236,8 +236,11 @@
     "trimCancelledDescription": "Video trimming operation has been cancelled",
     "cancelTrim": "Cancel Trimming",
     "retryTrim": "Retry Trim",
+    "exportVideo": "Export Video",
+    "dropYourVideoHereOrClickToBrowse": "Drop your video here or click to browse",
     "supportedFormats": "Supports MP4, AVI, MOV, WMV and other formats, max 500MB",
     "config": {
+      "title": "Trim Settings",
       "startTime": "Start Time",
       "endTime": "End Time",
       "startTimeDesc": "Trim start time (seconds)",
@@ -479,5 +482,35 @@
   "metadata": {
     "title": "Video Tools - Professional Online Video Processing Tools",
     "description": "Free online video processing tool collection, supporting video to GIF, GIF to video, video transcoding, video compression, video trimming, audio extraction, video speed adjustment and more."
+  },
+  "fileUpload": {
+    "selectVideoFile": "Please select a video file",
+    "selectGifFile": "Please select a GIF file",
+    "dragOrClick": "Support drag and drop or click to select files",
+    "selectFile": "Select File",
+    "recordVideo": "Record Video"
+  },
+  "videoTimeline": {
+    "play": "Play",
+    "pause": "Pause",
+    "timelineTrim": "Timeline Trim",
+    "selectedDuration": "Selected Duration"
+  },
+  "layout": {
+    "keywords": {
+      "videoTools": "video tools",
+      "videoConvert": "video converter",
+      "gifConvert": "gif converter",
+      "videoCompress": "video compression",
+      "videoTrim": "video trimming",
+      "audioExtract": "audio extraction",
+      "videoInfo": "video information",
+      "videoSpeed": "video speed"
+    }
+  },
+  "errors": {
+    "conversionFailed": "Conversion failed",
+    "speedChangeFailed": "Speed change failed",
+    "startTimeGreaterThanEndTime": "Start time must be less than end time"
   }
 }

@@ -19,6 +19,7 @@ interface RootLayoutProps {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'metadata' })
+  const tLayout = await getTranslations({ locale, namespace: 'layout' })
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://video-tools.vercel.app'
   const currentUrl = `${baseUrl}/${locale}`
@@ -29,13 +30,20 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       template: `%s | Video Tools`,
     },
     description: t('description'),
+    viewport: {
+      width: 'device-width',
+      initialScale: 1,
+      maximumScale: 5,
+      userScalable: true,
+      viewportFit: 'cover',
+    },
     keywords: [
-      '视频工具',
-      '视频转换',
-      'GIF转换',
-      '视频压缩',
-      '视频裁剪',
-      '音频提取',
+      tLayout('keywords.videoTools'),
+      tLayout('keywords.videoConvert'),
+      tLayout('keywords.gifConvert'),
+      tLayout('keywords.videoCompress'),
+      tLayout('keywords.videoTrim'),
+      tLayout('keywords.audioExtract'),
       'video tools',
       'video converter',
       'gif converter',
@@ -44,10 +52,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'audio extraction',
       'online video tools',
       'free video tools',
-      '動画ツール',
-      '動画変換',
-      'GIF変換',
-      '動画圧縮',
     ],
     authors: [{ name: 'Yukiniro', url: 'https://github.com/yukiniro' }],
     creator: 'Yukiniro',
@@ -134,6 +138,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'theme-color': '#0f172a',
       'color-scheme': 'dark light',
       'format-detection': 'telephone=no',
+      'mobile-web-app-capable': 'yes',
+      'apple-mobile-web-app-capable': 'yes',
+      'apple-mobile-web-app-status-bar-style': 'default',
+      'apple-mobile-web-app-title': 'Video Tools',
     },
   }
 }
@@ -191,6 +199,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
       <head>
         <script
           type="application/ld+json"
+          // eslint-disable-next-line react-dom/no-dangerously-set-innerhtml
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>

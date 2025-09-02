@@ -25,28 +25,43 @@ export default function VideoInfoPage() {
   useEffect(() => {
     if (files.length > 0) {
       const handleAnalyzeVideo = async () => {
+        try {
+          const info = await analyzeVideo(files[0])
+          return { info, error: null }
+        }
+        catch (err) {
+          console.error('Error analyzing video:', err)
+          const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred'
+          return { info: null, error: errorMessage }
+        }
+      }
+
+      const processVideo = async () => {
+        const result = await handleAnalyzeVideo()
+        return result
+      }
+
+      const initializeVideoProcessing = async () => {
         setIsAnalyzing(true)
         setError(undefined)
         setVideoInfo(null)
 
-        try {
-          const info = await analyzeVideo(files[0])
-          setVideoInfo(info)
-        }
-        catch (err) {
-          console.error('Error analyzing video:', err)
-          setError(err instanceof Error ? err.message : 'Unknown error occurred')
-        }
-        finally {
-          setIsAnalyzing(false)
-        }
+        const result = await processVideo()
+        setVideoInfo(result.info)
+        setError(result.error ?? undefined)
+        setIsAnalyzing(false)
       }
 
-      handleAnalyzeVideo()
+      initializeVideoProcessing()
     }
     else {
-      setVideoInfo(null)
-      setError(undefined)
+      const clearVideoInfo = () => {
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+        setVideoInfo(null)
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+        setError(undefined)
+      }
+      clearVideoInfo()
     }
   }, [files])
 

@@ -91,7 +91,7 @@ export const convertToAudioAtom = atom(
           error: translations('conversionError'),
         })
         toast.error(translations('conversionError'))
-        console.error('转换失败:', error)
+        console.error('Conversion failed:', error)
       }
     }
     finally {

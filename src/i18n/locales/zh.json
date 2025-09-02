@@ -221,8 +221,13 @@
   "videoTrim": {
     "title": "视频裁剪",
     "description": "精确控制时间范围的视频片段裁剪",
+    "trimVideo": "裁剪视频",
     "trimming": "裁剪中...",
+    "clickToTrim": "点击按钮开始裁剪视频",
     "trimmingInProgress": "正在裁剪视频，请稍候...",
+    "preparingTrim": "准备裁剪",
+    "processingVideo": "处理视频中",
+    "generatingVideo": "生成视频中",
     "trimCompleted": "裁剪完成",
     "trimFailed": "裁剪失败",
     "trimCancelled": "裁剪已取消",
@@ -232,25 +237,31 @@
     "cancelTrim": "取消裁剪",
     "retryTrim": "重试裁剪",
     "exportVideo": "导出视频",
-    "clickToTrim": "点击按钮开始裁剪视频",
     "dropYourVideoHereOrClickToBrowse": "将视频拖放到此处或单击浏览",
     "supportedFormats": "支持 MP4、AVI、MOV、WMV 等格式，最大 500MB",
     "config": {
       "title": "裁剪设置",
       "startTime": "开始时间",
       "endTime": "结束时间",
+      "startTimeDesc": "裁剪开始时间（秒）",
+      "endTimeDesc": "裁剪结束时间（秒）",
+      "endTimePlaceholder": "视频结尾",
       "resolution": "输出分辨率",
       "frameRate": "帧率",
-      "keepAudio": "保留音频",
+      "enableAudio": "保留音频",
       "480P": "480P (854×480)",
       "720P": "720P (1280×720)",
       "1080P": "1080P (1920×1080)",
-      "30fps": "30 FPS",
-      "60fps": "60 FPS"
+      "30FPS": "30 FPS",
+      "60FPS": "60 FPS"
     },
     "timeline": {
       "title": "时间轴裁剪",
+      "currentTime": "当前时间",
       "selectedDuration": "选中时长",
+      "trimRange": "裁剪范围",
+      "playPause": "播放/暂停",
+      "dragToAdjust": "拖拽调整裁剪范围",
       "play": "播放",
       "pause": "暂停",
       "seekToStart": "跳转到开始",
@@ -263,6 +274,7 @@
       "endTimeGreaterThanDuration": "结束时间不能超过视频总时长"
     },
     "tips": {
+      "preciseControl": "使用时间轴精确控制裁剪范围",
       "resolutionQuality": "更高的分辨率提供更清晰的画质，但文件更大",
       "frameRateSmooth": "更高的帧率提供更流畅的播放效果",
       "audioOption": "可选择是否保留音频轨道",
@@ -477,5 +489,35 @@
   "metadata": {
     "title": "视频工具 - 专业的在线视频处理工具",
     "description": "免费的在线视频处理工具集合，支持视频转GIF、GIF转视频、视频转码、视频压缩、视频裁剪、音频提取、视频变速等功能。"
+  },
+  "fileUpload": {
+    "selectVideoFile": "请选择视频文件",
+    "selectGifFile": "请选择 GIF 文件",
+    "dragOrClick": "支持拖拽或点击选择文件",
+    "selectFile": "选择文件",
+    "recordVideo": "拍摄视频"
+  },
+  "videoTimeline": {
+    "play": "播放",
+    "pause": "暂停",
+    "timelineTrim": "时间轴裁剪",
+    "selectedDuration": "选中时长"
+  },
+  "layout": {
+    "keywords": {
+      "videoTools": "视频工具",
+      "videoConvert": "视频转换",
+      "gifConvert": "GIF转换",
+      "videoCompress": "视频压缩",
+      "videoTrim": "视频裁剪",
+      "audioExtract": "音频提取",
+      "videoInfo": "视频信息查看",
+      "videoSpeed": "视频变速"
+    }
+  },
+  "errors": {
+    "conversionFailed": "转换失败",
+    "speedChangeFailed": "变速失败",
+    "startTimeGreaterThanEndTime": "开始时间必须小于结束时间"
   }
 }

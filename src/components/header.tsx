@@ -1,11 +1,12 @@
 'use client'
 
 import { useSetAtom } from 'jotai'
-import { ChevronDown, Menu, Video } from 'lucide-react'
+import { ChevronDown, Video } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { resetAllStatesAtom } from '@/atoms'
 import { LanguageDropdown } from '@/components/language-dropdown'
+import { MobileNavigation } from '@/components/mobile-navigation'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 
@@ -88,11 +89,8 @@ export function Header({ locale }: HeaderProps) {
         </nav>
 
         <div className="flex flex-1 items-center justify-end space-x-2">
-          {/* Mobile Menu Button */}
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <Menu className="h-4 w-4" />
-            <span className="sr-only">Menu</span>
-          </Button>
+          {/* Mobile Navigation */}
+          <MobileNavigation locale={locale} />
 
           {/* Theme Toggle */}
           <ThemeToggle />
