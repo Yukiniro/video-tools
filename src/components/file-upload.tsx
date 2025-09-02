@@ -3,6 +3,7 @@
 import { AlertCircleIcon, ImageUpIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
+import { Button } from '@/components/ui/button'
 
 interface FileUploadProps {
   onFilesChange: (files: File[]) => void
@@ -13,6 +14,7 @@ interface FileUploadProps {
 
 export default function FileUpload({ onFilesChange, accept = 'video/*', description, allowCamera = false }: FileUploadProps) {
   const t = useTranslations('common')
+  const tFileUpload = useTranslations('fileUpload')
   const [isDragging, setIsDragging] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -25,11 +27,11 @@ export default function FileUpload({ onFilesChange, accept = 'video/*', descript
     const validFiles = fileArray.filter((file) => {
       // 根据 accept 属性验证文件类型
       if (accept === 'video/*' && !file.type.startsWith('video/')) {
-        setErrors(['请选择视频文件'])
+        setErrors([tFileUpload('selectVideoFile')])
         return false
       }
       if (accept === 'image/gif' && file.type !== 'image/gif') {
-        setErrors(['请选择 GIF 文件'])
+        setErrors([tFileUpload('selectGifFile')])
         return false
       }
       return true
@@ -122,7 +124,7 @@ export default function FileUpload({ onFilesChange, accept = 'video/*', descript
               {description || t('dropYourVideoHereOrClickToBrowse')}
             </p>
             <p className="text-xs text-muted-foreground mt-1">
-              支持拖拽或点击选择文件
+              {tFileUpload('dragOrClick')}
             </p>
             {allowCamera && accept === 'video/*' && (
               <div className="mt-3 flex gap-2">
@@ -132,7 +134,7 @@ export default function FileUpload({ onFilesChange, accept = 'video/*', descript
                   onClick={openFileDialog}
                   className="text-xs h-8 min-h-[32px]"
                 >
-                  选择文件
+                  {tFileUpload('selectFile')}
                 </Button>
                 <Button
                   variant="outline"
@@ -140,7 +142,7 @@ export default function FileUpload({ onFilesChange, accept = 'video/*', descript
                   onClick={openCameraDialog}
                   className="text-xs h-8 min-h-[32px]"
                 >
-                  拍摄视频
+                  {tFileUpload('recordVideo')}
                 </Button>
               </div>
             )}

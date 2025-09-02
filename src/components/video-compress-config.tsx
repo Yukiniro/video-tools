@@ -13,18 +13,18 @@ import { Separator } from '@/components/ui/separator'
 import { getVideoInfo } from '@/store'
 
 const QUALITY_OPTIONS = [
-  { value: 'high', label: '高质量' },
-  { value: 'medium', label: '中等质量' },
-  { value: 'low', label: '低质量' },
-  { value: 'custom', label: '自定义' },
+  { value: 'high', label: 'high' },
+  { value: 'medium', label: 'medium' },
+  { value: 'low', label: 'low' },
+  { value: 'custom', label: 'custom' },
 ]
 
 const RESOLUTION_OPTIONS = [
-  { value: 'original', label: '原始分辨率' },
+  { value: 'original', label: 'original' },
   { value: '1080P', label: '1080P' },
   { value: '720P', label: '720P' },
   { value: '480P', label: '480P' },
-  { value: 'custom', label: '自定义' },
+  { value: 'custom', label: 'custom' },
 ]
 
 export function VideoCompressConfig() {

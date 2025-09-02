@@ -489,5 +489,35 @@
   "metadata": {
     "title": "视频工具 - 专业的在线视频处理工具",
     "description": "免费的在线视频处理工具集合，支持视频转GIF、GIF转视频、视频转码、视频压缩、视频裁剪、音频提取、视频变速等功能。"
+  },
+  "fileUpload": {
+    "selectVideoFile": "请选择视频文件",
+    "selectGifFile": "请选择 GIF 文件",
+    "dragOrClick": "支持拖拽或点击选择文件",
+    "selectFile": "选择文件",
+    "recordVideo": "拍摄视频"
+  },
+  "videoTimeline": {
+    "play": "播放",
+    "pause": "暂停",
+    "timelineTrim": "时间轴裁剪",
+    "selectedDuration": "选中时长"
+  },
+  "layout": {
+    "keywords": {
+      "videoTools": "视频工具",
+      "videoConvert": "视频转换",
+      "gifConvert": "GIF转换",
+      "videoCompress": "视频压缩",
+      "videoTrim": "视频裁剪",
+      "audioExtract": "音频提取",
+      "videoInfo": "视频信息查看",
+      "videoSpeed": "视频变速"
+    }
+  },
+  "errors": {
+    "conversionFailed": "转换失败",
+    "speedChangeFailed": "变速失败",
+    "startTimeGreaterThanEndTime": "开始时间必须小于结束时间"
   }
 }

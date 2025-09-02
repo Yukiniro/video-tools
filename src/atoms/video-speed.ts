@@ -100,7 +100,7 @@ export const processVideoSpeedAtom = atom(
           error: translations('speedChangeError'),
         })
         toast.error(translations('speedChangeError'))
-        console.error('变速失败:', error)
+        console.error('Speed change failed:', error)
       }
     }
     finally {

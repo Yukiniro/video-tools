@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -27,6 +28,7 @@ interface VideoTrimTimelineProps {
 }
 
 export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
+  const t = useTranslations('videoTimeline')
   const {
     file,
     isPlaying,
@@ -34,13 +36,15 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
     duration,
     startTime,
     endTime,
-    title = '时间轴裁剪',
+    title,
     togglePlay,
     onCurrentTimeChange,
     onStartTimeChange,
     onEndTimeChange,
     onRangeMove,
   } = props
+
+  const displayTitle = title || t('timelineTrim')
 
   const timelineRef = useRef<HTMLDivElement>(null)
   const [_, setDragType] = useState<'none' | 'handle' | 'seek'>('none')
@@ -117,12 +121,13 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
       <CardHeader className="pb-3 sm:pb-6">
         <CardTitle className="text-base sm:text-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
           <div className="flex items-center justify-between sm:justify-start">
-            <span className="text-sm sm:text-base">{title}</span>
+            <span className="text-sm sm:text-base">{displayTitle}</span>
             <PlayControlButton isPlaying={isPlaying} togglePlay={togglePlay} />
           </div>
           <div className="flex items-center justify-center sm:justify-end text-xs sm:text-sm text-muted-foreground">
             <span>
-              选中时长:
+              {t('selectedDuration')}
+              :
               {' '}
               {formatTime(selectedDuration)}
             </span>

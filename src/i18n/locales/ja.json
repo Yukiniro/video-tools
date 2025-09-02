@@ -482,5 +482,35 @@
   "metadata": {
     "title": "ビデオツール - プロフェッショナルなオンライン動画処理ツール",
     "description": "無料のオンライン動画処理ツールコレクション。動画からGIF、GIFから動画、動画トランスコーディング、動画圧縮、動画トリミング、音声抽出、動画速度調整などの機能をサポート。"
+  },
+  "fileUpload": {
+    "selectVideoFile": "動画ファイルを選択してください",
+    "selectGifFile": "GIFファイルを選択してください",
+    "dragOrClick": "ドラッグ&ドロップまたはクリックでファイルを選択",
+    "selectFile": "ファイルを選択",
+    "recordVideo": "動画を撮影"
+  },
+  "videoTimeline": {
+    "play": "再生",
+    "pause": "一時停止",
+    "timelineTrim": "タイムライントリム",
+    "selectedDuration": "選択された時間"
+  },
+  "layout": {
+    "keywords": {
+      "videoTools": "動画ツール",
+      "videoConvert": "動画変換",
+      "gifConvert": "GIF変換",
+      "videoCompress": "動画圧縮",
+      "videoTrim": "動画トリミング",
+      "audioExtract": "音声抽出",
+      "videoInfo": "動画情報表示",
+      "videoSpeed": "動画速度調整"
+    }
+  },
+  "errors": {
+    "conversionFailed": "変換に失敗しました",
+    "speedChangeFailed": "速度変更に失敗しました",
+    "startTimeGreaterThanEndTime": "開始時間は終了時間より小さくする必要があります"
   }
 }

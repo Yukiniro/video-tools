@@ -19,6 +19,7 @@ interface RootLayoutProps {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'metadata' })
+  const tLayout = await getTranslations({ locale, namespace: 'layout' })
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://video-tools.vercel.app'
   const currentUrl = `${baseUrl}/${locale}`
@@ -37,12 +38,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       viewportFit: 'cover',
     },
     keywords: [
-      '视频工具',
-      '视频转换',
-      'GIF转换',
-      '视频压缩',
-      '视频裁剪',
-      '音频提取',
+      tLayout('keywords.videoTools'),
+      tLayout('keywords.videoConvert'),
+      tLayout('keywords.gifConvert'),
+      tLayout('keywords.videoCompress'),
+      tLayout('keywords.videoTrim'),
+      tLayout('keywords.audioExtract'),
       'video tools',
       'video converter',
       'gif converter',
@@ -51,10 +52,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'audio extraction',
       'online video tools',
       'free video tools',
-      '動画ツール',
-      '動画変換',
-      'GIF変換',
-      '動画圧縮',
     ],
     authors: [{ name: 'Yukiniro', url: 'https://github.com/yukiniro' }],
     creator: 'Yukiniro',

@@ -1,6 +1,7 @@
 'use client'
 
 import { Pause, Play } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 
 interface PlayControlButtonProps {
@@ -15,13 +16,15 @@ interface PlayControlButtonProps {
  * @param {Function} props.togglePlay - 切换播放状态的回调函数
  */
 export function PlayControlButton({ isPlaying, togglePlay }: PlayControlButtonProps) {
+  const t = useTranslations('videoTimeline')
+
   return (
     <Button
       variant="ghost"
       size="icon"
       onClick={togglePlay}
       className="w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-primary/10 hover:bg-primary/20 active:bg-primary/30 transition-colors duration-200 group touch-manipulation select-none"
-      title={isPlaying ? '暂停' : '播放'}
+      title={isPlaying ? t('pause') : t('play')}
       style={{ touchAction: 'manipulation' }}
     >
       {isPlaying

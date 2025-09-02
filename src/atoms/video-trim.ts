@@ -44,7 +44,7 @@ export const trimVideoAtom = atom(
 
     // 验证时间范围
     if (config.startTime >= config.endTime) {
-      console.error('开始时间必须小于结束时间')
+      console.error('Start time must be less than end time')
       return
     }
 
@@ -107,7 +107,7 @@ export const trimVideoAtom = atom(
       }, 2000)
     }
     catch (error) {
-      console.error('视频裁剪失败:', error)
+      console.error('Video trimming failed:', error)
 
       // 重置进度状态
       set(commonProgressAtom, {
