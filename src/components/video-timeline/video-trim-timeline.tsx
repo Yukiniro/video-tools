@@ -2,7 +2,6 @@
 
 import { useRef, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { useMobileInteraction } from '@/hooks/use-mobile-interaction'
 import {
   formatTime,
   PlaybackIndicator,
@@ -47,23 +46,15 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
   const [_, setDragType] = useState<'none' | 'handle' | 'seek'>('none')
 
   /**
-   * 处理时间轴交互事件，支持点击和拖动更新当前时间
+   * 处理时间轴点击事件，更新当前时间
    */
-  const timelineInteraction = useMobileInteraction({
-    onStart: (position) => {
-      if (!timelineRef.current || duration === 0)
-        return
+  const handleTimelineClick = (e: React.MouseEvent) => {
+    if (!timelineRef.current || duration === 0)
+      return
 
-      setDragType('seek')
-      updateCurrentTime(position.x)
-    },
-    onMove: (position) => {
-      updateCurrentTime(position.x)
-    },
-    onEnd: () => {
-      setDragType('none')
-    },
-  })
+    setDragType('seek')
+    updateCurrentTime(e.clientX)
+  }
 
   const updateCurrentTime = (clientX: number) => {
     if (!timelineRef.current)
@@ -144,10 +135,8 @@ export function VideoTrimTimeline(props: VideoTrimTimelineProps) {
         <div className="space-y-2 sm:space-y-3">
           <div
             ref={timelineRef}
-            className="relative h-12 sm:h-16 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 rounded-lg sm:rounded-xl cursor-pointer shadow-inner border border-slate-200 dark:border-slate-600 touch-manipulation select-none"
-            onMouseDown={timelineInteraction.onMouseDown}
-            onTouchStart={timelineInteraction.onTouchStart}
-            style={{ touchAction: 'none' }}
+            className="relative h-12 sm:h-16 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 rounded-lg sm:rounded-xl cursor-pointer shadow-inner border border-slate-200 dark:border-slate-600"
+            onMouseDown={handleTimelineClick}
           >
             {/* 背景轨道 */}
             <div className="absolute inset-0 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700" />

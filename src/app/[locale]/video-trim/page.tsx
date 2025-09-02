@@ -11,6 +11,7 @@ import { ToolPageTemplate } from '@/components/tool-page-template'
 import { VideoPreview } from '@/components/video-preview'
 import { VideoTrimTimeline } from '@/components/video-timeline'
 import { VideoTrimProgressDialog } from '@/components/video-trim-progress-dialog'
+import { isMobileDevice } from '@/utils/device-detection'
 import { VideoTrimSettingPanel } from './video-trim-setting-panel'
 
 export default function VideoTrimPage() {
@@ -23,6 +24,7 @@ export default function VideoTrimPage() {
 
   const showUpload = files.length === 0
   const showPreview = files.length > 0
+  const isMobile = isMobileDevice()
 
   const videoPreviewRef = useRef<VideoPreviewRef | null>(null)
 
@@ -80,22 +82,47 @@ export default function VideoTrimPage() {
               </div>
             </div>
 
-            {/* 时间轴裁剪组件 */}
-            <div className="w-full max-w-5xl mx-auto px-2 sm:px-0">
-              <VideoTrimTimeline
-                isPlaying={isPlay}
-                file={files[0]}
-                currentTime={currentTime}
-                duration={duration}
-                startTime={config.startTime}
-                endTime={config.endTime}
-                onCurrentTimeChange={handleCurrentTimeChange}
-                onStartTimeChange={handleStartTimeChange}
-                onEndTimeChange={handleEndTimeChange}
-                onRangeMove={handleRangeMove}
-                togglePlay={handleTogglePlay}
-              />
-            </div>
+            {/* 时间轴裁剪组件 - 移动端隐藏 */}
+            {!isMobile && (
+              <div className="w-full max-w-5xl mx-auto px-2 sm:px-0">
+                <VideoTrimTimeline
+                  isPlaying={isPlay}
+                  file={files[0]}
+                  currentTime={currentTime}
+                  duration={duration}
+                  startTime={config.startTime}
+                  endTime={config.endTime}
+                  onCurrentTimeChange={handleCurrentTimeChange}
+                  onStartTimeChange={handleStartTimeChange}
+                  onEndTimeChange={handleEndTimeChange}
+                  onRangeMove={handleRangeMove}
+                  togglePlay={handleTogglePlay}
+                />
+              </div>
+            )}
+
+            {/* 移动端提示信息 */}
+            {isMobile && (
+              <div className="w-full max-w-5xl mx-auto px-2 sm:px-0">
+                <div className="bg-muted/50 border border-muted rounded-lg p-6 text-center">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-foreground mb-2">移动端时间轴功能</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        时间轴裁剪功能在移动端暂不可用，请在桌面端使用以获得完整功能体验。
+                        <br />
+                        您仍可以使用右侧的设置面板来调整开始和结束时间。
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

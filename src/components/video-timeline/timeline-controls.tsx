@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef } from 'react'
-import { useMobileInteraction } from '@/hooks/use-mobile-interaction'
 import { DragHandle } from './drag-handle'
 
 type ControllerType = 'start' | 'end' | 'range'
@@ -43,7 +42,6 @@ export function TimelineControls({
 }: TimelineControlsProps) {
   const isDraggingRef = useRef<'start' | 'end' | 'range' | null>(null)
   const dragOffsetRef = useRef(0)
-  const cleanupRef = useRef<(() => void) | null>(null)
 
   const rangeWidth = endPercentage - startPercentage
 
@@ -53,21 +51,21 @@ export function TimelineControls({
    * @param initialOffset 初始偏移量（仅用于范围拖动）
    */
   const handleDragStart = (type: 'start' | 'end' | 'range', initialOffset = 0) => {
-    const mobileInteraction = useMobileInteraction({
-      onStart: (position) => {
-        if (!timelineRef.current)
-          return
+    return (e: React.MouseEvent) => {
+      if (!timelineRef.current)
+        return
 
-        isDraggingRef.current = type
-        dragOffsetRef.current = initialOffset
-        onChangeStart?.(type)
-      },
-      onMove: (position) => {
+      e.preventDefault()
+      isDraggingRef.current = type
+      dragOffsetRef.current = initialOffset
+      onChangeStart?.(type)
+
+      const handleMouseMove = (e: MouseEvent) => {
         if (!timelineRef.current || !isDraggingRef.current)
           return
 
         const rect = timelineRef.current.getBoundingClientRect()
-        const x = position.x - rect.left
+        const x = e.clientX - rect.left
         const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
 
         if (isDraggingRef.current === 'range') {
@@ -79,13 +77,14 @@ export function TimelineControls({
         else {
           onChange?.(type, percentage)
         }
-      },
-      onEnd: (position) => {
+      }
+
+      const handleMouseUp = (e: MouseEvent) => {
         if (!timelineRef.current || !isDraggingRef.current)
           return
 
         const rect = timelineRef.current.getBoundingClientRect()
-        const x = position.x - rect.left
+        const x = e.clientX - rect.left
         const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
 
         if (isDraggingRef.current === 'range') {
@@ -100,33 +99,25 @@ export function TimelineControls({
 
         isDraggingRef.current = null
         dragOffsetRef.current = 0
-      },
-    })
 
-    return (e: React.MouseEvent | React.TouchEvent) => {
-      // 清理之前的监听器
-      if (cleanupRef.current) {
-        cleanupRef.current()
+        document.removeEventListener('mousemove', handleMouseMove)
+        document.removeEventListener('mouseup', handleMouseUp)
       }
 
-      // 设置新的监听器
-      cleanupRef.current = mobileInteraction.bindEvents()
-
-      // 触发开始事件
-      mobileInteraction.onMouseDown?.(e)
+      document.addEventListener('mousemove', handleMouseMove)
+      document.addEventListener('mouseup', handleMouseUp)
     }
   }
 
   /**
    * 处理范围拖动开始
    */
-  const handleRangeDragStart = (e: React.MouseEvent | React.TouchEvent) => {
+  const handleRangeDragStart = (e: React.MouseEvent) => {
     if (!timelineRef.current)
       return
 
     const rect = timelineRef.current.getBoundingClientRect()
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
-    const x = clientX - rect.left
+    const x = e.clientX - rect.left
     const clickPercentage = (x / rect.width) * 100
     const offset = clickPercentage - startPercentage
 
@@ -143,10 +134,8 @@ export function TimelineControls({
     >
       {/* 范围移动控制器 - 顶部居中 */}
       <div
-        className="absolute top-[-12px] left-1/2 transform -translate-x-1/2 flex items-center justify-center bg-gradient-to-b from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-300 dark:hover:to-blue-400 cursor-ew-resize z-30 shadow-lg hover:shadow-xl rounded-t-sm pointer-events-auto w-[44px] h-[16px] touch-manipulation select-none"
-        onMouseDown={e => handleRangeDragStart(e)}
-        onTouchStart={e => handleRangeDragStart(e)}
-        style={{ touchAction: 'none' }}
+        className="absolute top-[-12px] left-1/2 transform -translate-x-1/2 flex items-center justify-center bg-gradient-to-b from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-300 dark:hover:to-blue-400 cursor-ew-resize z-30 shadow-lg hover:shadow-xl rounded-t-sm pointer-events-auto"
+        onMouseDown={handleRangeDragStart}
       >
         {/* 条形控制器中间的抓手指示线 */}
         <div className="flex items-center justify-center gap-0.5">
@@ -160,14 +149,12 @@ export function TimelineControls({
       <DragHandle
         percentage={0}
         onMouseDown={handleDragStart('start')}
-        onTouchStart={handleDragStart('start')}
       />
 
       {/* 结束时间拖拽手柄 - 右侧 */}
       <DragHandle
         percentage={100}
         onMouseDown={handleDragStart('end')}
-        onTouchStart={handleDragStart('end')}
       />
     </div>
   )
