@@ -280,6 +280,14 @@
     "about": "About"
   },
   "tools": {
+    "common": {
+      "qualityOptions": {
+        "high": "High Quality",
+        "medium": "Medium Quality",
+        "low": "Low Quality",
+        "custom": "Custom"
+      }
+    },
     "videoToGif": {
       "title": "Video to GIF",
       "description": "Convert video files to GIF animations",
@@ -343,12 +351,6 @@
     "qualityTip": "Higher values mean better quality but larger file size",
     "customResolutionTip": "Enter the target width and height in pixels",
     "aspectRatioTip": "When changing width or height, the other value will automatically adjust proportionally to maintain the original aspect ratio",
-    "qualityOptions": {
-      "high": "High Quality",
-      "medium": "Medium Quality",
-      "low": "Low Quality",
-      "custom": "Custom"
-    },
     "resolutionOptions": {
       "original": "Original Resolution",
       "1080P": "1080P",

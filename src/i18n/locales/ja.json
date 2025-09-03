@@ -280,6 +280,14 @@
     "about": "について"
   },
   "tools": {
+    "common": {
+      "qualityOptions": {
+        "high": "高品質",
+        "medium": "中品質",
+        "low": "低品質",
+        "custom": "カスタム"
+      }
+    },
     "videoToGif": {
       "title": "動画からGIF",
       "description": "動画ファイルをGIFアニメーションに変換",
@@ -343,12 +351,6 @@
     "qualityTip": "値が高いほど品質は良くなりますが、ファイルサイズも大きくなります",
     "customResolutionTip": "目標となる幅と高さをピクセル単位で入力してください",
     "aspectRatioTip": "幅または高さを変更すると、元のアスペクト比を維持するため、もう一方の値が自動的に比例調整されます",
-    "qualityOptions": {
-      "high": "高品質",
-      "medium": "中品質",
-      "low": "低品質",
-      "custom": "カスタム"
-    },
     "resolutionOptions": {
       "original": "元の解像度",
       "1080P": "1080P",

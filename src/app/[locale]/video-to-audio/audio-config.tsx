@@ -21,6 +21,7 @@ const QUALITY_OPTIONS = [
 
 export function AudioConfig() {
   const t = useTranslations('videoToAudio')
+  const tCommon = useTranslations('tools.common')
   const [config, setConfig] = useAtom(audioConfigAtom)
 
   const handleFormatChange = (format: string) => {
@@ -52,7 +53,7 @@ export function AudioConfig() {
           label={t('quality')}
           options={QUALITY_OPTIONS.map(opt => ({
             ...opt,
-            label: t(`qualityOptions.${opt.value}`),
+            label: tCommon(`qualityOptions.${opt.value}`),
           }))}
           value={config.quality}
           onChange={handleQualityChange}
