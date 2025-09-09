@@ -28,7 +28,7 @@ const RESOLUTION_OPTIONS = [
 ]
 
 export function VideoCompressConfig() {
-  const t = useTranslations('videoCompress')
+  const t = useTranslations()
   const [files] = useAtom(videoCompressFilesAtom)
   const [config, setConfig] = useAtom(videoCompressConfigAtom)
   const [videoInfo, setVideoInfo] = useAtom(originalVideoInfoAtom)
@@ -103,17 +103,17 @@ export function VideoCompressConfig() {
     <Card>
       <CardHeader>
         <CardTitle className="text-base font-semibold">
-          {t('title')}
+          {t('tools.videoCompress.title')}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* 压缩质量 */}
         <div className="space-y-3">
           <SegmentedControl
-            label={t('quality')}
+            label={t('videoCompress.quality')}
             options={QUALITY_OPTIONS.map(opt => ({
               ...opt,
-              label: t(`qualityOptions.${opt.value}`),
+              label: t(`tools.common.qualityOptions.${opt.value}`),
             }))}
             value={config.quality}
             onChange={handleQualityChange}
@@ -122,7 +122,7 @@ export function VideoCompressConfig() {
           {config.quality === 'custom' && (
             <div className="pl-4">
               <Label className="text-sm text-muted-foreground">
-                {t('customQuality')}
+                {t('videoCompress.customQuality')}
                 {' '}
                 (1-100)
               </Label>
@@ -135,7 +135,7 @@ export function VideoCompressConfig() {
                 className="mt-1"
               />
               <p className="text-xs text-muted-foreground mt-1">
-                {t('qualityTip')}
+                {t('videoCompress.qualityTip')}
               </p>
             </div>
           )}
@@ -146,10 +146,10 @@ export function VideoCompressConfig() {
         {/* 输出分辨率 */}
         <div className="space-y-3">
           <SegmentedControl
-            label={t('resolution')}
+            label={t('videoCompress.resolution')}
             options={RESOLUTION_OPTIONS.map(opt => ({
               ...opt,
-              label: t(`resolutionOptions.${opt.value}`),
+              label: t(`videoCompress.resolutionOptions.${opt.value}`),
             }))}
             value={config.resolution}
             onChange={handleResolutionChange}
@@ -177,7 +177,7 @@ export function VideoCompressConfig() {
 
               <div>
                 <Label className="text-sm text-muted-foreground">
-                  {t('customWidth')}
+                  {t('videoCompress.customWidth')}
                   {' '}
                   (px)
                 </Label>
@@ -192,7 +192,7 @@ export function VideoCompressConfig() {
               </div>
               <div>
                 <Label className="text-sm text-muted-foreground">
-                  {t('customHeight')}
+                  {t('videoCompress.customHeight')}
                   {' '}
                   (px)
                 </Label>
@@ -206,7 +206,7 @@ export function VideoCompressConfig() {
                 />
               </div>
               <p className="text-xs text-muted-foreground">
-                {t('aspectRatioTip')}
+                {t('videoCompress.aspectRatioTip')}
               </p>
             </div>
           )}
@@ -222,7 +222,7 @@ export function VideoCompressConfig() {
             onCheckedChange={handleAudioToggle}
           />
           <Label htmlFor="enable-audio" className="text-sm font-medium">
-            {t('enableAudio')}
+            {t('videoCompress.enableAudio')}
           </Label>
         </div>
 
@@ -230,19 +230,19 @@ export function VideoCompressConfig() {
         <div className="text-xs text-muted-foreground space-y-1 pt-2">
           <p>
             •
-            {t('tips.qualityVsSize')}
+            {t('videoCompress.tips.qualityVsSize')}
           </p>
           <p>
             •
-            {t('tips.resolutionRecommendation')}
+            {t('videoCompress.tips.resolutionRecommendation')}
           </p>
           <p>
             •
-            {t('tips.originalFormatKept')}
+            {t('videoCompress.tips.originalFormatKept')}
           </p>
           <p>
             •
-            {t('tips.bitrateAutoAdjusted')}
+            {t('videoCompress.tips.bitrateAutoAdjusted')}
           </p>
         </div>
       </CardContent>
